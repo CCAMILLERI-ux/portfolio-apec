@@ -1,16 +1,39 @@
-import { KIND_LABEL, type Service } from '../data/services'
+import type { ReactNode } from 'react'
+import { KIND_LABEL, type Service, type ServiceKind } from '../data/services'
 import { Link } from '../lib/router'
 import { track } from '../lib/storage'
-import { Badge } from './Badge'
-import { ArrowRight, External } from './Icons'
-import { Illustration } from './Illustration'
-import { Modalities } from './Modalities'
+import { ArrowRight, Chat, External, Group, Laptop } from './Icons'
+import { Illustration, type Tone } from './Illustration'
+import { ModalityChips } from './Modalities'
 
-/** Destination de l'action contextualisée d'une carte. */
+export const KIND_TONE: Record<ServiceKind, Tone> = { atelier: 'yellow', individuel: 'blue', outil: 'navy' }
+export const KIND_SHORT: Record<ServiceKind, string> = { atelier: 'Atelier', individuel: 'Rendez-vous', outil: 'Outil' }
+const KIND_ICON = { atelier: Group, individuel: Chat, outil: Laptop }
+
+/** Étiquette carrée, d'après le motif « Repères » observé sur les visuels. */
+export function KindTag({ kind }: { kind: ServiceKind }) {
+  const Icon = KIND_ICON[kind]
+  return (
+    <span className="kind-tag">
+      <Icon size={26} className="kind-tag__icon" />
+      <span className="kind-tag__label">{KIND_SHORT[kind]}</span>
+      <span className="visually-hidden"> — {KIND_LABEL[kind]}</span>
+    </span>
+  )
+}
+
+export function ServiceVisual({ service, children }: { service: Service; children?: ReactNode }) {
+  return (
+    <div className="svc-visual">
+      <Illustration name={service.illustration} tone={KIND_TONE[service.kind]} className="svc-visual__img" />
+      <KindTag kind={service.kind} />
+      {children}
+    </div>
+  )
+}
+
 export function serviceActionTarget(s: Service, from: string) {
-  return s.action.kind === 'booking'
-    ? `/reserver/${s.id}?from=${from}`
-    : `/service/${s.id}?from=${from}`
+  return s.action.kind === 'booking' ? `/reserver/${s.id}?from=${from}` : `/service/${s.id}?from=${from}`
 }
 
 export function ServiceAction({ service, from, className = 'btn btn--primary' }: { service: Service; from: string; className?: string }) {
@@ -25,44 +48,32 @@ export function ServiceAction({ service, from, className = 'btn btn--primary' }:
       >
         {service.action.label}
         <External size={18} />
-        <span className="visually-hidden"> (site externe apec.fr, nouvel onglet)</span>
+        <span className="visually-hidden"> (nouvel onglet)</span>
       </a>
     )
   }
   return (
-    <Link
-      className={className}
-      to={serviceActionTarget(service, from)}
-      onClick={() => track('service_cta_click', service.id)}
-    >
+    <Link className={className} to={serviceActionTarget(service, from)} onClick={() => track('service_cta_click', service.id)}>
       {service.action.label}
-      <span className="visually-hidden"> — {service.officialTitle} (simulation)</span>
+      <span className="visually-hidden"> — {service.officialTitle}</span>
     </Link>
   )
 }
 
-/** Carte « piste exploratoire » : bénéfice, intitulé existant, repère, modalités, une action. */
-export function ServiceCard({ service, from, headingLevel = 3 }: { service: Service; from: string; headingLevel?: 2 | 3 }) {
-  const H = `h${headingLevel}` as 'h2' | 'h3'
+/** Carte « piste exploratoire ». */
+export function ServiceCard({ service, from }: { service: Service; from: string }) {
   return (
-    <article className="service-card">
-      <Illustration name={service.illustration} className="service-card__visual" />
-      <div className="service-card__body">
-        <div className="service-card__badges">
-          <Badge tone="kind">{KIND_LABEL[service.kind]}</Badge>
-          {service.titleProvenance === 'a-verifier' && <Badge tone="warn">Intitulé à vérifier</Badge>}
-        </div>
-        <H className="service-card__hook">{service.hook}</H>
-        <p className="service-card__benefit">{service.benefit}</p>
-        <p className="service-card__official">
-          <span className="service-card__official-label">Service existant :</span>{' '}
-          {service.officialTitle}
-        </p>
-        <Modalities items={service.modalities} compact />
-        <div className="service-card__actions">
+    <article className={`svc svc--${service.kind}`}>
+      <ServiceVisual service={service} />
+      <div className="svc__body">
+        <p className="svc__official">{service.officialTitle}</p>
+        <h3 className="svc__title">{service.hook}</h3>
+        <p className="svc__benefit">{service.benefit}</p>
+        <ModalityChips items={service.modalities} />
+        <div className="svc__actions">
           <ServiceAction service={service} from={from} />
           <Link to={`/service/${service.id}?from=${from}`} className="link-arrow">
-            Lire la fiche<span className="visually-hidden"> {service.officialTitle}</span>
+            En savoir plus<span className="visually-hidden"> : {service.officialTitle}</span>
             <ArrowRight size={18} />
           </Link>
         </div>
@@ -74,7 +85,6 @@ export function ServiceCard({ service, from, headingLevel = 3 }: { service: Serv
 /**
  * Carte « existant observé » : reconstruction du motif vu sur les captures
  * (pictogramme, intitulé, description courte, « En savoir plus » + action).
- * Aucun défaut n'est ajouté ; les éléments absents des captures ne sont pas inventés.
  */
 export function ObservedServiceCard({ service, from }: { service: Service; from: string }) {
   return (
@@ -84,11 +94,7 @@ export function ObservedServiceCard({ service, from }: { service: Service; from:
         <path d="M22 14a10 10 0 1 1 10 18" fill="none" stroke="var(--brand-yellow)" strokeWidth="3" strokeLinecap="round" />
       </svg>
       <h3 className="observed-card__title">{service.officialTitle}</h3>
-      <p className="observed-card__text">
-        {service.observedSummary ?? (
-          <em>Description courte non disponible sur les captures — non reproduite.</em>
-        )}
-      </p>
+      {service.observedSummary && <p className="observed-card__text">{service.observedSummary}</p>}
       <div className="observed-card__actions">
         <Link to={`/service/${service.id}?from=${from}`} className="btn btn--outline btn--sm">
           En savoir plus<span className="visually-hidden"> : {service.officialTitle}</span>
@@ -99,7 +105,7 @@ export function ObservedServiceCard({ service, from }: { service: Service; from:
             className="btn btn--primary btn--sm"
             onClick={() => track('service_cta_click', `${service.id} (vue existante)`)}
           >
-            {service.observedCta}<span className="visually-hidden"> : {service.officialTitle} (simulation)</span>
+            {service.observedCta}<span className="visually-hidden"> : {service.officialTitle}</span>
           </Link>
         ) : (
           <ServiceAction service={service} from={from} className="btn btn--primary btn--sm" />

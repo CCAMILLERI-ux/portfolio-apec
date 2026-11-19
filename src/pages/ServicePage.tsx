@@ -1,30 +1,31 @@
 import { useEffect } from 'react'
 import { Badge } from '../components/Badge'
-import { ArrowRight, External, Info, Plus } from '../components/Icons'
-import { Illustration } from '../components/Illustration'
+import { CrBlock } from '../components/Coulisses'
+import { ArrowRight, Laptop, Plus } from '../components/Icons'
 import { Modalities } from '../components/Modalities'
 import { PageBand } from '../components/PageBand'
-import { ServiceAction } from '../components/ServiceCard'
-import { getService, KIND_LABEL, OFFICIAL_SERVICES_URL } from '../data/services'
+import { ProtoLayout } from '../components/ProtoLayout'
+import { ServiceAction, ServiceVisual } from '../components/ServiceCard'
+import { getService, KIND_LABEL, type Service } from '../data/services'
 import { backFor, safeFrom } from '../lib/nav'
 import { Link, type Route } from '../lib/router'
 import { track } from '../lib/storage'
 import { NotFound } from './NotFound'
 
 /** Liens contextuels de la colonne latérale — différents selon le service. */
-const RELATED: Record<string, { to: string; anchor?: string; label: string; text: string }[]> = {
+const RELATED: Record<string, { to: string; anchor?: string; label: string; text: string; tone: 'blue' | 'navy' }[]> = {
   'atelier-entretiens': [
-    { to: '/cas-3', anchor: 'etapes', label: 'Lire nos conseils pour préparer votre séance', text: 'Arriver à l’atelier avec vos exemples déjà repérés.' },
+    { to: '/cas-3', anchor: 'etapes', label: 'Lire nos conseils pour préparer votre séance', text: 'Arriver à l’atelier avec vos exemples déjà repérés.', tone: 'blue' },
   ],
   'entretien-programme': [
-    { to: '/service/simulateur-entretien?from=cas-3', label: 'S’entraîner seul avant le rendez-vous', text: 'Le simulateur d’entretien, en autonomie.' },
-    { to: '/cas-3', anchor: 'checklist', label: 'Checklist de la veille de l’entretien', text: 'Les points à vérifier avant le jour J.' },
+    { to: '/service/simulateur-entretien?from=cas-3', label: 'S’entraîner seul avant le rendez-vous', text: 'Le simulateur d’entretien, en autonomie.', tone: 'navy' },
+    { to: '/cas-3', anchor: 'checklist', label: 'Checklist de la veille de l’entretien', text: 'Les points à contrôler avant le jour J.', tone: 'blue' },
   ],
   'simulateur-entretien': [
-    { to: '/service/entretien-programme?from=cas-3', label: 'Un entretien fixé ? Répétez-le avec un consultant', text: 'Simulation individuelle d’1 h.' },
+    { to: '/service/entretien-programme?from=cas-3', label: 'Un entretien fixé ? Répétez-le avec un consultant', text: 'Simulation individuelle d’1 h.', tone: 'blue' },
   ],
   candidature: [
-    { to: '/cas-3', anchor: 'etapes', label: 'Préparer ensuite l’entretien en 5 étapes', text: 'Conseil complet, utile avant même d’être convoqué.' },
+    { to: '/cas-3', anchor: 'etapes', label: 'Préparer ensuite l’entretien en 5 étapes', text: 'Conseil complet, utile avant même d’être convoqué.', tone: 'blue' },
   ],
 }
 
@@ -41,46 +42,30 @@ export function ServicePage({ id, route }: { id: string; route: Route }) {
   const related = RELATED[service.id] ?? []
 
   return (
-    <>
-      <PageBand back={back} kicker={KIND_LABEL[service.kind]} title={service.officialTitle} titleIsHeading={false} />
+    <ProtoLayout
+      path={route.path}
+      events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
+      coulisses={<ServiceCoulisses service={service} />}
+    >
+      <PageBand back={back} title={service.officialTitle} titleIsHeading={false} />
       <div className="container overlap">
         <div className="article-layout">
           <article className="sheet" aria-labelledby="titre-service">
-            <div className="service-head">
-              <h1 id="titre-service" tabIndex={-1}>{service.officialTitle}</h1>
-              <div className="service-card__badges">
-                <Badge tone="kind">{KIND_LABEL[service.kind]}</Badge>
-                {service.titleProvenance === 'a-verifier' ? (
-                  <Badge tone="warn">Intitulé et modalités à vérifier</Badge>
-                ) : (
-                  <Badge tone="ok">Intitulé observé sur apec.fr</Badge>
-                )}
-              </div>
-            </div>
+            <h1 id="titre-service" tabIndex={-1} className="service-title">{service.officialTitle}</h1>
             <Modalities items={service.modalities} />
             {service.observedSummary && <p className="small">{service.observedSummary}</p>}
             <p className="service-hook"><strong>{service.hook}.</strong> {service.benefit}</p>
-
             {service.details && (
               <ul className="plus-list">
-                {service.details.points.map((p) => (
-                  <li key={p}><Plus size={18} className="plus" /> {p}</li>
-                ))}
+                {service.details.points.map((p) => <li key={p}><Plus size={18} className="plus" /> {p}</li>)}
               </ul>
             )}
-
             <div className="service-actions">
               <ServiceAction service={service} from={from} />
             </div>
-
-            {service.scopeNote && (
-              <p className="observed-note">
-                <Info size={20} /> <span>{service.scopeNote}</span>
-              </p>
-            )}
-
             {service.details && (
               <>
+                <hr className="sep" />
                 <h2>À qui s’adresse ce service ?</h2>
                 <p>{service.details.forWhom}</p>
                 {service.details.prepare && (
@@ -91,41 +76,56 @@ export function ServicePage({ id, route }: { id: string; route: Route }) {
                 )}
               </>
             )}
-
-            {service.depth === 'synthese' && service.action.kind !== 'external' && (
-              <p>
-                <a href={OFFICIAL_SERVICES_URL} target="_blank" rel="noopener noreferrer">
-                  Voir l’offre officielle sur apec.fr <External size={16} />
-                  <span className="visually-hidden"> (site externe, nouvel onglet)</span>
-                </a>
-              </p>
-            )}
-            <p className="muted small">
-              Texte de la fiche : rédaction du prototype. Les phrases citées des captures sont reprises
-              uniquement pour l’intitulé et la description courte.
-            </p>
           </article>
 
           <aside className="sidebar" aria-label="Pour aller plus loin">
-            <Illustration name={service.illustration} className="side-visual" />
+            <ServiceVisual service={service} />
             {related.map((r) => (
-              <div key={r.label} className="side-card side-card--navy">
+              <div key={r.label} className={`side-card side-card--${r.tone}`}>
+                {r.tone === 'navy' && <Laptop size={36} className="side-card__icon" />}
                 <h2 className="side-card__title">{r.label}</h2>
                 <p>{r.text}</p>
                 <Link to={r.to} anchor={r.anchor} className="link-arrow link-arrow--light">
-                  Y aller<span className="visually-hidden"> : {r.label}</span> <ArrowRight size={18} />
+                  En savoir plus<span className="visually-hidden"> : {r.label}</span> <ArrowRight size={18} />
                 </Link>
               </div>
             ))}
             <div className="side-card">
               <h2 className="side-card__title side-card__title--dark">Pas sûr que ce soit le bon service ?</h2>
-              <Link to="/cas-1" className="link-arrow">
-                Comparer les services par situation <ArrowRight size={18} />
-              </Link>
+              <Link to="/cas-1" className="link-arrow">Comparer nos services <ArrowRight size={18} /></Link>
             </div>
           </aside>
         </div>
       </div>
+    </ProtoLayout>
+  )
+}
+
+function ServiceCoulisses({ service }: { service: Service }) {
+  const missing = service.modalities.filter((m) => m.provenance === 'a-verifier').map((m) => m.label.toLowerCase())
+  return (
+    <>
+      <h3 className="coulisses__case">Fiche service — {service.officialTitle}</h3>
+      <CrBlock title="Provenance des informations de cette fiche">
+        <ul>
+          <li>
+            Intitulé :{' '}
+            {service.titleProvenance === 'capture'
+              ? <Badge tone="ok">observé sur une capture d’apec.fr</Badge>
+              : <Badge tone="warn">à vérifier sur apec.fr</Badge>}
+          </li>
+          <li>Type d’aide affiché : {KIND_LABEL[service.kind]}.</li>
+          <li>
+            {missing.length
+              ? <>Modalités non vérifiées, donc <strong>non affichées</strong> : {missing.join(', ')}.</>
+              : 'Toutes les modalités affichées sont lisibles sur les captures.'}
+          </li>
+          <li>Accroche, bénéfice et textes de la fiche : rédaction du prototype. Seuls l’intitulé et la description courte observés sont cités.</li>
+          {service.scopeNote && <li>{service.scopeNote}</li>}
+          {service.depth === 'synthese' && <li>Fiche d’aperçu : le service n’est pas détaillé dans la démo.</li>}
+          <li>Visuel : illustration dessinée pour le prototype, aucune photographie ni personne réelle.</li>
+        </ul>
+      </CrBlock>
     </>
   )
 }

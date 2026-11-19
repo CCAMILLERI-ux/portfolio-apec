@@ -71,3 +71,36 @@ export const Menu = (p: P) => (
 export const Close = (p: P) => (
   <Base {...p}><path d="M6 6l12 12M18 6L6 18" /></Base>
 )
+export const User = (p: P) => (
+  <Base {...p}><circle cx="12" cy="8" r="3.6" /><path d="M5 20c.8-4 3.6-6.2 7-6.2s6.2 2.2 7 6.2" /></Base>
+)
+export const Search = (p: P) => (
+  <Base {...p}><circle cx="10.5" cy="10.5" r="6" /><path d="M15 15l5 5" /></Base>
+)
+export const Graduation = (p: P) => (
+  <Base {...p}><path d="M2.5 9.5L12 5l9.5 4.5L12 14z" /><path d="M6.5 11.5V16c1.5 1.6 3.3 2.4 5.5 2.4s4-.8 5.5-2.4v-4.5M21.5 9.5v5" /></Base>
+)
+export const TrendUp = (p: P) => (
+  <Base {...p}><path d="M3 18l6-6 4 4 8-8" /><path d="M15 8h6v6" /></Base>
+)
+export const Compass = (p: P) => (
+  <Base {...p}><circle cx="12" cy="12" r="8.5" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></Base>
+)
+export const Handshake = (p: P) => (
+  <Base {...p}><path d="M2.5 11l4-4 4 2 3-2 4 1 4 4" /><path d="M6.5 7l-1 7 4.5 4.5c.8.8 2 .8 2.7 0l5.8-5.8" /><path d="M10 13.5l2 2M12.5 11.5l2.5 2.5" /></Base>
+)
+export const Chart = (p: P) => (
+  <Base {...p}><path d="M4 20V4M4 20h16" /><rect x="7" y="12" width="3" height="5" /><rect x="12" y="8" width="3" height="9" /><rect x="17" y="5" width="3" height="12" /></Base>
+)
+export const Laptop = (p: P) => (
+  <Base {...p}><rect x="5" y="5" width="14" height="10" rx="1" /><path d="M2.5 19h19l-2-4h-15z" /></Base>
+)
+export const Chat = (p: P) => (
+  <Base {...p}><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3.5V15H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" /><path d="M19 9h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2v2.5L17 18h-4" /></Base>
+)
+export const Group = (p: P) => (
+  <Base {...p}><circle cx="12" cy="7" r="2.6" /><circle cx="5.5" cy="10" r="2.2" /><circle cx="18.5" cy="10" r="2.2" /><path d="M7.5 19c.5-3 2.3-4.8 4.5-4.8s4 1.8 4.5 4.8M1.5 18c.4-2.2 1.8-3.6 3.6-3.6M22.5 18c-.4-2.2-1.8-3.6-3.6-3.6" /></Base>
+)
+export const Doc = (p: P) => (
+  <Base {...p}><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v4h4M9 12h6M9 15.5h6M9 9h3" /></Base>
+)

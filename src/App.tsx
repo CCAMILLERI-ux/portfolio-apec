@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-import { Layout } from './components/Layout'
 import { useRoute } from './lib/router'
 import { BookingPage } from './pages/BookingPage'
 import { Case1 } from './pages/Case1'
@@ -54,14 +53,14 @@ export default function App() {
   const booking = path.match(/^\/reserver\/([\w-]+)$/)
   if (path === '/') page = <Home />
   else if (path === '/cas-1') page = <Case1 route={route} />
-  else if (path === '/cas-2') page = <Case2 />
-  else if (path === '/cas-2/prochaines-etapes') page = <NextSteps />
-  else if (path === '/cas-3') page = <Case3 />
-  else if (path === '/conseil/remuneration') page = <Remuneration />
+  else if (path === '/cas-2') page = <Case2 path={path} />
+  else if (path === '/cas-2/prochaines-etapes') page = <NextSteps path={path} />
+  else if (path === '/cas-3') page = <Case3 path={path} />
+  else if (path === '/conseil/remuneration') page = <Remuneration path={path} />
   else if (path === '/sources') page = <Sources />
   else if (service) page = <ServicePage key={service[1]} id={service[1]} route={route} />
   else if (booking) page = <BookingPage key={booking[1]} id={booking[1]} route={route} />
   else page = <NotFound />
 
-  return <Layout path={path}>{page}</Layout>
+  return page
 }

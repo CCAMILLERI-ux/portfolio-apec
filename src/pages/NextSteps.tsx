@@ -1,14 +1,14 @@
 import { useRef, useState } from 'react'
-import { Badge } from '../components/Badge'
-import { Case2Explain } from '../components/Case2Explain'
-import { ArrowRight, Calendar, External, Reset } from '../components/Icons'
+import { Case2Coulisses, CASE2_EVENTS } from '../components/Case2Coulisses'
+import { ArrowRight, Calendar, External } from '../components/Icons'
 import { PageBand } from '../components/PageBand'
-import { getService, KIND_LABEL } from '../data/services'
+import { ProtoLayout } from '../components/ProtoLayout'
+import { KindTag, KIND_TONE } from '../components/ServiceCard'
+import { getService } from '../data/services'
 import { INITIAL_ONBOARDING, useBookings, useOnboarding } from '../lib/demoState'
 import { Link, navigate } from '../lib/router'
-import { resetAll } from '../lib/storage'
 
-export function NextSteps() {
+export function NextSteps({ path }: { path: string }) {
   const [state, setState] = useOnboarding()
   const [bookings] = useBookings()
   const [status, setStatus] = useState('')
@@ -16,6 +16,7 @@ export function NextSteps() {
 
   const kept = state.recs.filter((id) => !state.removed.includes(id))
   const removed = state.recs.filter((id) => state.removed.includes(id))
+  const hasBooking = kept.some((id) => bookings[id])
 
   const remove = (id: string) => {
     setState((s) => ({ ...s, removed: [...s.removed, id] }))
@@ -28,36 +29,29 @@ export function NextSteps() {
   }
 
   return (
-    <>
-      <PageBand
-        back={{ to: '/cas-2', label: 'Accueil guidé · Cas 2' }}
-        title="Mes prochaines étapes"
-        onReset={() => setState(INITIAL_ONBOARDING)}
-      />
+    <ProtoLayout
+      path={path}
+      events={CASE2_EVENTS}
+      barNotice={hasBooking ? 'Rendez-vous simulés — aucun rendez-vous réel n’a été réservé.' : undefined}
+      onReset={() => setState(INITIAL_ONBOARDING)}
+      coulisses={<Case2Coulisses />}
+    >
+      <PageBand back={{ to: '/cas-2', label: 'Bien démarrer' }} title="Mes prochaines étapes" />
       <div className="container overlap">
         <div className="sheet sheet--narrow">
-          <p className="scenario">
-            <Badge tone="demo">Démo</Badge> Sauvegarde locale de démonstration, dans ce navigateur
-            uniquement. Profil fictif « Alex ».
-          </p>
           <p className="visually-hidden" role="status" aria-live="polite">{status}</p>
-
           <h2 ref={listRef} tabIndex={-1} className="step__title">
             Services conservés ({kept.length})
           </h2>
 
           {kept.length === 0 ? (
             <div className="empty">
-              <p>Aucun service conservé pour l’instant.</p>
-              <button
-                type="button"
-                className="btn btn--primary"
-                onClick={() => {
-                  setState((s) => ({ ...s, step: s.answers.needs.length ? 'needs' : 'welcome' }))
-                  navigate('/cas-2')
-                }}
-              >
-                Reprendre le guidage
+              <p>Vous n’avez pas encore de service dans votre liste.</p>
+              <button type="button" className="btn btn--primary" onClick={() => {
+                setState((s) => ({ ...s, step: s.answers.needs.length ? 'needs' : 'welcome' }))
+                navigate('/cas-2')
+              }}>
+                Me guider
               </button>
             </div>
           ) : (
@@ -66,41 +60,37 @@ export function NextSteps() {
                 const s = getService(id)!
                 const slot = bookings[id]
                 return (
-                  <li key={id} className="next-item">
+                  <li key={id} className={`next-item next-item--${KIND_TONE[s.kind]}`}>
+                    <div className="next-item__tag"><KindTag kind={s.kind} /></div>
                     <div className="next-item__main">
-                      <Badge tone="kind">{KIND_LABEL[s.kind]}</Badge>
                       <h3 className="next-item__title">{s.officialTitle}</h3>
                       <p className="muted">{s.hook}</p>
                       {slot ? (
                         <p className="next-item__status">
-                          <Calendar size={18} />
-                          <span>
-                            Réservation simulée : {slot.date} à {slot.time}.{' '}
-                            <strong>Aucun rendez-vous réel.</strong>
-                          </span>
+                          <Calendar size={18} /> <span><strong>Réservé :</strong> {slot.date} à {slot.time} — {slot.place}</span>
                         </p>
                       ) : (
                         <p className="next-item__status next-item__status--todo">À faire</p>
                       )}
-                    </div>
-                    <div className="next-item__actions">
-                      {!slot && s.action.kind === 'booking' && (
-                        <Link to={`/reserver/${id}?from=etapes`} className="btn btn--primary btn--sm">
-                          {s.action.label}<span className="visually-hidden"> : {s.officialTitle}</span>
+                      <div className="next-item__actions">
+                        {!slot && s.action.kind === 'booking' && (
+                          <Link to={`/reserver/${id}?from=etapes`} className="btn btn--primary btn--sm">
+                            {s.action.label}<span className="visually-hidden"> : {s.officialTitle}</span>
+                          </Link>
+                        )}
+                        {s.action.kind === 'external' && (
+                          <a className="btn btn--outline btn--sm" href={s.action.url} target="_blank" rel="noopener noreferrer">
+                            {s.action.label} <External size={16} />
+                            <span className="visually-hidden"> (nouvel onglet)</span>
+                          </a>
+                        )}
+                        <Link to={`/service/${id}?from=etapes`} className="link-arrow">
+                          En savoir plus<span className="visually-hidden"> : {s.officialTitle}</span> <ArrowRight size={16} />
                         </Link>
-                      )}
-                      {s.action.kind === 'external' && (
-                        <a className="btn btn--outline btn--sm" href={s.action.url} target="_blank" rel="noopener noreferrer">
-                          {s.action.label} <External size={16} />
-                          <span className="visually-hidden"> (site externe, nouvel onglet)</span>
-                        </a>
-                      )}
-                      <Link to={`/service/${id}?from=etapes`} className="link-arrow">
-                        Fiche<span className="visually-hidden"> {s.officialTitle}</span> <ArrowRight size={16} />
-                      </Link>
-                      <button type="button" className="btn btn--link btn--sm" onClick={() => remove(id)}>
-                        Retirer<span className="visually-hidden"> {s.officialTitle}</span>
-                      </button>
+                        <button type="button" className="btn btn--link btn--sm" onClick={() => remove(id)}>
+                          Retirer<span className="visually-hidden"> {s.officialTitle}</span>
+                        </button>
+                      </div>
                     </div>
                   </li>
                 )
@@ -125,46 +115,24 @@ export function NextSteps() {
           )}
 
           <div className="step__actions step__actions--wrap">
-            <button
-              type="button"
-              className="btn btn--outline"
-              onClick={() => {
-                setState((s) => ({ ...s, step: 'needs' }))
-                navigate('/cas-2')
-              }}
-            >
+            <button type="button" className="btn btn--outline" onClick={() => {
+              setState((s) => ({ ...s, step: 'needs' }))
+              navigate('/cas-2')
+            }}>
               Modifier mes besoins
             </button>
             {state.recs.length > 0 && (
-              <button
-                type="button"
-                className="btn btn--outline"
-                onClick={() => {
-                  setState((s) => ({ ...s, step: 'results' }))
-                  navigate('/cas-2')
-                }}
-              >
+              <button type="button" className="btn btn--outline" onClick={() => {
+                setState((s) => ({ ...s, step: 'results' }))
+                navigate('/cas-2')
+              }}>
                 Reprendre le guidage
               </button>
             )}
-            <button
-              type="button"
-              className="btn btn--link"
-              onClick={() => {
-                resetAll()
-                setState(INITIAL_ONBOARDING)
-                setStatus('Démo remise à zéro.')
-              }}
-            >
-              <Reset size={18} /> Remettre à zéro
-            </button>
+            <Link to="/cas-1" className="link-arrow">Voir tous nos services <ArrowRight size={18} /></Link>
           </div>
-          <p className="muted small">
-            Envie de voir tous les services ? <Link to="/cas-1">Explorer librement</Link>
-          </p>
         </div>
-        <Case2Explain />
       </div>
-    </>
+    </ProtoLayout>
   )
 }

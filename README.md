@@ -12,7 +12,12 @@ Portfolio de candidature au poste de Chef de projet animation web. Un seul site 
 | 2 | **Guider un nouvel inscrit** : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes prochaines étapes » | Parcours, activation, recommandation déterministe |
 | 3 | **Relier une recherche à un accompagnement** : page conseil « Comment préparer un entretien de recrutement ? », maillage interne, compléments SEO, GEO et coordination multicanale | SEO éditorial, maillage, acquisition |
 
-Chaque démo se parcourt d’abord comme un utilisateur. La méthode (constat, hypothèse, modification, KPI et garde-fous, équipes) est repliée dans le panneau « Comprendre mes choix ».
+## Organisation de l’interface
+
+- **Portfolio** (accueil, sources) : identité propre à la candidate (fond crème, DM Serif Display + Inter, accent terracotta), volontairement distincte de l’univers Apec.
+- **Prototypes** : univers inspiré d’apec.fr (bleu nuit, jaune, bleu ; Montserrat), **sans aucune explication dans les écrans utilisateur**.
+- **Coulisses du prototype** : sous le pied de page de chaque prototype, dans l’univers portfolio. Elles regroupent la mention d’indépendance, le retour au portfolio, la réinitialisation, la méthode (constat, hypothèse, modification, KPI et garde-fous, équipes), la provenance des informations et le journal local.
+- **Barre fixe du prototype** (univers portfolio) : rappel « Prototype · sans affiliation Apec », accès aux coulisses et au portfolio. Au cas 1, elle porte la bascule « Existant observé / Piste exploratoire ». Pendant et après une réservation, elle affiche « Réservation simulée… » puis « Simulation terminée — aucun rendez-vous réel n’a été réservé ».
 
 ## Installation et lancement
 
@@ -50,10 +55,10 @@ Le `noindex` est porté par la balise meta de chaque page. Le `robots.txt` du do
 
 1. **Accueil** : trois cartes, un clic par cas.
 2. **Cas 2 (≈ 2 min)** : « Me guider » → la situation est présélectionnée (modifiable) → cocher « Préparer un entretien », puis « Oui, dans les prochains jours » → les recommandations changent et s’expliquent (« Pourquoi ce service ? ») → « Commencer par ce service » → choisir un créneau fictif → récapitulatif → valider → « Simulation terminée — aucun rendez-vous réel n’a été réservé » → « Mes prochaines étapes » (retirer, modifier ses besoins, reprendre, remettre à zéro).
-3. **Cas 1 (≈ 1 min 30)** : changer de situation (« Je recrute et j’ai besoin d’aide ») puis basculer « Existant observé ».
-4. **Cas 3 (≈ 1 min 30)** : lire l’introduction, suivre « simulation individuelle d’1 h » puis revenir avec la flèche du bandeau ; ouvrir « Comprendre mes choix » (maillage, aperçu du titre, GEO, coordination).
+3. **Cas 1 (≈ 1 min 30)** : changer de situation (« Je recrute et j’ai besoin d’aide ») puis utiliser la bascule « Existant observé » de la barre du bas.
+4. **Cas 3 (≈ 1 min 30)** : lire l’introduction, suivre « simulation individuelle d’1 h » puis revenir avec la flèche du bandeau ; bouton « Coulisses » de la barre pour le maillage, l’aperçu du titre, le GEO et la coordination.
 
-Chaque page propose « Retour au portfolio », « Réinitialiser la démo » et une flèche de retour contextuelle : le lien d’origine est transmis par `?from=`.
+La barre et les coulisses proposent « Portfolio » et « Réinitialiser la démo » ; chaque fiche a une flèche de retour contextuelle (le lien d’origine est transmis par `?from=`).
 
 ## Choix techniques
 
@@ -72,23 +77,26 @@ Chaque page propose « Retour au portfolio », « Réinitialiser la démo » et 
   - **À vérifier** : tous les services des situations P2 à P6 (premier emploi, CEP, évolution interne, formation, reconversion, services recruteurs), ainsi que les durées, tarifs et publics non visibles. Ils sont affichés avec un badge « à vérifier » et des fiches d’aperçu qui renvoient vers le site officiel. La présélection est présentée comme soumise à conditions (TPE/PME notamment), sans reproduire de critères.
 - **Textes** : accroches, bénéfices, page conseil et repères rémunération sont des rédactions originales. Seuls les intitulés et descriptions courtes observés sont cités.
 - **Visuels** : illustrations et pictogrammes SVG dessinés pour le prototype. Aucune photographie, aucun portrait, aucun logo de l’Apec, aucun témoignage.
-- **Police** : Montserrat via `@fontsource/montserrat` (SIL Open Font License), servie localement. C’est une substitution provisoire : la police exacte d’apec.fr n’est pas confirmée.
+- **Polices** (SIL Open Font License, servies localement) : Montserrat pour les prototypes, substitution provisoire car la police exacte d’apec.fr n’est pas confirmée ; DM Serif Display et Inter pour le portfolio.
 
 ## Design : ce qui est estimé, ce qui est contrôlé
 
-- **Estimé d’après les captures** : palette (`--brand-navy #252555`, `--brand-yellow #FFC400`, `--brand-blue #006699`, etc.), typographie, bandeau bleu nuit avec flèche de retour jaune, carte blanche qui chevauche le bandeau, colonne latérale, bloc modalités 2×2, puces « + » jaunes, cartes « En savoir plus » + action. Le CSS public d’apec.fr n’a **pas** pu être consulté.
+- **Estimé d’après les captures** : palette (`--brand-navy #252555`, `--brand-yellow #FFC400`, `--brand-blue #006699`, etc.), typographie, bandeau bleu nuit avec flèche de retour jaune, carte blanche qui chevauche le bandeau, colonne latérale « Nos services » (carte bleue) / « Nos outils » (carte bleu nuit, pictogramme jaune), bloc modalités 2×2, puces « + » jaunes, bandeau bleu d’appel à l’action, visuels sur aplat jaune avec étiquette carrée (motif « Repères »). Le CSS public d’apec.fr n’a **pas** pu être consulté.
+- **Éléments graphiques proposés à partir de ce langage** : visuels de services en aplats jaune / bleu / bleu nuit selon le type d’aide, étiquette carrée « Atelier / Rendez-vous / Outil », tuiles de situation sur bandeau bleu nuit (jaune quand sélectionnée), tuiles d’accompagnement colorées, pastilles de modalités.
+- **Modalités** : seules celles lisibles sur les captures sont affichées à l’utilisateur ; les autres sont listées « à vérifier » dans les coulisses.
 - **Proposé (non observé)** : états survol, focus, sélection, désactivé et erreur, badges, étapes de progression, récapitulatif. Le mini-kit est visible sur la page « Sources et limites ».
 - **Contrôlé** : ratios de contraste calculés (formule WCAG) : bleu nuit sur jaune 8,9:1, bleu nuit sur blanc 14,2:1, blanc sur bleu 6,3:1. Le gris secondaire est foncé à `#5F6673`, car `#6B7280` ne donne que 4,45:1 sur `#F5F5FA`.
 
 ## Tests exécutés
 
-- `npm run build` (TypeScript + Vite) : OK. `npx oxlint src` : seuls restent des avertissements « fast refresh » sans effet sur le build.
+- `npm ci` et `npm run build` (TypeScript + Vite) : OK. `npx oxlint src` : seuls restent des avertissements « fast refresh » sans effet sur le build.
+- Contrôle automatique : aucun mot d’explication (« simulée », « fictif », « prototype », « démo », « à vérifier », « hypothèse », « persona »…) dans le contenu principal des 10 écrans de prototype ; coulisses et barre présentes sur chacun.
 - Script Playwright de bout en bout (hors dépôt), sur le build de prévisualisation, à 1280 px, 640 px et 375 px :
   - les trois cas sont accessibles depuis l’accueil ;
   - le parcours du cas 2 est complet : erreurs de validation, recommandations différentes selon les réponses, mention de simulation avant et après validation, persistance après rechargement, retrait d’une recommandation, remise à zéro ;
   - au cas 1 : changement de situation et même périmètre de services entre « existant » et « piste » ;
   - au cas 3 : chaque lien du maillage mène à la bonne page, avec retour possible ; le sommaire fait défiler ;
-  - les 31 liens internes ont été parcourus, sans lien mort ; les liens externes pointent uniquement vers apec.fr ;
+  - les 32 liens internes ont été parcourus, sans lien mort ; les liens externes pointent uniquement vers apec.fr ;
   - aucune erreur ni avertissement console, aucune requête en échec, aucune balise `<img>` ;
   - aucun débordement horizontal à 375 px et 640 px ;
   - navigation clavier : bouton atteint, focus visible, radios aux flèches.

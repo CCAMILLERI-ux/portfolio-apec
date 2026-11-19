@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Badge } from '../components/Badge'
-import { ExplainPanel } from '../components/ExplainPanel'
-import { ArrowRight, Plus } from '../components/Icons'
+import { CrBlock, CroGrid } from '../components/Coulisses'
+import { ArrowRight, Chat, Doc, Group, Laptop, Plus } from '../components/Icons'
+import { Illustration } from '../components/Illustration'
 import { PageBand } from '../components/PageBand'
+import { ProtoLayout } from '../components/ProtoLayout'
 import { Link } from '../lib/router'
 
 const TOC = [
@@ -45,15 +47,18 @@ const QUESTIONS = [
   },
 ]
 
-export function Case3() {
+export function Case3({ path }: { path: string }) {
   const [checked, setChecked] = useState<number[]>([])
   const toggle = (i: number) =>
     setChecked((c) => (c.includes(i) ? c.filter((x) => x !== i) : [...c, i]))
 
   return (
-    <>
+    <ProtoLayout
+      path={path}
+      events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
+      coulisses={<Case3Coulisses />}
+    >
       <PageBand
-        back={{ to: '/', label: 'Portfolio · Cas 3' }}
         kicker="Conseils · Entretiens de recrutement"
         title="Comment préparer un entretien de recrutement ?"
         titleIsHeading={false}
@@ -63,10 +68,14 @@ export function Case3() {
         <div className="article-layout">
           <article className="sheet article" aria-labelledby="titre-conseil">
             <h1 id="titre-conseil" tabIndex={-1}>Comment préparer un entretien de recrutement ?</h1>
-            <p className="article__meta">
-              Contenu original rédigé pour ce portfolio — mis à jour le 19/11/2026 ·{' '}
-              <Badge tone="demo">Page de démonstration</Badge>
-            </p>
+            <div className="article-hero">
+              <Illustration name="conseil" tone="yellow" className="article-hero__img" />
+              <span className="kind-tag kind-tag--violet">
+                <Doc size={30} className="kind-tag__icon" />
+                <span className="kind-tag__label">Conseils</span>
+              </span>
+            </div>
+            <p className="article__meta">Mis à jour le 19/11/2026</p>
 
             <p className="article__intro">
               Pour préparer un entretien de recrutement, concentrez-vous sur cinq points : analyser l’offre,
@@ -161,55 +170,67 @@ export function Case3() {
                 ))}
               </fieldset>
               <p className="muted small" aria-live="polite">
-                {checked.length} point{checked.length > 1 ? 's' : ''} sur {CHECKLIST.length} — rien n’est enregistré.
+                {checked.length} point{checked.length > 1 ? 's' : ''} sur {CHECKLIST.length}
               </p>
             </section>
 
             <section aria-labelledby="accompagnement" className="accompany">
               <h2 id="accompagnement" tabIndex={-1}>Se faire accompagner selon votre situation</h2>
-              <ul className="accompany__list">
-                <li>
-                  <p className="accompany__when">Vous voulez vous préparer en amont, sans entretien fixé</p>
+              <ul className="tiles">
+                <li className="tile tile--yellow">
+                  <Group size={36} className="tile__icon" />
+                  <p className="tile__when">Vous voulez vous préparer en amont, sans entretien fixé</p>
                   <Link to="/service/atelier-entretiens?from=cas-3-accompagnement" className="link-arrow">
                     Découvrir l’atelier sur les entretiens de recrutement <ArrowRight size={18} />
                   </Link>
                 </li>
-                <li>
-                  <p className="accompany__when">Vous avez un entretien dans les prochains jours</p>
-                  <Link to="/service/entretien-programme?from=cas-3-accompagnement" className="link-arrow">
+                <li className="tile tile--blue">
+                  <Chat size={36} className="tile__icon" />
+                  <p className="tile__when">Vous avez un entretien dans les prochains jours</p>
+                  <Link to="/service/entretien-programme?from=cas-3-accompagnement" className="link-arrow link-arrow--light">
                     Préparer cet entretien avec un consultant <ArrowRight size={18} />
                   </Link>
                 </li>
-                <li>
-                  <p className="accompany__when">Vous préférez vous entraîner seul, quand vous voulez</p>
-                  <Link to="/service/simulateur-entretien?from=cas-3-accompagnement" className="link-arrow">
+                <li className="tile tile--navy">
+                  <Laptop size={36} className="tile__icon" />
+                  <p className="tile__when">Vous préférez vous entraîner seul, quand vous voulez</p>
+                  <Link to="/service/simulateur-entretien?from=cas-3-accompagnement" className="link-arrow link-arrow--light">
                     Essayer le simulateur d’entretien <ArrowRight size={18} />
                   </Link>
                 </li>
               </ul>
             </section>
 
-            <p className="article__sources muted small">
-              Sources : contenu original de démonstration, sans statistique citée. Les services mentionnés
-              renvoient aux fiches du prototype, établies d’après des captures d’apec.fr.
-            </p>
           </article>
 
           <aside className="sidebar" aria-label="Pour aller plus loin">
+            <p className="sidebar__heading">Nos services</p>
             <div className="side-card side-card--blue">
-              <p className="side-card__kicker">Contenu connexe</p>
-              <h2 className="side-card__title">Aborder la rémunération en entretien</h2>
-              <p>Préparer une fourchette et formuler sa réponse.</p>
-              <Link to="/conseil/remuneration" className="link-arrow link-arrow--light">
-                Lire les repères <ArrowRight size={18} />
+              <h2 className="side-card__title">Réussir vos entretiens de recrutement</h2>
+              <p>Un atelier pour maîtriser chaque type d’entretien d’embauche.</p>
+              <Link to="/service/atelier-entretiens?from=cas-3" className="link-arrow link-arrow--light">
+                En savoir plus<span className="visually-hidden"> sur l’atelier</span> <ArrowRight size={18} />
               </Link>
             </div>
+            <p className="sidebar__heading">Nos outils</p>
+            <div className="side-card side-card--navy">
+              <Laptop size={36} className="side-card__icon" />
+              <h2 className="side-card__title">Simulateur d’entretien</h2>
+              <Link to="/service/simulateur-entretien?from=cas-3" className="link-arrow link-arrow--light">
+                Démarrer<span className="visually-hidden"> avec le simulateur</span> <ArrowRight size={18} />
+              </Link>
+            </div>
+            <p className="sidebar__heading">Sur le même sujet</p>
+            <Link to="/conseil/remuneration" className="side-article">
+              <Illustration name="document" tone="blue" className="side-article__img" />
+              <span className="side-article__title">Aborder la rémunération en entretien : trois repères</span>
+              <span className="side-article__more">Lire <ArrowRight size={16} /></span>
+            </Link>
           </aside>
         </div>
 
-        <Case3Explain />
       </div>
-    </>
+    </ProtoLayout>
   )
 }
 
@@ -227,11 +248,20 @@ const LINK_MAP = [
   ['Repères rémunération', 'Atelier « Réussir vos entretiens »', '« s’exercer à la question du salaire en atelier »', 'Passer à la pratique'],
 ]
 
-function Case3Explain() {
+export function Case3Coulisses() {
   return (
-    <ExplainPanel
-      events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
-      rubrics={{
+    <>
+      <h3 className="coulisses__case">Cas 3 — Relier une recherche à un accompagnement</h3>
+      <CrBlock title="Statut de la page">
+        <p>
+          Page conseil originale, rédigée pour ce portfolio, sans statistique citée. Elle imite une page SEO pour la
+          démonstration mais n’a pas vocation à être référencée (noindex). Les services mentionnés renvoient aux
+          fiches du prototype, établies d’après des captures d’apec.fr. La page « rémunération » est un contenu
+          connexe court, pas une page de remplissage.
+        </p>
+      </CrBlock>
+      <CroGrid
+        rubrics={{
         constat: (
           <p>
             Une personne qui tape « comment préparer un entretien » cherche d’abord une réponse, pas un
@@ -270,8 +300,8 @@ function Case3Explain() {
           </ul>
         ),
       }}
-    >
-      <section className="explain__rubric explain__rubric--wide">
+      />
+      <section className="cr-block cr-block--wide">
         <h3>Persona et intention de recherche</h3>
         <p>
           P1, cadre en recherche active, souvent juste après une convocation ou en anticipation.
@@ -287,7 +317,7 @@ function Case3Explain() {
         <p className="muted small">Aucun volume de recherche ni classement : à vérifier avec les outils SEO de l’équipe.</p>
       </section>
 
-      <section className="explain__rubric explain__rubric--wide">
+      <section className="cr-block cr-block--wide">
         <h3>Aperçu pédagogique du titre et de la description</h3>
         <p className="muted small">Illustration de la longueur et du ton visés — pas un résultat de moteur réel, aucune promesse de classement.</p>
         <div className="serp-preview" aria-label="Aperçu pédagogique">
@@ -301,7 +331,7 @@ function Case3Explain() {
         </p>
       </section>
 
-      <section className="explain__rubric explain__rubric--wide">
+      <section className="cr-block cr-block--wide">
         <h3>Structure de la page</h3>
         <ul className="outline">
           <li>H1 — Comment préparer un entretien de recrutement ?
@@ -316,7 +346,7 @@ function Case3Explain() {
         </ul>
       </section>
 
-      <section className="explain__rubric explain__rubric--wide">
+      <section className="cr-block cr-block--wide">
         <h3>Carte du maillage interne</h3>
         <div className="table-scroll">
           <table className="data-table">
@@ -337,7 +367,7 @@ function Case3Explain() {
         </p>
       </section>
 
-      <section className="explain__rubric explain__rubric--wide">
+      <section className="cr-block cr-block--wide">
         <h3>Complément : anticiper la recherche avec IA</h3>
         <ul className="plus-list">
           <li><Plus size={16} className="plus" /> Réponse claire dès l’introduction, reformulable telle quelle.</li>
@@ -351,7 +381,7 @@ function Case3Explain() {
         </p>
       </section>
 
-      <section className="explain__rubric explain__rubric--wide">
+      <section className="cr-block cr-block--wide">
         <h3>Complément : coordination multicanale <Badge tone="warn">Organisation à confirmer</Badge></h3>
         <div className="table-scroll">
           <table className="data-table">
@@ -368,6 +398,6 @@ function Case3Explain() {
           </table>
         </div>
       </section>
-    </ExplainPanel>
+    </>
   )
 }

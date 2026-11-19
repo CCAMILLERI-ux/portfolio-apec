@@ -2,30 +2,11 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { KIND_LABEL, type Service } from '../data/services'
 import { INDIVIDUAL_SLOTS, WORKSHOP_SESSIONS, type Slot } from '../data/slots'
 import { track } from '../lib/storage'
-import { Badge } from './Badge'
-import { Calendar, Check, Info, Pin } from './Icons'
+import { Calendar, Check, Pin } from './Icons'
 
 export interface BookingResult {
   serviceId: string
   slot: Slot
-}
-
-export function SimulationNotice({ after = false }: { after?: boolean }) {
-  return (
-    <p className="sim-notice" role="note">
-      <Info size={22} />
-      <span>
-        {after ? (
-          <strong>Simulation terminée — aucun rendez-vous réel n’a été réservé.</strong>
-        ) : (
-          <>
-            <strong>Réservation simulée.</strong> Créneaux fictifs : rien n’est envoyé, aucun système de
-            l’Apec n’est contacté.
-          </>
-        )}
-      </span>
-    </p>
-  )
 }
 
 /**
@@ -68,16 +49,14 @@ export function Booking({
   if (step === 'recap' && slot) {
     return (
       <section className="booking" aria-labelledby={`${groupId}-recap`}>
-        <SimulationNotice />
         <h2 id={`${groupId}-recap`} ref={recapRef} tabIndex={-1} className="booking__title">
-          Récapitulatif de la réservation simulée
+          Récapitulatif
         </h2>
         <dl className="recap">
           <div><dt>Service</dt><dd>{service.officialTitle}</dd></div>
           <div><dt>Type</dt><dd>{KIND_LABEL[service.kind]}</dd></div>
-          <div><dt>{isWorkshop ? 'Session' : 'Rendez-vous'}</dt><dd>{slot.date} à {slot.time} <Badge tone="demo">Fictif</Badge></dd></div>
+          <div><dt>{isWorkshop ? 'Session' : 'Rendez-vous'}</dt><dd>{slot.date} à {slot.time}</dd></div>
           <div><dt>Lieu</dt><dd>{slot.place}</dd></div>
-          <div><dt>Participant</dt><dd>Profil de démonstration (aucune donnée saisie)</dd></div>
         </dl>
         <div className="booking__actions">
           <button
@@ -88,7 +67,7 @@ export function Booking({
               onComplete({ serviceId: service.id, slot })
             }}
           >
-            <Check size={18} /> Valider la réservation simulée
+            <Check size={18} /> Valider la réservation
           </button>
           <button type="button" className="btn btn--outline" onClick={() => setStep('choose')}>
             Modifier le {noun}
@@ -100,14 +79,13 @@ export function Booking({
 
   return (
     <section className="booking" aria-labelledby={`${groupId}-choose`}>
-      <SimulationNotice />
       <h2 id={`${groupId}-choose`} ref={chooseRef} tabIndex={-1} className="booking__title">
         {isWorkshop ? 'Choisissez une session' : 'Choisissez un créneau'}
       </h2>
       <p className="muted">{service.officialTitle}</p>
       <fieldset className="slots" aria-describedby={error ? `${groupId}-err` : undefined}>
         <legend>
-          {isWorkshop ? 'Sessions' : 'Créneaux'} disponibles <Badge tone="demo">Données fictives</Badge>
+          {isWorkshop ? 'Sessions' : 'Créneaux'} disponibles
         </legend>
         <div className="slots__grid">
           {slots.map((s) => (

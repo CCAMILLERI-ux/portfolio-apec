@@ -10,8 +10,8 @@ export interface Slot {
 }
 
 const PLACES = {
-  centre: 'Centre de démonstration (fictif)',
-  distance: 'À distance — visio (fictif)',
+  centre: 'Dans votre centre',
+  distance: 'À distance, en visio',
 }
 
 export const INDIVIDUAL_SLOTS: Slot[] = [
