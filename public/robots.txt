@@ -1,0 +1,3 @@
+# Portfolio de candidature indépendant — ne pas indexer.
+User-agent: *
+Disallow: /
