@@ -36,6 +36,16 @@ npm run preview
 
 `npm run build` produit un dossier `dist/` statique. Le routage par hash (`#/cas-1`) et la base relative (`base: './'`) permettent d’ouvrir le site sur n’importe quel hébergement statique, y compris dans un sous-dossier, sans règle de réécriture. Aucun déploiement n’a été effectué.
 
+## Publication sur GitHub Pages
+
+Le fichier `.github/workflows/deploy-pages.yml` construit et publie le site à chaque push sur `main`. On peut aussi le lancer à la main depuis l’onglet **Actions** → « Publier sur GitHub Pages » → **Run workflow**.
+
+Une seule fois, dans le dépôt : **Settings → Pages → Build and deployment → Source : GitHub Actions**. Sur un compte gratuit, le dépôt doit être public.
+
+Adresse : `https://ccamilleri-ux.github.io/portfolio-apec/`
+
+Le `noindex` est porté par la balise meta de chaque page. Le `robots.txt` du dossier n’a pas d’effet sous un sous-chemin `github.io` : c’est la balise meta qui empêche l’indexation.
+
 ## Parcours de démo en cinq minutes
 
 1. **Accueil** : trois cartes, un clic par cas.
