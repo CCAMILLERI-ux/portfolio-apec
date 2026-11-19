@@ -17,7 +17,8 @@ Portfolio de candidature au poste de Chef de projet animation web. Un seul site 
 - **Portfolio** (accueil, sources) : identité propre à la candidate (fond crème, DM Serif Display + Inter, accent terracotta), volontairement distincte de l’univers Apec.
 - **Prototypes** : univers inspiré d’apec.fr (bleu nuit, jaune, bleu ; Montserrat), **sans aucune explication dans les écrans utilisateur**.
 - **Coulisses du prototype** : sous le pied de page de chaque prototype, dans l’univers portfolio. Elles regroupent la mention d’indépendance, le retour au portfolio, la réinitialisation, la méthode (constat, hypothèse, modification, KPI et garde-fous, équipes), la provenance des informations et le journal local.
-- **Barre fixe du prototype** (univers portfolio) : rappel « Prototype · sans affiliation Apec », accès aux coulisses et au portfolio. Au cas 1, elle porte la bascule « Existant observé / Piste exploratoire ». Pendant et après une réservation, elle affiche « Réservation simulée… » puis « Simulation terminée — aucun rendez-vous réel n’a été réservé ».
+- **Barre de démo** (univers portfolio), en haut de page et hors maquette : « Retour au portfolio », nom du cas, choix de variante (cas 1 : Existant observé / Piste 1 / Piste 2), « Comprendre ce cas » (vers les coulisses) et « Réinitialiser la démo ». Pendant et après une réservation, elle affiche « Réservation simulée… » puis « Simulation terminée — aucun rendez-vous réel n’a été réservé ».
+- **Mon espace** : page d’accueil de l’espace fictif d’Alex (guidage, prochaines étapes, rendez-vous, services, conseils).
 
 ## Installation et lancement
 
@@ -55,10 +56,10 @@ Le `noindex` est porté par la balise meta de chaque page. Le `robots.txt` du do
 
 1. **Accueil** : trois cartes, un clic par cas.
 2. **Cas 2 (≈ 2 min)** : « Me guider » → la situation est présélectionnée (modifiable) → cocher « Préparer un entretien », puis « Oui, dans les prochains jours » → les recommandations changent et s’expliquent (« Pourquoi ce service ? ») → « Commencer par ce service » → choisir un créneau fictif → récapitulatif → valider → « Simulation terminée — aucun rendez-vous réel n’a été réservé » → « Mes prochaines étapes » (retirer, modifier ses besoins, reprendre, remettre à zéro).
-3. **Cas 1 (≈ 1 min 30)** : changer de situation (« Je recrute et j’ai besoin d’aide ») puis utiliser la bascule « Existant observé » de la barre du bas.
-4. **Cas 3 (≈ 1 min 30)** : lire l’introduction, suivre « simulation individuelle d’1 h » puis revenir avec la flèche du bandeau ; bouton « Coulisses » de la barre pour le maillage, l’aperçu du titre, le GEO et la coordination.
+3. **Cas 1 (≈ 1 min 30)** : changer de situation (« Je recrute et j’ai besoin d’aide ») puis comparer « Existant observé », « Piste 1 » et « Piste 2 » depuis la barre du haut.
+4. **Cas 3 (≈ 1 min 30)** : lire l’introduction, suivre « simulation individuelle d’1 h » puis revenir avec la flèche du bandeau ; bouton « Comprendre ce cas » de la barre du haut pour le maillage, l’aperçu du titre, le GEO et la coordination.
 
-La barre et les coulisses proposent « Portfolio » et « Réinitialiser la démo » ; chaque fiche a une flèche de retour contextuelle (le lien d’origine est transmis par `?from=`).
+La barre du haut propose « Retour au portfolio » et « Réinitialiser la démo » ; chaque fiche a une flèche de retour contextuelle (le lien d’origine est transmis par `?from=`).
 
 ## Choix techniques
 

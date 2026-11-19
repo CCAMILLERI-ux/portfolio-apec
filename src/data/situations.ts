@@ -1,11 +1,11 @@
 /**
- * Entrées « par situation » du cas 1. Les codes P1–P6 sont des personas de
+ * Entrées « par situation » du cas 1. Les codes P1–P5 sont des personas de
  * travail (hypothèses de la candidate, non validés par l'Apec). Ils ne sont
  * jamais affichés aux visiteurs dans la démo utilisateur.
  */
 export interface Situation {
   id: string
-  persona: 'P1' | 'P2' | 'P3' | 'P4' | 'P5' | 'P6'
+  persona: 'P1' | 'P2' | 'P3' | 'P4' | 'P5'
   label: string
   personaNote: string
   serviceIds: [string, string, string]
@@ -46,13 +46,6 @@ export const SITUATIONS: Situation[] = [
     label: 'Je recrute et j’ai besoin d’aide',
     personaNote: 'Dirigeant de TPE/PME ou recruteur occasionnel',
     serviceIds: ['conseil-recrutement', 'publication-offre', 'preselection'],
-  },
-  {
-    id: 'optimiser-recrutements',
-    persona: 'P6',
-    label: 'Je souhaite optimiser mes recrutements',
-    personaNote: 'Recruteur ou RH professionnel',
-    serviceIds: ['recherche-profils', 'audit-sourcing', 'marque-employeur'],
   },
 ]
 

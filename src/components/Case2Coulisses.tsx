@@ -24,9 +24,9 @@ export function Case2Coulisses() {
           <li>L’âge n’est ni demandé ni utilisé : les recommandations reposent uniquement sur les réponses.</li>
           <li>
             Créneaux et sessions <strong>fictifs</strong>. La réservation est simulée : rien n’est envoyé, aucun
-            système de l’Apec n’est contacté. La barre du bas le rappelle pendant et après la réservation.
+            système de l’Apec n’est contacté. La barre de démo, en haut de page, le rappelle pendant et après la réservation.
           </li>
-          <li>« Mes prochaines étapes » utilise une sauvegarde locale de démonstration, effacée par « Réinitialiser la démo ».</li>
+          <li>« Mes prochaines étapes » utilise une sauvegarde locale de démonstration, effacée par « Réinitialiser la démo » (barre du haut). « Mon espace » est la page d’accueil de l’espace de démonstration.</li>
         </ul>
       </CrBlock>
       <CroGrid

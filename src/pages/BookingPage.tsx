@@ -6,7 +6,7 @@ import { PageBand } from '../components/PageBand'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { getService } from '../data/services'
 import { useBookings } from '../lib/demoState'
-import { backFor, safeFrom } from '../lib/nav'
+import { backFor, caseLabelFor, safeFrom } from '../lib/nav'
 import { Link, navigate, type Route } from '../lib/router'
 import { NotFound } from './NotFound'
 
@@ -28,6 +28,7 @@ export function BookingPage({ id, route }: { id: string; route: Route }) {
   return (
     <ProtoLayout
       path={route.path}
+      caseLabel={caseLabelFor(from)}
       events={['booking_start', 'booking_complete_demo']}
       barNotice={
         done
