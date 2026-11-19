@@ -1,24 +1,26 @@
-import { Badge } from '../components/Badge'
 import { ArrowRight } from '../components/Icons'
+import { Illustration } from '../components/Illustration'
 import { PageBand } from '../components/PageBand'
+import { ProtoLayout } from '../components/ProtoLayout'
 import { Link } from '../lib/router'
+import { Case3Coulisses } from './Case3'
 
 /** Contenu connexe court, clairement identifié — pas une page de remplissage. */
-export function Remuneration() {
+export function Remuneration({ path }: { path: string }) {
   return (
-    <>
+    <ProtoLayout path={path} events={['service_view', 'service_cta_click']} coulisses={<Case3Coulisses />}>
       <PageBand
         back={{ to: '/cas-3', label: 'Conseil : préparer un entretien de recrutement' }}
-        kicker="Conseils · Contenu connexe court"
         title="Aborder la rémunération en entretien"
         titleIsHeading={false}
       />
       <div className="container overlap">
         <article className="sheet article sheet--narrow" aria-labelledby="titre-remu">
           <h1 id="titre-remu" tabIndex={-1}>Aborder la rémunération en entretien : trois repères</h1>
-          <p className="article__meta">
-            Contenu original rédigé pour ce portfolio — 19/11/2026 · <Badge tone="demo">Page de démonstration</Badge>
-          </p>
+          <div className="article-hero article-hero--short">
+            <Illustration name="document" tone="blue" className="article-hero__img" />
+          </div>
+          <p className="article__meta">Mis à jour le 19/11/2026</p>
           <p className="article__intro">
             La question du salaire arrive souvent en fin d’entretien. La préparer à l’avance permet d’y
             répondre calmement, avec une fourchette argumentée plutôt qu’un chiffre improvisé.
@@ -39,12 +41,12 @@ export function Remuneration() {
             <Link to="/cas-3" anchor="questions">les autres questions fréquentes d’un entretien de recrutement</Link>, ou{' '}
             <Link to="/service/atelier-entretiens?from=remuneration">exercez-vous à la question du salaire en atelier collectif</Link>.
           </p>
-          <p className="muted small">Aucun chiffre de salaire n’est avancé ici : les repères dépendent du métier, du secteur et de la région.</p>
+          <p className="muted small">Les repères de rémunération dépendent du métier, du secteur et de la région.</p>
           <Link to="/cas-3" className="link-arrow">
             Revenir au conseil complet sur la préparation d’entretien <ArrowRight size={18} />
           </Link>
         </article>
       </div>
-    </>
+    </ProtoLayout>
   )
 }

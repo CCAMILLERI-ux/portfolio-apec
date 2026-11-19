@@ -3,21 +3,45 @@ import { Clock, Gift, People, Target } from './Icons'
 
 const ICON = { Format: People, Durée: Clock, Tarif: Gift, Public: Target }
 
-/** Bloc modalités 2×2 (format / durée / tarif / public), d'après le motif observé. */
-export function Modalities({ items, compact = false }: { items: Modality[]; compact?: boolean }) {
+/** Modalités vérifiées uniquement : rien d'inventé n'est affiché à l'utilisateur. */
+export function verified(items: Modality[]) {
+  return items.filter((m) => m.provenance === 'capture')
+}
+
+/** Bloc modalités 2×2, d'après le motif observé sur les fiches. */
+export function Modalities({ items }: { items: Modality[] }) {
+  const shown = verified(items)
+  if (shown.length === 0) return null
   return (
-    <dl className={`modalities${compact ? ' modalities--compact' : ''}`}>
-      {items.map((m) => {
+    <dl className="modalities">
+      {shown.map((m) => {
         const Icon = ICON[m.label]
-        const tbc = m.provenance === 'a-verifier'
         return (
-          <div key={m.label} className={`modalities__item${tbc ? ' is-tbc' : ''}`}>
-            <Icon size={compact ? 20 : 24} className="modalities__icon" />
+          <div key={m.label} className="modalities__item">
+            <Icon size={26} className="modalities__icon" />
             <dt className="visually-hidden">{m.label}</dt>
             <dd>{m.value}</dd>
           </div>
         )
       })}
     </dl>
+  )
+}
+
+/** Variante en pastilles pour les cartes. */
+export function ModalityChips({ items }: { items: Modality[] }) {
+  const shown = verified(items)
+  if (shown.length === 0) return null
+  return (
+    <ul className="chips" aria-label="Modalités">
+      {shown.map((m) => {
+        const Icon = ICON[m.label]
+        return (
+          <li key={m.label} className="chip">
+            <Icon size={16} /> <span className="visually-hidden">{m.label} : </span>{m.value}
+          </li>
+        )
+      })}
+    </ul>
   )
 }

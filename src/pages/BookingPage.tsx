@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { Badge } from '../components/Badge'
-import { Booking, SimulationNotice, type BookingResult } from '../components/Booking'
-import { ArrowRight } from '../components/Icons'
+import { Booking, type BookingResult } from '../components/Booking'
+import { CrBlock } from '../components/Coulisses'
+import { ArrowRight, Check } from '../components/Icons'
 import { PageBand } from '../components/PageBand'
+import { ProtoLayout } from '../components/ProtoLayout'
 import { getService } from '../data/services'
 import { useBookings } from '../lib/demoState'
 import { backFor, safeFrom } from '../lib/nav'
@@ -25,17 +26,37 @@ export function BookingPage({ id, route }: { id: string; route: Route }) {
   const serviceBack = { to: `/service/${id}?from=${from}`, label: service.officialTitle }
 
   return (
-    <>
-      <PageBand back={serviceBack} kicker="Réservation simulée" title={service.officialTitle} />
+    <ProtoLayout
+      path={route.path}
+      events={['booking_start', 'booking_complete_demo']}
+      barNotice={
+        done
+          ? 'Simulation terminée — aucun rendez-vous réel n’a été réservé.'
+          : 'Réservation simulée : créneaux fictifs, rien n’est envoyé.'
+      }
+      coulisses={
+        <>
+          <h3 className="coulisses__case">Réservation simulée</h3>
+          <CrBlock title="Ce qui se passe ici">
+            <p>
+              Créneaux et sessions fictifs, sans nom de consultant ni centre réel. Aucune donnée n’est saisie ni
+              envoyée ; aucun système de l’Apec n’est contacté. La réservation est enregistrée uniquement dans ce
+              navigateur, pour l’afficher dans « Mon espace ».
+            </p>
+          </CrBlock>
+        </>
+      }
+    >
+      <PageBand back={serviceBack} title={done ? 'Votre réservation' : 'Planifiez votre rendez-vous'} />
       <div className="container overlap">
         <div className="sheet sheet--narrow">
           {done ? (
-            <div className="step">
-              <SimulationNotice after />
-              <h2 ref={doneRef} tabIndex={-1} className="step__title">Réservation simulée enregistrée</h2>
+            <div className="step confirm">
+              <span className="confirm__check" aria-hidden="true"><Check size={44} /></span>
+              <h2 ref={doneRef} tabIndex={-1} className="step__title confirm__title">C’est noté !</h2>
               <dl className="recap">
                 <div><dt>Service</dt><dd>{service.officialTitle}</dd></div>
-                <div><dt>Date</dt><dd>{done.slot.date} à {done.slot.time} <Badge tone="demo">Fictif</Badge></dd></div>
+                <div><dt>Date</dt><dd>{done.slot.date} à {done.slot.time}</dd></div>
                 <div><dt>Lieu</dt><dd>{done.slot.place}</dd></div>
               </dl>
               <div className="step__actions step__actions--wrap">
@@ -43,7 +64,7 @@ export function BookingPage({ id, route }: { id: string; route: Route }) {
                   Retour : {origin.label}
                 </Link>
                 <Link to="/cas-2/prochaines-etapes" className="link-arrow">
-                  Mes prochaines étapes (cas 2) <ArrowRight size={18} />
+                  Mon espace <ArrowRight size={18} />
                 </Link>
               </div>
             </div>
@@ -60,6 +81,6 @@ export function BookingPage({ id, route }: { id: string; route: Route }) {
           )}
         </div>
       </div>
-    </>
+    </ProtoLayout>
   )
 }
