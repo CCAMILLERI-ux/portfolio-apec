@@ -47,7 +47,7 @@ export const SERVICE_PHOTO: Record<string, Photo> = {
   'atelier-iag': PHOTOS.atelierOrdinateurs,
   'entretien-programme': PHOTOS.entretienRecrutement,
   candidature: PHOTOS.relectureEcran,
-  'simulateur-entretien': PHOTOS.posteDeTravail,
+  'simulateur-entretien': PHOTOS.entretienCandidate,
   'creer-cv': PHOTOS.posteDeTravail,
   cep: PHOTOS.conversation,
   'evolution-interne': PHOTOS.collegues,
