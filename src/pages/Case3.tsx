@@ -1,19 +1,20 @@
 import { useState } from 'react'
 import { Badge } from '../components/Badge'
 import { CrBlock, CroGrid } from '../components/Coulisses'
-import { ArrowRight, Chat, Doc, Group, Laptop, Plus } from '../components/Icons'
-import { Illustration } from '../components/Illustration'
+import { External, Plus } from '../components/Icons'
+import { ArticleHero, ArticleMeta, SideArticleCard } from '../components/ArticleParts'
+import { PHOTOS } from '../data/photos'
+import { SolutionsCards, SolutionsCompact } from '../components/Cas3Solutions'
+import { CAS3_SOLUTIONS, URSSAF_BRUT_NET } from '../data/cas3'
 import { PageBand } from '../components/PageBand'
 import { ProtoLayout } from '../components/ProtoLayout'
-import { PhotoVisual } from '../components/ServiceCard'
-import { getService } from '../data/services'
 import { Link } from '../lib/router'
 
 const TOC = [
   { id: 'etapes', label: 'Les 5 étapes de préparation' },
   { id: 'questions', label: 'Exemples de questions et pistes de réponse' },
   { id: 'checklist', label: 'Checklist de la veille' },
-  { id: 'accompagnement', label: 'Se faire accompagner' },
+  { id: 'accompagnement', label: 'L’Apec vous accompagne' },
 ]
 
 const CHECKLIST = [
@@ -40,7 +41,7 @@ const QUESTIONS = [
   },
   {
     q: 'Quelles sont vos prétentions salariales ?',
-    a: 'Donnez une fourchette préparée à partir de repères de marché et de votre expérience.',
+    a: 'Donnez une fourchette en brut annuel, préparée à partir de repères de marché (par exemple les données de rémunération publiées par l’Apec) et de votre expérience.',
     link: true,
   },
   {
@@ -48,8 +49,6 @@ const QUESTIONS = [
     a: 'Oui, toujours : sur les priorités du poste, l’équipe, les critères de réussite à six mois.',
   },
 ]
-
-const atelier = getService('atelier-entretiens')!
 
 export function Case3({ path }: { path: string }) {
   const [checked, setChecked] = useState<number[]>([])
@@ -73,14 +72,8 @@ export function Case3({ path }: { path: string }) {
         <div className="article-layout">
           <article className="sheet article" aria-labelledby="titre-conseil">
             <h1 id="titre-conseil" tabIndex={-1}>Comment préparer un entretien de recrutement ?</h1>
-            <div className="article-hero">
-              <Illustration name="conseil" tone="yellow" className="article-hero__img" />
-              <span className="kind-tag kind-tag--violet">
-                <Doc size={30} className="kind-tag__icon" />
-                <span className="kind-tag__label">Conseils</span>
-              </span>
-            </div>
-            <p className="article__meta">Mis à jour le 19/11/2026</p>
+            <ArticleHero photo={PHOTOS.cadreSouriante} rubric="Conseils" />
+            <ArticleMeta date="19/11/2026" title="Comment préparer un entretien de recrutement ?" />
 
             <p className="article__intro">
               Pour préparer un entretien de recrutement, concentrez-vous sur cinq points : analyser l’offre,
@@ -107,13 +100,14 @@ export function Case3({ path }: { path: string }) {
               <p>
                 Repérez les trois attentes qui reviennent le plus dans l’annonce (compétences, contexte,
                 résultats attendus). Pour chacune, notez une expérience qui y répond. C’est la base de tout
-                l’entretien.
+                l’entretien. Les fiches métiers cadres de l’Apec aident à situer les missions et les compétences
+                habituellement attendues pour ce type de poste.
               </p>
 
               <h3>2. Comprendre l’entreprise</h3>
               <p>
-                Site, actualités récentes, rapports publics, profils des futurs collègues : cherchez ce qui
-                explique pourquoi le poste est ouvert maintenant. Une question informée sur ce contexte vaut
+                Site, actualités récentes, rapports publics, fiches entreprises, profils des futurs collègues :
+                cherchez ce qui explique pourquoi le poste est ouvert maintenant. Une question informée sur ce contexte vaut
                 mieux qu’une liste de chiffres récités.
               </p>
 
@@ -155,7 +149,14 @@ export function Case3({ path }: { path: string }) {
                     <dd>
                       {x.a}
                       {x.link && (
-                        <> <Link to="/conseil/remuneration">Voir comment préparer votre fourchette</Link>.</>
+                        <>
+                          {' '}<Link to="/conseil/remuneration">Voir comment préparer votre fourchette</Link>. Pour
+                          traduire un montant brut en net, utilisez le{' '}
+                          <a href={URSSAF_BRUT_NET} target="_blank" rel="noopener noreferrer">
+                            convertisseur salaire brut / net de l’Urssaf<span className="visually-hidden"> (site externe, nouvel onglet)</span>
+                          </a>{' '}
+                          <External size={14} />.
+                        </>
                       )}
                     </dd>
                   </div>
@@ -179,65 +180,20 @@ export function Case3({ path }: { path: string }) {
               </p>
             </section>
 
-            <section aria-labelledby="accompagnement" className="accompany">
-              <h2 id="accompagnement" tabIndex={-1}>Se faire accompagner selon votre situation</h2>
-              <ul className="tiles">
-                <li className="tile tile--yellow">
-                  <Group size={36} className="tile__icon" />
-                  <p className="tile__when">Vous voulez vous préparer en amont, sans entretien fixé</p>
-                  <Link to="/service/atelier-entretiens?from=cas-3-accompagnement" className="link-arrow">
-                    Découvrir l’atelier sur les entretiens de recrutement <ArrowRight size={18} />
-                  </Link>
-                </li>
-                <li className="tile tile--blue">
-                  <Chat size={36} className="tile__icon" />
-                  <p className="tile__when">Vous avez un entretien dans les prochains jours</p>
-                  <Link to="/service/entretien-programme?from=cas-3-accompagnement" className="link-arrow link-arrow--light">
-                    Préparer cet entretien avec un consultant <ArrowRight size={18} />
-                  </Link>
-                </li>
-                <li className="tile tile--navy">
-                  <Laptop size={36} className="tile__icon" />
-                  <p className="tile__when">Vous préférez vous entraîner seul, quand vous voulez</p>
-                  <Link to="/service/simulateur-entretien?from=cas-3-accompagnement" className="link-arrow link-arrow--light">
-                    Essayer le simulateur d’entretien <ArrowRight size={18} />
-                  </Link>
-                </li>
-              </ul>
-            </section>
+            <SolutionsCards />
 
           </article>
 
           <aside className="sidebar" aria-label="Pour aller plus loin">
-            <p className="sidebar__heading">Nos services</p>
-            <div className="side-card side-card--workshop">
-              <PhotoVisual service={atelier} className="side-card__photo" />
-              <div className="side-card__inner">
-                <p className="workshop__kicker">Atelier collectif</p>
-                <h2 className="side-card__title side-card__title--dark">Réussir vos entretiens de recrutement</h2>
-                <p>Un atelier pour maîtriser chaque type d’entretien d’embauche.</p>
-                <Link to="/reserver/atelier-entretiens?from=cas-3" className="btn btn--primary btn--sm">
-                  Voir les sessions<span className="visually-hidden"> de l’atelier</span>
-                </Link>
-                <Link to="/service/atelier-entretiens?from=cas-3" className="link-arrow">
-                  En savoir plus<span className="visually-hidden"> sur l’atelier</span> <ArrowRight size={18} />
-                </Link>
-              </div>
-            </div>
-            <p className="sidebar__heading">Nos outils</p>
-            <div className="side-card side-card--navy">
-              <Laptop size={36} className="side-card__icon" />
-              <h2 className="side-card__title">Simulateur d’entretien</h2>
-              <Link to="/service/simulateur-entretien?from=cas-3" className="link-arrow link-arrow--light">
-                Démarrer<span className="visually-hidden"> avec le simulateur</span> <ArrowRight size={18} />
-              </Link>
-            </div>
-            <p className="sidebar__heading">Sur le même sujet</p>
-            <Link to="/conseil/remuneration" className="side-article">
-              <Illustration name="document" tone="blue" className="side-article__img" />
-              <span className="side-article__title">Aborder la rémunération en entretien : trois repères</span>
-              <span className="side-article__more">Lire <ArrowRight size={16} /></span>
-            </Link>
+            <h2 className="sidebar__heading">Sur le même sujet</h2>
+            <SideArticleCard
+              to="/conseil/remuneration"
+              photo={PHOTOS.conversation}
+              title="Aborder la rémunération en entretien : trois repères"
+              date="19/11/2026"
+              rubric="Repères"
+            />
+            <SolutionsCompact />
           </aside>
         </div>
 
@@ -255,9 +211,10 @@ const LINK_MAP = [
   ['Conseil — préparer un entretien', 'Atelier « Réussir vos entretiens »', '« atelier collectif Réussir vos entretiens de recrutement »', 'Se préparer en groupe'],
   ['Conseil — préparer un entretien', 'Entretien programmé (simulation)', '« Répétez-le lors d’une simulation individuelle d’1 h »', 'Entretien déjà fixé'],
   ['Conseil — préparer un entretien', 'Repères rémunération', '« quelques repères pour aborder le salaire »', 'Question fréquente'],
+  ['Conseil — questions (salaire)', 'Convertisseur Urssaf (externe)', '« convertisseur salaire brut / net de l’Urssaf »', 'Passer du brut au net'],
+  ...CAS3_SOLUTIONS.map((s) => ['Conseil — bloc final et colonne', s.official, `« ${s.cta} »`, s.focus ?? s.title]),
   ['Fiche atelier', 'Conseil — étapes', '« Lire nos conseils pour préparer votre séance »', 'Préparer la séance'],
   ['Repères rémunération', 'Conseil — questions', '« les autres questions fréquentes »', 'Retour au besoin principal'],
-  ['Repères rémunération', 'Atelier « Réussir vos entretiens »', '« s’exercer à la question du salaire en atelier »', 'Passer à la pratique'],
 ]
 
 export function Case3Coulisses() {
@@ -271,6 +228,23 @@ export function Case3Coulisses() {
           fiches du prototype, établies d’après des captures d’apec.fr. La page « rémunération » est un contenu
           connexe court, pas une page de remplissage.
         </p>
+      </CrBlock>
+      <CrBlock title="Solutions recommandées : ordre et provenance">
+        <p>
+          Même liste, même ordre et mêmes destinations dans la colonne et en bas d’article : d’abord les
+          accompagnements humains (photos), puis les outils en autonomie (icônes). Le simulateur d’entretien prépare
+          les <strong>réponses</strong> ; Odiapazon aide à préparer les <strong>questions</strong> et à clarifier ses
+          attentes (usage suggéré, à partir de la description observée : « se projeter pour préparer une
+          collaboration réussie »).
+        </p>
+        <ul>
+          <li>Descriptions alignées sur les captures : « Entretien programmé » est une simulation pour un entretien prévu, pas un coaching général ; l’atelier porte sur les différents types d’entretien.</li>
+          <li>« Simulateur de salaire cadre » : intitulé, adresse et conditions à vérifier (absent des captures).</li>
+          <li>Outils : la fiche du prototype renvoie vers la page publique « Tous nos outils » d’apec.fr ; adresses directes et éventuelle connexion à un compte Apec non vérifiées (apec.fr protégé contre les accès automatisés).</li>
+          <li>Data Cadres, fiches métiers et fiches entreprises sont mentionnés dans le texte <strong>sans lien</strong> : leurs adresses n’ont pas pu être vérifiées.</li>
+          <li>Lien externe vérifié : convertisseur salaire brut / net de l’Urssaf (consulté le 20/11/2026).</li>
+          <li>Photos Unsplash (licence Unsplash) : situations illustratives, pas de vrais consultants Apec.</li>
+        </ul>
       </CrBlock>
       <CroGrid
         rubrics={{

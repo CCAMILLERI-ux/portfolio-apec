@@ -2,12 +2,13 @@ import { Badge } from '../components/Badge'
 import { CrBlock, CroGrid } from '../components/Coulisses'
 import { ArrowRight, Calendar, Chat, Compass, Graduation, Handshake, Search, TrendUp } from '../components/Icons'
 import { Illustration } from '../components/Illustration'
-import { ModalityChips } from '../components/Modalities'
+import { ModalityChips, verified } from '../components/Modalities'
 import { ProtoLayout } from '../components/ProtoLayout'
-import { KIND_TONE, ObservedServiceCard, PhotoVisual, ServiceAction, ServiceCard, ServiceVisual } from '../components/ServiceCard'
+import { ObservedServiceCard, PhotoVisual, ServiceAction, ServiceCard } from '../components/ServiceCard'
+import { Picto } from '../components/Picto'
 import { WORKSHOP_SESSIONS } from '../data/slots'
 import { ADVICE_BY_SITUATION, IDEAL_IF } from '../data/piste2'
-import { getService, SERVICES, type Service } from '../data/services'
+import { getService, KIND_LABEL, SERVICES, type Service } from '../data/services'
 import { ALL_DEMO_SERVICE_IDS, SITUATIONS } from '../data/situations'
 import { Link, navigate, type Route } from '../lib/router'
 
@@ -128,37 +129,41 @@ export function Case1({ route }: { route: Route }) {
 
         {view === 'piste2' && (
           <>
-            <ol className="pick-list" aria-label="Services, avec la situation où chacun est le plus utile">
-              {services.map((s) => (
-                <li key={s.id} className={`pick pick--${KIND_TONE[s.kind]}`}>
-                  <div className="pick__visual"><ServiceVisual service={s} /></div>
-                  <div className="pick__body">
-                    <p className="svc__official">{s.officialTitle}</p>
-                    <h3 className="pick__title">{s.hook}</h3>
-                    {IDEAL_IF[s.id] && (
-                      <p className="pick__ideal"><span className="pick__ideal-label">Idéal si</span> {IDEAL_IF[s.id]}</p>
-                    )}
-                    <ModalityChips items={s.modalities} />
-                  </div>
-                  <div className="pick__actions">
-                    <ServiceAction service={s} from="cas-1" />
-                    <Link to={`/service/${s.id}?from=cas-1`} className="link-arrow">
-                      En savoir plus<span className="visually-hidden"> : {s.officialTitle}</span> <ArrowRight size={18} />
-                    </Link>
-                  </div>
-                </li>
-              ))}
-              <li className="pick pick--help">
-                <div className="pick__help-icon"><Chat size={40} /></div>
-                <div className="pick__body">
-                  <h3 className="pick__title">Aucun ne vous correspond vraiment ?</h3>
-                  <p className="pick__ideal pick__ideal--light">Un consultant fait le point avec vous et vous oriente vers l’accompagnement adapté.</p>
-                </div>
-                <div className="pick__actions">
+            <ul className="theme-grid" aria-label="Services, avec la situation où chacun est le plus utile">
+              {services.map((s) => {
+                const shown = verified(s.modalities).filter((m) => m.label !== 'Public')
+                return (
+                  <li key={s.id} className="theme-card">
+                    <Picto kind={s.kind} />
+                    <p className="theme-card__kind">{KIND_LABEL[s.kind]}</p>
+                    <h3 className="theme-card__title">{s.hook}</h3>
+                    <p className="theme-card__official">{s.officialTitle}</p>
+                    <ul className="theme-card__bullets">
+                      {IDEAL_IF[s.id] && <li><strong>Idéal si</strong> {IDEAL_IF[s.id]}</li>}
+                      {shown.map((m) => <li key={m.label}>{m.value}</li>)}
+                    </ul>
+                    <div className="theme-card__actions">
+                      <ServiceAction service={s} from="cas-1" />
+                      <Link to={`/service/${s.id}?from=cas-1`} className="theme-card__arrow" aria-label={`En savoir plus : ${s.officialTitle}`}>
+                        <ArrowRight size={30} />
+                      </Link>
+                    </div>
+                  </li>
+                )
+              })}
+              <li className="theme-card theme-card--navy">
+                <Picto kind="aide" />
+                <p className="theme-card__kind">Échange avec un consultant</p>
+                <h3 className="theme-card__title">Aucun ne vous correspond vraiment ?</h3>
+                <ul className="theme-card__bullets">
+                  <li><strong>Idéal si</strong> vous hésitez ou votre situation est particulière</li>
+                  <li>Un consultant fait le point avec vous et vous oriente</li>
+                </ul>
+                <div className="theme-card__actions">
                   <Link to="/reserver/cep?from=cas-1" className="btn btn--primary">Échanger avec un consultant</Link>
                 </div>
               </li>
-            </ol>
+            </ul>
 
             {advice.length > 0 && (
               <section className="advice" aria-labelledby="nos-conseils">
@@ -270,15 +275,20 @@ function Case1Coulisses() {
             <thead><tr><th scope="col">Élément</th><th scope="col">Existant observé</th><th scope="col">Piste 1 — valoriser</th><th scope="col">Piste 2 — aider à choisir</th><th scope="col">Piste 3 — montrer l’humain</th></tr></thead>
             <tbody>
               <tr><td>Entrée</td><td>Par thème</td><td>Par situation</td><td>Par situation</td><td>Par situation</td></tr>
-              <tr><td>Carte</td><td>Pictogramme, intitulé, phrase</td><td>Visuel coloré, accroche bénéfice, intitulé conservé</td><td>Ligne comparable : visuel, accroche, <strong>« Idéal si… »</strong></td><td><strong>Photo</strong> + étiquette du type d’aide</td></tr>
-              <tr><td>Modalités</td><td>Sur la fiche</td><td>Sur la carte (vérifiées)</td><td>Sur la ligne (vérifiées)</td><td>Sur la carte (vérifiées)</td></tr>
-              <tr><td>Ateliers</td><td>Encadré texte, comme les autres</td><td>Visuel jaune + étiquette</td><td>Ligne + étiquette</td><td><strong>Carte vedette</strong> : grande photo, « Atelier collectif », prochaines sessions</td></tr>
+              <tr><td>Carte</td><td>Pictogramme, intitulé, phrase</td><td>Visuel coloré, accroche bénéfice, intitulé conservé</td><td><strong>Carte thématique bleue</strong> (kit) : pictogramme bicolore, puces jaunes <strong>« Idéal si… »</strong>, format et durée</td><td><strong>Photo</strong> + étiquette du type d’aide</td></tr>
+              <tr><td>Modalités</td><td>Sur la fiche</td><td>Pastilles sur la carte (vérifiées)</td><td>Puces sur la carte (vérifiées)</td><td>Sur la carte (vérifiées)</td></tr>
+              <tr><td>Ateliers</td><td>Encadré texte, comme les autres</td><td>Visuel jaune + étiquette</td><td>Carte bleue, pictogramme « groupe »</td><td><strong>Carte vedette</strong> : grande photo, « Atelier collectif », prochaines sessions</td></tr>
               <tr><td>Actions</td><td>« En savoir plus » + action</td><td>Une action principale + lien</td><td>Une action principale + lien</td><td>Une action principale + lien</td></tr>
-              <tr><td>Aide humaine</td><td>—</td><td>Lien à côté du titre</td><td>Intégrée à la liste, comme une option</td><td>Lien à côté du titre</td></tr>
+              <tr><td>Aide humaine</td><td>—</td><td>Lien à côté du titre</td><td>Carte bleu nuit dans la grille, comme une option</td><td>Lien à côté du titre</td></tr>
               <tr><td>Contenus conseils</td><td>Bloc séparé, plus bas</td><td>—</td><td><strong>« Nos conseils »</strong> reliés à la situation</td><td>—</td></tr>
             </tbody>
           </table>
         </div>
+        <p>
+          <strong>Repères visuels :</strong> chaque piste reprend un type de carte du mini-kit — carte service blanche
+          (piste 1), carte thématique bleue d’après les cartes « Nos consultantes et nos consultants » observées sur
+          apec.fr (piste 2), carte éditoriale avec photo (piste 3).
+        </p>
         <p>
           <strong>Ce que la piste 2 cherche à améliorer :</strong> la piste 1 montre mieux chaque service, mais laisse le
           visiteur comparer seul. La piste 2 formule le critère de choix (« Idéal si… »), présente les services comme des

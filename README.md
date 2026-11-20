@@ -18,9 +18,13 @@ Route `#/plan-seo`, accessible depuis l’accueil et l’en-tête du portfolio. 
 
 1. **Matrice des besoins** : six situations (recherche d’emploi, premier emploi, évolution, reconversion, TPE/PME qui recrute, RH) → besoin, exemples de recherches, intention, contenu, services, conversion finale. Requêtes exploratoires, sans volume ni classement. Services marqués « intitulé observé » (lisible sur les captures) ou « intitulé générique à vérifier ».
 2. **Parcours démonstrateur** « Préparer mon entretien de recrutement » : A recherche (aperçu illustratif) → B page conseil originale (six étapes, checklist utilisable, trois aides contextualisées) → C fiche service → D conversion simulée. Écran piloté par l’URL (`?ecran=a|b|c|d|r&service=…`) : le bouton retour du navigateur fonctionne. Bouton « Voir la logique de maillage ». Réinitialisation, retour, checklist conservée localement.
-3. **Méthode** : feuille de route 90 jours, priorisation sans score, données et outils, coordination, indicateurs sans résultats inventés, bonus GEO, usage encadré de l’IA.
+3. **Méthode** : feuille de route 90 jours, puis une présentation courte « Partir des questions des cadres pour les guider vers les services de l’Apec » : trois étapes (comprendre les recherches, apporter une réponse utile, faciliter le passage à l’action), un exemple de parcours (reconversion → échange avec un consultant, vers la prise de rendez-vous de démonstration), la mesure et une note sur l’usage de l’IA.
 
 Contenus centralisés dans `src/data/seoPlan.ts` ; parcours dans `src/components/SeoJourney.tsx` ; page dans `src/pages/SeoPlan.tsx`. Le portfolio étant en `noindex`, les éléments SEO sont une démonstration de méthode, pas un dispositif de positionnement.
+
+## Cas 3 — solutions recommandées
+
+La colonne latérale et le bas de l’article présentent la même liste, dans le même ordre et vers les mêmes fiches : accompagnement personnalisé et atelier collectif (photos), puis simulateur d’entretien, Odiapazon et simulateur de salaire cadre (icônes). Source unique : `src/data/cas3.ts`. Lien externe vérifié : convertisseur salaire brut / net de l’Urssaf. Data Cadres, fiches métiers et fiches entreprises sont mentionnés sans lien (adresses non vérifiables : apec.fr bloque les accès automatisés).
 
 ## Organisation de l’interface
 
@@ -84,7 +88,7 @@ La barre du haut propose « Retour au portfolio » et « Réinitialiser la démo
 
 - **Captures d’écran d’apec.fr** : références visuelles uniquement. Elles ne sont **ni versionnées ni servies**, car elles contiennent des données personnelles. Aucun nom, compte, statistique ou témoignage visible sur ces captures n’est repris.
 - **Intitulés et modalités** : chaque information porte une provenance dans `services.ts` (`capture` ou `a-verifier`).
-  - Observés sur les captures : « Réussir vos entretiens de recrutement », « Entretien programmé : entrainez vous avec un consultant ! » (individuel, face à face, 1 h, gratuit, cadres et jeunes diplômés), « Simulateur d’entretien », « Réussir sa candidature », « Faire de l’IA générative l’alliée de votre recherche emploi » (en groupe, en salle, 4 h, gratuit, cadres et jeunes diplômés), « Créer mon CV ».
+  - Observés sur les captures : « Réussir vos entretiens de recrutement », « Entretien programmé : entrainez vous avec un consultant ! » (individuel, face à face, 1 h, gratuit, cadres et jeunes diplômés), « Simulateur d’entretien », « Réussir sa candidature », « Faire de l’IA générative l’alliée de votre recherche emploi » (en groupe, en salle, 4 h, gratuit, cadres et jeunes diplômés), « Créer mon CV », « Odiapazon » (outil : « projetez-vous pour préparer une collaboration réussie »).
   - **À vérifier** : tous les services des situations P2 à P6 (premier emploi, CEP, évolution interne, formation, reconversion, services recruteurs), ainsi que les durées, tarifs et publics non visibles. Ils sont affichés avec un badge « à vérifier » et des fiches d’aperçu qui renvoient vers le site officiel. La présélection est présentée comme soumise à conditions (TPE/PME notamment), sans reproduire de critères.
 - **Textes** : accroches, bénéfices, page conseil et repères rémunération sont des rédactions originales. Seuls les intitulés et descriptions courtes observés sont cités.
 - **Visuels** : illustrations et pictogrammes SVG dessinés pour le prototype ; aucun logo de l’Apec, aucun témoignage.

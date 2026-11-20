@@ -1,5 +1,6 @@
 import { ArrowRight } from '../components/Icons'
-import { Illustration } from '../components/Illustration'
+import { ArticleHero, ArticleMeta } from '../components/ArticleParts'
+import { PHOTOS } from '../data/photos'
 import { PageBand } from '../components/PageBand'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { Link } from '../lib/router'
@@ -17,10 +18,8 @@ export function Remuneration({ path }: { path: string }) {
       <div className="container overlap">
         <article className="sheet article sheet--narrow" aria-labelledby="titre-remu">
           <h1 id="titre-remu" tabIndex={-1}>Aborder la rémunération en entretien : trois repères</h1>
-          <div className="article-hero article-hero--short">
-            <Illustration name="document" tone="blue" className="article-hero__img" />
-          </div>
-          <p className="article__meta">Mis à jour le 19/11/2026</p>
+          <ArticleHero photo={PHOTOS.conversation} rubric="Repères" />
+          <ArticleMeta date="19/11/2026" title="Aborder la rémunération en entretien : trois repères" />
           <p className="article__intro">
             La question du salaire arrive souvent en fin d’entretien. La préparer à l’avance permet d’y
             répondre calmement, avec une fourchette argumentée plutôt qu’un chiffre improvisé.

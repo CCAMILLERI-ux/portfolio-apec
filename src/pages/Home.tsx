@@ -78,49 +78,67 @@ function Thumb({ kind }: { kind: (typeof CASES)[number]['thumb'] }) {
 
 export function Home() {
   return (
-    <PortfolioLayout>
-      <section className="pf-hero">
-        <div className="pf-container">
-          <p className="pf-kicker">Candidature · Chef de projet animation web</p>
-          <h1 className="pf-hero__title" tabIndex={-1}>
-            Trois prototypes pour mieux faire découvrir, choisir et utiliser une offre de services
+    <PortfolioLayout compactBrand>
+      <section className="pf-container pf-intro" aria-labelledby="identite">
+        <div className="pf-intro__id">
+          <p className="pf-intro__kicker">Candidature à l’Apec</p>
+          <h1 id="identite" className="pf-intro__h1" tabIndex={-1}>
+            <span className="pf-intro__name">Caroline Camilleri</span>
+            <span className="pf-intro__role">Cheffe de projet Animation Web</span>
           </h1>
-          <p className="pf-hero__lead">
-            Attirer par une réponse utile, orienter par un maillage pertinent, proposer une aide adaptée, puis mesurer
-            l’utilisation effective. Des pistes exploratoires à discuter et à tester.
+          <p className="pf-intro__baseline">
+            Développer le trafic qualifié, animer les contenus et optimiser les parcours pour favoriser l’utilisation des services.
           </p>
-          <div className="pf-howto">
-            <p>
-              <strong>Comment les lire :</strong> chaque prototype s’ouvre dans un univers inspiré d’apec.fr et se
-              parcourt comme un utilisateur. Une barre de démo, en haut de page et hors maquette, permet de revenir au
-              portfolio, de changer de variante, de réinitialiser et d’ouvrir « Comprendre ce cas » : mes choix,
-              hypothèses et indicateurs sont regroupés en bas de page, dans <em>« Coulisses du prototype »</em>.
-            </p>
-          </div>
+        </div>
+        <div className="pf-intro__about">
+          <h2 className="pf-intro__h2">À propos de moi</h2>
+          <p>
+            Ma double expérience en marketing digital et en pilotage de services web associe SEO, animation éditoriale et
+            optimisation de la conversion. Habituée à coordonner métiers, DSI et agences, je m’appuie sur les données et
+            l’analyse des usages pour prioriser les améliorations et les déployer dans le CMS.
+          </p>
         </div>
       </section>
 
-      <section className="pf-container pf-section" aria-labelledby="cas">
-        <h2 id="cas" className="visually-hidden">Les trois cas</h2>
+      <section className="pf-container pf-cases-wrap" aria-labelledby="cas">
+        <h2 id="cas" className="pf-cases-title">Trois cas concrets pour apec.fr</h2>
         <ol className="pf-cases">
           {CASES.map((c) => (
             <li key={c.n} className="pf-case">
               <Thumb kind={c.thumb} />
               <div className="pf-case__body">
-                <p className="pf-case__num">Cas 0{c.n}</p>
+                <p className="pf-case__meta">
+                  <span className="pf-case__num">Cas 0{c.n}</span>
+                  <span className="pf-case__duration"><Clock size={14} /> {c.duration}<span className="visually-hidden"> (durée indicative)</span></span>
+                </p>
                 <h3 className="pf-case__title">{c.title}</h3>
                 <p className="pf-case__need">{c.need}</p>
                 <ul className="pf-tags" aria-label="Compétences illustrées">
                   {c.skills.map((s) => <li key={s}>{s}</li>)}
                 </ul>
-                <p className="pf-case__duration"><Clock size={16} /> Durée indicative : {c.duration}</p>
-                <Link to={c.to} className="pf-btn pf-btn--primary">
-                  Explorer la démo<span className="visually-hidden"> — cas {c.n} : {c.title}</span> <ArrowRight size={18} />
+                <Link to={c.to} className="pf-btn pf-btn--primary pf-btn--sm">
+                  Explorer la démo<span className="visually-hidden"> — cas {c.n} : {c.title}</span> <ArrowRight size={16} />
                 </Link>
               </div>
             </li>
           ))}
         </ol>
+
+        <details className="seo-acc pf-howto-acc">
+          <summary><span>Comment explorer les prototypes</span></summary>
+          <div className="seo-acc__body">
+            <p>
+              Chaque prototype s’ouvre dans un univers inspiré d’apec.fr et se parcourt comme un utilisateur. Une barre de
+              démo, en haut de page et hors maquette, permet de revenir au portfolio, de changer de variante, de
+              réinitialiser et d’ouvrir « Comprendre ce cas » : mes choix, hypothèses et indicateurs sont regroupés en bas
+              de page, dans <em>« Coulisses du prototype »</em>.
+            </p>
+            <p>
+              Ces prototypes sont des pistes exploratoires à discuter et à tester : attirer par une réponse utile, orienter
+              par un maillage pertinent, proposer une aide adaptée, puis mesurer l’utilisation effective.
+            </p>
+          </div>
+        </details>
       </section>
 
       <section className="pf-container pf-module" aria-labelledby="module-seo">
