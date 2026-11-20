@@ -1091,9 +1091,6 @@ legend { padding: 0; }
 .sol-side__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
 .sol-side-card { color: #fff; }
 .sol-side-card p { margin: 0; }
-.sol-side-card--human { background: var(--brand-blue); }
-.sol-side-card--human .sol-photo--sm { width: 100%; height: 120px; }
-.sol-side-card__body { padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px; }
 .sol-side-card--tool { background: var(--brand-navy); padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
 .sol-side-card__icon { color: var(--brand-yellow); margin-bottom: 4px; }
 .sol-side-card__title { font-size: 1.0625rem; font-weight: 600; line-height: 1.3; }
@@ -1112,8 +1109,6 @@ legend { padding: 0; }
 .sol-card { display: flex; flex-direction: column; background: #fff; border: 1px solid #e3e4ec; box-shadow: var(--shadow); }
 .sol-card p { margin: 0 0 var(--s2); }
 .sol-card .btn { align-self: flex-start; margin-top: auto; }
-.sol-card--human { border-top: 0; }
-.sol-card--human .sol-photo { border-bottom: 5px solid var(--brand-blue); }
 .sol-card__body { padding: var(--s2) 20px 20px; display: flex; flex-direction: column; flex: 1; }
 .sol-card--tool { padding: 20px; }
 .proto .sol-card__title { font-size: 1.1875rem; margin: 0 0 4px; }
@@ -1168,3 +1163,33 @@ legend { padding: 0; }
   .rubric-tag--lg .rubric-tag__top svg { width: 30px; height: 30px; }
   .rubric-tag--lg .rubric-tag__label { padding: 6px 8px; font-size: 0.75rem; }
 }
+
+/* Cas 3 : cartes d'accompagnement humain — deux designs distincts.
+   « atelier » : ancien design (photo, étiquette Atelier, bandeau jaune).
+   « entretien » : langage de la fiche « Entretien programmé » observée (boutons En savoir plus / Prenez rendez-vous). */
+.sol-side__list--humans { gap: var(--s2); }
+.hcard { display: flex; flex-direction: column; height: 100%; background: #fff; box-shadow: var(--shadow); border: 1px solid #e6e7ee; }
+.hcard__photo .photo-visual__img { height: 150px; }
+.hcard--lg .hcard__photo .photo-visual__img { height: 210px; }
+.hcard__photo .kind-tag { transform: scale(0.85); transform-origin: top left; left: 12px; top: 12px; }
+.hcard__body { padding: var(--s2) 20px 20px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; flex: 1; }
+.hcard--lg .hcard__body { padding: 20px var(--s3) var(--s3); }
+.hcard__body p { margin: 0; }
+.hcard__kicker { padding: 3px 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.hcard--atelier .hcard__kicker { background: var(--brand-yellow); color: var(--brand-navy); }
+.hcard--entretien .hcard__kicker { background: var(--brand-blue); color: #fff; }
+.proto .hcard__title { font-size: 1.0625rem; font-weight: 600; line-height: 1.3; margin: 2px 0 0; }
+.proto .hcard--lg .hcard__title { font-size: 1.3125rem; }
+.hcard__text { font-size: 0.875rem; line-height: 1.5; }
+.hcard--lg .hcard__text { font-size: 0.9375rem; }
+.hcard .chips { margin: 4px 0 0; }
+.hcard__points { margin: var(--s1) 0 0; font-size: 0.875rem; }
+.hcard__points li { margin-bottom: 6px; }
+.hcard__actions { margin-top: auto; padding-top: var(--s1); display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s2); width: 100%; }
+.hcard__actions .btn { min-height: 44px; padding: 8px 18px; font-size: 0.875rem; }
+.proto .hcard__more { border: 1px solid var(--brand-blue); color: var(--brand-blue-deep); }
+.proto .hcard__more:hover { border-color: var(--brand-navy); background: var(--brand-blue-tint); }
+/* Colonne étroite : boutons de l'entretien empilés sur toute la largeur */
+.sidebar .hcard--entretien .hcard__actions .btn { flex: 1 1 100%; }
+.hcard__sessions { width: 100%; margin-top: var(--s1); }
+.hcard__sessions ul { font-size: 0.875rem; }

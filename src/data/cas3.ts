@@ -3,6 +3,9 @@
  * Une seule source pour les deux emplacements : même ordre, mêmes destinations.
  *
  * Ordre imposé : accompagnements humains (photos), puis outils en autonomie (icônes).
+ * Accompagnements humains : deux designs distincts — carte « atelier » (photo, étiquette Atelier,
+ * bandeau jaune « Atelier collectif ») et carte « entretien programmé » (photo d'entretien,
+ * phrase et puces reprises de la fiche observée, boutons « En savoir plus » / « Prenez rendez-vous »).
  * Descriptions alignées sur ce qui est observable dans les captures d'apec.fr :
  * - « Entretien programmé » : simulation sur mesure et retour d'un professionnel,
  *   pour les cadres ayant un entretien prévu (et non un coaching général) ;
@@ -14,6 +17,11 @@
 import { PHOTOS, type Photo } from './photos'
 
 export type SolutionIcon = 'chat' | 'questions' | 'calculator'
+
+export interface CardAction {
+  label: string
+  href: string
+}
 
 export interface Solution {
   id: string
@@ -30,6 +38,15 @@ export interface Solution {
   icon?: SolutionIcon
   /** Repère qui distingue les deux outils d'entraînement. */
   focus?: string
+  /** Accompagnements humains : design de carte propre (atelier / entretien programmé). */
+  design?: 'atelier' | 'entretien'
+  /** Phrase d'accroche reprise de la page de service observée. */
+  lead?: string
+  /** Puces « + » reprises de la fiche observée (titre en gras, texte). */
+  points?: [string, string][]
+  /** Action principale (réservation) et lien secondaire (fiche). */
+  primary?: CardAction
+  secondary?: CardAction
 }
 
 export const CAS3_SOLUTIONS: Solution[] = [
@@ -38,20 +55,31 @@ export const CAS3_SOLUTIONS: Solution[] = [
     title: 'Accompagnement personnalisé',
     serviceId: 'entretien-programme',
     official: 'Entretien programmé : entrainez vous avec un consultant !',
-    description: 'Un entretien prévu ? Préparez-le avec un consultant : simulation sur mesure et retour personnalisé.',
-    cta: 'Échanger avec un consultant',
+    description: 'Préparez-vous sereinement pour votre entretien d’embauche avec une simulation sur-mesure et le feedback d’un professionnel !',
+    cta: 'Prenez rendez-vous',
     group: 'humain',
-    photo: PHOTOS.entretienFaceAFace,
+    photo: PHOTOS.entretienRecrutement,
+    design: 'entretien',
+    points: [
+      ['Simulations personnalisées', 'Entraînez-vous dans un cadre réaliste adapté à votre profil et au poste visé.'],
+      ['Feedback expert', 'Recevez des conseils constructifs d’un professionnel pour mettre en avant vos atouts.'],
+      ['Plan d’action concret', 'Repartez avec des recommandations claires pour optimiser vos chances de succès.'],
+    ],
+    primary: { label: 'Prenez rendez-vous', href: '/reserver/entretien-programme?from=cas-3' },
+    secondary: { label: 'En savoir plus', href: '/service/entretien-programme?from=cas-3' },
   },
   {
     id: 'atelier',
     title: 'Atelier collectif',
     serviceId: 'atelier-entretiens',
     official: 'Réussir vos entretiens de recrutement',
-    description: 'Préparez en groupe les différents types d’entretien d’embauche.',
-    cta: 'Découvrir les ateliers',
+    description: 'Un atelier pour maîtriser chaque type d’entretien d’embauche et les transformer en opportunités concrètes !',
+    cta: 'Voir les sessions',
     group: 'humain',
     photo: PHOTOS.atelierPostIt,
+    design: 'atelier',
+    primary: { label: 'Voir les sessions', href: '/reserver/atelier-entretiens?from=cas-3' },
+    secondary: { label: 'En savoir plus', href: '/service/atelier-entretiens?from=cas-3' },
   },
   {
     id: 'simulateur',
