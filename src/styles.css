@@ -1015,3 +1015,29 @@ legend { padding: 0; }
   .sj-node--hub::after { display: none; }
 }
 .sj-map__back { margin: 0; font-weight: 600; }
+
+/* Cas 1 — piste 2 : cartes thématiques bleues (kit), d'après les cartes
+   « Nos consultantes et nos consultants » observées sur apec.fr. */
+.theme-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s3); }
+@media (max-width: 1060px) { .theme-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .theme-grid { grid-template-columns: 1fr; } }
+.theme-card {
+  position: relative; display: flex; flex-direction: column; min-height: 440px;
+  background: var(--brand-blue); color: #fff; padding: var(--s4) var(--s3) var(--s3);
+  box-shadow: 0 2px 6px rgba(37, 37, 85, 0.25); transition: background-color 0.15s;
+}
+.theme-card:hover { background: var(--brand-blue-hover); }
+.theme-card--navy { background: var(--brand-navy); }
+.theme-card--navy:hover { background: var(--brand-navy-2); }
+.theme-card :focus-visible { outline-color: var(--brand-yellow); }
+.theme-card .picto { display: block; margin: 0 auto var(--s3); }
+.theme-card__kind { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 6px; }
+.proto .theme-card__title { color: #fff; font-size: 1.25rem; font-weight: 500; line-height: 1.35; margin: 0 0 var(--s1); }
+.theme-card__official { font-size: 0.8125rem; color: #fff; opacity: 0.92; margin: 0 0 var(--s2); }
+.theme-card__bullets { list-style: none; padding: 0; margin: 0 0 var(--s3); display: grid; gap: 10px; font-size: 0.875rem; font-weight: 600; }
+.theme-card__bullets li { position: relative; padding-left: 22px; }
+.theme-card__bullets li::before { content: ''; position: absolute; left: 2px; top: 0.45em; width: 8px; height: 8px; border-radius: 50%; background: var(--brand-yellow); }
+.theme-card__actions { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--s2); flex-wrap: wrap; }
+.theme-card__actions .btn { font-size: 0.875rem; padding: 8px 16px; min-height: 44px; }
+.proto .theme-card__arrow { display: inline-grid; place-items: center; width: 48px; height: 48px; color: var(--brand-yellow); margin-left: auto; }
+.proto .theme-card__arrow:hover { color: var(--brand-yellow); transform: translateX(3px); }
