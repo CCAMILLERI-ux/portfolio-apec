@@ -7,7 +7,7 @@ import { PageBand } from '../components/PageBand'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { ServiceAction, ServiceVisual } from '../components/ServiceCard'
 import { getService, KIND_LABEL, type Service } from '../data/services'
-import { backFor, safeFrom } from '../lib/nav'
+import { backFor, caseLabelFor, safeFrom } from '../lib/nav'
 import { Link, type Route } from '../lib/router'
 import { track } from '../lib/storage'
 import { NotFound } from './NotFound'
@@ -44,6 +44,7 @@ export function ServicePage({ id, route }: { id: string; route: Route }) {
   return (
     <ProtoLayout
       path={route.path}
+      caseLabel={caseLabelFor(from)}
       events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
       coulisses={<ServiceCoulisses service={service} />}
     >

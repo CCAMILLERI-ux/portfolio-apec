@@ -55,6 +55,7 @@ export function Case3({ path }: { path: string }) {
   return (
     <ProtoLayout
       path={path}
+      caseLabel="Cas 3 · Conseil & maillage"
       events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
       coulisses={<Case3Coulisses />}
     >

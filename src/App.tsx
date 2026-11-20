@@ -4,6 +4,7 @@ import { BookingPage } from './pages/BookingPage'
 import { Case1 } from './pages/Case1'
 import { Case2 } from './pages/Case2'
 import { Case3 } from './pages/Case3'
+import { Espace } from './pages/Espace'
 import { Home } from './pages/Home'
 import { NextSteps } from './pages/NextSteps'
 import { NotFound } from './pages/NotFound'
@@ -16,6 +17,7 @@ const TITLES: Record<string, string> = {
   '/cas-1': 'Cas 1 — Choisir un service',
   '/cas-2': 'Cas 2 — Accueil guidé',
   '/cas-2/prochaines-etapes': 'Cas 2 — Mes prochaines étapes',
+  '/espace': 'Cas 2 — Mon espace',
   '/cas-3': 'Cas 3 — Préparer un entretien de recrutement',
   '/conseil/remuneration': 'Cas 3 — Aborder la rémunération',
   '/sources': 'Sources et limites',
@@ -53,6 +55,7 @@ export default function App() {
   const booking = path.match(/^\/reserver\/([\w-]+)$/)
   if (path === '/') page = <Home />
   else if (path === '/cas-1') page = <Case1 route={route} />
+  else if (path === '/espace') page = <Espace path={path} />
   else if (path === '/cas-2') page = <Case2 path={path} />
   else if (path === '/cas-2/prochaines-etapes') page = <NextSteps path={path} />
   else if (path === '/cas-3') page = <Case3 path={path} />

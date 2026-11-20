@@ -31,12 +31,13 @@ export function NextSteps({ path }: { path: string }) {
   return (
     <ProtoLayout
       path={path}
+      caseLabel="Cas 2 · Accueil guidé"
       events={CASE2_EVENTS}
       barNotice={hasBooking ? 'Rendez-vous simulés — aucun rendez-vous réel n’a été réservé.' : undefined}
       onReset={() => setState(INITIAL_ONBOARDING)}
       coulisses={<Case2Coulisses />}
     >
-      <PageBand back={{ to: '/cas-2', label: 'Bien démarrer' }} title="Mes prochaines étapes" />
+      <PageBand back={{ to: '/espace', label: 'Mon espace' }} title="Mes prochaines étapes" />
       <div className="container overlap">
         <div className="sheet sheet--narrow">
           <p className="visually-hidden" role="status" aria-live="polite">{status}</p>

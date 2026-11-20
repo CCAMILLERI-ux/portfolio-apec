@@ -92,8 +92,9 @@ export function Home() {
           <div className="pf-howto">
             <p>
               <strong>Comment les lire :</strong> chaque prototype s’ouvre dans un univers inspiré d’apec.fr et se
-              parcourt comme un utilisateur. Mes choix, hypothèses et indicateurs sont regroupés en bas de chaque page,
-              dans <em>« Coulisses du prototype »</em>.
+              parcourt comme un utilisateur. Une barre de démo, en haut de page et hors maquette, permet de revenir au
+              portfolio, de changer de variante, de réinitialiser et d’ouvrir « Comprendre ce cas » : mes choix,
+              hypothèses et indicateurs sont regroupés en bas de page, dans <em>« Coulisses du prototype »</em>.
             </p>
           </div>
         </div>
@@ -127,8 +128,8 @@ export function Home() {
           <h2>Parcours conseillé en cinq minutes</h2>
           <ol className="pf-steps">
             <li><strong>Cas 2 · 2 min</strong> — « Me guider », cochez « Préparer un entretien », réservez une session, puis ouvrez « Mes prochaines étapes ».</li>
-            <li><strong>Cas 1 · 1 min 30</strong> — changez de situation, puis utilisez la bascule « Existant observé / Piste exploratoire » de la barre du bas.</li>
-            <li><strong>Cas 3 · 1 min 30</strong> — lisez l’introduction, suivez un lien vers un accompagnement et revenez ; descendez dans les coulisses.</li>
+            <li><strong>Cas 1 · 1 min 30</strong> — changez de situation, puis comparez « Existant observé », « Piste 1 » et « Piste 2 » depuis la barre de démo, en haut de page.</li>
+            <li><strong>Cas 3 · 1 min 30</strong> — lisez l’introduction, suivez un lien vers un accompagnement et revenez ; cliquez sur « Comprendre ce cas ».</li>
           </ol>
         </div>
         <div className="pf-panel pf-panel--soft">

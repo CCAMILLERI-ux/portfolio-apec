@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { Booking } from '../components/Booking'
 import { Case2Coulisses, CASE2_EVENTS } from '../components/Case2Coulisses'
-import { ArrowLeft, ArrowRight, Check, External, Plus } from '../components/Icons'
+import { ArrowLeft, ArrowRight, Chat, Check, External, Plus } from '../components/Icons'
 import { Illustration } from '../components/Illustration'
 import { ModalityChips, Modalities } from '../components/Modalities'
+import { PageBand } from '../components/PageBand'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { KindTag, KIND_TONE } from '../components/ServiceCard'
 import { ALEX_PRESET, NEED_OPTIONS, SITUATION_OPTIONS, recommend, type Need } from '../data/onboarding'
@@ -202,6 +203,9 @@ export function Case2({ path }: { path: string }) {
         <div className="step">
           {heading(<>Nos suggestions pour bien démarrer</>)}
           <p className="muted">Sélectionnées d’après vos réponses. Retrouvez-les à tout moment dans « Mon espace ».</p>
+          <Link to="/reserver/cep?from=etapes" className="help-link help-link--block">
+            <Chat size={22} /> Vous préférez être conseillé par une personne ? <strong>Échanger avec un consultant</strong>
+          </Link>
           <ol className="rec-list">
             {recs.map((r, i) => {
               const s = getService(r.serviceId)!
@@ -246,13 +250,6 @@ export function Case2({ path }: { path: string }) {
               )
             })}
           </ol>
-          <div className="help-tile">
-            <p className="help-tile__title">Vous préférez être conseillé par une personne ?</p>
-            <p>Un consultant peut vous aider à choisir.</p>
-            <Link to="/reserver/cep?from=etapes" className="link-arrow link-arrow--light">
-              Échanger avec un consultant <ArrowRight size={18} />
-            </Link>
-          </div>
           <div className="step__actions">
             <button type="button" className="btn btn--link" onClick={() => go('needs')}><ArrowLeft size={18} /> Modifier mes réponses</button>
             <Link to="/cas-2/prochaines-etapes" className="btn btn--outline">Mon espace</Link>
@@ -335,17 +332,13 @@ export function Case2({ path }: { path: string }) {
   return (
     <ProtoLayout
       path={path}
+      caseLabel="Cas 2 · Accueil guidé"
       events={CASE2_EVENTS}
       barNotice={barNotice}
       onReset={() => setState(INITIAL_ONBOARDING)}
       coulisses={<Case2Coulisses />}
     >
-      <div className="band">
-        <div className="container">
-          <p className="band__kicker">Mon espace</p>
-          <p className="band__title">Bien démarrer</p>
-        </div>
-      </div>
+      <PageBand back={{ to: '/espace', label: 'Mon espace' }} title="Bien démarrer" titleIsHeading={false} />
       <div className="container overlap">
         <div className={`sheet${step === 'welcome' ? ' sheet--flush' : ' sheet--narrow'}`}>
           <h1 className="visually-hidden" tabIndex={-1}>Bien démarrer — accueil après inscription</h1>

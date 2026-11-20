@@ -1,33 +1,20 @@
-import { useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { Link } from '../lib/router'
 import { EventLog } from './EventLog'
 import { DISCLAIMER, SIGNATURE } from './PortfolioLayout'
-import { Home, Reset } from './Icons'
 
 /** Pied de page « Coulisses du prototype » : seul endroit où le prototype s'explique. */
-export function Coulisses({ events, onReset, children }: { events: string[]; onReset: () => void; children: ReactNode }) {
-  const [status, setStatus] = useState('')
+export function Coulisses({ events, children }: { events: string[]; children: ReactNode }) {
   return (
     <section id="coulisses" className="coulisses" tabIndex={-1} aria-labelledby="coulisses-titre">
       <div className="pf-container">
         <p className="coulisses__kicker">{SIGNATURE}</p>
         <h2 id="coulisses-titre" className="coulisses__title">Coulisses du prototype</h2>
         <p className="coulisses__disclaimer">{DISCLAIMER}</p>
-        <div className="coulisses__tools">
-          <Link to="/" className="pf-btn"><Home size={18} /> Retour au portfolio</Link>
-          <button
-            type="button"
-            className="pf-btn"
-            onClick={() => {
-              onReset()
-              setStatus('Démo réinitialisée : choix, réservations simulées et journal local effacés.')
-            }}
-          >
-            <Reset size={18} /> Réinitialiser la démo
-          </button>
+        <p className="coulisses__hint">
+          Retour au portfolio et réinitialisation : barre en haut de page.{' '}
           <Link to="/sources" className="pf-link">Sources, limites et mini-kit UI</Link>
-          <span className="coulisses__status" role="status" aria-live="polite">{status}</span>
-        </div>
+        </p>
 
         <div className="coulisses__content">{children}</div>
 

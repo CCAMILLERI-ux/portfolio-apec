@@ -46,7 +46,7 @@ export function Sources() {
           <ul className="pf-list">
             <li>Portfolio de candidature indépendant : propositions exploratoires, sans affiliation officielle à l’Apec.</li>
             <li>Aucune inscription, aucune réservation réelle, aucune donnée envoyée. Sauvegarde locale de démonstration uniquement.</li>
-            <li>Les écrans des prototypes ne contiennent aucune explication : tout est regroupé dans « Coulisses du prototype », en pied de page. Une barre fixe rappelle en permanence qu’il s’agit d’un prototype et signale les réservations simulées.</li>
+            <li>Les écrans des prototypes ne contiennent aucune explication. Une barre de démo, en haut de page et hors maquette, regroupe le retour au portfolio, le choix de variante, la réinitialisation, l’accès aux explications et les rappels de réservation simulée. Les explications sont en bas de page, dans « Coulisses du prototype ».</li>
             <li>Toutes les pages portent une consigne <code>noindex</code>. Aucun analytics ni traceur externe.</li>
             <li>La bascule « Existant observé / Piste exploratoire » compare des variantes ; ce n’est pas un test A/B.</li>
           </ul>
