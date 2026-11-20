@@ -55,7 +55,7 @@ export function DesignSystem() {
   const existing = SERVICES.filter((s) => s.titleProvenance === 'capture')
 
   return (
-    <PortfolioLayout>
+    <PortfolioLayout minimalFooter>
       <section className="pf-hero pf-hero--compact">
         <div className="pf-container">
           <p className="pf-kicker">Méthode</p>
