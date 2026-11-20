@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Badge } from '../components/Badge'
 import { CrBlock, CroGrid } from '../components/Coulisses'
-import { ArrowRight, Doc, External, Plus } from '../components/Icons'
+import { External, Plus } from '../components/Icons'
+import { ArticleHero, ArticleMeta, SideArticleCard } from '../components/ArticleParts'
+import { PHOTOS } from '../data/photos'
 import { SolutionsCards, SolutionsCompact } from '../components/Cas3Solutions'
 import { CAS3_SOLUTIONS, URSSAF_BRUT_NET } from '../data/cas3'
-import { Illustration } from '../components/Illustration'
 import { PageBand } from '../components/PageBand'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { Link } from '../lib/router'
@@ -71,14 +72,8 @@ export function Case3({ path }: { path: string }) {
         <div className="article-layout">
           <article className="sheet article" aria-labelledby="titre-conseil">
             <h1 id="titre-conseil" tabIndex={-1}>Comment préparer un entretien de recrutement ?</h1>
-            <div className="article-hero">
-              <Illustration name="conseil" tone="yellow" className="article-hero__img" />
-              <span className="kind-tag kind-tag--violet">
-                <Doc size={30} className="kind-tag__icon" />
-                <span className="kind-tag__label">Conseils</span>
-              </span>
-            </div>
-            <p className="article__meta">Mis à jour le 19/11/2026</p>
+            <ArticleHero photo={PHOTOS.cadreSouriante} rubric="Conseils" />
+            <ArticleMeta date="19/11/2026" title="Comment préparer un entretien de recrutement ?" />
 
             <p className="article__intro">
               Pour préparer un entretien de recrutement, concentrez-vous sur cinq points : analyser l’offre,
@@ -189,14 +184,16 @@ export function Case3({ path }: { path: string }) {
 
           </article>
 
-          <aside className="sidebar" aria-labelledby="sol-side-title">
+          <aside className="sidebar" aria-label="Pour aller plus loin">
+            <h2 className="sidebar__heading">Sur le même sujet</h2>
+            <SideArticleCard
+              to="/conseil/remuneration"
+              photo={PHOTOS.conversation}
+              title="Aborder la rémunération en entretien : trois repères"
+              date="19/11/2026"
+              rubric="Repères"
+            />
             <SolutionsCompact />
-            <p className="sidebar__heading">Sur le même sujet</p>
-            <Link to="/conseil/remuneration" className="side-article">
-              <Illustration name="document" tone="blue" className="side-article__img" />
-              <span className="side-article__title">Aborder la rémunération en entretien : trois repères</span>
-              <span className="side-article__more">Lire <ArrowRight size={16} /></span>
-            </Link>
           </aside>
         </div>
 

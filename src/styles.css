@@ -19,6 +19,7 @@
   --brand-blue-border: #b3cfe0; /* bordures (30 %) */
   --brand-blue-soft: #8db7d0; /* accent clair des illustrations (45 %), remplace l'ancien cyan */
   --brand-violet: #5b5bd6;
+  --brand-violet-tag: #6c6ceb; /* étiquette de rubrique, prélevée sur la capture d'article */
   --surface-white: #ffffff;
   --surface-muted: #f5f5fa;
   --border-neutral: #d1d3db;
@@ -1073,28 +1074,32 @@ legend { padding: 0; }
 /* Cas 3 : solutions recommandées (colonne compacte + bloc détaillé en bas d'article).
    Photos = accompagnements humains ; icônes = outils en autonomie. */
 .sol-photo { display: block; width: 100%; object-fit: cover; background: var(--surface-muted); }
-.sol-photo--sm { width: 64px; height: 64px; flex: none; }
 .sol-photo--lg { height: 190px; }
 .sol-icon { display: inline-grid; place-items: center; flex: none; background: var(--brand-blue); color: #fff; }
-.sol-icon--sm { width: 64px; height: 64px; }
 .sol-icon--lg { width: 64px; height: 64px; margin-bottom: var(--s2); }
 .sol-focus {
   display: inline-block; align-self: flex-start; margin: 0 0 6px; padding: 2px 8px;
   background: var(--brand-yellow); color: var(--brand-navy); font-size: 0.75rem; font-weight: 700;
 }
 
-/* Colonne latérale */
-.sol-side { background: #fff; box-shadow: var(--shadow); padding: var(--s3) 20px; }
-.sol-side__title { font-size: 1.125rem; font-weight: 700; line-height: 1.3; margin: 0 0 6px; }
-.sol-side__intro { font-size: 0.875rem; color: var(--text-secondary-a11y); margin: 0 0 var(--s2); }
-.sol-side__group + .sol-side__group { margin-top: var(--s2); padding-top: var(--s2); border-top: 1px solid var(--border-neutral); }
-.sol-side__label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-blue); margin: 0 0 var(--s1); }
-.sol-side__list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s2); }
-.sol-item { display: flex; gap: 12px; align-items: flex-start; }
-.sol-item__body { display: flex; flex-direction: column; min-width: 0; }
-.sol-item__title { font-weight: 700; font-size: 0.9375rem; margin: 0 0 2px; }
-.sol-item__text { font-size: 0.8125rem; line-height: 1.45; margin: 0; }
-.proto .sol-item__link { font-size: 0.8125rem; min-height: 32px; margin-top: 2px; }
+/* Colonne latérale (cartouches blancs + cartes bleue / bleu nuit, d'après les articles apec.fr) */
+.sol-side { display: grid; gap: 0; margin-top: var(--s2); }
+.sol-side__head { background: #fff; box-shadow: var(--shadow); padding: 20px; }
+.sol-side__title { font-size: 1.125rem; font-weight: 600; line-height: 1.3; margin: 0 0 6px; }
+.sol-side__intro { font-size: 0.875rem; color: var(--text-secondary-a11y); margin: 0; }
+.proto .sol-side__box { margin-top: var(--s2); }
+.sol-side__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
+.sol-side-card { color: #fff; }
+.sol-side-card p { margin: 0; }
+.sol-side-card--human { background: var(--brand-blue); }
+.sol-side-card--human .sol-photo--sm { width: 100%; height: 120px; }
+.sol-side-card__body { padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px; }
+.sol-side-card--tool { background: var(--brand-navy); padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+.sol-side-card__icon { color: var(--brand-yellow); margin-bottom: 4px; }
+.sol-side-card__title { font-size: 1.0625rem; font-weight: 600; line-height: 1.3; }
+.sol-side-card__text { font-size: 0.8125rem; line-height: 1.45; }
+.proto .sol-side-card__link { font-size: 0.875rem; min-height: 36px; }
+.sol-side-card :focus-visible { outline-color: var(--brand-yellow); }
 
 /* Bloc détaillé en bas d'article */
 .sol-block { margin-top: var(--s5); padding-top: var(--s3); border-top: 5px solid var(--brand-yellow); }
@@ -1113,3 +1118,53 @@ legend { padding: 0; }
 .sol-card--tool { padding: 20px; }
 .proto .sol-card__title { font-size: 1.1875rem; margin: 0 0 4px; }
 .sol-card__official { font-size: 0.8125rem; color: var(--text-secondary-a11y); }
+
+/* Gabarit « article » (d'après les captures d'apec.fr, rubrique « Vie pro et carrière ») */
+.rubric-tag { position: absolute; left: 26px; top: 24px; display: flex; flex-direction: column; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); z-index: 1; }
+.rubric-tag__top { display: grid; place-items: center; background: var(--brand-violet-tag); color: #fff; }
+.rubric-tag__label { background: var(--brand-navy); color: #fff; font-weight: 700; }
+.rubric-tag--lg .rubric-tag__top { width: 150px; height: 100px; }
+.rubric-tag--lg .rubric-tag__label { padding: 12px 12px; font-size: 0.9375rem; }
+.rubric-tag--sm { left: 10px; top: 10px; }
+.rubric-tag--sm .rubric-tag__top { width: 48px; height: 32px; }
+.rubric-tag--sm .rubric-tag__label { padding: 2px 6px; font-size: 0.5625rem; }
+.a-hero { position: relative; margin: var(--s3) 0 var(--s2); }
+.a-hero__img { display: block; width: 100%; height: clamp(220px, 34vw, 420px); object-fit: cover; }
+.a-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s1) var(--s2); margin-bottom: var(--s3); }
+.a-meta__date { margin: 0; font-size: 0.8125rem; font-weight: 700; }
+.a-meta__status { width: 100%; text-align: right; font-size: 0.8125rem; color: var(--text-secondary-a11y); min-height: 1em; }
+.a-share { display: inline-flex; align-items: stretch; padding: 0; background: #fff; border: 1px solid var(--border-neutral); cursor: pointer; font: inherit; min-height: 48px; }
+.a-share__label { display: grid; place-items: center; padding: 0 44px; font-size: 0.875rem; font-weight: 600; color: var(--brand-navy); }
+.a-share__icon { display: grid; place-items: center; width: 50px; border-left: 1px solid var(--border-neutral); color: #e0a800; }
+.a-share:hover { border-color: var(--brand-navy); }
+@media (max-width: 480px) { .a-share__label { padding: 0 20px; } }
+
+/* Typographie de l'article : chapô gras, intertitres de graisse moyenne */
+.proto .article h1 { font-size: clamp(1.75rem, 1.3rem + 1.5vw, 2.375rem); font-weight: 600; margin-top: var(--s2); }
+.proto .article h2 { font-weight: 500; }
+.proto .article h3 { font-weight: 500; font-size: 1.1875rem; }
+.article__intro { font-weight: 600; font-size: 1rem; line-height: 1.6; border-left: 0; padding-left: 0; }
+.article p, .article dd { color: #2f2f5c; }
+
+/* Colonne : cartouches de titre blancs + carte article */
+.proto .sidebar__heading { font-size: 1.375rem; font-weight: 500; margin: var(--s2) 0 0; }
+.proto .sidebar > .sidebar__heading:first-child { margin-top: 0; }
+.sidebar > .sidebar__heading + .a-card { margin-top: 0; }
+.a-card { position: relative; background: #fff; box-shadow: var(--shadow); padding: 0 var(--s2) var(--s2); }
+.a-card__visual { position: relative; }
+.a-card__img { display: block; width: 100%; height: 160px; object-fit: cover; }
+.proto .a-card__title { font-size: 0.9375rem; font-weight: 700; line-height: 1.4; margin: 12px 0; padding-bottom: 12px; border-bottom: 1px solid var(--brand-navy); }
+.proto .a-card__link { color: var(--brand-navy); text-decoration: none; }
+.a-card__link::after { content: ''; position: absolute; inset: 0; }
+.a-card:hover .a-card__link { text-decoration: underline; }
+.a-card:has(.a-card__link:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+.a-card__link:focus-visible { outline: none; }
+.a-card__meta { display: flex; justify-content: space-between; align-items: center; margin: 0; font-size: 0.75rem; }
+.a-card__more { display: inline-flex; align-items: center; gap: 4px; font-size: 1rem; font-weight: 500; color: var(--brand-navy); }
+.a-card__more svg { color: #e0a800; }
+@media (max-width: 600px) {
+  .rubric-tag--lg { left: 12px; top: 12px; }
+  .rubric-tag--lg .rubric-tag__top { width: 84px; height: 56px; }
+  .rubric-tag--lg .rubric-tag__top svg { width: 30px; height: 30px; }
+  .rubric-tag--lg .rubric-tag__label { padding: 6px 8px; font-size: 0.75rem; }
+}

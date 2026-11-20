@@ -30,39 +30,60 @@ function Visual({ s, size }: { s: Solution; size: 'sm' | 'lg' }) {
 const humans = CAS3_SOLUTIONS.filter((s) => s.group === 'humain')
 const tools = CAS3_SOLUTIONS.filter((s) => s.group === 'outil')
 
-/** Version compacte, pour la colonne latérale. */
+/**
+ * Version compacte, pour la colonne latérale, d'après les codes observés sur les articles apec.fr :
+ * cartouches blancs « Nos services » / « Nos outils », carte bleue de service, carte bleu nuit d'outil
+ * avec pictogramme filaire jaune. Photos pour l'humain, icônes pour les outils.
+ */
 export function SolutionsCompact() {
   return (
     <section className="sol-side" aria-labelledby="sol-side-title">
-      <p id="sol-side-title" className="sol-side__title">{CAS3_SOLUTIONS_TITLE}</p>
-      <p className="sol-side__intro">{CAS3_SOLUTIONS_INTRO}</p>
-      {[
-        ['Avec un consultant', humans],
-        ['En autonomie', tools],
-      ].map(([label, list]) => (
-        <div key={label as string} className="sol-side__group">
-          <p className="sol-side__label">{label as string}</p>
-          <ul className="sol-side__list">
-            {(list as Solution[]).map((s) => (
-              <li key={s.id} className="sol-item">
-                <Visual s={s} size="sm" />
-                <div className="sol-item__body">
-                  <p className="sol-item__title">{s.title}</p>
-                  {s.focus && <p className="sol-focus">{s.focus}</p>}
-                  <p className="sol-item__text">{s.description}</p>
-                  <Link
-                    to={solutionHref(s)}
-                    className="link-arrow sol-item__link"
-                    onClick={() => track('service_cta_click', `${s.serviceId} (cas 3, colonne)`)}
-                  >
-                    {s.cta} <ArrowRight size={16} />
-                  </Link>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      <div className="sol-side__head">
+        <p id="sol-side-title" className="sol-side__title">{CAS3_SOLUTIONS_TITLE}</p>
+        <p className="sol-side__intro">{CAS3_SOLUTIONS_INTRO}</p>
+      </div>
+
+      <h3 className="sidebar__heading sol-side__box">Nos services</h3>
+      <ul className="sol-side__list">
+        {humans.map((s) => (
+          <li key={s.id} className="sol-side-card sol-side-card--human">
+            <Visual s={s} size="sm" />
+            <div className="sol-side-card__body">
+              <p className="sol-side-card__title">{s.title}</p>
+              <p className="sol-side-card__text">{s.description}</p>
+              <Link
+                to={solutionHref(s)}
+                className="link-arrow link-arrow--light sol-side-card__link"
+                onClick={() => track('service_cta_click', `${s.serviceId} (cas 3, colonne)`)}
+              >
+                {s.cta} <ArrowRight size={18} />
+              </Link>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <h3 className="sidebar__heading sol-side__box">Nos outils</h3>
+      <ul className="sol-side__list">
+        {tools.map((s) => {
+          const Icon = ICONS[s.icon ?? 'chat']
+          return (
+            <li key={s.id} className="sol-side-card sol-side-card--tool">
+              <Icon size={32} className="sol-side-card__icon" />
+              <p className="sol-side-card__title">{s.title}</p>
+              {s.focus && <p className="sol-focus">{s.focus}</p>}
+              <p className="sol-side-card__text">{s.description}</p>
+              <Link
+                to={solutionHref(s)}
+                className="link-arrow link-arrow--light sol-side-card__link"
+                onClick={() => track('service_cta_click', `${s.serviceId} (cas 3, colonne)`)}
+              >
+                {s.cta} <ArrowRight size={18} />
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
     </section>
   )
 }

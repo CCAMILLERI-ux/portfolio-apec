@@ -111,3 +111,10 @@ export const Questions = (p: P) => (
 export const Calculator = (p: P) => (
   <Base {...p}><rect x="5" y="2.5" width="14" height="19" rx="2" /><rect x="8" y="5.5" width="8" height="3.5" rx=".5" /><path d="M8.5 12.5h.01M12 12.5h.01M15.5 12.5h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 18.5h.01M12 18.5h3.5" /></Base>
 )
+/** Flèche dans un cercle ouvert, d'après le pictogramme des étiquettes de rubrique observées. */
+export const ArrowCircle = (p: P) => (
+  <Base {...p}><path d="M17.5 5.5A8.5 8.5 0 1 0 17.5 18.5" /><path d="M8 12h12M16 8l4 4-4 4" /></Base>
+)
+export const Share = (p: P) => (
+  <Base {...p}><circle cx="18" cy="5.5" r="2.5" /><circle cx="6" cy="12" r="2.5" /><circle cx="18" cy="18.5" r="2.5" /><path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1" /></Base>
+)
