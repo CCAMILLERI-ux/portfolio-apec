@@ -72,7 +72,7 @@ export function Case3({ path }: { path: string }) {
         <div className="article-layout">
           <article className="sheet article" aria-labelledby="titre-conseil">
             <h1 id="titre-conseil" tabIndex={-1}>Comment préparer un entretien de recrutement ?</h1>
-            <ArticleHero photo={PHOTOS.cadreSouriante} rubric="Conseils" />
+            <ArticleHero photo={PHOTOS.entretienCandidate} rubric="Conseils" tagSide="right" />
             <ArticleMeta date="19/11/2026" title="Comment préparer un entretien de recrutement ?" />
 
             <p className="article__intro">
@@ -87,7 +87,7 @@ export function Case3({ path }: { path: string }) {
               <ol>
                 {TOC.map((t) => (
                   <li key={t.id}>
-                    <Link to="/cas-3" anchor={t.id}>{t.label}</Link>
+                    <Link to="/cas-01-seo" anchor={t.id}>{t.label}</Link>
                   </li>
                 ))}
               </ol>

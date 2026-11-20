@@ -8,19 +8,22 @@ Portfolio de candidature au poste de Chef de projet animation web. Un seul site 
 
 | Cas | Démo | Compétences illustrées |
 | --- | --- | --- |
-| 02 (`#/cas-1`) | **Clarifier l’offre pour faciliter le choix** — anciennement « Rendre les services plus faciles à choisir » : entrée par situation, cartes de services, bascule « Existant observé / Piste exploratoire » | UX/UI, animation du site, hypothèse CRO |
-| 03 (`#/cas-2`) | **Accompagner l’utilisateur à chaque étape de son inscription** — anciennement « Guider un nouvel inscrit » : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes prochaines étapes » | Parcours, activation, recommandation déterministe |
-| 01 (`#/cas-3`) | **De la recherche Google à l’utilisation des services** — anciennement « Relier une recherche à un accompagnement » : page conseil « Comment préparer un entretien de recrutement ? », maillage interne, compléments SEO, GEO et coordination multicanale | SEO éditorial, maillage, acquisition |
+| 02 (`#/cas-02-ab-test`) | **Clarifier l’offre pour faciliter le choix** — anciennement « Rendre les services plus faciles à choisir » : entrée par situation, cartes de services, bascule « Existant observé / Piste exploratoire » | UX/UI, animation du site, hypothèse CRO |
+| 03 (`#/cas-03-inscription`) | **Accompagner l’utilisateur à chaque étape de son inscription** — anciennement « Guider un nouvel inscrit » : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes prochaines étapes » | Parcours, activation, recommandation déterministe |
+| 01 (`#/cas-01-seo`) | **De la recherche Google à l’utilisation des services** — anciennement « Relier une recherche à un accompagnement » : page conseil « Comment préparer un entretien de recrutement ? », maillage interne, compléments SEO, GEO et coordination multicanale | SEO éditorial, maillage, acquisition |
 
-## Module « Du besoin au service : une acquisition SEO utile »
+## Plan SEO pour apec.fr
 
-Route `#/plan-seo`, accessible depuis l’accueil et l’en-tête du portfolio. Plan d’acquisition SEO orienté vers l’utilisation des services, en trois blocs :
+Route `#/plan-seo`, accessible depuis l’accueil et l’en-tête du portfolio. « Un plan SEO pour apec.fr : de la recherche au service utilisé », en six parties :
 
-1. **Matrice des besoins** : six situations (recherche d’emploi, premier emploi, évolution, reconversion, TPE/PME qui recrute, RH) → besoin, exemples de recherches, intention, contenu, services, conversion finale. Requêtes exploratoires, sans volume ni classement. Services marqués « service existant » (repris d’apec.fr) ou « intitulé provisoire ».
-2. **Parcours démonstrateur** « Préparer mon entretien de recrutement » : A recherche (aperçu illustratif) → B page conseil originale (six étapes, checklist utilisable, trois aides contextualisées) → C fiche service → D conversion simulée. Écran piloté par l’URL (`?ecran=a|b|c|d|r&service=…`) : le bouton retour du navigateur fonctionne. Bouton « Voir la logique de maillage ». Réinitialisation, retour, checklist conservée localement.
-3. **Méthode** : feuille de route 90 jours, puis une présentation courte « Partir des questions des cadres pour les guider vers les services de l’Apec » : trois étapes (comprendre les recherches, apporter une réponse utile, faciliter le passage à l’action), un exemple de parcours (reconversion → échange avec un consultant, vers la prise de rendez-vous de démonstration), la mesure et une note sur l’usage de l’IA.
+0. **Hero** : ambition, trois objectifs (visibilité hors marque, trafic qualifié vers les services, conversion mesurée).
+1. **Diagnostic** : quatre observations sur les pages publiques (titre de connexion indexé, title et H1 divergents, données structurées absentes, actifs peu reliés), sans chiffre.
+2. **Stratégie en quatre piliers** : technique et indexation, contenus et intentions (matrice des six situations), maillage (cocon fiche métier ↔ offres ↔ salaires ↔ conseils ↔ services), popularité et visibilité IA.
+3. **Démonstration** : parcours « Préparer mon entretien de recrutement » (recherche → page conseil → fiche service → inscription simulée).
+4. **Plan 90 jours** : actions et livrables visibles.
+5. **Pilotage** : indicateurs, A/B tests et rituels.
 
-Contenus centralisés dans `src/data/seoPlan.ts` ; parcours dans `src/components/SeoJourney.tsx` ; page dans `src/pages/SeoPlan.tsx`. Le portfolio étant en `noindex`, les éléments SEO sont une démonstration de méthode, pas un dispositif de positionnement.
+Contenus centralisés dans `src/data/seoPlan.ts` ; parcours dans `src/components/SeoJourney.tsx` ; page dans `src/pages/SeoPlan.tsx`.
 
 ## Cas 3 — solutions recommandées
 
@@ -28,7 +31,7 @@ La colonne latérale et le bas de l’article présentent la même liste, dans l
 
 ## Organisation de l’interface
 
-- **Portfolio** (accueil, sources) : identité propre à la candidate (fond crème, DM Serif Display + Inter, accent terracotta), volontairement distincte de l’univers Apec.
+- **Portfolio** (accueil, sources) : identité propre à la candidate (fond crème, Plus Jakarta Sans + Inter, accent terracotta), volontairement distincte de l’univers Apec.
 - **Prototypes** : univers inspiré d’apec.fr (bleu nuit, jaune, bleu ; Montserrat), **sans aucune explication dans les écrans utilisateur**.
 - **Coulisses du prototype** : masquées par défaut, affichées uniquement au clic sur « Comprendre ce cas », sous le pied de page, dans l’univers portfolio. Elles regroupent la mention d’indépendance, le retour au portfolio, la réinitialisation, la méthode (constat, hypothèse, modification, KPI et garde-fous, équipes), la provenance des informations et le journal local.
 - **Barre de démo** (univers portfolio), en haut de page et hors maquette : « Retour au portfolio », nom du cas, choix de variante (cas 1 : Existant observé / Piste 1 / Piste 2 / Piste 3), « Comprendre ce cas » (affiche ou masque les coulisses) et « Réinitialiser la démo ». Pendant et après une réservation, elle affiche « Réservation simulée… » puis « Simulation terminée — aucun rendez-vous réel n’a été réservé ».
@@ -54,7 +57,7 @@ npm run build
 npm run preview
 ```
 
-`npm run build` produit un dossier `dist/` statique. Le routage par hash (`#/cas-1`) et la base relative (`base: './'`) permettent d’ouvrir le site sur n’importe quel hébergement statique, y compris dans un sous-dossier, sans règle de réécriture. Aucun déploiement n’a été effectué.
+`npm run build` produit un dossier `dist/` statique. Le routage par hash (`#/cas-02-ab-test`) et la base relative (`base: './'`) permettent d’ouvrir le site sur n’importe quel hébergement statique, y compris dans un sous-dossier, sans règle de réécriture. Aucun déploiement n’a été effectué.
 
 ## Publication sur GitHub Pages
 
@@ -92,8 +95,8 @@ La barre du haut propose « Retour au portfolio » et « Réinitialiser la démo
   - **À vérifier** : tous les services des situations P2 à P6 (premier emploi, CEP, évolution interne, formation, reconversion, services recruteurs), ainsi que les durées, tarifs et publics non visibles. Ils sont affichés avec un badge « à vérifier » et des fiches d’aperçu qui renvoient vers le site officiel. La présélection est présentée comme soumise à conditions (TPE/PME notamment), sans reproduire de critères.
 - **Textes** : accroches, bénéfices, page conseil et repères rémunération sont des rédactions originales. Seuls les intitulés et descriptions courtes observés sont cités.
 - **Visuels** : illustrations et pictogrammes SVG dessinés pour le prototype ; aucun logo de l’Apec, aucun témoignage.
-- **Photographies** (piste 3 du cas 1, carte atelier du cas 3) : 15 photos Unsplash, licence Unsplash (https://unsplash.com/license), dans `public/photos/`. Identifiants d’origine et textes alternatifs dans `src/data/photos.ts` et sur la page « Sources et limites ». Elles ne représentent ni des salariés, ni des consultants, ni des usagers de l’Apec ; crédits sur la page « Sources et limites ».
-- **Polices** (SIL Open Font License, servies localement) : Montserrat pour les prototypes, substitution provisoire car la police exacte d’apec.fr n’est pas confirmée ; DM Serif Display et Inter pour le portfolio.
+- **Photographies** (piste 3 du cas 1, carte atelier du cas 3) : 16 photos Unsplash, licence Unsplash (https://unsplash.com/license), dans `public/photos/`. Identifiants d’origine et textes alternatifs dans `src/data/photos.ts` et sur la page « Sources et limites ». Elles ne représentent ni des salariés, ni des consultants, ni des usagers de l’Apec ; crédits sur la page « Sources et limites ».
+- **Polices** (SIL Open Font License, servies localement) : Montserrat pour les prototypes, substitution provisoire car la police exacte d’apec.fr n’est pas confirmée ; Plus Jakarta Sans et Inter pour le portfolio.
 
 ## Design : ce qui est estimé, ce qui est contrôlé
 

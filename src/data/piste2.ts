@@ -31,7 +31,7 @@ export interface Advice {
 }
 
 const ADVICE_INTERVIEW: Advice = {
-  to: '/cas-3',
+  to: '/cas-01-seo',
   kicker: 'Conseils',
   title: 'Comment préparer un entretien de recrutement ?',
   excerpt: 'La méthode en 5 étapes, des exemples de questions et une checklist pour la veille.',

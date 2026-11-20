@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { flushSync } from 'react-dom'
 import { Link } from '../lib/router'
 import { resetAll } from '../lib/storage'
@@ -7,8 +7,8 @@ import { ArrowLeft, ArrowRight, Calendar, Close, Info, Menu, Reset, User } from 
 
 const PROTO_NAV = [
   { to: '/espace', label: 'Mon espace' },
-  { to: '/cas-1', label: 'Nos services' },
-  { to: '/cas-3', label: 'Conseils entretien' },
+  { to: '/cas-02-ab-test', label: 'Nos services' },
+  { to: '/cas-01-seo', label: 'Conseils entretien' },
 ]
 
 interface Props {
@@ -38,6 +38,21 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
   const [open, setOpen] = useState(false)
   const [status, setStatus] = useState('')
 
+  // Hauteurs des éléments collants (barre de démo, introduction) : exposées en variables CSS
+  // pour empiler l'introduction sous la barre et décaler les ancres d'autant.
+  const barRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const root = document.documentElement
+    const update = () => root.style.setProperty('--sticky-h', `${barRef.current?.offsetHeight ?? 0}px`)
+    update()
+    const ro = new ResizeObserver(update)
+    if (barRef.current) ro.observe(barRef.current)
+    return () => {
+      ro.disconnect()
+      root.style.setProperty('--sticky-h', '0px')
+    }
+  }, [])
+
   // Les coulisses ne sont affichées qu'à la demande ; à l'ouverture, on y descend.
   const [explain, setExplain] = useState(false)
   const toggleExplain = () => {
@@ -60,10 +75,10 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
         Aller à la maquette
       </a>
 
-      <div className="demo-bar" role="region" aria-label="Commandes de la démo (hors maquette)">
+      <div className="demo-bar" ref={barRef} role="region" aria-label="Commandes de la démo (hors maquette)">
         <div className="demo-bar__inner">
           <Link to="/" className="demo-bar__btn demo-bar__btn--back">
-            <ArrowLeft size={18} /> Retour au portfolio
+            <ArrowLeft size={16} /> <span className="visually-hidden">Retour au </span>Portfolio
           </Link>
           <span className="demo-bar__case">{caseLabel}</span>
           {barControl}
@@ -75,7 +90,8 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
               aria-controls="coulisses"
               onClick={toggleExplain}
             >
-              <Info size={18} /> {explain ? 'Masquer les explications' : 'Comprendre ce cas'}
+              <Info size={16} />
+              <span className="demo-bar__lbl">{explain ? 'Masquer les explications' : 'Comprendre ce cas'}</span>
             </button>
             <button
               type="button"
@@ -87,25 +103,23 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
                 window.setTimeout(() => setStatus(''), 4000)
               }}
             >
-              <Reset size={18} /> Réinitialiser la démo
+              <Reset size={16} />
+              <span className="demo-bar__lbl">Réinitialiser<span className="demo-bar__hide-md"> la démo</span></span>
             </button>
           </span>
+          {intro && (
+            <div className="demo-bar__intro" role="note">
+              <span className="demo-bar__kicker">{intro.kicker}</span>
+              <h2 className="demo-bar__title">{intro.title}</h2>
+              <span className="demo-bar__text">{intro.text}</span>
+              {intro.note && <span className="demo-bar__note">{intro.note}</span>}
+            </div>
+          )}
           {(barNotice || status) && (
             <span className="demo-bar__notice" role="status">{status || barNotice}</span>
           )}
         </div>
       </div>
-
-      {intro && (
-        <section className="demo-intro" aria-labelledby="demo-intro-title">
-          <div className="demo-intro__inner">
-            <p className="demo-intro__kicker">{intro.kicker}</p>
-            <h2 id="demo-intro-title" className="demo-intro__title">{intro.title}</h2>
-            <p className="demo-intro__text">{intro.text}</p>
-            {intro.note && <p className="demo-intro__note">{intro.note}</p>}
-          </div>
-        </section>
-      )}
 
       <div className="maquette">
         <header className="proto-header">
@@ -119,7 +133,7 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
             >
               {open ? <Close /> : <Menu />} <span>Menu</span>
             </button>
-            <Link to="/cas-1" className="proto-wordmark">
+            <Link to="/cas-02-ab-test" className="proto-wordmark">
               <span className="proto-wordmark__dot" aria-hidden="true" />
               espace cadres
             </Link>
@@ -151,8 +165,8 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
           <div className="container">
             <ul className="proto-footer__links">
               <li><Link to="/espace">Mon espace</Link></li>
-              <li><Link to="/cas-1">Nos services</Link></li>
-              <li><Link to="/cas-3">Conseils entretien</Link></li>
+              <li><Link to="/cas-02-ab-test">Nos services</Link></li>
+              <li><Link to="/cas-01-seo">Conseils entretien</Link></li>
             </ul>
           </div>
         </footer>

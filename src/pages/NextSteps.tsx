@@ -50,7 +50,7 @@ export function NextSteps({ path }: { path: string }) {
               <p>Vous n’avez pas encore de service dans votre liste.</p>
               <button type="button" className="btn btn--primary" onClick={() => {
                 setState((s) => ({ ...s, step: s.answers.needs.length ? 'needs' : 'welcome' }))
-                navigate('/cas-2')
+                navigate('/cas-03-inscription')
               }}>
                 Me guider
               </button>
@@ -118,19 +118,19 @@ export function NextSteps({ path }: { path: string }) {
           <div className="step__actions step__actions--wrap">
             <button type="button" className="btn btn--outline" onClick={() => {
               setState((s) => ({ ...s, step: 'needs' }))
-              navigate('/cas-2')
+              navigate('/cas-03-inscription')
             }}>
               Modifier mes besoins
             </button>
             {state.recs.length > 0 && (
               <button type="button" className="btn btn--outline" onClick={() => {
                 setState((s) => ({ ...s, step: 'results' }))
-                navigate('/cas-2')
+                navigate('/cas-03-inscription')
               }}>
                 Reprendre le guidage
               </button>
             )}
-            <Link to="/cas-1" className="link-arrow">Voir tous nos services <ArrowRight size={18} /></Link>
+            <Link to="/cas-02-ab-test" className="link-arrow">Voir tous nos services <ArrowRight size={18} /></Link>
           </div>
         </div>
       </div>

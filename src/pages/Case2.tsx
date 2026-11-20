@@ -103,7 +103,7 @@ export function Case2({ path }: { path: string }) {
               <button type="button" className="btn btn--primary btn--lg" onClick={() => { track('onboarding_start'); go('situation') }}>
                 Me guider <ArrowRight size={18} />
               </button>
-              <Link to="/cas-1" className="btn btn--outline btn--lg">Explorer librement</Link>
+              <Link to="/cas-02-ab-test" className="btn btn--outline btn--lg">Explorer librement</Link>
             </div>
             <p className="small">
               Vous préférez en parler à quelqu’un ?{' '}
@@ -252,7 +252,7 @@ export function Case2({ path }: { path: string }) {
           </ol>
           <div className="step__actions">
             <button type="button" className="btn btn--link" onClick={() => go('needs')}><ArrowLeft size={18} /> Modifier mes réponses</button>
-            <Link to="/cas-2/prochaines-etapes" className="btn btn--outline">Mon espace</Link>
+            <Link to="/cas-03-inscription/prochaines-etapes" className="btn btn--outline">Mon espace</Link>
           </div>
         </div>
       )
@@ -312,7 +312,7 @@ export function Case2({ path }: { path: string }) {
           )}
           <p>Vos suggestions restent disponibles dans votre espace : vous pouvez les modifier, en retirer ou reprendre le guidage.</p>
           <div className="step__actions">
-            <Link to="/cas-2/prochaines-etapes" className="btn btn--primary" onClick={() => track('onboarding_step_complete', 'confirm')}>
+            <Link to="/cas-03-inscription/prochaines-etapes" className="btn btn--primary" onClick={() => track('onboarding_step_complete', 'confirm')}>
               Mes prochaines étapes <ArrowRight size={18} />
             </Link>
           </div>

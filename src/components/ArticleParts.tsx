@@ -10,20 +10,20 @@ import { ArrowCircle, ArrowRight, Share } from './Icons'
  */
 
 /** Étiquette carrée de rubrique : partie violette avec pictogramme, bandeau bleu nuit avec libellé. */
-export function RubricTag({ label, size = 'lg' }: { label: string; size?: 'lg' | 'sm' }) {
+export function RubricTag({ label, size = 'lg', side = 'left' }: { label: string; size?: 'lg' | 'sm'; side?: 'left' | 'right' }) {
   return (
-    <span className={`rubric-tag rubric-tag--${size}`}>
+    <span className={`rubric-tag rubric-tag--${size}${side === 'right' ? ' rubric-tag--right' : ''}`}>
       <span className="rubric-tag__top"><ArrowCircle size={size === 'lg' ? 52 : 24} /></span>
       <span className="rubric-tag__label">{label}</span>
     </span>
   )
 }
 
-export function ArticleHero({ photo, rubric }: { photo: Photo; rubric: string }) {
+export function ArticleHero({ photo, rubric, tagSide = 'left' }: { photo: Photo; rubric: string; tagSide?: 'left' | 'right' }) {
   return (
     <div className="a-hero">
       <img src={photo.file} alt={photo.alt} width={960} height={600} className="a-hero__img" />
-      <RubricTag label={rubric} />
+      <RubricTag label={rubric} side={tagSide} />
     </div>
   )
 }

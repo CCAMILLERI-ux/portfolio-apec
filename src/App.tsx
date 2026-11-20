@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useRoute } from './lib/router'
+import { navigate, useRoute, type Route } from './lib/router'
 import { BookingPage } from './pages/BookingPage'
 import { Case1 } from './pages/Case1'
 import { Case2 } from './pages/Case2'
@@ -15,14 +15,28 @@ import { Sources } from './pages/Sources'
 
 const TITLES: Record<string, string> = {
   '/': 'Accueil',
-  '/cas-1': 'Cas 02 — Clarifier l’offre pour faciliter le choix',
-  '/cas-2': 'Cas 03 — Inscription accompagnée',
-  '/cas-2/prochaines-etapes': 'Cas 03 — Mes prochaines étapes',
+  '/cas-02-ab-test': 'Cas 02 — Clarifier l’offre pour faciliter le choix',
+  '/cas-03-inscription': 'Cas 03 — Inscription accompagnée',
+  '/cas-03-inscription/prochaines-etapes': 'Cas 03 — Mes prochaines étapes',
   '/espace': 'Cas 03 — Mon espace',
-  '/cas-3': 'Cas 01 — Préparer un entretien de recrutement',
+  '/cas-01-seo': 'Cas 01 — Préparer un entretien de recrutement',
   '/conseil/remuneration': 'Cas 01 — Aborder la rémunération',
   '/sources': 'Sources et limites',
-  '/plan-seo': 'Du besoin au service : une acquisition SEO utile',
+  '/plan-seo': 'Un plan SEO pour apec.fr',
+}
+
+const LEGACY: Record<string, string> = {
+  '/cas-1': '/cas-02-ab-test',
+  '/cas-2': '/cas-03-inscription',
+  '/cas-2/prochaines-etapes': '/cas-03-inscription/prochaines-etapes',
+  '/cas-3': '/cas-01-seo',
+}
+
+function legacyTarget(route: Route): string | null {
+  const to = LEGACY[route.path]
+  if (!to) return null
+  const q = route.query.toString()
+  return `${to}${q ? `?${q}` : ''}${route.anchor ? `#${route.anchor}` : ''}`
 }
 
 export default function App() {
@@ -57,15 +71,22 @@ export default function App() {
     })
   }, [path, anchor])
 
+  // Anciennes adresses (avant la renumérotation des cas) : redirection sans casser les liens partagés.
+  const legacy = legacyTarget(route)
+  useEffect(() => {
+    if (legacy) navigate(legacy, { replace: true })
+  }, [legacy])
+  if (legacy) return null
+
   let page: React.ReactNode
   const service = path.match(/^\/service\/([\w-]+)$/)
   const booking = path.match(/^\/reserver\/([\w-]+)$/)
   if (path === '/') page = <Home />
-  else if (path === '/cas-1') page = <Case1 route={route} />
+  else if (path === '/cas-02-ab-test') page = <Case1 route={route} />
   else if (path === '/espace') page = <Espace path={path} />
-  else if (path === '/cas-2') page = <Case2 path={path} />
-  else if (path === '/cas-2/prochaines-etapes') page = <NextSteps path={path} />
-  else if (path === '/cas-3') page = <Case3 path={path} />
+  else if (path === '/cas-03-inscription') page = <Case2 path={path} />
+  else if (path === '/cas-03-inscription/prochaines-etapes') page = <NextSteps path={path} />
+  else if (path === '/cas-01-seo') page = <Case3 path={path} />
   else if (path === '/conseil/remuneration') page = <Remuneration path={path} />
   else if (path === '/sources') page = <Sources />
   else if (path === '/plan-seo') page = <SeoPlan route={route} />

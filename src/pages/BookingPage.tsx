@@ -64,7 +64,7 @@ export function BookingPage({ id, route }: { id: string; route: Route }) {
                 <Link to={origin.to} anchor={origin.anchor} className="btn btn--primary">
                   Retour : {origin.label}
                 </Link>
-                <Link to="/cas-2/prochaines-etapes" className="link-arrow">
+                <Link to="/cas-03-inscription/prochaines-etapes" className="link-arrow">
                   Mon espace <ArrowRight size={18} />
                 </Link>
               </div>

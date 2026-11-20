@@ -47,13 +47,14 @@ export function Sources() {
         <section aria-labelledby="statut">
           <h2 id="statut">Statut du prototype</h2>
           <ul className="pf-list">
-            <li>Portfolio de candidature indépendant : propositions exploratoires, sans affiliation officielle à l’Apec.</li>
-            <li>Aucune inscription, aucune réservation réelle, aucune donnée envoyée. Sauvegarde locale de démonstration uniquement.</li>
+            <li>Portfolio de candidature indépendant : propositions exploratoires, sans affiliation officielle à l’Apec. Ni refonte officielle d’apec.fr, ni audit : des pistes à tester.</li>
+            <li>Aucune inscription, aucun rendez-vous réel, aucune donnée collectée. Les choix faits dans les démonstrations sont seulement gardés dans votre navigateur.</li>
             <li>Les écrans des prototypes restent dédiés à l’expérience utilisateur. Une barre de démonstration, en haut de page, permet de revenir au portfolio, de changer de variante, de réinitialiser et d’ouvrir « Comprendre ce cas », où sont présentés mes choix.</li>
             <li>Le portfolio n’est pas destiné à être référencé par les moteurs de recherche. Aucun outil de mesure d’audience ni traceur externe.</li>
             <li>La comparaison « Existant observé » et pistes illustre une démarche d’A/B test ; aucun test n’a été mené.</li>
           </ul>
         </section>
+
 
         <section aria-labelledby="provenance">
           <h2 id="provenance">Provenance des informations</h2>
@@ -91,7 +92,7 @@ export function Sources() {
             </li>
             <li>Pas de témoignage ni de chiffre de satisfaction : je n’en présente que s’ils sont réels et sourcés.</li>
             <li>Prototypes : Montserrat (SIL Open Font License), choisie pour sa proximité avec la typographie d’apec.fr.</li>
-            <li>Portfolio : DM Serif Display et Inter (SIL Open Font License), volontairement distincts de l’univers Apec.</li>
+            <li>Portfolio : Plus Jakarta Sans pour les titres et Inter pour le texte (SIL Open Font License), volontairement distinctes de l’univers Apec.</li>
           </ul>
         </section>
 

@@ -15,17 +15,17 @@ import { NotFound } from './NotFound'
 /** Liens contextuels de la colonne latérale — différents selon le service. */
 const RELATED: Record<string, { to: string; anchor?: string; label: string; text: string; tone: 'blue' | 'navy' }[]> = {
   'atelier-entretiens': [
-    { to: '/cas-3', anchor: 'etapes', label: 'Lire nos conseils pour préparer votre séance', text: 'Arriver à l’atelier avec vos exemples déjà repérés.', tone: 'blue' },
+    { to: '/cas-01-seo', anchor: 'etapes', label: 'Lire nos conseils pour préparer votre séance', text: 'Arriver à l’atelier avec vos exemples déjà repérés.', tone: 'blue' },
   ],
   'entretien-programme': [
     { to: '/service/simulateur-entretien?from=cas-3', label: 'S’entraîner seul avant le rendez-vous', text: 'Le simulateur d’entretien, en autonomie.', tone: 'navy' },
-    { to: '/cas-3', anchor: 'checklist', label: 'Checklist de la veille de l’entretien', text: 'Les points à contrôler avant le jour J.', tone: 'blue' },
+    { to: '/cas-01-seo', anchor: 'checklist', label: 'Checklist de la veille de l’entretien', text: 'Les points à contrôler avant le jour J.', tone: 'blue' },
   ],
   'simulateur-entretien': [
     { to: '/service/entretien-programme?from=cas-3', label: 'Un entretien fixé ? Répétez-le avec un consultant', text: 'Simulation individuelle d’1 h.', tone: 'blue' },
   ],
   candidature: [
-    { to: '/cas-3', anchor: 'etapes', label: 'Préparer ensuite l’entretien en 5 étapes', text: 'Conseil complet, utile avant même d’être convoqué.', tone: 'blue' },
+    { to: '/cas-01-seo', anchor: 'etapes', label: 'Préparer ensuite l’entretien en 5 étapes', text: 'Conseil complet, utile avant même d’être convoqué.', tone: 'blue' },
   ],
 }
 
@@ -93,7 +93,7 @@ export function ServicePage({ id, route }: { id: string; route: Route }) {
             ))}
             <div className="side-card">
               <h2 className="side-card__title side-card__title--dark">Pas sûr que ce soit le bon service ?</h2>
-              <Link to="/cas-1" className="link-arrow">Comparer nos services <ArrowRight size={18} /></Link>
+              <Link to="/cas-02-ab-test" className="link-arrow">Comparer nos services <ArrowRight size={18} /></Link>
             </div>
           </aside>
         </div>

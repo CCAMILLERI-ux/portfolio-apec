@@ -2,58 +2,103 @@ import { useState } from 'react'
 import { ArrowRight, Check, Info } from '../components/Icons'
 import { PortfolioLayout } from '../components/PortfolioLayout'
 import { SeoJourney } from '../components/SeoJourney'
-import { GUIDE_AI_NOTE, GUIDE_EXAMPLE, GUIDE_MEASURE, GUIDE_STEPS, ROADMAP, SEO_SITUATIONS } from '../data/seoPlan'
+import {
+  AB_TESTS,
+  DIAGNOSTIC,
+  KPIS,
+  OBJECTIVES,
+  PILLARS,
+  RITUALS,
+  ROADMAP,
+  SEO_SITUATIONS,
+  nb,
+} from '../data/seoPlan'
 import { Link, type Route } from '../lib/router'
-
-const CHAIN = ['Besoin utilisateur', 'Intention de recherche', 'Contenu utile', 'Service pertinent', 'Utilisation effective']
-
-function Accordion({ title, children, id }: { title: string; children: React.ReactNode; id?: string }) {
-  return (
-    <details className="seo-acc" id={id}>
-      <summary><span>{title}</span></summary>
-      <div className="seo-acc__body">{children}</div>
-    </details>
-  )
-}
 
 export function SeoPlan({ route }: { route: Route }) {
   const [sitId, setSitId] = useState(SEO_SITUATIONS[0].id)
   const sit = SEO_SITUATIONS.find((s) => s.id === sitId)!
 
   return (
-    <PortfolioLayout>
+    <PortfolioLayout minimalFooter>
+      {/* ---------------- 0. Hero ---------------- */}
       <section className="pf-hero pf-hero--compact seo-hero">
         <div className="pf-container">
-          <p className="pf-kicker">Module · Acquisition SEO orientée services</p>
-          <h1 className="pf-hero__title" tabIndex={-1}>Du besoin au service : une acquisition SEO utile</h1>
+          <p className="pf-kicker">Plan SEO · apec.fr</p>
+          <h1 className="pf-hero__title seo-hero__title" tabIndex={-1}>
+            Un plan SEO pour apec.fr : de la recherche au service utilisé
+          </h1>
           <p className="pf-hero__lead">
-            Attirer les bons publics, répondre à leurs questions et faciliter l’accès aux services adaptés à leur situation.
+            Faire d’apec.fr la réponse de référence aux questions des cadres et des recruteurs, puis conduire chaque
+            visite vers l’offre, l’outil ou l’accompagnement qui lui correspond.
           </p>
-          <p className="seo-mention">
-            <Info size={16} /> Proposition exploratoire de Caroline Camilleri — prototype indépendant, non officiel.
-            Hypothèses à valider avec les équipes et les données de l’Apec.
-          </p>
-
-          <ol className="seo-chain" aria-label="Fil conducteur">
-            {CHAIN.map((c, i) => (
-              <li key={c}><span className="seo-chain__n">{i + 1}</span>{c}</li>
+          <ul className="seo-goals" aria-label="Objectifs">
+            {OBJECTIVES.map((o, i) => (
+              <li key={o.title} className="seo-goal">
+                <span className="seo-goal__n" aria-hidden="true">{i + 1}</span>
+                <p className="seo-goal__title">{o.title}</p>
+                <p className="seo-goal__text">{nb(o.text)}</p>
+              </li>
             ))}
-          </ol>
-
+          </ul>
           <div className="seo-levels">
-            <Link to="/plan-seo" anchor="parcours" className="pf-btn pf-btn--primary">Voir le parcours <ArrowRight size={18} /></Link>
-            <Link to="/plan-seo" anchor="methode" className="pf-btn">Comprendre ma méthode</Link>
-            <Link to="/plan-seo" anchor="matrice" className="pf-link">Les six situations <ArrowRight size={16} /></Link>
+            <Link to="/plan-seo" anchor="diagnostic" className="pf-btn pf-btn--primary">
+              Découvrir le plan <ArrowRight size={18} />
+            </Link>
           </div>
+          <p className="seo-mention">
+            <Info size={16} /> Proposition indépendante de Caroline Camilleri : hypothèses à valider avec les
+            données de l’Apec.
+          </p>
         </div>
       </section>
 
-      {/* ---------------- Bloc 1 ---------------- */}
-      <section className="pf-container seo-block" aria-labelledby="matrice">
+      {/* ---------------- 1. Diagnostic ---------------- */}
+      <section className="pf-container seo-block" aria-labelledby="diagnostic">
         <p className="seo-block__num">1</p>
-        <h2 id="matrice" tabIndex={-1}>Des besoins aux services</h2>
-        <p className="seo-block__lead">Six situations, une même logique. Choisissez une situation pour voir le besoin, les recherches, le contenu et le service qui peut y répondre.</p>
-        <p className="seo-caveat">Exemples de requêtes exploratoires : volumes, concurrence et priorités non validés.</p>
+        <h2 id="diagnostic" tabIndex={-1}>Diagnostic</h2>
+        <p className="seo-block__lead">Quatre observations faites sur les pages publiques d’apec.fr, et le levier associé.</p>
+        <ul className="seo-diag">
+          {DIAGNOSTIC.map((d) => (
+            <li key={d.title} className="seo-diag__item">
+              <h3 className="seo-diag__title">{d.title}</h3>
+              <p>{nb(d.finding)}</p>
+              <p className="seo-diag__lever"><strong>Levier :</strong> {nb(d.lever)}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ---------------- 2. Stratégie ---------------- */}
+      <section className="pf-container seo-block" aria-labelledby="strategie">
+        <p className="seo-block__num">2</p>
+        <h2 id="strategie" tabIndex={-1}>Stratégie en quatre piliers</h2>
+        <p className="seo-block__lead">Tout le SEO d’apec.fr : offres, fiches métiers, outils, études, conseils et services.</p>
+        <ol className="seo-pillars">
+          {PILLARS.map((p, i) => (
+            <li key={p.id} className="seo-pillar">
+              <p className="seo-pillar__n">{String.fromCharCode(97 + i)}</p>
+              <h3 className="seo-pillar__title">{p.title}</h3>
+              <ul className="seo-pillar__points">
+                {p.points.map((pt) => <li key={pt}>{nb(pt)}</li>)}
+              </ul>
+              {p.cocon && (
+                <ol className="seo-cocon" aria-label="Cocon sémantique autour d’un métier">
+                  {p.cocon.map((c) => <li key={c}>{c}</li>)}
+                </ol>
+              )}
+              {p.link && (
+                <Link to="/plan-seo" anchor={p.link.anchor} className="pf-link">
+                  {p.link.label} <ArrowRight size={16} />
+                </Link>
+              )}
+            </li>
+          ))}
+        </ol>
+
+        <h3 id="matrice" tabIndex={-1} className="seo-sub">Contenus et intentions : six situations</h3>
+        <p className="seo-block__lead">Choisissez une situation pour voir le besoin, les recherches, le contenu et les services qui y répondent.</p>
+        <p className="seo-caveat">Exemples de requêtes : volumes et priorités à confirmer dans Search Console.</p>
 
         <fieldset className="seo-tabs">
           <legend className="visually-hidden">Situation utilisateur</legend>
@@ -67,15 +112,15 @@ export function SeoPlan({ route }: { route: Route }) {
         </fieldset>
 
         <article className="seo-matrix" aria-live="polite" aria-labelledby="seo-sit-title">
-          <h3 id="seo-sit-title" className="seo-matrix__title">{sit.persona}</h3>
+          <h4 id="seo-sit-title" className="seo-matrix__title">{sit.persona}</h4>
           <dl className="seo-matrix__grid">
-            <div><dt>Besoin</dt><dd>{sit.need}</dd></div>
+            <div><dt>Besoin</dt><dd>{nb(sit.need)}</dd></div>
             <div>
               <dt>Exemples de recherches</dt>
               <dd><ul className="seo-queries">{sit.queries.map((q) => <li key={q}>« {q} »</li>)}</ul></dd>
             </div>
-            <div><dt>Intention</dt><dd>{sit.intent}</dd></div>
-            <div><dt>Contenu à optimiser ou à envisager</dt><dd>{sit.content}</dd></div>
+            <div><dt>Intention</dt><dd>{nb(sit.intent)}</dd></div>
+            <div><dt>Contenu à optimiser ou à envisager</dt><dd>{nb(sit.content)}</dd></div>
             <div>
               <dt>Services pertinents</dt>
               <dd>
@@ -91,108 +136,92 @@ export function SeoPlan({ route }: { route: Route }) {
                 </ul>
               </dd>
             </div>
-            <div><dt>Conversion finale recherchée</dt><dd>{sit.conversion}</dd></div>
+            <div><dt>Conversion finale recherchée</dt><dd>{nb(sit.conversion)}</dd></div>
           </dl>
-          {sit.note && <p className="seo-note"><Info size={16} /> {sit.note}</p>}
-          {sit.hasJourney ? (
+          {sit.note && <p className="seo-note"><Info size={16} /> {nb(sit.note)}</p>}
+          {sit.hasJourney && (
             <Link to="/plan-seo" anchor="parcours" className="pf-btn pf-btn--primary pf-btn--sm">
-              Voir le parcours de cette situation <ArrowRight size={16} />
+              Voir la démonstration de cette situation <ArrowRight size={16} />
             </Link>
-          ) : (
-            <p className="seo-note">Parcours non développé : la démonstration détaille une seule situation (recherche d’emploi), la même logique s’applique ici.</p>
           )}
         </article>
-
-        <Accordion title="Comprendre ma méthode : comment lire cette matrice">
-          <ul className="pf-list">
-            <li>Un même besoin peut concerner plusieurs personas (ex. préparer un entretien : recherche d’emploi, premier emploi, reconversion).</li>
-            <li>Le SEO ne se limite pas aux offres d’emploi : ici, il s’agit des besoins autour de la candidature, de la carrière et du recrutement.</li>
-            <li>Commencer par examiner et optimiser les pages existantes avant de créer de nouveaux contenus.</li>
-            <li>Ne pas confondre trafic, clic vers un service et service réellement utilisé : la conversion visée est la dernière colonne.</li>
-            <li>SEO et accès direct se complètent : une personne qui connaît déjà l’Apec ira directement au service.</li>
-            <li>Ces rapprochements sont des pistes à valider ; les intitulés provisoires et les conditions sont à confirmer avec les équipes.</li>
-          </ul>
-        </Accordion>
       </section>
 
-      {/* ---------------- Bloc 2 ---------------- */}
+      {/* ---------------- 3. Démonstration ---------------- */}
       <section className="pf-container seo-block" aria-labelledby="parcours">
-        <p className="seo-block__num">2</p>
-        <h2 id="parcours" tabIndex={-1}>Un parcours démonstrateur : « Préparer mon entretien de recrutement »</h2>
-        <p className="seo-block__lead">De la recherche à l’inscription, en quatre écrans. Le contenu reste utile même si la personne ne choisit aucun service.</p>
+        <p className="seo-block__num">3</p>
+        <h2 id="parcours" tabIndex={-1}>Démonstration : « Préparer mon entretien de recrutement »</h2>
+        <p className="seo-block__lead">
+          La méthode appliquée à un besoin fréquent : une recherche Google, une page conseil utile, une fiche service et
+          une inscription. Le contenu reste utile même sans inscription.
+        </p>
         <SeoJourney route={route} />
 
-        <Accordion title="Comprendre mes choix sur ce parcours">
-          <dl className="seo-why">
-            <div><dt>Besoin utilisateur</dt><dd>Se préparer efficacement à un entretien, avec ou sans entretien déjà fixé.</dd></div>
-            <div><dt>Hypothèse</dt><dd>« Une réponse utile, accompagnée de propositions contextualisées, pourrait faciliter la découverte et l’utilisation des services. » C’est une hypothèse à tester, pas un résultat démontré.</dd></div>
-            <div><dt>Réponse proposée</dt><dd>Une page conseil qui répond d’abord (méthode, checklist), puis trois aides selon la situation : seul, en groupe, avec un consultant.</dd></div>
-            <div><dt>Maillage</dt><dd>Liens placés dans la section où ils répondent à un besoin (entraînement → simulateur, accompagnement → atelier et consultant, rémunération → ressource) ; retour des fiches vers la checklist. Bouton « Voir la logique de maillage » ci-dessus.</dd></div>
-            <div><dt>Conversion recherchée</dt><dd>Inscription finalisée, rendez-vous confirmé ou entraînement terminé ; puis participation effective.</dd></div>
-            <div><dt>Mesure</dt><dd>Entrées SEO sur la page, clics vers chaque aide, conversions finalisées rapportées aux sessions d’entrée, participation ; à comparer à l’état initial, avec prudence (saisonnalité, délai).</dd></div>
-            <div><dt>Points à valider avec les équipes</dt><dd>Intitulés, formats, durées, publics et conditions des services ; capacité d’accueil des ateliers et consultants ; exactitude des conseils ; faisabilité dans le CMS ; plan de marquage.</dd></div>
-          </dl>
-        </Accordion>
+        <details className="seo-acc">
+          <summary><span>Comprendre mes choix sur ce parcours</span></summary>
+          <div className="seo-acc__body">
+            <dl className="seo-why">
+              <div><dt>Besoin utilisateur</dt><dd>Se préparer à un entretien, avec ou sans entretien déjà fixé.</dd></div>
+              <div><dt>Hypothèse</dt><dd>Une réponse utile, accompagnée de propositions contextualisées, facilite la découverte et l’utilisation des services.</dd></div>
+              <div><dt>Réponse proposée</dt><dd>Une page conseil qui répond d’abord (méthode, checklist), puis trois aides selon la situation : seul, en groupe, avec un consultant.</dd></div>
+              <div><dt>Maillage</dt><dd>Liens placés dans la section où ils répondent à un besoin (entraînement → simulateur, accompagnement → atelier et consultant, rémunération → ressource) ; retour des fiches vers la checklist.</dd></div>
+              <div><dt>Conversion recherchée</dt><dd>Inscription finalisée, rendez-vous confirmé ou entraînement terminé, puis participation effective.</dd></div>
+              <div><dt>Mesure</dt><dd>Entrées SEO sur la page, clics vers chaque aide, conversions rapportées aux sessions d’entrée, comparées à l’état initial.</dd></div>
+            </dl>
+          </div>
+        </details>
       </section>
 
-      {/* ---------------- Bloc 3 ---------------- */}
+      {/* ---------------- 4. Plan 90 jours ---------------- */}
       <section className="pf-container seo-block" aria-labelledby="methode">
-        <p className="seo-block__num">3</p>
-        <h2 id="methode" tabIndex={-1}>Ma méthode de mise en œuvre</h2>
-        <p className="seo-caveat">Calendrier de travail proposé, à adapter au contexte ; ne constitue pas une promesse de résultats SEO sous trois mois.</p>
-
+        <p className="seo-block__num">4</p>
+        <h2 id="methode" tabIndex={-1}>Plan 90 jours</h2>
         <ol className="seo-roadmap">
           {ROADMAP.map((r) => (
             <li key={r.period} className="seo-phase">
               <p className="seo-phase__period">{r.period}</p>
               <h3 className="seo-phase__title">{r.title}</h3>
+              <ul className="seo-phase__actions">{r.actions.map((a) => <li key={a}>{nb(a)}</li>)}</ul>
               <p className="seo-phase__label">Livrables</p>
               <ul className="seo-phase__deliv">{r.deliverables.map((d) => <li key={d}>{d}</li>)}</ul>
-              <details className="seo-phase__more">
-                <summary>Voir les actions</summary>
-                <ul className="pf-list">{r.actions.map((a) => <li key={a}>{a}</li>)}</ul>
-              </details>
             </li>
           ))}
         </ol>
+      </section>
 
-        <section className="seo-guide" aria-labelledby="seo-guide-title">
-          <h3 id="seo-guide-title" className="seo-guide__title">Partir des questions des cadres pour les guider vers les services de l’Apec</h3>
-          <p className="seo-guide__intro">
-            L’idée : répondre aux recherches concrètes des utilisateurs avec des contenus utiles, puis leur proposer un
-            accompagnement adapté.
-          </p>
-
-          <ol className="seo-steps">
-            {GUIDE_STEPS.map((step, i) => (
-              <li key={step.title} className="seo-step">
-                <span className="seo-step__n" aria-hidden="true">{i + 1}</span>
-                <h4 className="seo-step__title">{step.title}</h4>
-                <p>{step.text}</p>
-              </li>
-            ))}
-          </ol>
-
-          <div className="seo-example">
-            <p className="seo-example__label">Exemple de parcours proposé <span>· proposition pour le portfolio</span></p>
-            <p className="seo-example__q">« {GUIDE_EXAMPLE.question} »</p>
-            <p>{GUIDE_EXAMPLE.explanation}</p>
-            <Link to="/reserver/cep?from=plan-seo" className="pf-btn pf-btn--primary">
-              {GUIDE_EXAMPLE.cta} <ArrowRight size={18} />
-            </Link>
-            <p className="seo-example__hint">Ouvre la prise de rendez-vous de démonstration du prototype.</p>
-          </div>
-
-          <p className="seo-measure"><strong>Pour mesurer l’efficacité :</strong> {GUIDE_MEASURE}</p>
-          <p className="seo-ai-note">{GUIDE_AI_NOTE}</p>
-        </section>
+      {/* ---------------- 5. Pilotage ---------------- */}
+      <section className="pf-container seo-block" aria-labelledby="pilotage">
+        <p className="seo-block__num">5</p>
+        <h2 id="pilotage" tabIndex={-1}>Pilotage</h2>
+        <div className="seo-pilot">
+          <section className="seo-pilot__col" aria-labelledby="kpi">
+            <h3 id="kpi" className="seo-sub">Indicateurs clés</h3>
+            <dl className="seo-kpis">
+              {KPIS.map((k) => (
+                <div key={k.family}>
+                  <dt>{k.family}</dt>
+                  <dd><ul>{k.items.map((i) => <li key={i}>{nb(i)}</li>)}</ul></dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+          <section className="seo-pilot__col" aria-labelledby="abtests">
+            <h3 id="abtests" className="seo-sub">A/B tests</h3>
+            <ul className="pf-list">{AB_TESTS.map((t) => <li key={t}>{nb(t)}</li>)}</ul>
+            <h3 className="seo-sub">Rituels</h3>
+            <dl className="seo-rituals">
+              {RITUALS.map((r) => (
+                <div key={r.who}><dt>{r.who}</dt><dd>{nb(r.what)}</dd></div>
+              ))}
+            </dl>
+          </section>
+        </div>
       </section>
 
       <section className="pf-container seo-block seo-end">
         <p className="small">
-          Ce portfolio indépendant est en <code>noindex</code> : les éléments SEO présentés sont une démonstration de méthode,
-          pas un dispositif destiné à positionner ce portfolio sur les requêtes de l’Apec. Aucune donnée interne de l’Apec
-          n’a été utilisée. Les intitulés de services reprennent apec.fr ; les autres sont provisoires.
+          Ce portfolio est en <code>noindex</code> : les éléments SEO présentés illustrent une méthode et ne visent pas à
+          positionner ce portfolio sur les requêtes de l’Apec.
         </p>
         <Link to="/" className="pf-link">Revenir aux cas du portfolio <ArrowRight size={16} /></Link>
       </section>

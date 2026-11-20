@@ -11,7 +11,7 @@ export function Remuneration({ path }: { path: string }) {
   return (
     <ProtoLayout path={path} caseLabel="Cas 01 · De la recherche Google aux services" events={['service_view', 'service_cta_click']} coulisses={<Case3Coulisses />}>
       <PageBand
-        back={{ to: '/cas-3', label: 'Conseil : préparer un entretien de recrutement' }}
+        back={{ to: '/cas-01-seo', label: 'Conseil : préparer un entretien de recrutement' }}
         title="Aborder la rémunération en entretien"
         titleIsHeading={false}
       />
@@ -37,11 +37,11 @@ export function Remuneration({ path }: { path: string }) {
           <h2>3. S’exercer avant le jour J</h2>
           <p>
             Cette question se prépare avec les autres : retrouvez{' '}
-            <Link to="/cas-3" anchor="questions">les autres questions fréquentes d’un entretien de recrutement</Link>, ou{' '}
+            <Link to="/cas-01-seo" anchor="questions">les autres questions fréquentes d’un entretien de recrutement</Link>, ou{' '}
             <Link to="/service/atelier-entretiens?from=remuneration">exercez-vous à la question du salaire en atelier collectif</Link>.
           </p>
           <p className="muted small">Les repères de rémunération dépendent du métier, du secteur et de la région.</p>
-          <Link to="/cas-3" className="link-arrow">
+          <Link to="/cas-01-seo" className="link-arrow">
             Revenir au conseil complet sur la préparation d’entretien <ArrowRight size={18} />
           </Link>
         </article>
