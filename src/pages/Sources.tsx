@@ -18,11 +18,13 @@ import { Link } from '../lib/router'
 const TOKENS = [
   ['--brand-navy', '#252555', 'Texte principal, en-tête, pied de page, bandeaux'],
   ['--brand-yellow', '#FFC400', 'Boutons, aplats de visuels, pictogrammes sur bleu nuit'],
-  ['--brand-blue', '#006699', 'Cartes thématiques, bandeau d’appel à l’action'],
+  ['--brand-blue', '#026096', 'Bleu secondaire : cartes, bandeaux, liens (prélevé sur capture)'],
+  ['--brand-blue-hover', '#024D78', 'Survol et état actif des éléments bleus'],
+  ['--brand-blue-tint', '#EBF2F7', 'Fonds clairs teintés (encadrés, « Pourquoi ce service ? »)'],
+  ['--brand-blue-soft', '#8DB7D0', 'Accent clair des illustrations (remplace l’ancien cyan)'],
   ['--surface-white', '#FFFFFF', 'Fond'],
   ['--surface-muted', '#F5F5FA', 'Fonds secondaires'],
   ['--border-neutral', '#D1D3DB', 'Bordures'],
-  ['--accent-cyan-light', '#99E8FA', 'Accent léger dans les illustrations'],
   ['--text-secondary', '#6B7280', 'Valeur de départ ; #5F6673 utilisé pour le texte'],
 ]
 
@@ -128,8 +130,7 @@ export function Sources() {
             ))}
           </ul>
           <p className="small">
-            Contrastes calculés (formule WCAG 2) : bleu nuit sur jaune ≈ 8,9:1 ; bleu nuit sur blanc ≈ 14,2:1 ; blanc
-            sur bleu ≈ 6,3:1. #6B7280 donne 4,45:1 sur #F5F5FA : le texte secondaire utilise #5F6673 (≥ 5,3:1). Le
+            Contrastes calculés (formule WCAG 2) : bleu nuit sur jaune ≈ 8,9:1 ; bleu nuit sur blanc ≈ 14,2:1 ; blanc sur bleu #026096 ≈ 6,7:1 ; bleu #026096 sur blanc ≈ 6,7:1. Le bleu nuit n’est jamais utilisé en texte sur le bleu (≈ 2,1:1) : le texte y est blanc. #6B7280 donne 4,45:1 sur #F5F5FA : le texte secondaire utilise #5F6673 (≥ 5,3:1). Le
             jaune n’est jamais une couleur de texte sur fond blanc. Ces calculs ne valent pas audit RGAA.
           </p>
 
