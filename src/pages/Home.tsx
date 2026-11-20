@@ -183,8 +183,7 @@ export function Home() {
             <span>Diagnostic</span><span>4 piliers</span><span>Démonstration</span><span>90 jours</span>
           </div>
           <div className="pf-case__body">
-            <p className="pf-case__meta"><span className="pf-case__num">Plan SEO</span></p>
-            <h2 id="plan-seo" className="pf-case__title">Mon plan SEO pour apec.fr</h2>
+            <h2 id="plan-seo" className="pf-case__title">Stratégie SEO – Méthode de travail</h2>
             <p className="pf-case__need">
               Un plan SEO complet pour apec.fr : diagnostic, stratégie en quatre piliers (technique, contenus, maillage,
               visibilité IA), démonstration et feuille de route sur 90 jours.
@@ -193,7 +192,7 @@ export function Home() {
               <li>SEO technique</li><li>Contenus</li><li>Maillage interne</li><li>Visibilité IA</li><li>Pilotage</li>
             </ul>
             <Link to="/plan-seo" className="pf-btn pf-btn--primary pf-btn--sm">
-              Voir le plan SEO<span className="visually-hidden"> pour apec.fr</span> <ArrowRight size={16} />
+              Découvrir la méthode<span className="visually-hidden"> : stratégie SEO pour apec.fr</span> <ArrowRight size={16} />
             </Link>
           </div>
         </article>
