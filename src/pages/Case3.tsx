@@ -5,6 +5,8 @@ import { ArrowRight, Chat, Doc, Group, Laptop, Plus } from '../components/Icons'
 import { Illustration } from '../components/Illustration'
 import { PageBand } from '../components/PageBand'
 import { ProtoLayout } from '../components/ProtoLayout'
+import { PhotoVisual } from '../components/ServiceCard'
+import { getService } from '../data/services'
 import { Link } from '../lib/router'
 
 const TOC = [
@@ -46,6 +48,8 @@ const QUESTIONS = [
     a: 'Oui, toujours : sur les priorités du poste, l’équipe, les critères de réussite à six mois.',
   },
 ]
+
+const atelier = getService('atelier-entretiens')!
 
 export function Case3({ path }: { path: string }) {
   const [checked, setChecked] = useState<number[]>([])
@@ -206,12 +210,19 @@ export function Case3({ path }: { path: string }) {
 
           <aside className="sidebar" aria-label="Pour aller plus loin">
             <p className="sidebar__heading">Nos services</p>
-            <div className="side-card side-card--blue">
-              <h2 className="side-card__title">Réussir vos entretiens de recrutement</h2>
-              <p>Un atelier pour maîtriser chaque type d’entretien d’embauche.</p>
-              <Link to="/service/atelier-entretiens?from=cas-3" className="link-arrow link-arrow--light">
-                En savoir plus<span className="visually-hidden"> sur l’atelier</span> <ArrowRight size={18} />
-              </Link>
+            <div className="side-card side-card--workshop">
+              <PhotoVisual service={atelier} className="side-card__photo" />
+              <div className="side-card__inner">
+                <p className="workshop__kicker">Atelier collectif</p>
+                <h2 className="side-card__title side-card__title--dark">Réussir vos entretiens de recrutement</h2>
+                <p>Un atelier pour maîtriser chaque type d’entretien d’embauche.</p>
+                <Link to="/reserver/atelier-entretiens?from=cas-3" className="btn btn--primary btn--sm">
+                  Voir les sessions<span className="visually-hidden"> de l’atelier</span>
+                </Link>
+                <Link to="/service/atelier-entretiens?from=cas-3" className="link-arrow">
+                  En savoir plus<span className="visually-hidden"> sur l’atelier</span> <ArrowRight size={18} />
+                </Link>
+              </div>
             </div>
             <p className="sidebar__heading">Nos outils</p>
             <div className="side-card side-card--navy">

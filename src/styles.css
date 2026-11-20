@@ -53,6 +53,8 @@
 *::before,
 *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
+/* La barre de démo est collante sur grand écran : les ancres ne doivent pas passer dessous. */
+@media (min-width: 761px) { html { scroll-padding-top: 96px; } }
 body {
   margin: 0;
   font-size: 16px;
@@ -477,8 +479,11 @@ legend { padding: 0; }
 @media (max-width: 600px) { .progress__label { display: none; } .progress li.is-current .progress__label { display: inline; } }
 .proto .step__title { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); margin-top: 0; }
 .step__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-top: var(--s3); }
-.subquestion { background: var(--surface-muted); padding: var(--s2) !important; }
-.subquestion legend { font-weight: 600; float: left; width: 100%; margin-bottom: var(--s1); }
+.subquestion { background: var(--surface-muted); padding: var(--s2) var(--s3) !important; border-left: 5px solid var(--brand-blue) !important; }
+.subquestion legend { font-weight: 600; float: left; width: 100%; margin-bottom: 12px; }
+.subquestion .choices--inline { clear: both; display: grid; grid-template-columns: repeat(2, minmax(0, 260px)); gap: var(--s1); }
+.subquestion .choice { background: #fff; }
+@media (max-width: 560px) { .subquestion .choices--inline { grid-template-columns: 1fr; } }
 .field-error { display: flex; gap: 6px; align-items: flex-start; color: var(--error); background: var(--error-bg); border-left: 4px solid var(--error); padding: 8px 12px; font-weight: 600; font-size: 0.9375rem; margin: var(--s1) 0 0; }
 .field-error::before { content: '⚠'; }
 
@@ -792,3 +797,41 @@ legend { padding: 0; }
 .proto .space-card__title--dark { color: var(--brand-navy); }
 .space-list { list-style: none; padding: 0; margin: 0 0 var(--s1); display: grid; gap: var(--s1); font-size: 0.9375rem; }
 .space-list li { border-left: 3px solid var(--brand-yellow); padding-left: 10px; }
+
+/* Barre de démo : bouton actif */
+.proto .demo-bar__btn.is-active { background: var(--pf-accent-soft); color: var(--pf-ink); border-color: var(--pf-accent-soft); }
+
+/* Piste 3 : visuels photographiques */
+.photo-visual { position: relative; overflow: hidden; background: var(--brand-navy); border-bottom: 6px solid var(--brand-yellow); }
+.photo-visual--blue { border-bottom-color: var(--brand-blue); }
+.photo-visual--navy { border-bottom-color: var(--brand-navy); }
+.photo-visual__img { display: block; width: 100%; height: 200px; object-fit: cover; }
+.photo-visual .kind-tag { z-index: 1; }
+
+/* Piste 3 : carte vedette « atelier » */
+.workshop { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); background: #fff; box-shadow: var(--shadow); border: 1px solid #e6e7ee; margin-bottom: var(--s3); }
+.workshop__photo { border-bottom: 0; border-right: 8px solid var(--brand-yellow); height: 100%; }
+.workshop__photo .photo-visual__img { height: 100%; min-height: 340px; }
+.workshop__photo .kind-tag { width: 96px; height: 96px; left: 20px; top: 20px; }
+.workshop__body { padding: var(--s4); display: flex; flex-direction: column; }
+.workshop__kicker { align-self: flex-start; background: var(--brand-yellow); color: var(--brand-navy); font-weight: 700; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 4px 10px; margin-bottom: 12px; }
+.proto .workshop__title { font-size: clamp(1.375rem, 1.1rem + 0.8vw, 1.75rem); margin: 0 0 var(--s1); }
+.workshop__sessions { background: #fffbea; border-left: 5px solid var(--brand-yellow); padding: 12px 16px; margin: var(--s1) 0 0; }
+.workshop__sessions-title { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 6px; }
+.workshop__sessions ul { list-style: none; margin: 0; padding: 0; font-size: 0.9375rem; display: grid; gap: 4px; }
+@media (max-width: 860px) {
+  .workshop { grid-template-columns: 1fr; }
+  .workshop__photo { border-right: 0; border-bottom: 8px solid var(--brand-yellow); }
+  .workshop__photo .photo-visual__img { min-height: 0; height: 220px; }
+  .workshop__body { padding: var(--s3); }
+}
+
+/* Cas 3 : carte atelier de la colonne « Nos services » */
+.side-card--workshop { padding: 0; border-top: 0; }
+.side-card__photo .photo-visual__img { height: 170px; }
+.side-card__photo .kind-tag { transform: scale(0.85); transform-origin: top left; left: 12px; top: 12px; }
+.side-card__inner { padding: var(--s2) var(--s3) var(--s3); display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.side-card__inner .btn { margin-top: var(--s1); }
+
+.svc-grid--duo { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 640px) { .svc-grid--duo { grid-template-columns: 1fr; } }

@@ -16,8 +16,8 @@ Portfolio de candidature au poste de Chef de projet animation web. Un seul site 
 
 - **Portfolio** (accueil, sources) : identité propre à la candidate (fond crème, DM Serif Display + Inter, accent terracotta), volontairement distincte de l’univers Apec.
 - **Prototypes** : univers inspiré d’apec.fr (bleu nuit, jaune, bleu ; Montserrat), **sans aucune explication dans les écrans utilisateur**.
-- **Coulisses du prototype** : sous le pied de page de chaque prototype, dans l’univers portfolio. Elles regroupent la mention d’indépendance, le retour au portfolio, la réinitialisation, la méthode (constat, hypothèse, modification, KPI et garde-fous, équipes), la provenance des informations et le journal local.
-- **Barre de démo** (univers portfolio), en haut de page et hors maquette : « Retour au portfolio », nom du cas, choix de variante (cas 1 : Existant observé / Piste 1 / Piste 2), « Comprendre ce cas » (vers les coulisses) et « Réinitialiser la démo ». Pendant et après une réservation, elle affiche « Réservation simulée… » puis « Simulation terminée — aucun rendez-vous réel n’a été réservé ».
+- **Coulisses du prototype** : masquées par défaut, affichées uniquement au clic sur « Comprendre ce cas », sous le pied de page, dans l’univers portfolio. Elles regroupent la mention d’indépendance, le retour au portfolio, la réinitialisation, la méthode (constat, hypothèse, modification, KPI et garde-fous, équipes), la provenance des informations et le journal local.
+- **Barre de démo** (univers portfolio), en haut de page et hors maquette : « Retour au portfolio », nom du cas, choix de variante (cas 1 : Existant observé / Piste 1 / Piste 2 / Piste 3), « Comprendre ce cas » (affiche ou masque les coulisses) et « Réinitialiser la démo ». Pendant et après une réservation, elle affiche « Réservation simulée… » puis « Simulation terminée — aucun rendez-vous réel n’a été réservé ».
 - **Mon espace** : page d’accueil de l’espace fictif d’Alex (guidage, prochaines étapes, rendez-vous, services, conseils).
 
 ## Installation et lancement
@@ -56,7 +56,7 @@ Le `noindex` est porté par la balise meta de chaque page. Le `robots.txt` du do
 
 1. **Accueil** : trois cartes, un clic par cas.
 2. **Cas 2 (≈ 2 min)** : « Me guider » → la situation est présélectionnée (modifiable) → cocher « Préparer un entretien », puis « Oui, dans les prochains jours » → les recommandations changent et s’expliquent (« Pourquoi ce service ? ») → « Commencer par ce service » → choisir un créneau fictif → récapitulatif → valider → « Simulation terminée — aucun rendez-vous réel n’a été réservé » → « Mes prochaines étapes » (retirer, modifier ses besoins, reprendre, remettre à zéro).
-3. **Cas 1 (≈ 1 min 30)** : changer de situation (« Je recrute et j’ai besoin d’aide ») puis comparer « Existant observé », « Piste 1 » et « Piste 2 » depuis la barre du haut.
+3. **Cas 1 (≈ 1 min 30)** : changer de situation (« Je recrute et j’ai besoin d’aide ») puis comparer « Existant observé », « Piste 1 » (visuels illustrés), « Piste 2 » (aide au choix) et « Piste 3 » (photos, ateliers mis en avant) depuis la barre du haut.
 4. **Cas 3 (≈ 1 min 30)** : lire l’introduction, suivre « simulation individuelle d’1 h » puis revenir avec la flèche du bandeau ; bouton « Comprendre ce cas » de la barre du haut pour le maillage, l’aperçu du titre, le GEO et la coordination.
 
 La barre du haut propose « Retour au portfolio » et « Réinitialiser la démo » ; chaque fiche a une flèche de retour contextuelle (le lien d’origine est transmis par `?from=`).
@@ -77,7 +77,8 @@ La barre du haut propose « Retour au portfolio » et « Réinitialiser la démo
   - Observés sur les captures : « Réussir vos entretiens de recrutement », « Entretien programmé : entrainez vous avec un consultant ! » (individuel, face à face, 1 h, gratuit, cadres et jeunes diplômés), « Simulateur d’entretien », « Réussir sa candidature », « Faire de l’IA générative l’alliée de votre recherche emploi » (en groupe, en salle, 4 h, gratuit, cadres et jeunes diplômés), « Créer mon CV ».
   - **À vérifier** : tous les services des situations P2 à P6 (premier emploi, CEP, évolution interne, formation, reconversion, services recruteurs), ainsi que les durées, tarifs et publics non visibles. Ils sont affichés avec un badge « à vérifier » et des fiches d’aperçu qui renvoient vers le site officiel. La présélection est présentée comme soumise à conditions (TPE/PME notamment), sans reproduire de critères.
 - **Textes** : accroches, bénéfices, page conseil et repères rémunération sont des rédactions originales. Seuls les intitulés et descriptions courtes observés sont cités.
-- **Visuels** : illustrations et pictogrammes SVG dessinés pour le prototype. Aucune photographie, aucun portrait, aucun logo de l’Apec, aucun témoignage.
+- **Visuels** : illustrations et pictogrammes SVG dessinés pour le prototype ; aucun logo de l’Apec, aucun témoignage.
+- **Photographies** (piste 3 du cas 1, carte atelier du cas 3) : 14 photos Unsplash, licence Unsplash (https://unsplash.com/license), téléchargées depuis le CDN public, recadrées en 960 × 600, sans métadonnées EXIF/XMP, dans `public/photos/`. Identifiants d’origine et textes alternatifs dans `src/data/photos.ts` et sur la page « Sources et limites ». Elles ne représentent ni des salariés, ni des consultants, ni des usagers de l’Apec ; le nom des photographes reste à confirmer.
 - **Polices** (SIL Open Font License, servies localement) : Montserrat pour les prototypes, substitution provisoire car la police exacte d’apec.fr n’est pas confirmée ; DM Serif Display et Inter pour le portfolio.
 
 ## Design : ce qui est estimé, ce qui est contrôlé

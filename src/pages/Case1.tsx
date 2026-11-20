@@ -1,20 +1,22 @@
 import { Badge } from '../components/Badge'
 import { CrBlock, CroGrid } from '../components/Coulisses'
-import { ArrowRight, Chat, Compass, Graduation, Handshake, Search, TrendUp } from '../components/Icons'
+import { ArrowRight, Calendar, Chat, Compass, Graduation, Handshake, Search, TrendUp } from '../components/Icons'
 import { Illustration } from '../components/Illustration'
 import { ModalityChips } from '../components/Modalities'
 import { ProtoLayout } from '../components/ProtoLayout'
-import { KIND_TONE, ObservedServiceCard, ServiceAction, ServiceCard, ServiceVisual } from '../components/ServiceCard'
+import { KIND_TONE, ObservedServiceCard, PhotoVisual, ServiceAction, ServiceCard, ServiceVisual } from '../components/ServiceCard'
+import { WORKSHOP_SESSIONS } from '../data/slots'
 import { ADVICE_BY_SITUATION, IDEAL_IF } from '../data/piste2'
 import { getService, SERVICES, type Service } from '../data/services'
 import { ALL_DEMO_SERVICE_IDS, SITUATIONS } from '../data/situations'
 import { Link, navigate, type Route } from '../lib/router'
 
-type View = 'existant' | 'piste' | 'piste2'
+type View = 'existant' | 'piste' | 'piste2' | 'piste3'
 const VIEWS: [View, string][] = [
   ['existant', 'Existant observé'],
   ['piste', 'Piste 1'],
   ['piste2', 'Piste 2'],
+  ['piste3', 'Piste 3'],
 ]
 const ALL = 'tous'
 
@@ -28,7 +30,7 @@ const SITUATION_ICON: Record<string, typeof Search> = {
 
 export function Case1({ route }: { route: Route }) {
   const rawView = route.query.get('vue')
-  const view: View = rawView === 'existant' || rawView === 'piste2' ? rawView : 'piste'
+  const view: View = rawView === 'existant' || rawView === 'piste2' || rawView === 'piste3' ? rawView : 'piste'
   const situationId = route.query.get('situation') ?? SITUATIONS[0].id
   const situation = SITUATIONS.find((s) => s.id === situationId)
   const isAll = situationId === ALL || !situation
@@ -101,7 +103,7 @@ export function Case1({ route }: { route: Route }) {
           <h2 className="results-title">
             {isAll ? resultLabel : <>Pour vous : <span className="results-title__sit">{resultLabel}</span></>}
           </h2>
-          {view === 'piste' && (
+          {(view === 'piste' || view === 'piste3') && (
             <Link to="/reserver/cep?from=cas-1" className="help-link">
               <Chat size={22} /> Vous hésitez ? <strong>Échanger avec un consultant</strong>
             </Link>
@@ -121,6 +123,8 @@ export function Case1({ route }: { route: Route }) {
             {services.map((s) => <ServiceCard key={s.id} service={s} from="cas-1" />)}
           </div>
         )}
+
+        {view === 'piste3' && <Piste3 services={services} />}
 
         {view === 'piste2' && (
           <>
@@ -184,6 +188,65 @@ export function Case1({ route }: { route: Route }) {
   )
 }
 
+/** Piste 3 : de l'humain. Ateliers mis en avant, photos à la place des pictogrammes. */
+function Piste3({ services }: { services: Service[] }) {
+  const workshops = services.filter((s) => s.kind === 'atelier')
+  const others = services.filter((s) => s.kind !== 'atelier')
+  return (
+    <>
+      {workshops.map((s) => (
+        <article key={s.id} className="workshop">
+          <PhotoVisual service={s} className="workshop__photo" />
+          <div className="workshop__body">
+            <p className="workshop__kicker">Atelier collectif</p>
+            <p className="svc__official">{s.officialTitle}</p>
+            <h3 className="workshop__title">{s.hook}</h3>
+            <p>{s.benefit}</p>
+            <ModalityChips items={s.modalities} />
+            {s.action.kind === 'booking' && (
+              <div className="workshop__sessions">
+                <p className="workshop__sessions-title"><Calendar size={18} /> Prochaines sessions</p>
+                <ul>
+                  {WORKSHOP_SESSIONS.map((slot) => (
+                    <li key={slot.id}><strong>{slot.date}</strong> · {slot.time} · {slot.place}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div className="svc__actions">
+              <ServiceAction service={s} from="cas-1" />
+              <Link to={`/service/${s.id}?from=cas-1`} className="link-arrow">
+                En savoir plus<span className="visually-hidden"> : {s.officialTitle}</span> <ArrowRight size={18} />
+              </Link>
+            </div>
+          </div>
+        </article>
+      ))}
+      {others.length > 0 && (
+        <div className={`svc-grid${others.length === 2 ? ' svc-grid--duo' : ''}`}>
+          {others.map((s) => (
+            <article key={s.id} className={`svc svc--${s.kind}`}>
+              <PhotoVisual service={s} />
+              <div className="svc__body">
+                <p className="svc__official">{s.officialTitle}</p>
+                <h3 className="svc__title">{s.hook}</h3>
+                <p className="svc__benefit">{s.benefit}</p>
+                <ModalityChips items={s.modalities} />
+                <div className="svc__actions">
+                  <ServiceAction service={s} from="cas-1" />
+                  <Link to={`/service/${s.id}?from=cas-1`} className="link-arrow">
+                    En savoir plus<span className="visually-hidden"> : {s.officialTitle}</span> <ArrowRight size={18} />
+                  </Link>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </>
+  )
+}
+
 function Case1Coulisses() {
   const tbc = SERVICES.filter((s) => s.titleProvenance === 'a-verifier')
   return (
@@ -191,8 +254,8 @@ function Case1Coulisses() {
       <h3 className="coulisses__case">Cas 1 — Rendre les services plus faciles à choisir</h3>
       <CrBlock title="Comment lire cette démo">
         <p>
-          La barre du haut bascule entre trois variantes sur les mêmes services : <strong>Existant observé</strong>,
-          <strong> Piste 1</strong> et <strong>Piste 2</strong>. C’est une comparaison de variantes, <strong>pas un test A/B</strong>.
+          La barre du haut bascule entre quatre variantes sur les mêmes services : <strong>Existant observé</strong>,
+          <strong> Piste 1</strong>, <strong>Piste 2</strong> et <strong>Piste 3</strong>. C’est une comparaison de variantes, <strong>pas un test A/B</strong>.
         </p>
         <p>
           La vue « existant » reconstruit le motif de cartes vu sur apec.fr (rubrique « Entretiens de recrutement »,
@@ -200,18 +263,19 @@ function Case1Coulisses() {
           piste. Les descriptions absentes des captures ne sont pas inventées.
         </p>
       </CrBlock>
-      <CrBlock title="Piste 1 et piste 2 : ce que chacune change">
+      <CrBlock title="Les pistes : ce que chacune change">
         <div className="table-scroll">
           <table className="data-table">
             <caption className="visually-hidden">Comparaison des pistes</caption>
-            <thead><tr><th scope="col">Élément</th><th scope="col">Existant observé</th><th scope="col">Piste 1 — valoriser</th><th scope="col">Piste 2 — aider à choisir</th></tr></thead>
+            <thead><tr><th scope="col">Élément</th><th scope="col">Existant observé</th><th scope="col">Piste 1 — valoriser</th><th scope="col">Piste 2 — aider à choisir</th><th scope="col">Piste 3 — montrer l’humain</th></tr></thead>
             <tbody>
-              <tr><td>Entrée</td><td>Par thème</td><td>Par situation</td><td>Par situation</td></tr>
-              <tr><td>Carte</td><td>Pictogramme, intitulé, phrase</td><td>Visuel coloré, accroche bénéfice, intitulé conservé</td><td>Ligne comparable : visuel, accroche, <strong>« Idéal si… »</strong></td></tr>
-              <tr><td>Modalités</td><td>Sur la fiche</td><td>Sur la carte (vérifiées)</td><td>Sur la ligne (vérifiées)</td></tr>
-              <tr><td>Actions</td><td>« En savoir plus » + action</td><td>Une action principale + lien</td><td>Une action principale + lien</td></tr>
-              <tr><td>Aide humaine</td><td>—</td><td>Lien à côté du titre</td><td>Intégrée à la liste, comme une option</td></tr>
-              <tr><td>Contenus conseils</td><td>Bloc séparé, plus bas</td><td>—</td><td><strong>« Nos conseils »</strong> reliés à la situation</td></tr>
+              <tr><td>Entrée</td><td>Par thème</td><td>Par situation</td><td>Par situation</td><td>Par situation</td></tr>
+              <tr><td>Carte</td><td>Pictogramme, intitulé, phrase</td><td>Visuel coloré, accroche bénéfice, intitulé conservé</td><td>Ligne comparable : visuel, accroche, <strong>« Idéal si… »</strong></td><td><strong>Photo</strong> + étiquette du type d’aide</td></tr>
+              <tr><td>Modalités</td><td>Sur la fiche</td><td>Sur la carte (vérifiées)</td><td>Sur la ligne (vérifiées)</td><td>Sur la carte (vérifiées)</td></tr>
+              <tr><td>Ateliers</td><td>Encadré texte, comme les autres</td><td>Visuel jaune + étiquette</td><td>Ligne + étiquette</td><td><strong>Carte vedette</strong> : grande photo, « Atelier collectif », prochaines sessions</td></tr>
+              <tr><td>Actions</td><td>« En savoir plus » + action</td><td>Une action principale + lien</td><td>Une action principale + lien</td><td>Une action principale + lien</td></tr>
+              <tr><td>Aide humaine</td><td>—</td><td>Lien à côté du titre</td><td>Intégrée à la liste, comme une option</td><td>Lien à côté du titre</td></tr>
+              <tr><td>Contenus conseils</td><td>Bloc séparé, plus bas</td><td>—</td><td><strong>« Nos conseils »</strong> reliés à la situation</td><td>—</td></tr>
             </tbody>
           </table>
         </div>
@@ -220,6 +284,20 @@ function Case1Coulisses() {
           visiteur comparer seul. La piste 2 formule le critère de choix (« Idéal si… »), présente les services comme des
           options comparables, traite l’aide humaine comme une option à part entière et relie le choix à des contenus
           utiles (maillage vers le cas 3). Hypothèse à tester : moins d’hésitation, pas forcément plus de clics.
+        </p>
+        <p>
+          <strong>Ce que la piste 3 explore :</strong> les ateliers sont aujourd’hui présentés comme les autres services,
+          dans un encadré texte. La piste 3 les rend plus repérables et plus attrayants : carte vedette, grande photo de
+          groupe, étiquette « Atelier collectif » et prochaines sessions visibles sans clic. Les photographies, déjà
+          présentes dans les contenus et réseaux sociaux de l’Apec, montrent la dimension humaine des accompagnements.
+          Hypothèse à tester : davantage d’inscriptions aux ateliers, à surveiller avec la présence effective.
+        </p>
+      </CrBlock>
+      <CrBlock title="Photographies de la piste 3">
+        <p>
+          Photos Unsplash, licence Unsplash (usage gratuit, sans autorisation requise), sans métadonnées. Elles
+          illustrent des situations et ne représentent ni des salariés, ni des consultants, ni des usagers de l’Apec.
+          Les dates de sessions affichées sont fictives. Détail des sources : page « Sources et limites ».
         </p>
       </CrBlock>
       <CroGrid

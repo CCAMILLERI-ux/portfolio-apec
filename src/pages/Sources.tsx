@@ -12,6 +12,7 @@ import {
   OFFICIAL_TOOLS_URL,
   SERVICES,
 } from '../data/services'
+import { ALL_PHOTOS } from '../data/photos'
 import { Link } from '../lib/router'
 
 const TOKENS = [
@@ -80,11 +81,33 @@ export function Sources() {
         <section aria-labelledby="assets">
           <h2 id="assets">Visuels et typographie</h2>
           <ul className="pf-list">
-            <li>Illustrations en aplats et pictogrammes : dessinés en SVG pour ce prototype, dans les couleurs observées. Aucune photographie, aucun portrait, aucun logo de l’Apec.</li>
+            <li>Illustrations en aplats et pictogrammes : dessinés en SVG pour ce prototype, dans les couleurs observées. Aucun portrait, aucune photographie et aucun logo de l’Apec.</li>
+            <li>
+              Photographies (piste 3 du cas 1 et carte atelier du cas 3) : <strong>Unsplash, licence Unsplash</strong> (usage
+              gratuit, sans autorisation requise —{' '}
+              <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">unsplash.com/license<span className="visually-hidden"> (site externe, nouvel onglet)</span></a>).
+              Fichiers recadrés en 960 × 600, sans métadonnées. Elles illustrent des situations et ne représentent ni des
+              salariés, ni des consultants, ni des usagers de l’Apec. Le nom des photographes reste à confirmer sur la page de chaque photo.
+            </li>
             <li>Pas de témoignage ni de chiffre de satisfaction : aucune source autorisée n’était disponible.</li>
             <li>Prototypes : Montserrat (SIL Open Font License), substitution provisoire, la police exacte d’apec.fr n’étant pas confirmée.</li>
             <li>Portfolio : DM Serif Display et Inter (SIL Open Font License), volontairement distincts de l’univers Apec.</li>
           </ul>
+        </section>
+
+        <section aria-labelledby="photos">
+          <h2 id="photos">Photographies utilisées</h2>
+          <div className="table-scroll">
+            <table className="data-table">
+              <caption className="visually-hidden">Fichiers photo et identifiants Unsplash</caption>
+              <thead><tr><th scope="col">Fichier</th><th scope="col">Identifiant Unsplash</th><th scope="col">Description (texte alternatif)</th></tr></thead>
+              <tbody>
+                {ALL_PHOTOS.map((p) => (
+                  <tr key={p.file}><td><code>{p.file}</code></td><td><code>photo-{p.unsplashId}</code></td><td>{p.alt}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section aria-labelledby="kit">
