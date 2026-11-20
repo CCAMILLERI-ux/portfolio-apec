@@ -47,12 +47,21 @@ export function Sources() {
         <section aria-labelledby="statut">
           <h2 id="statut">Statut du prototype</h2>
           <ul className="pf-list">
-            <li>Portfolio de candidature indépendant : propositions exploratoires, sans affiliation officielle à l’Apec.</li>
-            <li>Aucune inscription, aucune réservation réelle, aucune donnée envoyée. Sauvegarde locale de démonstration uniquement.</li>
+            <li>Portfolio de candidature indépendant : propositions exploratoires, sans affiliation officielle à l’Apec. Ni refonte officielle d’apec.fr, ni audit : des pistes à tester.</li>
+            <li>Aucune inscription, aucun rendez-vous réel, aucune donnée collectée. Les choix faits dans les démonstrations sont seulement gardés dans votre navigateur.</li>
             <li>Les écrans des prototypes restent dédiés à l’expérience utilisateur. Une barre de démonstration, en haut de page, permet de revenir au portfolio, de changer de variante, de réinitialiser et d’ouvrir « Comprendre ce cas », où sont présentés mes choix.</li>
             <li>Le portfolio n’est pas destiné à être référencé par les moteurs de recherche. Aucun outil de mesure d’audience ni traceur externe.</li>
             <li>La comparaison « Existant observé » et pistes illustre une démarche d’A/B test ; aucun test n’a été mené.</li>
           </ul>
+        </section>
+
+        <section aria-labelledby="parcours-5min">
+          <h2 id="parcours-5min">Parcours conseillé en cinq minutes</h2>
+          <ol className="pf-steps">
+            <li><strong>Cas 01 · 1 min 30</strong> — lisez l’introduction, suivez un lien vers un accompagnement et revenez ; cliquez sur « Comprendre ce cas ».</li>
+            <li><strong>Cas 02 · 1 min 30</strong> — changez de situation, puis comparez « Existant observé » et les pistes 1 à 3 depuis la barre de démo, en haut de page.</li>
+            <li><strong>Cas 03 · 2 min</strong> — « Me guider », cochez « Préparer un entretien », réservez une session, puis ouvrez « Mes prochaines étapes ».</li>
+          </ol>
         </section>
 
         <section aria-labelledby="provenance">

@@ -24,10 +24,7 @@ export function PortfolioLayout({ children, compactBrand = false }: { children: 
           {compactBrand ? (
             <Link to="/" className="pf-brand pf-brand--compact" aria-current="page">Portfolio</Link>
           ) : (
-            <Link to="/" className="pf-brand">
-              <span className="pf-brand__name">Caroline Camilleri</span>
-              <span className="pf-brand__role">Portfolio · Exploration UX, acquisition & conversion</span>
-            </Link>
+            <Link to="/" className="pf-brand pf-brand--compact">Portfolio APEC</Link>
           )}
           <nav aria-label="Portfolio">
             <ul className="pf-nav">

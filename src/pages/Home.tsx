@@ -160,25 +160,6 @@ export function Home() {
         </div>
       </section>
 
-      <section className="pf-container pf-section pf-columns">
-        <div className="pf-panel">
-          <h2>Parcours conseillé en cinq minutes</h2>
-          <ol className="pf-steps">
-            <li><strong>Cas 01 · 1 min 30</strong> — lisez l’introduction, suivez un lien vers un accompagnement et revenez ; cliquez sur « Comprendre ce cas ».</li>
-            <li><strong>Cas 02 · 1 min 30</strong> — changez de situation, puis comparez « Existant observé » et les pistes 1 à 3 depuis la barre de démo, en haut de page.</li>
-            <li><strong>Cas 03 · 2 min</strong> — « Me guider », cochez « Préparer un entretien », réservez une session, puis ouvrez « Mes prochaines étapes ».</li>
-          </ol>
-        </div>
-        <div className="pf-panel pf-panel--soft">
-          <h2>Cadre de ce prototype</h2>
-          <ul className="pf-list">
-            <li>Ni refonte officielle d’apec.fr, ni audit : des pistes à tester.</li>
-            <li>Aucune inscription, aucun rendez-vous réel, aucune donnée collectée.</li>
-            <li>Les informations sur les services reprennent apec.fr ; ce qui reste à confirmer n’est pas affiché.</li>
-          </ul>
-          <Link to="/sources" className="pf-link">Sources, limites et mini-kit UI <ArrowRight size={16} /></Link>
-        </div>
-      </section>
     </PortfolioLayout>
   )
 }
