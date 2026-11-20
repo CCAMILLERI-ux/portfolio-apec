@@ -13,7 +13,7 @@ export function Coulisses({ events, hidden, children }: { events: string[]; hidd
         <p className="coulisses__disclaimer">{DISCLAIMER}</p>
         <p className="coulisses__hint">
           Retour au portfolio, réinitialisation et fermeture de ces explications : barre en haut de page.{' '}
-          <Link to="/sources" className="pf-link">Sources, limites et mini-kit UI</Link>
+          <Link to="/design-system" className="pf-link">Design system et sources</Link>
         </p>
 
         <div className="coulisses__content">{children}</div>

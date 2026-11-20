@@ -313,7 +313,7 @@ function Case1Coulisses() {
         <p>
           Photos Unsplash, licence Unsplash (usage gratuit, sans autorisation requise). Elles
           illustrent des situations et ne représentent ni des salariés, ni des consultants, ni des usagers de l’Apec.
-          Les dates de sessions affichées sont fictives. Détail des sources : page « Sources et limites ».
+          Les dates de sessions affichées sont fictives. Détail des sources : page « Design system ».
         </p>
       </CrBlock>
       <CroGrid

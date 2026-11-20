@@ -11,7 +11,7 @@ import { NextSteps } from './pages/NextSteps'
 import { NotFound } from './pages/NotFound'
 import { Remuneration } from './pages/Remuneration'
 import { ServicePage } from './pages/ServicePage'
-import { Sources } from './pages/Sources'
+import { DesignSystem } from './pages/DesignSystem'
 
 const TITLES: Record<string, string> = {
   '/': 'Accueil',
@@ -21,7 +21,7 @@ const TITLES: Record<string, string> = {
   '/espace': 'Cas 03 — Mon espace',
   '/cas-01-seo': 'Cas 01 — Préparer un entretien de recrutement',
   '/conseil/remuneration': 'Cas 01 — Aborder la rémunération',
-  '/sources': 'Sources et limites',
+  '/design-system': 'Design system & prototypage',
   '/plan-seo': 'Un plan SEO pour apec.fr',
 }
 
@@ -30,6 +30,7 @@ const LEGACY: Record<string, string> = {
   '/cas-2': '/cas-03-inscription',
   '/cas-2/prochaines-etapes': '/cas-03-inscription/prochaines-etapes',
   '/cas-3': '/cas-01-seo',
+  '/sources': '/design-system',
 }
 
 function legacyTarget(route: Route): string | null {
@@ -88,7 +89,7 @@ export default function App() {
   else if (path === '/cas-03-inscription/prochaines-etapes') page = <NextSteps path={path} />
   else if (path === '/cas-01-seo') page = <Case3 path={path} />
   else if (path === '/conseil/remuneration') page = <Remuneration path={path} />
-  else if (path === '/sources') page = <Sources />
+  else if (path === '/design-system') page = <DesignSystem />
   else if (path === '/plan-seo') page = <SeoPlan route={route} />
   else if (service) page = <ServicePage key={service[1]} id={service[1]} route={route} />
   else if (booking) page = <BookingPage key={booking[1]} id={booking[1]} route={route} />

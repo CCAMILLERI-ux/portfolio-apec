@@ -17,7 +17,7 @@ const CASES = [
     to: '/cas-02-ab-test',
     title: 'Clarifier l’offre pour faciliter le choix',
     need: 'Un A/B test UX/UI pour clarifier l’offre de services et améliorer la conversion.',
-    skills: ['A/B testing', 'KPI', 'Conversion'],
+    skills: ['A/B testing', 'KPI', 'Conversion', 'Design system / Figma'],
     duration: '1 min 30',
     thumb: 'services',
   },
@@ -116,7 +116,7 @@ export function Home() {
           <h2 className="pf-intro__h2">À propos de moi</h2>
           <p>
             Référente de la performance de sites à fort trafic de services, je relie SEO, animation éditoriale et
-            optimisation de la conversion. Je pilote la roadmap d’animation, je teste, je mesure et je déploie dans le CMS
+            optimisation de la conversion. Je pilote la roadmap d’animation, je maquette les variantes sur Figma à partir du design system, je teste, je mesure et je déploie dans le CMS
             avec la DSI, les équipes produit et les agences. Ici, trois cas concrets pour apec.fr et mon plan SEO.
           </p>
           <ul className="pf-contact" aria-label="Me contacter">
@@ -173,7 +173,7 @@ export function Home() {
         </details>
         <p className="pf-frame-note">
           Prototypes indépendants inspirés d’apec.fr, sans affiliation officielle : aucune inscription réelle, aucune donnée collectée.{' '}
-          <Link to="/sources" className="pf-link">Sources et limites <ArrowRight size={16} /></Link>
+          <Link to="/design-system" anchor="sources" className="pf-link">Sources et mentions <ArrowRight size={16} /></Link>
         </p>
       </section>
 
