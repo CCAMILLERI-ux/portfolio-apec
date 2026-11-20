@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react'
+import { flushSync } from 'react-dom'
 import { Link } from '../lib/router'
 import { resetAll } from '../lib/storage'
 import { Coulisses } from './Coulisses'
@@ -35,7 +36,14 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
   const [open, setOpen] = useState(false)
   const [status, setStatus] = useState('')
 
-  const toCoulisses = () => {
+  // Les coulisses ne sont affichées qu'à la demande ; à l'ouverture, on y descend.
+  const [explain, setExplain] = useState(false)
+  const toggleExplain = () => {
+    if (explain) {
+      setExplain(false)
+      return
+    }
+    flushSync(() => setExplain(true))
     const el = document.getElementById('coulisses')
     el?.scrollIntoView({ block: 'start' })
     el?.focus({ preventScroll: true })
@@ -58,8 +66,14 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
           <span className="demo-bar__case">{caseLabel}</span>
           {barControl}
           <span className="demo-bar__actions">
-            <button type="button" className="demo-bar__btn" onClick={toCoulisses}>
-              <Info size={18} /> Comprendre ce cas
+            <button
+              type="button"
+              className={`demo-bar__btn${explain ? ' is-active' : ''}`}
+              aria-expanded={explain}
+              aria-controls="coulisses"
+              onClick={toggleExplain}
+            >
+              <Info size={18} /> {explain ? 'Masquer les explications' : 'Comprendre ce cas'}
             </button>
             <button
               type="button"
@@ -131,7 +145,7 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
         </footer>
       </div>
 
-      <Coulisses events={events}>{coulisses}</Coulisses>
+      <Coulisses events={events} hidden={!explain}>{coulisses}</Coulisses>
     </div>
   )
 }

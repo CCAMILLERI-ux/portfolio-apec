@@ -5,6 +5,7 @@ import { track } from '../lib/storage'
 import { ArrowRight, Chat, External, Group, Laptop } from './Icons'
 import { Illustration, type Tone } from './Illustration'
 import { ModalityChips } from './Modalities'
+import { SERVICE_PHOTO } from '../data/photos'
 
 export const KIND_TONE: Record<ServiceKind, Tone> = { atelier: 'yellow', individuel: 'blue', outil: 'navy' }
 export const KIND_SHORT: Record<ServiceKind, string> = { atelier: 'Atelier', individuel: 'Rendez-vous', outil: 'Outil' }
@@ -28,6 +29,18 @@ export function ServiceVisual({ service, children }: { service: Service; childre
       <Illustration name={service.illustration} tone={KIND_TONE[service.kind]} className="svc-visual__img" />
       <KindTag kind={service.kind} />
       {children}
+    </div>
+  )
+}
+
+/** Visuel photographique (piste 3) : photo, étiquette carrée et liseré de couleur du type d'aide. */
+export function PhotoVisual({ service, className = '' }: { service: Service; className?: string }) {
+  const photo = SERVICE_PHOTO[service.id]
+  if (!photo) return <ServiceVisual service={service} />
+  return (
+    <div className={`photo-visual photo-visual--${KIND_TONE[service.kind]} ${className}`}>
+      <img src={photo.file} alt={photo.alt} loading="lazy" decoding="async" width={960} height={600} className="photo-visual__img" />
+      <KindTag kind={service.kind} />
     </div>
   )
 }

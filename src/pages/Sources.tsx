@@ -12,16 +12,19 @@ import {
   OFFICIAL_TOOLS_URL,
   SERVICES,
 } from '../data/services'
+import { ALL_PHOTOS } from '../data/photos'
 import { Link } from '../lib/router'
 
 const TOKENS = [
   ['--brand-navy', '#252555', 'Texte principal, en-tête, pied de page, bandeaux'],
   ['--brand-yellow', '#FFC400', 'Boutons, aplats de visuels, pictogrammes sur bleu nuit'],
-  ['--brand-blue', '#006699', 'Cartes thématiques, bandeau d’appel à l’action'],
+  ['--brand-blue', '#026096', 'Bleu secondaire : cartes, bandeaux, liens (prélevé sur capture)'],
+  ['--brand-blue-hover', '#024D78', 'Survol et état actif des éléments bleus'],
+  ['--brand-blue-tint', '#EBF2F7', 'Fonds clairs teintés (encadrés, « Pourquoi ce service ? »)'],
+  ['--brand-blue-soft', '#8DB7D0', 'Accent clair des illustrations (remplace l’ancien cyan)'],
   ['--surface-white', '#FFFFFF', 'Fond'],
   ['--surface-muted', '#F5F5FA', 'Fonds secondaires'],
   ['--border-neutral', '#D1D3DB', 'Bordures'],
-  ['--accent-cyan-light', '#99E8FA', 'Accent léger dans les illustrations'],
   ['--text-secondary', '#6B7280', 'Valeur de départ ; #5F6673 utilisé pour le texte'],
 ]
 
@@ -80,11 +83,33 @@ export function Sources() {
         <section aria-labelledby="assets">
           <h2 id="assets">Visuels et typographie</h2>
           <ul className="pf-list">
-            <li>Illustrations en aplats et pictogrammes : dessinés en SVG pour ce prototype, dans les couleurs observées. Aucune photographie, aucun portrait, aucun logo de l’Apec.</li>
+            <li>Illustrations en aplats et pictogrammes : dessinés en SVG pour ce prototype, dans les couleurs observées. Aucun portrait, aucune photographie et aucun logo de l’Apec.</li>
+            <li>
+              Photographies (piste 3 du cas 1 et carte atelier du cas 3) : <strong>Unsplash, licence Unsplash</strong> (usage
+              gratuit, sans autorisation requise —{' '}
+              <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">unsplash.com/license<span className="visually-hidden"> (site externe, nouvel onglet)</span></a>).
+              Fichiers recadrés en 960 × 600, sans métadonnées. Elles illustrent des situations et ne représentent ni des
+              salariés, ni des consultants, ni des usagers de l’Apec. Le nom des photographes reste à confirmer sur la page de chaque photo.
+            </li>
             <li>Pas de témoignage ni de chiffre de satisfaction : aucune source autorisée n’était disponible.</li>
             <li>Prototypes : Montserrat (SIL Open Font License), substitution provisoire, la police exacte d’apec.fr n’étant pas confirmée.</li>
             <li>Portfolio : DM Serif Display et Inter (SIL Open Font License), volontairement distincts de l’univers Apec.</li>
           </ul>
+        </section>
+
+        <section aria-labelledby="photos">
+          <h2 id="photos">Photographies utilisées</h2>
+          <div className="table-scroll">
+            <table className="data-table">
+              <caption className="visually-hidden">Fichiers photo et identifiants Unsplash</caption>
+              <thead><tr><th scope="col">Fichier</th><th scope="col">Identifiant Unsplash</th><th scope="col">Description (texte alternatif)</th></tr></thead>
+              <tbody>
+                {ALL_PHOTOS.map((p) => (
+                  <tr key={p.file}><td><code>{p.file}</code></td><td><code>photo-{p.unsplashId}</code></td><td>{p.alt}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section aria-labelledby="kit">
@@ -105,8 +130,7 @@ export function Sources() {
             ))}
           </ul>
           <p className="small">
-            Contrastes calculés (formule WCAG 2) : bleu nuit sur jaune ≈ 8,9:1 ; bleu nuit sur blanc ≈ 14,2:1 ; blanc
-            sur bleu ≈ 6,3:1. #6B7280 donne 4,45:1 sur #F5F5FA : le texte secondaire utilise #5F6673 (≥ 5,3:1). Le
+            Contrastes calculés (formule WCAG 2) : bleu nuit sur jaune ≈ 8,9:1 ; bleu nuit sur blanc ≈ 14,2:1 ; blanc sur bleu #026096 ≈ 6,7:1 ; bleu #026096 sur blanc ≈ 6,7:1. Le bleu nuit n’est jamais utilisé en texte sur le bleu (≈ 2,1:1) : le texte y est blanc. #6B7280 donne 4,45:1 sur #F5F5FA : le texte secondaire utilise #5F6673 (≥ 5,3:1). Le
             jaune n’est jamais une couleur de texte sur fond blanc. Ces calculs ne valent pas audit RGAA.
           </p>
 

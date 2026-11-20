@@ -1,4 +1,5 @@
 import type { IllustrationKey } from '../data/services'
+import { COLORS } from '../data/tokens'
 
 /**
  * Illustrations en aplats dessinées pour le prototype, dans les couleurs de la
@@ -8,9 +9,9 @@ import type { IllustrationKey } from '../data/services'
 export type Tone = 'yellow' | 'blue' | 'navy'
 
 const PALETTE: Record<Tone, { bg: string; fig: string; acc: string; soft: string }> = {
-  yellow: { bg: '#FFC400', fig: '#252555', acc: '#FFFFFF', soft: '#006699' },
-  blue: { bg: '#006699', fig: '#FFFFFF', acc: '#FFC400', soft: '#99E8FA' },
-  navy: { bg: '#252555', fig: '#FFFFFF', acc: '#FFC400', soft: '#99E8FA' },
+  yellow: { bg: COLORS.yellow, fig: COLORS.navy, acc: COLORS.white, soft: COLORS.blue },
+  blue: { bg: COLORS.blue, fig: COLORS.white, acc: COLORS.yellow, soft: COLORS.blueSoft },
+  navy: { bg: COLORS.navy, fig: COLORS.white, acc: COLORS.yellow, soft: COLORS.blueSoft },
 }
 
 function Fig({ x, y, s = 1, color }: { x: number; y: number; s?: number; color: string }) {

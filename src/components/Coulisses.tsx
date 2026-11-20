@@ -4,15 +4,15 @@ import { EventLog } from './EventLog'
 import { DISCLAIMER, SIGNATURE } from './PortfolioLayout'
 
 /** Pied de page « Coulisses du prototype » : seul endroit où le prototype s'explique. */
-export function Coulisses({ events, children }: { events: string[]; children: ReactNode }) {
+export function Coulisses({ events, hidden, children }: { events: string[]; hidden?: boolean; children: ReactNode }) {
   return (
-    <section id="coulisses" className="coulisses" tabIndex={-1} aria-labelledby="coulisses-titre">
+    <section id="coulisses" className="coulisses" tabIndex={-1} aria-labelledby="coulisses-titre" hidden={hidden}>
       <div className="pf-container">
         <p className="coulisses__kicker">{SIGNATURE}</p>
         <h2 id="coulisses-titre" className="coulisses__title">Coulisses du prototype</h2>
         <p className="coulisses__disclaimer">{DISCLAIMER}</p>
         <p className="coulisses__hint">
-          Retour au portfolio et réinitialisation : barre en haut de page.{' '}
+          Retour au portfolio, réinitialisation et fermeture de ces explications : barre en haut de page.{' '}
           <Link to="/sources" className="pf-link">Sources, limites et mini-kit UI</Link>
         </p>
 
