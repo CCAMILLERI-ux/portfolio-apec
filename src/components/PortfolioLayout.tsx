@@ -3,7 +3,7 @@ import { Link } from '../lib/router'
 
 export const DISCLAIMER =
   'Prototype de candidature indépendant — propositions exploratoires, sans affiliation officielle à l’Apec. Aucune inscription réelle.'
-export const SIGNATURE = 'Exploration UX, acquisition & conversion — Caroline Camilleri'
+export const SIGNATURE = 'Acquisition SEO, conversion & animation web — Caroline Camilleri'
 
 /** Habillage du portfolio : identité propre, volontairement distincte de l'univers Apec. */
 /**
@@ -21,11 +21,10 @@ export function PortfolioLayout({ children, compactBrand = false, minimalFooter 
       </a>
       <header className="pf-header">
         <div className="pf-container pf-header__inner">
-          {compactBrand ? (
-            <Link to="/" className="pf-brand pf-brand--compact" aria-current="page">Portfolio</Link>
-          ) : (
-            <Link to="/" className="pf-brand pf-brand--compact">Portfolio APEC</Link>
-          )}
+          <Link to="/" className="pf-brand pf-brand--compact" aria-current={compactBrand ? 'page' : undefined}>
+            <span className="pf-brand__name">{compactBrand ? 'Portfolio' : 'Portfolio APEC'}</span>
+            <span className="pf-brand__role">Acquisition SEO, conversion & animation web</span>
+          </Link>
           <nav aria-label="Portfolio">
             <ul className="pf-nav">
               <li><Link to="/">Les trois cas</Link></li>

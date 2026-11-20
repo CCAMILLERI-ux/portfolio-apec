@@ -55,14 +55,6 @@ export function Sources() {
           </ul>
         </section>
 
-        <section aria-labelledby="parcours-5min">
-          <h2 id="parcours-5min">Parcours conseillé en cinq minutes</h2>
-          <ol className="pf-steps">
-            <li><strong>Cas 01 · 1 min 30</strong> — lisez l’introduction, suivez un lien vers un accompagnement et revenez ; cliquez sur « Comprendre ce cas ».</li>
-            <li><strong>Cas 02 · 1 min 30</strong> — changez de situation, puis comparez « Existant observé » et les pistes 1 à 3 depuis la barre de démo, en haut de page.</li>
-            <li><strong>Cas 03 · 2 min</strong> — « Me guider », cochez « Préparer un entretien », réservez une session, puis ouvrez « Mes prochaines étapes ».</li>
-          </ol>
-        </section>
 
         <section aria-labelledby="provenance">
           <h2 id="provenance">Provenance des informations</h2>

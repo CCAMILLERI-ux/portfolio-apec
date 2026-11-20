@@ -8,9 +8,9 @@ Portfolio de candidature au poste de Chef de projet animation web. Un seul site 
 
 | Cas | Démo | Compétences illustrées |
 | --- | --- | --- |
-| 02 (`#/cas-1`) | **Clarifier l’offre pour faciliter le choix** — anciennement « Rendre les services plus faciles à choisir » : entrée par situation, cartes de services, bascule « Existant observé / Piste exploratoire » | UX/UI, animation du site, hypothèse CRO |
-| 03 (`#/cas-2`) | **Accompagner l’utilisateur à chaque étape de son inscription** — anciennement « Guider un nouvel inscrit » : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes prochaines étapes » | Parcours, activation, recommandation déterministe |
-| 01 (`#/cas-3`) | **De la recherche Google à l’utilisation des services** — anciennement « Relier une recherche à un accompagnement » : page conseil « Comment préparer un entretien de recrutement ? », maillage interne, compléments SEO, GEO et coordination multicanale | SEO éditorial, maillage, acquisition |
+| 02 (`#/cas-02-ab-test`) | **Clarifier l’offre pour faciliter le choix** — anciennement « Rendre les services plus faciles à choisir » : entrée par situation, cartes de services, bascule « Existant observé / Piste exploratoire » | UX/UI, animation du site, hypothèse CRO |
+| 03 (`#/cas-03-inscription`) | **Accompagner l’utilisateur à chaque étape de son inscription** — anciennement « Guider un nouvel inscrit » : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes prochaines étapes » | Parcours, activation, recommandation déterministe |
+| 01 (`#/cas-01-seo`) | **De la recherche Google à l’utilisation des services** — anciennement « Relier une recherche à un accompagnement » : page conseil « Comment préparer un entretien de recrutement ? », maillage interne, compléments SEO, GEO et coordination multicanale | SEO éditorial, maillage, acquisition |
 
 ## Plan SEO pour apec.fr
 
@@ -57,7 +57,7 @@ npm run build
 npm run preview
 ```
 
-`npm run build` produit un dossier `dist/` statique. Le routage par hash (`#/cas-1`) et la base relative (`base: './'`) permettent d’ouvrir le site sur n’importe quel hébergement statique, y compris dans un sous-dossier, sans règle de réécriture. Aucun déploiement n’a été effectué.
+`npm run build` produit un dossier `dist/` statique. Le routage par hash (`#/cas-02-ab-test`) et la base relative (`base: './'`) permettent d’ouvrir le site sur n’importe quel hébergement statique, y compris dans un sous-dossier, sans règle de réécriture. Aucun déploiement n’a été effectué.
 
 ## Publication sur GitHub Pages
 

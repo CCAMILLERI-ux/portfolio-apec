@@ -87,7 +87,7 @@ export function Case3({ path }: { path: string }) {
               <ol>
                 {TOC.map((t) => (
                   <li key={t.id}>
-                    <Link to="/cas-3" anchor={t.id}>{t.label}</Link>
+                    <Link to="/cas-01-seo" anchor={t.id}>{t.label}</Link>
                   </li>
                 ))}
               </ol>

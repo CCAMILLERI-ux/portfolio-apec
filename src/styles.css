@@ -1277,3 +1277,34 @@ legend { padding: 0; }
 .seo-kpis dd, .seo-rituals dd { margin: 0; }
 .seo-kpis ul { margin: 0; padding-left: 1.2rem; }
 .pf .seo-hero__title, .seo-block h2, .seo-block h3, .seo-block h4 { text-wrap: balance; }
+
+/* Accueil : en-tête avec sous-titre, contact, apports, plan SEO, parcours */
+.pf .pf-brand--compact { display: flex; flex-direction: column; gap: 0; line-height: 1.15; }
+.pf .pf-brand--compact .pf-brand__name { font-size: 1.25rem; }
+.pf-brand--compact .pf-brand__role { font-family: var(--font-pf); font-size: 0.75rem; color: var(--pf-muted); }
+.pf-contact { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; font-size: 0.9375rem; font-weight: 600; }
+.pf-contact a { min-height: 32px; display: inline-flex; align-items: center; }
+
+.pf-impact { padding-bottom: var(--s4); }
+.pf-impact__grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+@media (max-width: 860px) { .pf-impact__grid { grid-template-columns: 1fr; } }
+.pf-impact__card { background: var(--pf-card); border: 1px solid var(--pf-line); border-top: 4px solid var(--pf-accent); border-radius: 10px; padding: 20px; }
+.pf-impact__card p { margin: 0; text-wrap: pretty; }
+.pf-impact__axis { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pf-accent); }
+.pf-impact__figure { font-family: var(--font-pf-display); font-weight: 700; font-size: 2.75rem; line-height: 1.1; letter-spacing: -0.03em; margin: 4px 0 6px !important; }
+.pf-impact__done { font-size: 0.9375rem; }
+.pf-impact__apec { margin-top: 10px !important; padding-top: 10px; border-top: 1px solid var(--pf-line); font-size: 0.9375rem; }
+
+.pf-plan { padding-bottom: var(--s4); }
+.pf-case--wide { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+.pf-plan__visual { background: var(--brand-navy); display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 20px; align-content: center; }
+.pf-plan__visual span { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.25); color: #fff; border-radius: 4px; padding: 10px 8px; text-align: center; font-size: 0.8125rem; font-weight: 600; }
+.pf-plan__visual span:nth-child(2) { background: var(--brand-yellow); color: var(--brand-navy); border-color: var(--brand-yellow); }
+@media (max-width: 760px) { .pf-case--wide { grid-template-columns: 1fr; } .pf-plan__visual { grid-template-columns: repeat(4, 1fr); padding: 12px; } .pf-plan__visual span { padding: 8px 4px; font-size: 0.6875rem; } }
+
+.pf-route { margin-top: var(--s3); background: var(--pf-card); border: 1px solid var(--pf-line); border-radius: 10px; padding: 20px var(--s3); }
+.pf .pf-route__title { font-size: 1.125rem; margin: 0 0 var(--s1); }
+.pf-route .pf-steps { margin-bottom: var(--s2); }
+.pf-route li, .pf-route p { text-wrap: pretty; }
+.pf-route__note { margin: 0; font-size: 0.875rem; color: var(--pf-muted); }
+.pf h1, .pf h2, .pf h3, .pf .pf-case__title { text-wrap: balance; }

@@ -7,8 +7,8 @@ import { ArrowLeft, ArrowRight, Calendar, Close, Info, Menu, Reset, User } from 
 
 const PROTO_NAV = [
   { to: '/espace', label: 'Mon espace' },
-  { to: '/cas-1', label: 'Nos services' },
-  { to: '/cas-3', label: 'Conseils entretien' },
+  { to: '/cas-02-ab-test', label: 'Nos services' },
+  { to: '/cas-01-seo', label: 'Conseils entretien' },
 ]
 
 interface Props {
@@ -133,7 +133,7 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
             >
               {open ? <Close /> : <Menu />} <span>Menu</span>
             </button>
-            <Link to="/cas-1" className="proto-wordmark">
+            <Link to="/cas-02-ab-test" className="proto-wordmark">
               <span className="proto-wordmark__dot" aria-hidden="true" />
               espace cadres
             </Link>
@@ -165,8 +165,8 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
           <div className="container">
             <ul className="proto-footer__links">
               <li><Link to="/espace">Mon espace</Link></li>
-              <li><Link to="/cas-1">Nos services</Link></li>
-              <li><Link to="/cas-3">Conseils entretien</Link></li>
+              <li><Link to="/cas-02-ab-test">Nos services</Link></li>
+              <li><Link to="/cas-01-seo">Conseils entretien</Link></li>
             </ul>
           </div>
         </footer>

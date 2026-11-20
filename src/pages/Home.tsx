@@ -5,28 +5,28 @@ import { Link } from '../lib/router'
 const CASES = [
   {
     n: 1,
-    to: '/cas-3',
-    title: 'De la recherche Google à l’utilisation des services',
-    need: 'Un article optimisé pour le SEO qui oriente vers les outils et accompagnements adaptés.',
+    to: '/cas-01-seo',
+    title: 'De la recherche Google à l’utilisation des services',
+    need: 'Un article optimisé pour le SEO qui oriente vers les outils et accompagnements adaptés.',
     skills: ['SEO éditorial', 'Maillage interne', 'Acquisition'],
     duration: '1 min 30',
     thumb: 'article',
   },
   {
     n: 2,
-    to: '/cas-1',
-    title: 'Clarifier l’offre pour faciliter le choix',
-    need: 'Une simulation d’A/B test UX/UI pour optimiser la conversion.',
-    skills: ['UX/UI', 'Animation du site', 'Hypothèse CRO'],
+    to: '/cas-02-ab-test',
+    title: 'Clarifier l’offre pour faciliter le choix',
+    need: 'Un A/B test UX/UI pour clarifier l’offre de services et améliorer la conversion.',
+    skills: ['A/B testing', 'KPI', 'Conversion'],
     duration: '1 min 30',
     thumb: 'services',
   },
   {
     n: 3,
-    to: '/cas-2',
-    title: 'Accompagner l’utilisateur à chaque étape de son inscription',
-    need: 'Un tunnel guidé pour faciliter la création de compte et l’accès aux services.',
-    skills: ['Parcours utilisateur', 'Recommandation explicable', 'Activation'],
+    to: '/cas-03-inscription',
+    title: 'Accompagner l’utilisateur à chaque étape de son inscription',
+    need: 'Un tunnel guidé pour faciliter la création de compte et l’accès aux services.',
+    skills: ['Parcours utilisateur', 'Activation', 'Conversion'],
     duration: '2 min',
     thumb: 'onboarding',
   },
@@ -76,6 +76,28 @@ function Thumb({ kind }: { kind: (typeof CASES)[number]['thumb'] }) {
   )
 }
 
+/** Résultats de la candidate (sans nom d'employeur), projetés sur le poste. */
+const IMPACT = [
+  {
+    axis: 'Acquisition',
+    figure: '83 %',
+    done: 'de conformité SEO technique sur un site de marque, dont j’ai piloté toute la stratégie SEO (technique, contenus, maillage).',
+    apec: 'faire de la recherche naturelle un levier d’accès aux services.',
+  },
+  {
+    axis: 'Conversion',
+    figure: '× 2',
+    done: 'sur la conversion du tunnel de création de compte d’un espace client B2B, grâce à l’optimisation UX et aux A/B tests.',
+    apec: 'transformer les visites en comptes, candidatures et rendez-vous.',
+  },
+  {
+    axis: 'Animation',
+    figure: '7 sites',
+    done: 'et plus de 25 services digitaux pilotés en BUILD et en RUN, avec la DSI et 6 agences.',
+    apec: 'une roadmap d’animation tenue, déployée dans le CMS avec les équipes.',
+  },
+]
+
 export function Home() {
   return (
     <PortfolioLayout compactBrand>
@@ -87,21 +109,72 @@ export function Home() {
             <span className="pf-intro__role">Cheffe de projet Animation Web</span>
           </h1>
           <p className="pf-intro__baseline">
-            Développer le trafic qualifié, animer les contenus et optimiser les parcours pour favoriser l’utilisation des services.
+            Développer le trafic qualifié, animer les contenus et optimiser les parcours pour favoriser l’utilisation des services.
           </p>
         </div>
         <div className="pf-intro__about">
           <h2 className="pf-intro__h2">À propos de moi</h2>
           <p>
-            Ma double expérience en marketing digital et en pilotage de services web associe SEO, animation éditoriale et
-            optimisation de la conversion. Habituée à coordonner métiers, DSI et agences, je m’appuie sur les données et
-            l’analyse des usages pour prioriser les améliorations et les déployer dans le CMS.
+            Référente de la performance de sites à fort trafic de services, je relie SEO, animation éditoriale et
+            optimisation de la conversion. Je pilote la roadmap d’animation, je teste, je mesure et je déploie dans le CMS
+            avec la DSI, les équipes produit et les agences. Ici, trois cas concrets pour apec.fr et mon plan SEO.
           </p>
+          <ul className="pf-contact" aria-label="Me contacter">
+            <li>
+              <a href="https://www.linkedin.com/in/caroline-camilleri-pro/" target="_blank" rel="noopener noreferrer">
+                LinkedIn<span className="visually-hidden"> (nouvel onglet)</span>
+              </a>
+            </li>
+            <li><a href="mailto:camilleri.caro@gmail.com">camilleri.caro@gmail.com</a></li>
+            {/* CV : à réactiver une fois la nouvelle version déposée dans public/.
+            <li>
+              <a href="CV_CHEF_DE_PROJET_ANIMATION_WEB_CCAMILLERI.pdf" className="pf-btn pf-btn--sm" download>
+                Télécharger mon CV<span className="visually-hidden"> (PDF)</span>
+              </a>
+            </li>
+            */}
+          </ul>
         </div>
       </section>
 
+      <section className="pf-container pf-impact" aria-labelledby="apport">
+        <h2 id="apport" className="pf-cases-title">Ce que j’apporte à apec.fr</h2>
+        <ul className="pf-impact__grid">
+          {IMPACT.map((i) => (
+            <li key={i.axis} className="pf-impact__card">
+              <p className="pf-impact__axis">{i.axis}</p>
+              <p className="pf-impact__figure">{i.figure}</p>
+              <p className="pf-impact__done">{i.done}</p>
+              <p className="pf-impact__apec"><strong>Pour apec.fr :</strong> {i.apec}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="pf-container pf-plan" aria-labelledby="plan-seo">
+        <article className="pf-case pf-case--wide">
+          <div className="pf-plan__visual" aria-hidden="true">
+            <span>Diagnostic</span><span>4 piliers</span><span>Démonstration</span><span>90 jours</span>
+          </div>
+          <div className="pf-case__body">
+            <p className="pf-case__meta"><span className="pf-case__num">Plan SEO</span></p>
+            <h2 id="plan-seo" className="pf-case__title">Mon plan SEO pour apec.fr</h2>
+            <p className="pf-case__need">
+              Un plan SEO complet pour apec.fr : diagnostic, stratégie en quatre piliers (technique, contenus, maillage,
+              visibilité IA), démonstration et feuille de route sur 90 jours.
+            </p>
+            <ul className="pf-tags" aria-label="Compétences illustrées">
+              <li>SEO technique</li><li>Contenus</li><li>Maillage interne</li><li>Visibilité IA</li><li>Pilotage</li>
+            </ul>
+            <Link to="/plan-seo" className="pf-btn pf-btn--primary pf-btn--sm">
+              Voir le plan SEO<span className="visually-hidden"> pour apec.fr</span> <ArrowRight size={16} />
+            </Link>
+          </div>
+        </article>
+      </section>
+
       <section className="pf-container pf-cases-wrap" aria-labelledby="cas">
-        <h2 id="cas" className="pf-cases-title">Trois cas concrets pour apec.fr</h2>
+        <h2 id="cas" className="pf-cases-title">Trois cas concrets pour apec.fr</h2>
         <ol className="pf-cases">
           {CASES.map((c) => (
             <li key={c.n} className="pf-case">
@@ -124,42 +197,31 @@ export function Home() {
           ))}
         </ol>
 
+        <section className="pf-route" aria-labelledby="parcours-5min">
+          <h3 id="parcours-5min" className="pf-route__title">Parcours conseillé en cinq minutes</h3>
+          <ol className="pf-steps">
+            <li><strong>Cas 01 · 1 min 30</strong> — lisez l’introduction, suivez un lien vers un accompagnement et revenez ; cliquez sur « Comprendre ce cas ».</li>
+            <li><strong>Cas 02 · 1 min 30</strong> — changez de situation, puis comparez « Existant observé » et les pistes 1 à 3 depuis la barre de démo, en haut de page.</li>
+            <li><strong>Cas 03 · 2 min</strong> — « Me guider », cochez « Préparer un entretien », réservez une session, puis ouvrez « Mes prochaines étapes ».</li>
+          </ol>
+          <p className="pf-route__note">
+            Prototypes indépendants inspirés d’apec.fr, sans affiliation officielle : aucune inscription réelle, aucune donnée collectée.{' '}
+            <Link to="/sources" className="pf-link">Sources et limites <ArrowRight size={16} /></Link>
+          </p>
+        </section>
+
         <details className="seo-acc pf-howto-acc">
           <summary><span>Comment explorer les prototypes</span></summary>
           <div className="seo-acc__body">
             <p>
               Chaque prototype s’ouvre dans un univers inspiré d’apec.fr et se parcourt comme un utilisateur. Une barre de
               démo, en haut de page et hors maquette, permet de revenir au portfolio, de changer de variante, de
-              réinitialiser et d’ouvrir « Comprendre ce cas » : mes choix, hypothèses et indicateurs sont regroupés en bas
+              réinitialiser et d’ouvrir « Comprendre ce cas » : mes choix, hypothèses et indicateurs sont regroupés en bas
               de page, dans <em>« Coulisses du prototype »</em>.
-            </p>
-            <p>
-              Ces prototypes sont des pistes exploratoires à discuter et à tester : attirer par une réponse utile, orienter
-              par un maillage pertinent, proposer une aide adaptée, puis mesurer l’utilisation effective.
             </p>
           </div>
         </details>
       </section>
-
-      <section className="pf-container pf-module" aria-labelledby="module-seo">
-        <div className="pf-module__inner">
-          <div>
-            <p className="pf-case__num">Plan SEO</p>
-            <h2 id="module-seo" className="pf-module__title">Un plan SEO pour apec.fr : de la recherche au service utilisé</h2>
-            <p className="pf-case__need">
-              Diagnostic, stratégie en quatre piliers (technique, contenus, maillage, visibilité IA), démonstration,
-              plan 90 jours et pilotage par les conversions.
-            </p>
-            <ul className="pf-tags" aria-label="Compétences illustrées">
-              <li>SEO technique</li><li>Contenus</li><li>Maillage</li><li>GEO</li><li>Pilotage</li>
-            </ul>
-          </div>
-          <Link to="/plan-seo" className="pf-btn pf-btn--primary">
-            Voir le plan SEO<span className="visually-hidden"> pour apec.fr</span> <ArrowRight size={18} />
-          </Link>
-        </div>
-      </section>
-
     </PortfolioLayout>
   )
 }

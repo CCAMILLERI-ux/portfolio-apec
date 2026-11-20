@@ -43,7 +43,7 @@ export function Case1({ route }: { route: Route }) {
 
   const update = (next: { vue?: View; situation?: string }) => {
     const q = new URLSearchParams({ situation: next.situation ?? current, vue: next.vue ?? view })
-    navigate(`/cas-1?${q.toString()}`, { replace: true })
+    navigate(`/cas-02-ab-test?${q.toString()}`, { replace: true })
   }
   const resultLabel = isAll ? 'Tous nos services' : situation.label
 
@@ -71,7 +71,7 @@ export function Case1({ route }: { route: Route }) {
       }}
       barControl={variantSwitch}
       events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
-      onReset={() => navigate('/cas-1', { replace: true })}
+      onReset={() => navigate('/cas-02-ab-test', { replace: true })}
       coulisses={<Case1Coulisses />}
     >
       <div className="band band--tall">

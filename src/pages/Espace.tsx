@@ -46,7 +46,7 @@ export function Espace({ path }: { path: string }) {
                 className="btn btn--primary"
                 onClick={() => {
                   setState((s) => ({ ...s, step: guided ? 'results' : 'welcome' }))
-                  navigate('/cas-2')
+                  navigate('/cas-03-inscription')
                 }}
               >
                 {guided ? 'Revoir mes suggestions' : 'Me guider'} <ArrowRight size={18} />
@@ -62,7 +62,7 @@ export function Espace({ path }: { path: string }) {
                 ? `${kept.length} service${kept.length > 1 ? 's' : ''} conservé${kept.length > 1 ? 's' : ''}.`
                 : 'Aucun service conservé pour l’instant.'}
             </p>
-            <Link to="/cas-2/prochaines-etapes" className="link-arrow link-arrow--light">
+            <Link to="/cas-03-inscription/prochaines-etapes" className="link-arrow link-arrow--light">
               Voir mes prochaines étapes <ArrowRight size={18} />
             </Link>
           </section>
@@ -91,14 +91,14 @@ export function Espace({ path }: { path: string }) {
             <Search size={36} className="space-card__icon space-card__icon--dark" />
             <h2 id="sp-services" className="space-card__title space-card__title--dark">Nos services</h2>
             <p>Ateliers, accompagnements et outils selon votre situation.</p>
-            <Link to="/cas-1" className="link-arrow">Explorer nos services <ArrowRight size={18} /></Link>
+            <Link to="/cas-02-ab-test" className="link-arrow">Explorer nos services <ArrowRight size={18} /></Link>
           </section>
 
           <section className="space-card" aria-labelledby="sp-conseils">
             <Doc size={36} className="space-card__icon space-card__icon--dark" />
             <h2 id="sp-conseils" className="space-card__title space-card__title--dark">Conseils</h2>
             <p>Préparer un entretien de recrutement en 5 étapes.</p>
-            <Link to="/cas-3" className="link-arrow">Lire le conseil <ArrowRight size={18} /></Link>
+            <Link to="/cas-01-seo" className="link-arrow">Lire le conseil <ArrowRight size={18} /></Link>
           </section>
         </div>
       </div>
