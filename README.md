@@ -28,7 +28,7 @@ La colonne latérale et le bas de l’article présentent la même liste, dans l
 
 ## Organisation de l’interface
 
-- **Portfolio** (accueil, sources) : identité propre à la candidate (fond crème, DM Serif Display + Inter, accent terracotta), volontairement distincte de l’univers Apec.
+- **Portfolio** (accueil, sources) : identité propre à la candidate (fond crème, Plus Jakarta Sans + Inter, accent terracotta), volontairement distincte de l’univers Apec.
 - **Prototypes** : univers inspiré d’apec.fr (bleu nuit, jaune, bleu ; Montserrat), **sans aucune explication dans les écrans utilisateur**.
 - **Coulisses du prototype** : masquées par défaut, affichées uniquement au clic sur « Comprendre ce cas », sous le pied de page, dans l’univers portfolio. Elles regroupent la mention d’indépendance, le retour au portfolio, la réinitialisation, la méthode (constat, hypothèse, modification, KPI et garde-fous, équipes), la provenance des informations et le journal local.
 - **Barre de démo** (univers portfolio), en haut de page et hors maquette : « Retour au portfolio », nom du cas, choix de variante (cas 1 : Existant observé / Piste 1 / Piste 2 / Piste 3), « Comprendre ce cas » (affiche ou masque les coulisses) et « Réinitialiser la démo ». Pendant et après une réservation, elle affiche « Réservation simulée… » puis « Simulation terminée — aucun rendez-vous réel n’a été réservé ».
@@ -93,7 +93,7 @@ La barre du haut propose « Retour au portfolio » et « Réinitialiser la démo
 - **Textes** : accroches, bénéfices, page conseil et repères rémunération sont des rédactions originales. Seuls les intitulés et descriptions courtes observés sont cités.
 - **Visuels** : illustrations et pictogrammes SVG dessinés pour le prototype ; aucun logo de l’Apec, aucun témoignage.
 - **Photographies** (piste 3 du cas 1, carte atelier du cas 3) : 15 photos Unsplash, licence Unsplash (https://unsplash.com/license), dans `public/photos/`. Identifiants d’origine et textes alternatifs dans `src/data/photos.ts` et sur la page « Sources et limites ». Elles ne représentent ni des salariés, ni des consultants, ni des usagers de l’Apec ; crédits sur la page « Sources et limites ».
-- **Polices** (SIL Open Font License, servies localement) : Montserrat pour les prototypes, substitution provisoire car la police exacte d’apec.fr n’est pas confirmée ; DM Serif Display et Inter pour le portfolio.
+- **Polices** (SIL Open Font License, servies localement) : Montserrat pour les prototypes, substitution provisoire car la police exacte d’apec.fr n’est pas confirmée ; Plus Jakarta Sans et Inter pour le portfolio.
 
 ## Design : ce qui est estimé, ce qui est contrôlé
 

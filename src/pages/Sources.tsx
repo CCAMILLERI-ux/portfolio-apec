@@ -100,7 +100,7 @@ export function Sources() {
             </li>
             <li>Pas de témoignage ni de chiffre de satisfaction : je n’en présente que s’ils sont réels et sourcés.</li>
             <li>Prototypes : Montserrat (SIL Open Font License), choisie pour sa proximité avec la typographie d’apec.fr.</li>
-            <li>Portfolio : DM Serif Display et Inter (SIL Open Font License), volontairement distincts de l’univers Apec.</li>
+            <li>Portfolio : Plus Jakarta Sans pour les titres et Inter pour le texte (SIL Open Font License), volontairement distinctes de l’univers Apec.</li>
           </ul>
         </section>
 
