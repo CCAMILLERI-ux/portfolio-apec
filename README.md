@@ -18,7 +18,7 @@ Route `#/plan-seo`, accessible depuis l’accueil et l’en-tête du portfolio. 
 
 1. **Matrice des besoins** : six situations (recherche d’emploi, premier emploi, évolution, reconversion, TPE/PME qui recrute, RH) → besoin, exemples de recherches, intention, contenu, services, conversion finale. Requêtes exploratoires, sans volume ni classement. Services marqués « intitulé observé » (lisible sur les captures) ou « intitulé générique à vérifier ».
 2. **Parcours démonstrateur** « Préparer mon entretien de recrutement » : A recherche (aperçu illustratif) → B page conseil originale (six étapes, checklist utilisable, trois aides contextualisées) → C fiche service → D conversion simulée. Écran piloté par l’URL (`?ecran=a|b|c|d|r&service=…`) : le bouton retour du navigateur fonctionne. Bouton « Voir la logique de maillage ». Réinitialisation, retour, checklist conservée localement.
-3. **Méthode** : feuille de route 90 jours, priorisation sans score, données et outils, coordination, indicateurs sans résultats inventés, bonus GEO, usage encadré de l’IA.
+3. **Méthode** : feuille de route 90 jours, puis une présentation courte « Partir des questions des cadres pour les guider vers les services de l’Apec » : trois étapes (comprendre les recherches, apporter une réponse utile, faciliter le passage à l’action), un exemple de parcours (reconversion → échange avec un consultant, vers la prise de rendez-vous de démonstration), la mesure et une note sur l’usage de l’IA.
 
 Contenus centralisés dans `src/data/seoPlan.ts` ; parcours dans `src/components/SeoJourney.tsx` ; page dans `src/pages/SeoPlan.tsx`. Le portfolio étant en `noindex`, les éléments SEO sont une démonstration de méthode, pas un dispositif de positionnement.
 

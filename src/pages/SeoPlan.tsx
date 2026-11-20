@@ -2,18 +2,7 @@ import { useState } from 'react'
 import { ArrowRight, Check, Info } from '../components/Icons'
 import { PortfolioLayout } from '../components/PortfolioLayout'
 import { SeoJourney } from '../components/SeoJourney'
-import {
-  DATA_SOURCES,
-  GEO_CAVEATS,
-  GEO_STEPS,
-  INDICATORS,
-  MEASURE_CAVEATS,
-  PRIORITY_CRITERIA,
-  RELAYS,
-  ROADMAP,
-  ROLES,
-  SEO_SITUATIONS,
-} from '../data/seoPlan'
+import { GUIDE_AI_NOTE, GUIDE_EXAMPLE, GUIDE_MEASURE, GUIDE_STEPS, ROADMAP, SEO_SITUATIONS } from '../data/seoPlan'
 import { Link, type Route } from '../lib/router'
 
 const CHAIN = ['Besoin utilisateur', 'Intention de recherche', 'Contenu utile', 'Service pertinent', 'Utilisation effective']
@@ -167,77 +156,36 @@ export function SeoPlan({ route }: { route: Route }) {
           ))}
         </ol>
 
-        <aside className="seo-ia">
-          <p><strong>Usage de l’IA dans la méthode.</strong> L’IA assiste la recherche de questions, la préparation des briefs et la synthèse ; les données, sources et contenus restent vérifiés et validés humainement. Pas de génération massive de pages, aucune donnée personnelle transmise.</p>
-        </aside>
+        <section className="seo-guide" aria-labelledby="seo-guide-title">
+          <h3 id="seo-guide-title" className="seo-guide__title">Partir des questions des cadres pour les guider vers les services de l’Apec</h3>
+          <p className="seo-guide__intro">
+            L’idée : répondre aux recherches concrètes des utilisateurs avec des contenus utiles, puis leur proposer un
+            accompagnement adapté.
+          </p>
 
-        <div className="seo-accs">
-          <Accordion title="Prioriser : six critères, sans score">
-            <p>Le volume de recherche ne suffit pas à décider. Chaque sujet est discuté au regard de six questions :</p>
-            <div className="table-scroll">
-              <table className="data-table seo-table">
-                <caption className="visually-hidden">Critères de priorisation</caption>
-                <thead><tr><th scope="col">Critère</th><th scope="col">Question à se poser</th></tr></thead>
-                <tbody>{PRIORITY_CRITERIA.map((c) => <tr key={c.criterion}><td>{c.criterion}</td><td>{c.question}</td></tr>)}</tbody>
-              </table>
-            </div>
-          </Accordion>
+          <ol className="seo-steps">
+            {GUIDE_STEPS.map((step, i) => (
+              <li key={step.title} className="seo-step">
+                <span className="seo-step__n" aria-hidden="true">{i + 1}</span>
+                <h4 className="seo-step__title">{step.title}</h4>
+                <p>{step.text}</p>
+              </li>
+            ))}
+          </ol>
 
-          <Accordion title="Données et outils">
-            <div className="seo-cols">
-              {DATA_SOURCES.map((d) => (
-                <section key={d.title} className="seo-col">
-                  <h4>{d.title}</h4>
-                  <ul className="pf-list">{d.items.map((i) => <li key={i}>{i}</li>)}</ul>
-                  <p className="small">{d.note}</p>
-                </section>
-              ))}
-            </div>
-          </Accordion>
+          <div className="seo-example">
+            <p className="seo-example__label">Exemple de parcours proposé <span>· proposition pour le portfolio</span></p>
+            <p className="seo-example__q">« {GUIDE_EXAMPLE.question} »</p>
+            <p>{GUIDE_EXAMPLE.explanation}</p>
+            <Link to="/reserver/cep?from=plan-seo" className="pf-btn pf-btn--primary">
+              {GUIDE_EXAMPLE.cta} <ArrowRight size={18} />
+            </Link>
+            <p className="seo-example__hint">Ouvre la prise de rendez-vous de démonstration du prototype.</p>
+          </div>
 
-          <Accordion title="Coordination des équipes">
-            <div className="table-scroll">
-              <table className="data-table seo-table">
-                <caption className="visually-hidden">Rôles</caption>
-                <thead><tr><th scope="col">Qui</th><th scope="col">Rôle dans le projet</th></tr></thead>
-                <tbody>{ROLES.map((r) => <tr key={r.who}><td>{r.who}</td><td>{r.what}</td></tr>)}</tbody>
-              </table>
-            </div>
-            <p>
-              <strong>Relais secondaires</strong> : {RELAYS.join(', ').toLowerCase()}. Ils peuvent amplifier un contenu
-              existant ; ils sont gérés avec leurs responsables et ne font pas l’objet de ce plan.
-            </p>
-          </Accordion>
-
-          <Accordion title="Indicateurs (tableau pédagogique, sans résultats)">
-            <div className="table-scroll">
-              <table className="data-table seo-table">
-                <caption className="visually-hidden">Indicateurs par famille</caption>
-                <thead><tr><th scope="col">Famille</th><th scope="col">Indicateurs</th></tr></thead>
-                <tbody>
-                  {INDICATORS.map((f) => (
-                    <tr key={f.family}><td>{f.family}</td><td><ul className="seo-cell-list">{f.items.map((i) => <li key={i}>{i}</li>)}</ul></td></tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p><strong>Précautions de lecture :</strong> {MEASURE_CAVEATS.join(' · ')}.</p>
-            <p className="small">Aucun chiffre n’est affiché : les valeurs de référence viendraient de l’état initial réalisé avec l’analyste.</p>
-          </Accordion>
-
-          <Accordion title="Bonus — Et si la recherche commençait dans une IA ?">
-            <p className="seo-geo-q">
-              Question illustrative : « J’ai un entretien la semaine prochaine. Qui peut m’aider à le préparer ? »
-            </p>
-            <p>Aucune réponse d’assistant n’est reproduite ici. La démarche proposée :</p>
-            <ol className="pf-list">{GEO_STEPS.map((s) => <li key={s}>{s}</li>)}</ol>
-            <dl className="seo-defs">
-              <div><dt>Mention</dt><dd>L’Apec est nommée.</dd></div>
-              <div><dt>Citation</dt><dd>Une page Apec est référencée comme source, avec un lien.</dd></div>
-            </dl>
-            <ul className="pf-list">{GEO_CAVEATS.map((c) => <li key={c}>{c}</li>)}</ul>
-          </Accordion>
-        </div>
+          <p className="seo-measure"><strong>Pour mesurer l’efficacité :</strong> {GUIDE_MEASURE}</p>
+          <p className="seo-ai-note">{GUIDE_AI_NOTE}</p>
+        </section>
       </section>
 
       <section className="pf-container seo-block seo-end">

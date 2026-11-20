@@ -205,66 +205,30 @@ export const ROADMAP = [
   },
 ]
 
-export const PRIORITY_CRITERIA = [
-  { criterion: 'Utilité pour les publics et la mission de l’Apec', question: 'Le contenu répond-il à un vrai besoin des cadres ou des recruteurs ?' },
-  { criterion: 'Demande observée ou estimée', question: 'Quels signaux : Search Console, recherche interne, questions remontées par les consultants ?' },
-  { criterion: 'Potentiel de progression de l’existant', question: 'Une page existe-t-elle déjà et peut-elle être améliorée plutôt que recréée ?' },
-  { criterion: 'Pertinence du service proposé', question: 'Le service relié répond-il vraiment à la situation de la personne ?' },
-  { criterion: 'Effort et dépendances', question: 'Quelles équipes, quel délai, quelles contraintes techniques ?' },
-  { criterion: 'Capacité du service à accueillir la demande', question: 'Le service peut-il absorber un surcroît de demandes (places, consultants) ?' },
-]
-
-export const DATA_SOURCES = [
+/* Synthèse de la méthode : présentation courte pour l'entretien. */
+export const GUIDE_STEPS = [
   {
-    title: 'Sources internes nécessaires',
-    items: ['Search Console', 'Analytics (parcours, conversions)', 'Recherche interne du site', 'Retours des métiers et des consultants'],
-    note: 'Je ne dispose pas de ces données : elles conditionnent la priorisation réelle.',
+    title: 'Comprendre les recherches',
+    text: 'Identifier les questions des cadres et les sujets sur lesquels renforcer la visibilité de l’Apec.',
   },
   {
-    title: 'Recherche exploratoire publique',
-    items: ['Pages de résultats des moteurs', 'Outils d’estimation de mots-clés', 'Questions associées affichées'],
-    note: 'Utile pour formuler des hypothèses, jamais suffisant pour décider seul.',
+    title: 'Apporter une réponse utile',
+    text: 'Améliorer les contenus existants : réponses claires, conseils concrets et liens vers les ressources pertinentes.',
   },
   {
-    title: 'Observations qualitatives',
-    items: ['Entretiens utilisateurs', 'Tests de parcours', 'Écoute des consultants'],
-    note: 'Pour comprendre le « pourquoi » derrière les chiffres.',
+    title: 'Faciliter le passage à l’action',
+    text: 'Proposer une suite logique : découvrir un outil, s’inscrire à un atelier ou échanger avec un consultant.',
   },
 ]
 
-export const ROLES = [
-  { who: 'Cheffe de projet animation web', what: 'Cadrage, priorisation, briefs, coordination, recette, suivi.' },
-  { who: 'Experts métiers et éditorial', what: 'Exactitude des contenus, validation, formulation des services.' },
-  { who: 'Produit / DSI', what: 'Faisabilité et mise en œuvre technique (gabarits, CMS, performance).' },
-  { who: 'Analyste', what: 'Qualité du suivi, plan de marquage, interprétation des résultats.' },
-]
+export const GUIDE_EXAMPLE = {
+  question: 'Comment préparer une reconversion quand on est cadre ?',
+  explanation:
+    'Une page qui explique les premières étapes, renvoie vers les ressources utiles et propose un échange avec un consultant.',
+  cta: 'Faire le point avec un consultant',
+}
 
-export const RELAYS = ['Newsletter', 'Réseaux sociaux', 'Autres dispositifs gérés avec leurs responsables']
+export const GUIDE_MEASURE = 'visites depuis Google, clics vers les services et rendez-vous pris à la suite du parcours.'
 
-export const INDICATORS = [
-  { family: 'Acquisition', items: ['Impressions et clics organiques', 'Distinction marque / hors marque', 'Pages et thématiques concernées'] },
-  { family: 'Découverte', items: ['Sessions d’entrée SEO conduisant vers une fiche service'] },
-  { family: 'Conversion', items: ['Inscriptions et rendez-vous finalisés', 'Outils terminés', 'Taux avec dénominateur explicite (ex. inscriptions / sessions d’entrée sur la thématique)'] },
-  { family: 'Utilité', items: ['Participation effective', 'Rendez-vous honorés', 'Satisfaction, si mesurable'] },
-  { family: 'Efficience', items: ['Résultats rapportés aux ressources éditoriales et techniques mobilisées'] },
-]
-
-export const MEASURE_CAVEATS = ['Saisonnalité', 'Délai d’observation (le SEO met du temps)', 'Attribution imparfaite entre canaux', 'Corrélation ≠ causalité']
-
-export const GEO_STEPS = [
-  'Constituer un petit panel de questions par situation.',
-  'Observer les réponses des assistants avec recherche web.',
-  'Distinguer mention de l’Apec et citation d’une page Apec.',
-  'Vérifier l’exactitude des services décrits dans les réponses.',
-  'Renforcer les réponses utiles, les sources et la clarté des contenus.',
-  'Vérifier l’accessibilité technique des pages avec les équipes.',
-  'Suivre les citations observées et les visites identifiables.',
-]
-
-export const GEO_CAVEATS = [
-  'Visibilité non garantie.',
-  'Réponses variables selon le moteur, la date et le contexte.',
-  'Aucune mesure exhaustive de toutes les IA.',
-  'Aucun balisage « magique ».',
-  'Entraînement des modèles et accès pour la recherche sont deux sujets distincts.',
-]
+export const GUIDE_AI_NOTE =
+  'L’IA peut aider à explorer les questions et préparer les contenus, avec validation des équipes Apec.'
