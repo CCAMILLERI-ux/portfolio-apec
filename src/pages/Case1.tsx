@@ -53,7 +53,7 @@ export function Case1({ route }: { route: Route }) {
       {VIEWS.map(([v, label]) => (
         <label key={v} className={`bar-switch__opt${view === v ? ' is-selected' : ''}`}>
           <input type="radio" name="vue" value={v} checked={view === v} onChange={() => update({ vue: v })} />
-          {label}
+          {v === 'existant' ? <>Existant<span className="demo-bar__hide-sm"> observé</span></> : label}
         </label>
       ))}
     </fieldset>
