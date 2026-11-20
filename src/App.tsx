@@ -15,12 +15,12 @@ import { Sources } from './pages/Sources'
 
 const TITLES: Record<string, string> = {
   '/': 'Accueil',
-  '/cas-1': 'Cas 1 — Choisir un service',
-  '/cas-2': 'Cas 2 — Accueil guidé',
-  '/cas-2/prochaines-etapes': 'Cas 2 — Mes prochaines étapes',
-  '/espace': 'Cas 2 — Mon espace',
-  '/cas-3': 'Cas 3 — Préparer un entretien de recrutement',
-  '/conseil/remuneration': 'Cas 3 — Aborder la rémunération',
+  '/cas-1': 'Cas 02 — Clarifier l’offre pour faciliter le choix',
+  '/cas-2': 'Cas 03 — Inscription accompagnée',
+  '/cas-2/prochaines-etapes': 'Cas 03 — Mes prochaines étapes',
+  '/espace': 'Cas 03 — Mon espace',
+  '/cas-3': 'Cas 01 — Préparer un entretien de recrutement',
+  '/conseil/remuneration': 'Cas 01 — Aborder la rémunération',
   '/sources': 'Sources et limites',
   '/plan-seo': 'Du besoin au service : une acquisition SEO utile',
 }

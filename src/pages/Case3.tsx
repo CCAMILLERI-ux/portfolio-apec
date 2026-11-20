@@ -58,7 +58,7 @@ export function Case3({ path }: { path: string }) {
   return (
     <ProtoLayout
       path={path}
-      caseLabel="Cas 3 · Conseil & maillage"
+      caseLabel="Cas 01 · De la recherche Google aux services"
       events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
       coulisses={<Case3Coulisses />}
     >
@@ -220,7 +220,7 @@ const LINK_MAP = [
 export function Case3Coulisses() {
   return (
     <>
-      <h3 className="coulisses__case">Cas 3 — Relier une recherche à un accompagnement</h3>
+      <h3 className="coulisses__case">Cas 01 — De la recherche Google à l’utilisation des services</h3>
       <CrBlock title="Statut de la page">
         <p>
           Page conseil originale, rédigée pour ce portfolio, sans statistique citée. Elle imite une page SEO pour la

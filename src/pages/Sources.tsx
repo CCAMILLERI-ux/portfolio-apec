@@ -85,7 +85,7 @@ export function Sources() {
           <ul className="pf-list">
             <li>Illustrations en aplats et pictogrammes : dessinés en SVG pour ce prototype, dans les couleurs observées. Aucun portrait, aucune photographie et aucun logo de l’Apec.</li>
             <li>
-              Photographies (piste 3 du cas 1 et carte atelier du cas 3) : <strong>Unsplash, licence Unsplash</strong> (usage
+              Photographies (piste 3 du cas 02 et cartes d’accompagnement du cas 01) : <strong>Unsplash, licence Unsplash</strong> (usage
               gratuit, sans autorisation requise —{' '}
               <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">unsplash.com/license<span className="visually-hidden"> (site externe, nouvel onglet)</span></a>).
               Fichiers recadrés en 960 × 600, sans métadonnées. Elles illustrent des situations et ne représentent ni des

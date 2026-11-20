@@ -62,7 +62,7 @@ export function Case1({ route }: { route: Route }) {
   return (
     <ProtoLayout
       path={route.path}
-      caseLabel="Cas 1 · Choisir un service"
+      caseLabel="Cas 02 · Clarifier l’offre"
       barControl={variantSwitch}
       events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
       onReset={() => navigate('/cas-1', { replace: true })}
@@ -256,7 +256,7 @@ function Case1Coulisses() {
   const tbc = SERVICES.filter((s) => s.titleProvenance === 'a-verifier')
   return (
     <>
-      <h3 className="coulisses__case">Cas 1 — Rendre les services plus faciles à choisir</h3>
+      <h3 className="coulisses__case">Cas 02 — Clarifier l’offre pour faciliter le choix</h3>
       <CrBlock title="Comment lire cette démo">
         <p>
           La barre du haut bascule entre quatre variantes sur les mêmes services : <strong>Existant observé</strong>,
@@ -293,7 +293,7 @@ function Case1Coulisses() {
           <strong>Ce que la piste 2 cherche à améliorer :</strong> la piste 1 montre mieux chaque service, mais laisse le
           visiteur comparer seul. La piste 2 formule le critère de choix (« Idéal si… »), présente les services comme des
           options comparables, traite l’aide humaine comme une option à part entière et relie le choix à des contenus
-          utiles (maillage vers le cas 3). Hypothèse à tester : moins d’hésitation, pas forcément plus de clics.
+          utiles (maillage vers le cas 01). Hypothèse à tester : moins d’hésitation, pas forcément plus de clics.
         </p>
         <p>
           <strong>Ce que la piste 3 explore :</strong> les ateliers sont aujourd’hui présentés comme les autres services,

@@ -40,7 +40,7 @@ function Visual({ s, size }: { s: Solution; size: 'sm' | 'lg' }) {
 function HumanCard({ s, detailed, headingLevel }: { s: Solution; detailed: boolean; headingLevel: 'h3' | 'h4' | 'p' }) {
   const service = getService(s.serviceId)!
   const Title = headingLevel
-  const click = (where: string) => () => track('service_cta_click', `${s.serviceId} (cas 3, ${where})`)
+  const click = (where: string) => () => track('service_cta_click', `${s.serviceId} (cas 01, ${where})`)
   return (
     <div className={`hcard hcard--${s.design}${detailed ? ' hcard--lg' : ''}`}>
       <PhotoVisual service={service} className="hcard__photo" />
@@ -124,7 +124,7 @@ export function SolutionsCompact() {
               <Link
                 to={solutionHref(s)}
                 className="link-arrow link-arrow--light sol-side-card__link"
-                onClick={() => track('service_cta_click', `${s.serviceId} (cas 3, colonne)`)}
+                onClick={() => track('service_cta_click', `${s.serviceId} (cas 01, colonne)`)}
               >
                 {s.cta} <ArrowRight size={18} />
               </Link>
@@ -161,7 +161,7 @@ export function SolutionsCards() {
             <Link
               to={solutionHref(s)}
               className="btn btn--outline btn--sm"
-              onClick={() => track('service_cta_click', `${s.serviceId} (cas 3, bas d’article)`)}
+              onClick={() => track('service_cta_click', `${s.serviceId} (cas 01, bas d’article)`)}
             >
               {s.cta}
             </Link>

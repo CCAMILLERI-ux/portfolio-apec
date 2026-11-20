@@ -9,7 +9,7 @@ import { Case3Coulisses } from './Case3'
 /** Contenu connexe court, clairement identifié — pas une page de remplissage. */
 export function Remuneration({ path }: { path: string }) {
   return (
-    <ProtoLayout path={path} caseLabel="Cas 3 · Conseil & maillage" events={['service_view', 'service_cta_click']} coulisses={<Case3Coulisses />}>
+    <ProtoLayout path={path} caseLabel="Cas 01 · De la recherche Google aux services" events={['service_view', 'service_cta_click']} coulisses={<Case3Coulisses />}>
       <PageBand
         back={{ to: '/cas-3', label: 'Conseil : préparer un entretien de recrutement' }}
         title="Aborder la rémunération en entretien"
