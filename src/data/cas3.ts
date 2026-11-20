@@ -3,8 +3,8 @@
  * Une seule source pour les deux emplacements : même ordre, mêmes destinations.
  *
  * Ordre imposé : accompagnements humains (photos), puis outils en autonomie (icônes).
- * Accompagnements humains : deux designs distincts — carte « atelier » (photo, étiquette Atelier,
- * bandeau jaune « Atelier collectif ») et carte « entretien programmé » (photo d'entretien,
+ * Accompagnements humains : deux designs distincts — carte « atelier » (photo avec liseré bleu,
+ * titre, intitulé, phrase, un bouton) et carte « entretien programmé » (photo d'entretien,
  * phrase et puces reprises de la fiche observée, boutons « En savoir plus » / « Prenez rendez-vous »).
  * Descriptions alignées sur ce qui est observable dans les captures d'apec.fr :
  * - « Entretien programmé » : simulation sur mesure et retour d'un professionnel,
@@ -73,13 +73,12 @@ export const CAS3_SOLUTIONS: Solution[] = [
     title: 'Atelier collectif',
     serviceId: 'atelier-entretiens',
     official: 'Réussir vos entretiens de recrutement',
-    description: 'Un atelier pour maîtriser chaque type d’entretien d’embauche et les transformer en opportunités concrètes !',
-    cta: 'Voir les sessions',
+    description: 'Préparez en groupe les différents types d’entretien d’embauche.',
+    cta: 'Découvrir les ateliers',
     group: 'humain',
     photo: PHOTOS.atelierPostIt,
     design: 'atelier',
-    primary: { label: 'Voir les sessions', href: '/reserver/atelier-entretiens?from=cas-3' },
-    secondary: { label: 'En savoir plus', href: '/service/atelier-entretiens?from=cas-3' },
+    primary: { label: 'Découvrir les ateliers', href: '/service/atelier-entretiens?from=cas-3' },
   },
   {
     id: 'simulateur',

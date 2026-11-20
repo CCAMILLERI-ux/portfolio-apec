@@ -2,8 +2,7 @@ import { CAS3_SOLUTIONS, CAS3_SOLUTIONS_INTRO, CAS3_SOLUTIONS_TITLE, solutionHre
 import { Link } from '../lib/router'
 import { track } from '../lib/storage'
 import { getService } from '../data/services'
-import { WORKSHOP_SESSIONS } from '../data/slots'
-import { ArrowRight, Calculator, Calendar, Chat, Plus, Questions } from './Icons'
+import { ArrowRight, Calculator, Chat, Plus, Questions } from './Icons'
 import { ModalityChips } from './Modalities'
 import { PhotoVisual } from './ServiceCard'
 
@@ -33,7 +32,7 @@ function Visual({ s, size }: { s: Solution; size: 'sm' | 'lg' }) {
 
 /**
  * Carte d'accompagnement humain, en deux designs :
- * - « atelier » : ancien design de la carte atelier (photo, étiquette Atelier, bandeau jaune) ;
+ * - « atelier » : carte simple (photo avec liseré bleu, titre, intitulé, phrase, un bouton) ;
  * - « entretien » : langage de la fiche « Entretien programmé » observée (accroche, puces « + »,
  *   boutons « En savoir plus » / « Prenez rendez-vous »).
  */
@@ -41,6 +40,26 @@ function HumanCard({ s, detailed, headingLevel }: { s: Solution; detailed: boole
   const service = getService(s.serviceId)!
   const Title = headingLevel
   const click = (where: string) => () => track('service_cta_click', `${s.serviceId} (cas 01, ${where})`)
+  if (s.design === 'atelier') {
+    // Design « atelier » : carte simple — photo avec liseré bleu, titre, intitulé, phrase, un bouton.
+    return (
+      <div className={`acard${detailed ? ' acard--lg' : ''}`}>
+        {s.photo && (
+          <img src={s.photo.file} alt={s.photo.alt} loading="lazy" decoding="async" width={960} height={600} className="acard__photo" />
+        )}
+        <div className="acard__body">
+          <Title className="acard__title">{s.title}</Title>
+          <p className="acard__official">{s.official}</p>
+          <p className="acard__text">{s.description}</p>
+          {s.primary && (
+            <Link to={s.primary.href} className="btn btn--primary acard__cta" onClick={click('action principale')}>
+              {s.primary.label}<span className="visually-hidden"> : {s.official}</span>
+            </Link>
+          )}
+        </div>
+      </div>
+    )
+  }
   return (
     <div className={`hcard hcard--${s.design}${detailed ? ' hcard--lg' : ''}`}>
       <PhotoVisual service={service} className="hcard__photo" />
@@ -56,16 +75,6 @@ function HumanCard({ s, detailed, headingLevel }: { s: Solution; detailed: boole
             ))}
           </ul>
         )}
-        {detailed && s.design === 'atelier' && (
-          <div className="workshop__sessions hcard__sessions">
-            <p className="workshop__sessions-title"><Calendar size={18} /> Prochaines sessions</p>
-            <ul>
-              {WORKSHOP_SESSIONS.map((slot) => (
-                <li key={slot.id}><strong>{slot.date}</strong> · {slot.time} · {slot.place}</li>
-              ))}
-            </ul>
-          </div>
-        )}
         <div className="hcard__actions">
           {s.design === 'entretien' && s.secondary && (
             <Link to={s.secondary.href} className="btn btn--outline hcard__more" onClick={click('en savoir plus')}>
@@ -75,11 +84,6 @@ function HumanCard({ s, detailed, headingLevel }: { s: Solution; detailed: boole
           {s.primary && (
             <Link to={s.primary.href} className="btn btn--primary" onClick={click('action principale')}>
               {s.primary.label}<span className="visually-hidden"> : {s.official}</span>
-            </Link>
-          )}
-          {s.design === 'atelier' && s.secondary && (
-            <Link to={s.secondary.href} className="link-arrow" onClick={click('en savoir plus')}>
-              {s.secondary.label}<span className="visually-hidden"> : {s.official}</span> <ArrowRight size={18} />
             </Link>
           )}
         </div>

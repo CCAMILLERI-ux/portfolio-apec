@@ -1176,7 +1176,6 @@ legend { padding: 0; }
 .hcard--lg .hcard__body { padding: 20px var(--s3) var(--s3); }
 .hcard__body p { margin: 0; }
 .hcard__kicker { padding: 3px 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
-.hcard--atelier .hcard__kicker { background: var(--brand-yellow); color: var(--brand-navy); }
 .hcard--entretien .hcard__kicker { background: var(--brand-blue); color: #fff; }
 .proto .hcard__title { font-size: 1.0625rem; font-weight: 600; line-height: 1.3; margin: 2px 0 0; }
 .proto .hcard--lg .hcard__title { font-size: 1.3125rem; }
@@ -1191,8 +1190,6 @@ legend { padding: 0; }
 .proto .hcard__more:hover { border-color: var(--brand-navy); background: var(--brand-blue-tint); }
 /* Colonne étroite : boutons de l'entretien empilés sur toute la largeur */
 .sidebar .hcard--entretien .hcard__actions .btn { flex: 1 1 100%; }
-.hcard__sessions { width: 100%; margin-top: var(--s1); }
-.hcard__sessions ul { font-size: 0.875rem; }
 
 /* Introduction compacte d'un prototype (hors maquette, univers portfolio) */
 .demo-intro { background: var(--pf-bg); color: var(--pf-ink); font-family: var(--font-pf); border-bottom: 1px solid var(--pf-line); }
@@ -1214,3 +1211,20 @@ legend { padding: 0; }
   .bar-switch__opt:nth-child(n + 4) { border-top: 1px solid rgba(246, 242, 234, 0.3); }
   .bar-switch__opt:nth-child(odd) { border-left: 1px solid rgba(246, 242, 234, 0.3); }
 }
+
+/* Cas 01 : design « atelier » — carte simple (photo à liseré bleu, titre, intitulé, phrase, un bouton) */
+.acard { display: flex; flex-direction: column; height: 100%; background: #fff; border: 1px solid #e3e4ec; box-shadow: var(--shadow); }
+.acard__photo { display: block; width: 100%; height: 150px; object-fit: cover; border-bottom: 5px solid var(--brand-blue); }
+.acard--lg .acard__photo { height: 230px; }
+.acard__body { display: flex; flex-direction: column; align-items: flex-start; flex: 1; padding: var(--s2) 20px 20px; }
+.acard--lg .acard__body { padding: 20px var(--s3) var(--s3); }
+.proto .acard__title { font-size: 1.125rem; font-weight: 600; margin: 0 0 4px; }
+.proto .acard--lg .acard__title { font-size: 1.3125rem; }
+.acard__official { font-size: 0.8125rem; color: var(--text-secondary-a11y); margin: 0 0 var(--s1); }
+.acard__text { font-size: 0.9375rem; margin: 0 0 var(--s2); }
+.acard--lg .acard__text { font-size: 1.0625rem; }
+.acard__cta { margin-top: auto; min-height: 44px; padding: 8px 20px; font-size: 0.9375rem; }
+/* Bas d'article : la photo de l'atelier occupe la hauteur disponible (carte alignée sur celle de l'entretien) */
+.acard--lg .acard__photo { flex: 1 1 auto; height: auto; min-height: 230px; }
+.acard--lg .acard__body { flex: 0 0 auto; }
+@media (max-width: 760px) { .acard--lg .acard__photo { flex: none; height: 200px; min-height: 0; } }
