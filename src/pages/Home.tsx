@@ -125,13 +125,6 @@ export function Home() {
                 LinkedIn<span className="visually-hidden"> (nouvel onglet)</span>
               </a>
             </li>
-            {/* CV : à réactiver une fois la nouvelle version déposée dans public/.
-            <li>
-              <a href="CV_CHEF_DE_PROJET_ANIMATION_WEB_CCAMILLERI.pdf" className="pf-btn pf-btn--sm" download>
-                Télécharger mon CV<span className="visually-hidden"> (PDF)</span>
-              </a>
-            </li>
-            */}
           </ul>
         </div>
       </section>

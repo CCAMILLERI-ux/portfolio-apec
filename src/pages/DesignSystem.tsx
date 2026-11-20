@@ -86,11 +86,6 @@ export function DesignSystem() {
             J’ai créé le design system d’un écosystème de 7{N}sites et je l’utilise au quotidien dans Figma pour décliner
             les évolutions, harmoniser les interfaces et maquetter rapidement les variantes à{N}tester.
           </p>
-          {/* Lien vers le kit Figma : à réactiver une fois l’URL fournie.
-          <a href="URL_FIGMA" className="pf-btn pf-btn--primary pf-btn--sm" target="_blank" rel="noopener noreferrer">
-            Voir le kit dans Figma <External size={16} /><span className="visually-hidden"> (nouvel onglet)</span>
-          </a>
-          */}
         </section>
 
         <section aria-labelledby="kit">
