@@ -6,6 +6,7 @@ import { ArrowRight, Chat, External, Group, Laptop } from './Icons'
 import { Illustration, type Tone } from './Illustration'
 import { ModalityChips } from './Modalities'
 import { SERVICE_PHOTO } from '../data/photos'
+import { nb } from '../lib/text'
 
 export const KIND_TONE: Record<ServiceKind, Tone> = { atelier: 'yellow', individuel: 'blue', outil: 'navy' }
 export const KIND_SHORT: Record<ServiceKind, string> = { atelier: 'Atelier', individuel: 'Rendez-vous', outil: 'Outil' }
@@ -74,14 +75,16 @@ export function ServiceAction({ service, from, className = 'btn btn--primary' }:
 }
 
 /** Carte « piste exploratoire ». */
-export function ServiceCard({ service, from }: { service: Service; from: string }) {
+export function ServiceCard({ service, from, meta, level = 3 }: { service: Service; from: string; meta?: ReactNode; level?: 3 | 4 }) {
+  const H = `h${level}` as 'h3' | 'h4'
   return (
     <article className={`svc svc--${service.kind}`}>
       <ServiceVisual service={service} />
       <div className="svc__body">
-        <p className="svc__official">{service.officialTitle}</p>
-        <h3 className="svc__title">{service.hook}</h3>
-        <p className="svc__benefit">{service.benefit}</p>
+        <p className="svc__official">{nb(service.officialTitle)}</p>
+        {meta}
+        <H className="svc__title">{nb(service.hook)}</H>
+        <p className="svc__benefit">{nb(service.benefit)}</p>
         <ModalityChips items={service.modalities} />
         <div className="svc__actions">
           <ServiceAction service={service} from={from} />
@@ -99,15 +102,17 @@ export function ServiceCard({ service, from }: { service: Service; from: string 
  * Carte « existant observé » : reconstruction du motif vu sur les captures
  * (pictogramme, intitulé, description courte, « En savoir plus » + action).
  */
-export function ObservedServiceCard({ service, from }: { service: Service; from: string }) {
+export function ObservedServiceCard({ service, from, meta, level = 3 }: { service: Service; from: string; meta?: ReactNode; level?: 3 | 4 }) {
+  const H = `h${level}` as 'h3' | 'h4'
   return (
     <article className="observed-card">
       <svg className="observed-card__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
         <path d="M30 8a16 16 0 1 0 10 28" fill="none" stroke="var(--brand-navy)" strokeWidth="3" strokeLinecap="round" />
         <path d="M22 14a10 10 0 1 1 10 18" fill="none" stroke="var(--brand-yellow)" strokeWidth="3" strokeLinecap="round" />
       </svg>
-      <h3 className="observed-card__title">{service.officialTitle}</h3>
-      {service.observedSummary && <p className="observed-card__text">{service.observedSummary}</p>}
+      {meta}
+      <H className="observed-card__title">{nb(service.officialTitle)}</H>
+      {service.observedSummary && <p className="observed-card__text">{nb(service.observedSummary)}</p>}
       <div className="observed-card__actions">
         <Link to={`/service/${service.id}?from=${from}`} className="btn btn--outline btn--sm">
           En savoir plus<span className="visually-hidden"> : {service.officialTitle}</span>

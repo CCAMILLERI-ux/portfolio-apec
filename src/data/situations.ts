@@ -3,6 +3,8 @@
  * travail (hypothèses de la candidate, non validés par l'Apec). Ils ne sont
  * jamais affichés aux visiteurs dans la démo utilisateur.
  */
+import type { ServiceKind } from './services'
+
 export interface Situation {
   id: string
   persona: 'P1' | 'P2' | 'P3' | 'P4' | 'P5'
@@ -52,3 +54,37 @@ export const SITUATIONS: Situation[] = [
 export const ALL_DEMO_SERVICE_IDS = Array.from(
   new Set(SITUATIONS.flatMap((s) => s.serviceIds)),
 )
+
+/* ---------- Vue « Tous » : regroupement par situation ---------- */
+
+
+/** Ordre de second niveau dans chaque groupe : rendez-vous, atelier, outil. */
+export const KIND_ORDER: ServiceKind[] = ['individuel', 'atelier', 'outil']
+
+export const FORMAT_LABEL: Record<ServiceKind, string> = {
+  individuel: 'Rendez-vous individuel',
+  atelier: 'Atelier',
+  outil: 'Outil en ligne',
+}
+
+export interface SituationGroup {
+  situation: Situation
+  /** Services dont cette situation est la situation principale (première qui les contient). */
+  serviceIds: string[]
+}
+
+/** Chaque service n'apparaît qu'une fois, dans sa situation principale. */
+export function groupBySituation(kindOf: (id: string) => ServiceKind): SituationGroup[] {
+  const seen = new Set<string>()
+  return SITUATIONS.map((situation) => {
+    const ids = situation.serviceIds.filter((id) => !seen.has(id))
+    ids.forEach((id) => seen.add(id))
+    ids.sort((a, b) => KIND_ORDER.indexOf(kindOf(a)) - KIND_ORDER.indexOf(kindOf(b)))
+    return { situation, serviceIds: ids }
+  })
+}
+
+/** Autres situations où un service est aussi proposé. */
+export function otherSituations(serviceId: string, primaryId: string): Situation[] {
+  return SITUATIONS.filter((s) => s.id !== primaryId && s.serviceIds.includes(serviceId))
+}

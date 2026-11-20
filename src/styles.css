@@ -1356,3 +1356,24 @@ legend { padding: 0; }
 .ds-sources__links { list-style: none; padding: 0; margin: 0 0 var(--s1); display: flex; flex-wrap: wrap; gap: 4px 18px; }
 .ds-sources__links a { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; }
 .ds-sources__note { color: var(--pf-muted); margin-bottom: 0 !important; }
+
+/* Cas 02 — vue « Tous nos services » regroupée par situation */
+.grp-nav { margin: 0 0 var(--s3); }
+.grp-nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.proto .grp-nav__link { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 12px; border: 1px solid var(--border-neutral); background: #fff; color: var(--brand-navy); text-decoration: none; font-size: 0.875rem; font-weight: 600; }
+.proto .grp-nav__link:hover { border-color: var(--brand-navy); }
+.grp-nav__link svg { color: var(--brand-blue); flex: none; }
+.grp { margin-top: var(--s4); }
+.grp:first-of-type { margin-top: 0; }
+.proto .grp__title { display: flex; align-items: center; gap: 12px; margin: 0 0 var(--s2); padding: 12px 16px; background: var(--brand-navy); color: #fff; font-size: 1.25rem; }
+.grp__icon { color: var(--brand-yellow); flex: none; }
+.grp--recruiter { margin-top: var(--s6); padding-top: var(--s4); border-top: 4px solid var(--brand-navy); }
+.grp__audience { margin: 0 0 var(--s1); font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-blue-deep); }
+.grp-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 8px; }
+.grp-format { display: inline-block; padding: 2px 8px; border: 1px solid var(--brand-navy); background: #fff; color: var(--brand-navy); font-size: 0.75rem; font-weight: 700; }
+.grp-also { font-size: 0.8125rem; font-style: italic; color: var(--text-secondary-a11y); }
+.theme-card .grp-meta { margin-bottom: 10px; }
+.theme-card .grp-also { color: #fff; opacity: 0.92; }
+.observed-card .grp-meta { margin-top: -4px; }
+.theme-grid--help { margin-top: var(--s3); }
+@media (max-width: 600px) { .proto .grp__title { font-size: 1.0625rem; } .grp--recruiter { margin-top: var(--s5); } }
