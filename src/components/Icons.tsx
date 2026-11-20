@@ -104,3 +104,10 @@ export const Group = (p: P) => (
 export const Doc = (p: P) => (
   <Base {...p}><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v4h4M9 12h6M9 15.5h6M9 9h3" /></Base>
 )
+/** Questions réciproques : deux bulles, l'une portant un point d'interrogation. */
+export const Questions = (p: P) => (
+  <Base {...p}><path d="M3 5h10a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H8l-3.5 3v-3H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" /><path d="M6.3 8.2a1.7 1.7 0 1 1 2.4 1.6c-.5.2-.7.6-.7 1.1M8 12.4v.1" /><path d="M17 9h4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-3.5-3H12a2 2 0 0 1-2-2v-1" /></Base>
+)
+export const Calculator = (p: P) => (
+  <Base {...p}><rect x="5" y="2.5" width="14" height="19" rx="2" /><rect x="8" y="5.5" width="8" height="3.5" rx=".5" /><path d="M8.5 12.5h.01M12 12.5h.01M15.5 12.5h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 18.5h.01M12 18.5h3.5" /></Base>
+)

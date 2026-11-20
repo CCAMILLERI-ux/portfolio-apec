@@ -577,20 +577,6 @@ legend { padding: 0; }
 .checklist__item.is-selected { background: #fffbea; border-color: var(--brand-navy); box-shadow: inset 5px 0 0 var(--brand-yellow); }
 .checklist__item.is-selected span { text-decoration: line-through; text-decoration-color: var(--text-secondary-a11y); }
 .checklist__item:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
-.accompany { margin-top: var(--s4); }
-.tiles { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); }
-@media (max-width: 760px) { .tiles { grid-template-columns: 1fr; } }
-.tile { padding: var(--s3) var(--s2); display: flex; flex-direction: column; gap: var(--s1); }
-.tile p { margin: 0; }
-.tile--yellow { background: var(--brand-yellow); }
-.tile--yellow .tile__icon { color: var(--brand-navy); }
-.proto .tile--yellow .link-arrow svg { color: var(--brand-navy); }
-.tile--blue { background: var(--brand-blue); color: #fff; }
-.tile--navy { background: var(--brand-navy); color: #fff; }
-.tile--blue .tile__icon, .tile--navy .tile__icon { color: var(--brand-yellow); }
-.tile--blue :focus-visible, .tile--navy :focus-visible { outline-color: var(--brand-yellow); }
-.tile--yellow :focus-visible { outline-color: var(--brand-navy); }
-.tile__when { font-weight: 600; flex: 1; }
 
 .sidebar { display: grid; gap: 0; }
 .sidebar > * + * { margin-top: var(--s2); }
@@ -833,11 +819,6 @@ legend { padding: 0; }
 }
 
 /* Cas 3 : carte atelier de la colonne « Nos services » */
-.side-card--workshop { padding: 0; border-top: 0; }
-.side-card__photo .photo-visual__img { height: 170px; }
-.side-card__photo .kind-tag { transform: scale(0.85); transform-origin: top left; left: 12px; top: 12px; }
-.side-card__inner { padding: var(--s2) var(--s3) var(--s3); display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
-.side-card__inner .btn { margin-top: var(--s1); }
 
 .svc-grid--duo { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 640px) { .svc-grid--duo { grid-template-columns: 1fr; } }
@@ -1088,3 +1069,47 @@ legend { padding: 0; }
 .pf-case .pf-tags li { font-size: 0.75rem; padding: 2px 8px; }
 .pf-howto-acc { margin-top: var(--s3); }
 .pf-howto-acc p { max-width: 75ch; }
+
+/* Cas 3 : solutions recommandées (colonne compacte + bloc détaillé en bas d'article).
+   Photos = accompagnements humains ; icônes = outils en autonomie. */
+.sol-photo { display: block; width: 100%; object-fit: cover; background: var(--surface-muted); }
+.sol-photo--sm { width: 64px; height: 64px; flex: none; }
+.sol-photo--lg { height: 190px; }
+.sol-icon { display: inline-grid; place-items: center; flex: none; background: var(--brand-blue); color: #fff; }
+.sol-icon--sm { width: 64px; height: 64px; }
+.sol-icon--lg { width: 64px; height: 64px; margin-bottom: var(--s2); }
+.sol-focus {
+  display: inline-block; align-self: flex-start; margin: 0 0 6px; padding: 2px 8px;
+  background: var(--brand-yellow); color: var(--brand-navy); font-size: 0.75rem; font-weight: 700;
+}
+
+/* Colonne latérale */
+.sol-side { background: #fff; box-shadow: var(--shadow); padding: var(--s3) 20px; }
+.sol-side__title { font-size: 1.125rem; font-weight: 700; line-height: 1.3; margin: 0 0 6px; }
+.sol-side__intro { font-size: 0.875rem; color: var(--text-secondary-a11y); margin: 0 0 var(--s2); }
+.sol-side__group + .sol-side__group { margin-top: var(--s2); padding-top: var(--s2); border-top: 1px solid var(--border-neutral); }
+.sol-side__label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-blue); margin: 0 0 var(--s1); }
+.sol-side__list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s2); }
+.sol-item { display: flex; gap: 12px; align-items: flex-start; }
+.sol-item__body { display: flex; flex-direction: column; min-width: 0; }
+.sol-item__title { font-weight: 700; font-size: 0.9375rem; margin: 0 0 2px; }
+.sol-item__text { font-size: 0.8125rem; line-height: 1.45; margin: 0; }
+.proto .sol-item__link { font-size: 0.8125rem; min-height: 32px; margin-top: 2px; }
+
+/* Bloc détaillé en bas d'article */
+.sol-block { margin-top: var(--s5); padding-top: var(--s3); border-top: 5px solid var(--brand-yellow); }
+.sol-block__intro { font-size: 1.0625rem; }
+.proto .sol-block__label { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-blue); margin: var(--s3) 0 var(--s2); }
+.sol-grid { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s2); }
+.sol-grid--humans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sol-grid--tools { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 760px) { .sol-grid--humans, .sol-grid--tools { grid-template-columns: 1fr; } }
+.sol-card { display: flex; flex-direction: column; background: #fff; border: 1px solid #e3e4ec; box-shadow: var(--shadow); }
+.sol-card p { margin: 0 0 var(--s2); }
+.sol-card .btn { align-self: flex-start; margin-top: auto; }
+.sol-card--human { border-top: 0; }
+.sol-card--human .sol-photo { border-bottom: 5px solid var(--brand-blue); }
+.sol-card__body { padding: var(--s2) 20px 20px; display: flex; flex-direction: column; flex: 1; }
+.sol-card--tool { padding: 20px; }
+.proto .sol-card__title { font-size: 1.1875rem; margin: 0 0 4px; }
+.sol-card__official { font-size: 0.8125rem; color: var(--text-secondary-a11y); }

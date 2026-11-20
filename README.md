@@ -22,6 +22,10 @@ Route `#/plan-seo`, accessible depuis l’accueil et l’en-tête du portfolio. 
 
 Contenus centralisés dans `src/data/seoPlan.ts` ; parcours dans `src/components/SeoJourney.tsx` ; page dans `src/pages/SeoPlan.tsx`. Le portfolio étant en `noindex`, les éléments SEO sont une démonstration de méthode, pas un dispositif de positionnement.
 
+## Cas 3 — solutions recommandées
+
+La colonne latérale et le bas de l’article présentent la même liste, dans le même ordre et vers les mêmes fiches : accompagnement personnalisé et atelier collectif (photos), puis simulateur d’entretien, Odiapazon et simulateur de salaire cadre (icônes). Source unique : `src/data/cas3.ts`. Lien externe vérifié : convertisseur salaire brut / net de l’Urssaf. Data Cadres, fiches métiers et fiches entreprises sont mentionnés sans lien (adresses non vérifiables : apec.fr bloque les accès automatisés).
+
 ## Organisation de l’interface
 
 - **Portfolio** (accueil, sources) : identité propre à la candidate (fond crème, DM Serif Display + Inter, accent terracotta), volontairement distincte de l’univers Apec.
@@ -84,7 +88,7 @@ La barre du haut propose « Retour au portfolio » et « Réinitialiser la démo
 
 - **Captures d’écran d’apec.fr** : références visuelles uniquement. Elles ne sont **ni versionnées ni servies**, car elles contiennent des données personnelles. Aucun nom, compte, statistique ou témoignage visible sur ces captures n’est repris.
 - **Intitulés et modalités** : chaque information porte une provenance dans `services.ts` (`capture` ou `a-verifier`).
-  - Observés sur les captures : « Réussir vos entretiens de recrutement », « Entretien programmé : entrainez vous avec un consultant ! » (individuel, face à face, 1 h, gratuit, cadres et jeunes diplômés), « Simulateur d’entretien », « Réussir sa candidature », « Faire de l’IA générative l’alliée de votre recherche emploi » (en groupe, en salle, 4 h, gratuit, cadres et jeunes diplômés), « Créer mon CV ».
+  - Observés sur les captures : « Réussir vos entretiens de recrutement », « Entretien programmé : entrainez vous avec un consultant ! » (individuel, face à face, 1 h, gratuit, cadres et jeunes diplômés), « Simulateur d’entretien », « Réussir sa candidature », « Faire de l’IA générative l’alliée de votre recherche emploi » (en groupe, en salle, 4 h, gratuit, cadres et jeunes diplômés), « Créer mon CV », « Odiapazon » (outil : « projetez-vous pour préparer une collaboration réussie »).
   - **À vérifier** : tous les services des situations P2 à P6 (premier emploi, CEP, évolution interne, formation, reconversion, services recruteurs), ainsi que les durées, tarifs et publics non visibles. Ils sont affichés avec un badge « à vérifier » et des fiches d’aperçu qui renvoient vers le site officiel. La présélection est présentée comme soumise à conditions (TPE/PME notamment), sans reproduire de critères.
 - **Textes** : accroches, bénéfices, page conseil et repères rémunération sont des rédactions originales. Seuls les intitulés et descriptions courtes observés sont cités.
 - **Visuels** : illustrations et pictogrammes SVG dessinés pour le prototype ; aucun logo de l’Apec, aucun témoignage.

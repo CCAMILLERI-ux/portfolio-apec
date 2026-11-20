@@ -169,7 +169,7 @@ export const SERVICES: Service[] = [
     illustration: 'outil',
     action: {
       kind: 'external',
-      label: 'Explorer l’outil sur apec.fr',
+      label: 'Trouver l’outil sur apec.fr',
       url: OFFICIAL_TOOLS_URL,
     },
     depth: 'detaillee',
@@ -266,12 +266,51 @@ export const SERVICES: Service[] = [
     illustration: 'document',
     action: {
       kind: 'external',
-      label: 'Explorer l’outil sur apec.fr',
+      label: 'Trouver l’outil sur apec.fr',
       url: OFFICIAL_TOOLS_URL,
     },
     depth: 'synthese',
     scopeNote:
       'L’outil n’est pas reproduit dans la démo. Le lien ouvre la page publique des outils d’apec.fr (site externe).',
+  },
+
+  {
+    id: 'odiapazon',
+    audience: 'candidat',
+    officialTitle: 'Odiapazon',
+    titleProvenance: 'capture',
+    hook: 'Clarifiez vos attentes sur la future collaboration',
+    benefit:
+      'Se projeter dans le poste et l’environnement de travail pour clarifier ses attentes et préparer les questions à poser au recruteur.',
+    kind: 'outil',
+    modalities: [
+      { label: 'Format', value: 'Outil', provenance: 'capture' },
+      TBC('Durée'),
+      TBC('Tarif'),
+      TBC('Public'),
+    ],
+    illustration: 'outil',
+    action: { kind: 'external', label: 'Trouver l’outil sur apec.fr', url: OFFICIAL_TOOLS_URL },
+    depth: 'synthese',
+    observedSummary: 'Managers, candidats à l’aide de cet outil, projetez-vous pour préparer une collaboration réussie !',
+    observedCta: 'Commencez',
+    scopeNote:
+      'L’outil n’est pas reproduit dans la démo. Le lien ouvre la page publique des outils d’apec.fr (site externe) ; l’adresse directe de l’outil et la nécessité d’un compte restent à vérifier.',
+  },
+  {
+    id: 'simulateur-salaire',
+    audience: 'candidat',
+    officialTitle: 'Simulateur de salaire cadre',
+    titleProvenance: 'a-verifier',
+    hook: 'Situez votre rémunération par rapport au marché',
+    benefit: 'Disposer de repères de marché pour préparer ses prétentions salariales.',
+    kind: 'outil',
+    modalities: [TBC('Format'), TBC('Durée'), TBC('Tarif'), TBC('Public')],
+    illustration: 'outil',
+    action: { kind: 'external', label: 'Trouver l’outil sur apec.fr', url: OFFICIAL_TOOLS_URL },
+    depth: 'synthese',
+    scopeNote:
+      'Fiche d’aperçu : intitulé, adresse directe et conditions d’accès (compte Apec éventuel) à vérifier sur le site officiel. Le lien ouvre la page publique des outils d’apec.fr.',
   },
 
   /* ---------------- Fiches synthétiques (intitulés à vérifier) ---------------- */
