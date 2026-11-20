@@ -12,6 +12,16 @@ Portfolio de candidature au poste de Chef de projet animation web. Un seul site 
 | 2 | **Guider un nouvel inscrit** : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes prochaines étapes » | Parcours, activation, recommandation déterministe |
 | 3 | **Relier une recherche à un accompagnement** : page conseil « Comment préparer un entretien de recrutement ? », maillage interne, compléments SEO, GEO et coordination multicanale | SEO éditorial, maillage, acquisition |
 
+## Module « Du besoin au service : une acquisition SEO utile »
+
+Route `#/plan-seo`, accessible depuis l’accueil et l’en-tête du portfolio. Plan d’acquisition SEO orienté vers l’utilisation des services, en trois blocs :
+
+1. **Matrice des besoins** : six situations (recherche d’emploi, premier emploi, évolution, reconversion, TPE/PME qui recrute, RH) → besoin, exemples de recherches, intention, contenu, services, conversion finale. Requêtes exploratoires, sans volume ni classement. Services marqués « intitulé observé » (lisible sur les captures) ou « intitulé générique à vérifier ».
+2. **Parcours démonstrateur** « Préparer mon entretien de recrutement » : A recherche (aperçu illustratif) → B page conseil originale (six étapes, checklist utilisable, trois aides contextualisées) → C fiche service → D conversion simulée. Écran piloté par l’URL (`?ecran=a|b|c|d|r&service=…`) : le bouton retour du navigateur fonctionne. Bouton « Voir la logique de maillage ». Réinitialisation, retour, checklist conservée localement.
+3. **Méthode** : feuille de route 90 jours, priorisation sans score, données et outils, coordination, indicateurs sans résultats inventés, bonus GEO, usage encadré de l’IA.
+
+Contenus centralisés dans `src/data/seoPlan.ts` ; parcours dans `src/components/SeoJourney.tsx` ; page dans `src/pages/SeoPlan.tsx`. Le portfolio étant en `noindex`, les éléments SEO sont une démonstration de méthode, pas un dispositif de positionnement.
+
 ## Organisation de l’interface
 
 - **Portfolio** (accueil, sources) : identité propre à la candidate (fond crème, DM Serif Display + Inter, accent terracotta), volontairement distincte de l’univers Apec.

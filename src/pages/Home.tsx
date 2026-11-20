@@ -123,6 +123,25 @@ export function Home() {
         </ol>
       </section>
 
+      <section className="pf-container pf-module" aria-labelledby="module-seo">
+        <div className="pf-module__inner">
+          <div>
+            <p className="pf-case__num">Module complémentaire</p>
+            <h2 id="module-seo" className="pf-module__title">Du besoin au service : une acquisition SEO utile</h2>
+            <p className="pf-case__need">
+              Un plan d’acquisition SEO orienté vers l’utilisation des services : six situations, un parcours
+              démonstrateur de la recherche à l’inscription, et ma méthode sur 90 jours (priorisation, coordination, mesure).
+            </p>
+            <ul className="pf-tags" aria-label="Compétences illustrées">
+              <li>SEO</li><li>Maillage interne</li><li>Priorisation</li><li>Coordination</li><li>Mesure</li>
+            </ul>
+          </div>
+          <Link to="/plan-seo" className="pf-btn pf-btn--primary">
+            Explorer le module<span className="visually-hidden"> : plan d’acquisition SEO</span> <ArrowRight size={18} />
+          </Link>
+        </div>
+      </section>
+
       <section className="pf-container pf-section pf-columns">
         <div className="pf-panel">
           <h2>Parcours conseillé en cinq minutes</h2>

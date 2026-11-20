@@ -24,6 +24,7 @@ export function PortfolioLayout({ children }: { children: ReactNode }) {
           <nav aria-label="Portfolio">
             <ul className="pf-nav">
               <li><Link to="/">Les trois cas</Link></li>
+              <li><Link to="/plan-seo">Plan d’acquisition SEO</Link></li>
               <li><Link to="/sources">Sources et limites</Link></li>
             </ul>
           </nav>
