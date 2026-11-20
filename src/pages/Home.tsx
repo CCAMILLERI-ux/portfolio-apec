@@ -174,7 +174,7 @@ export function Home() {
           <ul className="pf-list">
             <li>Ni refonte officielle d’apec.fr, ni audit : des pistes à tester.</li>
             <li>Aucune inscription, aucun rendez-vous réel, aucune donnée collectée.</li>
-            <li>Seules les modalités lisibles sur des captures d’écran sont affichées ; le reste est signalé « à vérifier ».</li>
+            <li>Les informations sur les services reprennent apec.fr ; ce qui reste à confirmer n’est pas affiché.</li>
           </ul>
           <Link to="/sources" className="pf-link">Sources, limites et mini-kit UI <ArrowRight size={16} /></Link>
         </div>

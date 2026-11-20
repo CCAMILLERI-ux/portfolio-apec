@@ -24,7 +24,7 @@ export function Coulisses({ events, hidden, children }: { events: string[]; hidd
             Événements prévus ici : {events.map((e, i) => (
               <span key={e}>{i > 0 && ', '}<code>{e}</code></span>
             ))}. Enregistrés uniquement dans ce navigateur, sans donnée personnelle ni traceur externe.
-            Ce journal vérifie l’instrumentation : ce ne sont <strong>pas</strong> des résultats d’expérimentation.
+            Ce journal illustre le plan de marquage : ce ne sont <strong>pas</strong> des résultats d’expérimentation.
           </p>
           <EventLog />
         </section>

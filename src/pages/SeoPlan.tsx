@@ -84,7 +84,7 @@ export function SeoPlan({ route }: { route: Route }) {
                     <li key={sv.label}>
                       {sv.label}{' '}
                       <span className={`badge ${sv.observed ? 'badge--ok' : 'badge--warn'}`}>
-                        {sv.observed ? 'Intitulé observé' : 'Intitulé générique à vérifier'}
+                        {sv.observed ? 'Service existant' : 'Intitulé provisoire'}
                       </span>
                     </li>
                   ))}
@@ -110,7 +110,7 @@ export function SeoPlan({ route }: { route: Route }) {
             <li>Commencer par examiner et optimiser les pages existantes avant de créer de nouveaux contenus.</li>
             <li>Ne pas confondre trafic, clic vers un service et service réellement utilisé : la conversion visée est la dernière colonne.</li>
             <li>SEO et accès direct se complètent : une personne qui connaît déjà l’Apec ira directement au service.</li>
-            <li>Ces rapprochements sont des pistes à valider ; les intitulés génériques et conditions sont à vérifier sur les sources officielles.</li>
+            <li>Ces rapprochements sont des pistes à valider ; les intitulés provisoires et les conditions sont à confirmer avec les équipes.</li>
           </ul>
         </Accordion>
       </section>
@@ -192,7 +192,7 @@ export function SeoPlan({ route }: { route: Route }) {
         <p className="small">
           Ce portfolio indépendant est en <code>noindex</code> : les éléments SEO présentés sont une démonstration de méthode,
           pas un dispositif destiné à positionner ce portfolio sur les requêtes de l’Apec. Aucune donnée interne de l’Apec
-          n’a été utilisée. Intitulés observés sur des captures d’apec.fr ; les autres sont génériques et à vérifier.
+          n’a été utilisée. Les intitulés de services reprennent apec.fr ; les autres sont provisoires.
         </p>
         <Link to="/" className="pf-link">Revenir aux cas du portfolio <ArrowRight size={16} /></Link>
       </section>

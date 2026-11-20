@@ -52,7 +52,7 @@ function ModalityLines({ service }: { service: Service }) {
         <li key={m.label}><strong>{m.label} :</strong> {m.value}</li>
       ))}
       {missing.length > 0 && (
-        <li className="sj-modal__tbc"><strong>À confirmer :</strong> {missing.join(', ')} (non vérifiés, non affichés)</li>
+        <li className="sj-modal__tbc"><strong>À confirmer :</strong> {missing.join(', ')} </li>
       )}
     </ul>
   )

@@ -225,7 +225,7 @@ export function Case3Coulisses() {
         <p>
           Page conseil originale, rédigée pour ce portfolio, sans statistique citée. Elle imite une page SEO pour la
           démonstration mais n’a pas vocation à être référencée (noindex). Les services mentionnés renvoient aux
-          fiches du prototype, établies d’après des captures d’apec.fr. La page « rémunération » est un contenu
+          fiches du prototype, rédigées à partir des pages d’apec.fr. La page « rémunération » est un contenu
           connexe court, pas une page de remplissage.
         </p>
       </CrBlock>
@@ -234,15 +234,15 @@ export function Case3Coulisses() {
           Même liste, même ordre et mêmes destinations dans la colonne et en bas d’article : d’abord les
           accompagnements humains (photos), puis les outils en autonomie (icônes). Le simulateur d’entretien prépare
           les <strong>réponses</strong> ; Odiapazon aide à préparer les <strong>questions</strong> et à clarifier ses
-          attentes (usage suggéré, à partir de la description observée : « se projeter pour préparer une
+          attentes (usage suggéré, à partir de sa présentation sur apec.fr : « se projeter pour préparer une
           collaboration réussie »).
         </p>
         <ul>
-          <li>Descriptions alignées sur les captures : « Entretien programmé » est une simulation pour un entretien prévu, pas un coaching général ; l’atelier porte sur les différents types d’entretien.</li>
-          <li>« Simulateur de salaire cadre » : intitulé, adresse et conditions à vérifier (absent des captures).</li>
-          <li>Outils : la fiche du prototype renvoie vers la page publique « Tous nos outils » d’apec.fr ; adresses directes et éventuelle connexion à un compte Apec non vérifiées (apec.fr protégé contre les accès automatisés).</li>
-          <li>Data Cadres, fiches métiers et fiches entreprises sont mentionnés dans le texte <strong>sans lien</strong> : leurs adresses n’ont pas pu être vérifiées.</li>
-          <li>Lien externe vérifié : convertisseur salaire brut / net de l’Urssaf (consulté le 20/11/2026).</li>
+          <li>Descriptions fidèles aux pages d’apec.fr : « Entretien programmé » est une simulation pour un entretien prévu, pas un coaching général ; l’atelier porte sur les différents types d’entretien.</li>
+          <li>« Simulateur de salaire cadre » : intitulé provisoire, à confirmer avec les équipes.</li>
+          <li>Outils : la fiche du prototype renvoie vers la page « Tous nos outils » d’apec.fr ; les liens directs et l’éventuelle connexion à un compte Apec seraient à préciser dans une vraie mise en œuvre.</li>
+          <li>Data Cadres, fiches métiers et fiches entreprises sont cités dans le texte ; les liens seraient ajoutés dans le CMS.</li>
+          <li>Lien externe : convertisseur salaire brut / net de l’Urssaf.</li>
           <li>Photos Unsplash (licence Unsplash) : situations illustratives, pas de vrais consultants Apec.</li>
         </ul>
       </CrBlock>
@@ -251,7 +251,7 @@ export function Case3Coulisses() {
         constat: (
           <p>
             Une personne qui tape « comment préparer un entretien » cherche d’abord une réponse, pas un
-            service. Sur les captures, les contenus et les services existent mais sont reliés surtout par
+            service. Sur apec.fr, les contenus et les services existent mais sont reliés surtout par
             des blocs latéraux génériques.
           </p>
         ),
@@ -300,7 +300,7 @@ export function Case3Coulisses() {
           <li>questions entretien d’embauche</li>
           <li>s’entraîner entretien d’embauche</li>
         </ul>
-        <p className="muted small">Aucun volume de recherche ni classement : à vérifier avec les outils SEO de l’équipe.</p>
+        <p className="muted small">Aucun volume de recherche ni classement : à évaluer avec les outils SEO de l’équipe.</p>
       </section>
 
       <section className="cr-block cr-block--wide">

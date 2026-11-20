@@ -107,21 +107,21 @@ function ServiceCoulisses({ service }: { service: Service }) {
   return (
     <>
       <h3 className="coulisses__case">Fiche service — {service.officialTitle}</h3>
-      <CrBlock title="Provenance des informations de cette fiche">
+      <CrBlock title="Sources de cette fiche">
         <ul>
           <li>
             Intitulé :{' '}
             {service.titleProvenance === 'capture'
-              ? <Badge tone="ok">observé sur une capture d’apec.fr</Badge>
-              : <Badge tone="warn">à vérifier sur apec.fr</Badge>}
+              ? <Badge tone="ok">repris d’apec.fr</Badge>
+              : <Badge tone="warn">provisoire, à confirmer</Badge>}
           </li>
           <li>Type d’aide affiché : {KIND_LABEL[service.kind]}.</li>
           <li>
             {missing.length
-              ? <>Modalités non vérifiées, donc <strong>non affichées</strong> : {missing.join(', ')}.</>
-              : 'Toutes les modalités affichées sont lisibles sur les captures.'}
+              ? <>Modalités à confirmer, donc <strong>non affichées</strong> : {missing.join(', ')}.</>
+              : 'Modalités reprises d’apec.fr.'}
           </li>
-          <li>Accroche, bénéfice et textes de la fiche : rédaction du prototype. Seuls l’intitulé et la description courte observés sont cités.</li>
+          <li>Accroche, bénéfice et textes de la fiche : rédaction proposée. Seuls l’intitulé et la description courte d’apec.fr sont cités.</li>
           {service.scopeNote && <li>{service.scopeNote}</li>}
           {service.depth === 'synthese' && <li>Fiche d’aperçu : le service n’est pas détaillé dans la démo.</li>}
           <li>Visuel : illustration dessinée pour le prototype, aucune photographie ni personne réelle.</li>
