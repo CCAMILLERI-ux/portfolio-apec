@@ -62,7 +62,13 @@ export function Case1({ route }: { route: Route }) {
   return (
     <ProtoLayout
       path={route.path}
-      caseLabel="Cas 1 · Choisir un service"
+      caseLabel="Cas 02 · Clarifier l’offre"
+      intro={{
+        kicker: 'Simulation d’A/B test UX/UI',
+        title: 'Optimiser l’expérience utilisateur et la conversion',
+        text: 'Comparer deux présentations des services pour faciliter le choix. Test envisageable avec AB Tasty.',
+        note: 'Prototype de démonstration — aucun résultat mesuré.',
+      }}
       barControl={variantSwitch}
       events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
       onReset={() => navigate('/cas-1', { replace: true })}
@@ -256,16 +262,16 @@ function Case1Coulisses() {
   const tbc = SERVICES.filter((s) => s.titleProvenance === 'a-verifier')
   return (
     <>
-      <h3 className="coulisses__case">Cas 1 — Rendre les services plus faciles à choisir</h3>
+      <h3 className="coulisses__case">Cas 02 — Clarifier l’offre pour faciliter le choix</h3>
       <CrBlock title="Comment lire cette démo">
         <p>
           La barre du haut bascule entre quatre variantes sur les mêmes services : <strong>Existant observé</strong>,
-          <strong> Piste 1</strong>, <strong>Piste 2</strong> et <strong>Piste 3</strong>. C’est une comparaison de variantes, <strong>pas un test A/B</strong>.
+          <strong> Piste 1</strong>, <strong>Piste 2</strong> et <strong>Piste 3</strong>. C’est une simulation : aucun test A/B n’a été mené.
         </p>
         <p>
-          La vue « existant » reconstruit le motif de cartes vu sur apec.fr (rubrique « Entretiens de recrutement »,
-          captures de novembre 2026). Le regroupement par situation n’existe pas dans les captures : c’est lui-même une
-          piste. Les descriptions absentes des captures ne sont pas inventées.
+          La vue « existant » reprend la présentation actuelle des services sur apec.fr (rubrique « Entretiens de
+          recrutement », novembre 2026). Le regroupement par situation n’existe pas aujourd’hui : c’est lui-même une
+          piste.
         </p>
       </CrBlock>
       <CrBlock title="Les pistes : ce que chacune change">
@@ -286,14 +292,14 @@ function Case1Coulisses() {
         </div>
         <p>
           <strong>Repères visuels :</strong> chaque piste reprend un type de carte du mini-kit — carte service blanche
-          (piste 1), carte thématique bleue d’après les cartes « Nos consultantes et nos consultants » observées sur
-          apec.fr (piste 2), carte éditoriale avec photo (piste 3).
+          (piste 1), carte thématique bleue inspirée des cartes « Nos consultantes et nos consultants » d’apec.fr
+          (piste 2), carte éditoriale avec photo (piste 3).
         </p>
         <p>
           <strong>Ce que la piste 2 cherche à améliorer :</strong> la piste 1 montre mieux chaque service, mais laisse le
           visiteur comparer seul. La piste 2 formule le critère de choix (« Idéal si… »), présente les services comme des
           options comparables, traite l’aide humaine comme une option à part entière et relie le choix à des contenus
-          utiles (maillage vers le cas 3). Hypothèse à tester : moins d’hésitation, pas forcément plus de clics.
+          utiles (maillage vers le cas 01). Hypothèse à tester : moins d’hésitation, pas forcément plus de clics.
         </p>
         <p>
           <strong>Ce que la piste 3 explore :</strong> les ateliers sont aujourd’hui présentés comme les autres services,
@@ -305,7 +311,7 @@ function Case1Coulisses() {
       </CrBlock>
       <CrBlock title="Photographies de la piste 3">
         <p>
-          Photos Unsplash, licence Unsplash (usage gratuit, sans autorisation requise), sans métadonnées. Elles
+          Photos Unsplash, licence Unsplash (usage gratuit, sans autorisation requise). Elles
           illustrent des situations et ne représentent ni des salariés, ni des consultants, ni des usagers de l’Apec.
           Les dates de sessions affichées sont fictives. Détail des sources : page « Sources et limites ».
         </p>
@@ -314,7 +320,7 @@ function Case1Coulisses() {
         rubrics={{
           constat: (
             <p>
-              Sur les pages observées, les services sont présentés par thème, avec un intitulé, une phrase et deux
+              Sur apec.fr, les services sont présentés par thème, avec un intitulé, une phrase et deux
               boutons. Les modalités (format, durée, gratuité, public) n’apparaissent qu’une fois la fiche ouverte.
               Ce constat ne prouve pas une baisse de conversion.
             </p>
@@ -329,7 +335,7 @@ function Case1Coulisses() {
             <ul>
               <li>Cinq entrées par situation, modifiables, et une vue « tous nos services ».</li>
               <li>Accroche orientée bénéfice, distincte de l’intitulé existant, conservé.</li>
-              <li>Visuels en aplats et étiquette carrée, reprenant le langage des captures.</li>
+              <li>Visuels en aplats et étiquette carrée, reprenant le langage graphique d’apec.fr.</li>
               <li>Piste 2 : critère « Idéal si… », aide humaine en option, conseils reliés.</li>
             </ul>
           ),
@@ -363,14 +369,14 @@ function Case1Coulisses() {
           </tbody>
         </table>
       </CrBlock>
-      <CrBlock title={<>Informations à vérifier <Badge tone="warn">Non contrôlé</Badge></>}>
+      <CrBlock title={<>Points à confirmer avec les équipes <Badge tone="warn">Provisoire</Badge></>}>
         <p>
-          Seules les modalités lisibles sur les captures sont affichées. Les intitulés suivants n’ont pas pu être
-          contrôlés sur apec.fr ; leurs fiches renvoient vers le site officiel. Les formulations « Idéal si… » sont des
-          propositions rédactionnelles.
+          Les formats, durées et conditions ne sont affichés que lorsqu’ils figurent sur apec.fr. Les intitulés
+          suivants sont provisoires ; leurs fiches renvoient vers le site officiel. Les formulations « Idéal si… » sont
+          des propositions rédactionnelles.
         </p>
         <ul className="inline-list">{tbc.map((s) => <li key={s.id}>{s.officialTitle}</li>)}</ul>
-        <p>La présélection est soumise à des conditions (TPE/PME notamment) à vérifier : elle n’est pas présentée comme ouverte à tous.</p>
+        <p>La présélection est soumise à des conditions (TPE/PME notamment), à préciser : elle n’est pas présentée comme ouverte à tous.</p>
       </CrBlock>
     </>
   )

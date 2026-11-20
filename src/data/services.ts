@@ -76,12 +76,12 @@ export const OFFICIAL_CANDIDATE_URL = 'https://www.apec.fr/candidat.html'
 
 const TBC = (label: Modality['label']): Modality => ({
   label,
-  value: `${label} à vérifier`,
+  value: `${label} à confirmer`,
   provenance: 'a-verifier',
 })
 
 const SYNTHESIS_NOTE =
-  "Fiche d'aperçu : ce service n'est pas détaillé dans la démo. Intitulé et modalités à vérifier sur le site officiel."
+  "Fiche d'aperçu : ce service n'est pas détaillé dans la démo. Intitulé et modalités à confirmer avec les équipes ; le lien renvoie vers le site officiel."
 
 export const SERVICES: Service[] = [
   /* ---------------- Parcours entretien (fiches détaillées) ---------------- */
@@ -295,7 +295,7 @@ export const SERVICES: Service[] = [
     observedSummary: 'Managers, candidats à l’aide de cet outil, projetez-vous pour préparer une collaboration réussie !',
     observedCta: 'Commencez',
     scopeNote:
-      'L’outil n’est pas reproduit dans la démo. Le lien ouvre la page publique des outils d’apec.fr (site externe) ; l’adresse directe de l’outil et la nécessité d’un compte restent à vérifier.',
+      'L’outil n’est pas reproduit dans la démo. Le lien ouvre la page publique des outils d’apec.fr (site externe) ; le lien direct vers l’outil et l’éventuelle connexion à un compte seraient précisés lors de la mise en œuvre.',
   },
   {
     id: 'simulateur-salaire',
@@ -310,7 +310,7 @@ export const SERVICES: Service[] = [
     action: { kind: 'external', label: 'Trouver l’outil sur apec.fr', url: OFFICIAL_TOOLS_URL },
     depth: 'synthese',
     scopeNote:
-      'Fiche d’aperçu : intitulé, adresse directe et conditions d’accès (compte Apec éventuel) à vérifier sur le site officiel. Le lien ouvre la page publique des outils d’apec.fr.',
+      'Fiche d’aperçu : intitulé provisoire ; lien direct et conditions d’accès (compte Apec éventuel) à confirmer avec les équipes. Le lien ouvre la page publique des outils d’apec.fr.',
   },
 
   /* ---------------- Fiches synthétiques (intitulés à vérifier) ---------------- */

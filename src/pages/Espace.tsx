@@ -17,7 +17,7 @@ export function Espace({ path }: { path: string }) {
   return (
     <ProtoLayout
       path={path}
-      caseLabel="Cas 2 · Mon espace"
+      caseLabel="Cas 03 · Mon espace"
       events={CASE2_EVENTS}
       onReset={() => setState(INITIAL_ONBOARDING)}
       coulisses={<Case2Coulisses />}

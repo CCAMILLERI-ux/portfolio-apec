@@ -332,7 +332,7 @@ export function Case2({ path }: { path: string }) {
   return (
     <ProtoLayout
       path={path}
-      caseLabel="Cas 2 · Accueil guidé"
+      caseLabel="Cas 03 · Inscription accompagnée"
       events={CASE2_EVENTS}
       barNotice={barNotice}
       onReset={() => setState(INITIAL_ONBOARDING)}

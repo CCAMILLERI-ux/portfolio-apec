@@ -5,30 +5,30 @@ import { Link } from '../lib/router'
 const CASES = [
   {
     n: 1,
+    to: '/cas-3',
+    title: 'De la recherche Google à l’utilisation des services',
+    need: 'Un article optimisé pour le SEO qui oriente vers les outils et accompagnements adaptés.',
+    skills: ['SEO éditorial', 'Maillage interne', 'Acquisition'],
+    duration: '1 min 30',
+    thumb: 'article',
+  },
+  {
+    n: 2,
     to: '/cas-1',
-    title: 'Rendre les services plus faciles à choisir',
-    need: 'Un visiteur doit trouver en quelques secondes les services qui correspondent à sa situation.',
+    title: 'Clarifier l’offre pour faciliter le choix',
+    need: 'Une simulation d’A/B test UX/UI pour optimiser la conversion.',
     skills: ['UX/UI', 'Animation du site', 'Hypothèse CRO'],
     duration: '1 min 30',
     thumb: 'services',
   },
   {
-    n: 2,
+    n: 3,
     to: '/cas-2',
-    title: 'Guider un nouvel inscrit',
-    need: 'Une personne qui vient de créer son compte doit savoir par quoi commencer, sans être obligée de suivre un guidage.',
+    title: 'Accompagner l’utilisateur à chaque étape de son inscription',
+    need: 'Un tunnel guidé pour faciliter la création de compte et l’accès aux services.',
     skills: ['Parcours utilisateur', 'Recommandation explicable', 'Activation'],
     duration: '2 min',
     thumb: 'onboarding',
-  },
-  {
-    n: 3,
-    to: '/cas-3',
-    title: 'Relier une recherche à un accompagnement',
-    need: 'Une personne qui cherche « comment préparer un entretien » doit obtenir une réponse utile, puis découvrir l’aide adaptée.',
-    skills: ['SEO éditorial', 'Maillage interne', 'Acquisition'],
-    duration: '1 min 30',
-    thumb: 'article',
   },
 ] as const
 
@@ -164,9 +164,9 @@ export function Home() {
         <div className="pf-panel">
           <h2>Parcours conseillé en cinq minutes</h2>
           <ol className="pf-steps">
-            <li><strong>Cas 2 · 2 min</strong> — « Me guider », cochez « Préparer un entretien », réservez une session, puis ouvrez « Mes prochaines étapes ».</li>
-            <li><strong>Cas 1 · 1 min 30</strong> — changez de situation, puis comparez « Existant observé », « Piste 1 » et « Piste 2 » depuis la barre de démo, en haut de page.</li>
-            <li><strong>Cas 3 · 1 min 30</strong> — lisez l’introduction, suivez un lien vers un accompagnement et revenez ; cliquez sur « Comprendre ce cas ».</li>
+            <li><strong>Cas 01 · 1 min 30</strong> — lisez l’introduction, suivez un lien vers un accompagnement et revenez ; cliquez sur « Comprendre ce cas ».</li>
+            <li><strong>Cas 02 · 1 min 30</strong> — changez de situation, puis comparez « Existant observé » et les pistes 1 à 3 depuis la barre de démo, en haut de page.</li>
+            <li><strong>Cas 03 · 2 min</strong> — « Me guider », cochez « Préparer un entretien », réservez une session, puis ouvrez « Mes prochaines étapes ».</li>
           </ol>
         </div>
         <div className="pf-panel pf-panel--soft">
@@ -174,7 +174,7 @@ export function Home() {
           <ul className="pf-list">
             <li>Ni refonte officielle d’apec.fr, ni audit : des pistes à tester.</li>
             <li>Aucune inscription, aucun rendez-vous réel, aucune donnée collectée.</li>
-            <li>Seules les modalités lisibles sur des captures d’écran sont affichées ; le reste est signalé « à vérifier ».</li>
+            <li>Les informations sur les services reprennent apec.fr ; ce qui reste à confirmer n’est pas affiché.</li>
           </ul>
           <Link to="/sources" className="pf-link">Sources, limites et mini-kit UI <ArrowRight size={16} /></Link>
         </div>

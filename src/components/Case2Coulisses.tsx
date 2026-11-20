@@ -12,7 +12,7 @@ export const CASE2_EVENTS = [
 export function Case2Coulisses() {
   return (
     <>
-      <h3 className="coulisses__case">Cas 2 — Guider un nouvel inscrit</h3>
+      <h3 className="coulisses__case">Cas 03 — Accompagner l’utilisateur à chaque étape de son inscription</h3>
       <CrBlock title="Scénario et cadre de la démo">
         <ul>
           <li>

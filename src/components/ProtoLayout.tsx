@@ -24,6 +24,8 @@ interface Props {
   /** Rappel contextuel (ex. réservation simulée), dans la barre du haut. */
   barNotice?: string
   onReset?: () => void
+  /** Bloc d'introduction compact, hors maquette, sous la barre de démo. */
+  intro?: { kicker: string; title: string; text: string; note?: string }
 }
 
 /**
@@ -32,7 +34,7 @@ interface Props {
  * - Au centre : la maquette utilisateur, inspirée d'apec.fr, sans aucune explication.
  * - En bas : « Coulisses du prototype » (méthode, provenance, journal).
  */
-export function ProtoLayout({ path, caseLabel, children, coulisses, events, barControl, barNotice, onReset }: Props) {
+export function ProtoLayout({ path, caseLabel, children, coulisses, events, barControl, barNotice, onReset, intro }: Props) {
   const [open, setOpen] = useState(false)
   const [status, setStatus] = useState('')
 
@@ -93,6 +95,17 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
           )}
         </div>
       </div>
+
+      {intro && (
+        <section className="demo-intro" aria-labelledby="demo-intro-title">
+          <div className="demo-intro__inner">
+            <p className="demo-intro__kicker">{intro.kicker}</p>
+            <h2 id="demo-intro-title" className="demo-intro__title">{intro.title}</h2>
+            <p className="demo-intro__text">{intro.text}</p>
+            {intro.note && <p className="demo-intro__note">{intro.note}</p>}
+          </div>
+        </section>
+      )}
 
       <div className="maquette">
         <header className="proto-header">

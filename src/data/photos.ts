@@ -25,6 +25,7 @@ const P = (file: string, unsplashId: string, alt: string): Photo => ({
 export const PHOTOS = {
   atelierPostIt: P('atelier-post-it', '1552664730-d307ca884978', 'Une animatrice présente des idées sur un mur de post-it à un petit groupe assis autour d’une table.'),
   atelierOrdinateurs: P('atelier-ordinateurs', '1542744173-8e7e53415bb0', 'Un groupe travaille sur des ordinateurs portables autour d’une grande table, un intervenant au fond de la salle.'),
+  entretienRecrutement: P('entretien-recrutement', '1521791136064-7986c2920216', 'Poignée de main entre deux personnes en chemise, dans un bureau.'),
   entretienFaceAFace: P('entretien-face-a-face', '1551836022-d5d88e9218df', 'Deux femmes échangent de part et d’autre d’une table de réunion, l’une prend des notes.'),
   relectureEcran: P('relecture-ecran', '1531482615713-2afd69097998', 'Deux personnes relisent ensemble un document à l’écran d’un ordinateur.'),
   conversation: P('conversation', '1517245386807-bb43f82c33c4', 'Gros plan sur les mains de deux personnes en discussion, devant un ordinateur portable.'),
@@ -43,7 +44,7 @@ export const PHOTOS = {
 export const SERVICE_PHOTO: Record<string, Photo> = {
   'atelier-entretiens': PHOTOS.atelierPostIt,
   'atelier-iag': PHOTOS.atelierOrdinateurs,
-  'entretien-programme': PHOTOS.entretienFaceAFace,
+  'entretien-programme': PHOTOS.entretienRecrutement,
   candidature: PHOTOS.relectureEcran,
   'simulateur-entretien': PHOTOS.posteDeTravail,
   'creer-cv': PHOTOS.posteDeTravail,

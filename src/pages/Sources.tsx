@@ -18,14 +18,14 @@ import { Link } from '../lib/router'
 const TOKENS = [
   ['--brand-navy', '#252555', 'Texte principal, en-tête, pied de page, bandeaux'],
   ['--brand-yellow', '#FFC400', 'Boutons, aplats de visuels, pictogrammes sur bleu nuit'],
-  ['--brand-blue', '#026096', 'Bleu secondaire : cartes, bandeaux, liens (prélevé sur capture)'],
+  ['--brand-blue', '#026096', 'Bleu secondaire : cartes, bandeaux, liens (relevé sur apec.fr)'],
   ['--brand-blue-hover', '#024D78', 'Survol et état actif des éléments bleus'],
   ['--brand-blue-tint', '#EBF2F7', 'Fonds clairs teintés (encadrés, « Pourquoi ce service ? »)'],
   ['--brand-blue-soft', '#8DB7D0', 'Accent clair des illustrations (remplace l’ancien cyan)'],
   ['--surface-white', '#FFFFFF', 'Fond'],
   ['--surface-muted', '#F5F5FA', 'Fonds secondaires'],
   ['--border-neutral', '#D1D3DB', 'Bordures'],
-  ['--text-secondary', '#6B7280', 'Valeur de départ ; #5F6673 utilisé pour le texte'],
+  ['--text-secondary', '#6B7280', 'Gris secondaire ; #5F6673 pour le texte, plus lisible'],
 ]
 
 const EXTERNAL = [OFFICIAL_CANDIDATE_URL, OFFICIAL_RECRUITER_URL, OFFICIAL_SERVICES_URL, OFFICIAL_TOOLS_URL]
@@ -49,25 +49,24 @@ export function Sources() {
           <ul className="pf-list">
             <li>Portfolio de candidature indépendant : propositions exploratoires, sans affiliation officielle à l’Apec.</li>
             <li>Aucune inscription, aucune réservation réelle, aucune donnée envoyée. Sauvegarde locale de démonstration uniquement.</li>
-            <li>Les écrans des prototypes ne contiennent aucune explication. Une barre de démo, en haut de page et hors maquette, regroupe le retour au portfolio, le choix de variante, la réinitialisation, l’accès aux explications et les rappels de réservation simulée. Les explications sont en bas de page, dans « Coulisses du prototype ».</li>
-            <li>Toutes les pages portent une consigne <code>noindex</code>. Aucun analytics ni traceur externe.</li>
-            <li>La bascule « Existant observé / Piste exploratoire » compare des variantes ; ce n’est pas un test A/B.</li>
+            <li>Les écrans des prototypes restent dédiés à l’expérience utilisateur. Une barre de démonstration, en haut de page, permet de revenir au portfolio, de changer de variante, de réinitialiser et d’ouvrir « Comprendre ce cas », où sont présentés mes choix.</li>
+            <li>Le portfolio n’est pas destiné à être référencé par les moteurs de recherche. Aucun outil de mesure d’audience ni traceur externe.</li>
+            <li>La comparaison « Existant observé » et pistes illustre une démarche d’A/B test ; aucun test n’a été mené.</li>
           </ul>
         </section>
 
         <section aria-labelledby="provenance">
           <h2 id="provenance">Provenance des informations</h2>
           <p>
-            Références : captures d’écran de pages d’apec.fr (novembre 2026), utilisées comme références visuelles et
-            non intégrées au site, car elles contiennent des données personnelles. Les pages publiques n’étaient pas
-            accessibles depuis l’environnement de développement. <strong>Seules les modalités lisibles sur les captures
-            sont affichées</strong> ; les autres ne sont pas montrées et restent à vérifier.
+            Les prototypes s’appuient sur les pages d’apec.fr consultées en novembre 2026. Les formats, durées et
+            conditions des services ne sont affichés que lorsqu’ils figurent sur ces pages ; les autres sont à confirmer
+            avec les équipes de l’Apec.
           </p>
-          <h3>Intitulés observés sur les captures ({observed.length})</h3>
+          <h3>Services repris d’apec.fr</h3>
           <ul className="inline-list">{observed.map((s) => <li key={s.id}>{s.officialTitle}</li>)}</ul>
-          <h3>Intitulés à vérifier ({tbc.length})</h3>
+          <h3>Intitulés provisoires, à confirmer avec les équipes</h3>
           <ul className="inline-list">{tbc.map((s) => <li key={s.id}>{s.officialTitle}</li>)}</ul>
-          <h3>Pages officielles à consulter</h3>
+          <h3>Pages officielles de référence</h3>
           <ul className="pf-list">
             {EXTERNAL.map((u) => (
               <li key={u}>
@@ -83,38 +82,30 @@ export function Sources() {
         <section aria-labelledby="assets">
           <h2 id="assets">Visuels et typographie</h2>
           <ul className="pf-list">
-            <li>Illustrations en aplats et pictogrammes : dessinés en SVG pour ce prototype, dans les couleurs observées. Aucun portrait, aucune photographie et aucun logo de l’Apec.</li>
+            <li>Illustrations et pictogrammes dessinés pour ce prototype, dans les couleurs d’apec.fr. Aucun logo ni visuel de l’Apec n’est reproduit.</li>
             <li>
-              Photographies (piste 3 du cas 1 et carte atelier du cas 3) : <strong>Unsplash, licence Unsplash</strong> (usage
+              Photographies (piste 3 du cas 02 et cartes d’accompagnement du cas 01) : <strong>Unsplash, licence Unsplash</strong> (usage
               gratuit, sans autorisation requise —{' '}
               <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">unsplash.com/license<span className="visually-hidden"> (site externe, nouvel onglet)</span></a>).
-              Fichiers recadrés en 960 × 600, sans métadonnées. Elles illustrent des situations et ne représentent ni des
-              salariés, ni des consultants, ni des usagers de l’Apec. Le nom des photographes reste à confirmer sur la page de chaque photo.
+              Elles illustrent des situations et ne représentent ni des salariés, ni des consultants, ni des usagers de l’Apec.
             </li>
-            <li>Pas de témoignage ni de chiffre de satisfaction : aucune source autorisée n’était disponible.</li>
-            <li>Prototypes : Montserrat (SIL Open Font License), substitution provisoire, la police exacte d’apec.fr n’étant pas confirmée.</li>
+            <li>Pas de témoignage ni de chiffre de satisfaction : je n’en présente que s’ils sont réels et sourcés.</li>
+            <li>Prototypes : Montserrat (SIL Open Font License), choisie pour sa proximité avec la typographie d’apec.fr.</li>
             <li>Portfolio : DM Serif Display et Inter (SIL Open Font License), volontairement distincts de l’univers Apec.</li>
           </ul>
         </section>
 
         <section aria-labelledby="photos">
-          <h2 id="photos">Photographies utilisées</h2>
-          <div className="table-scroll">
-            <table className="data-table">
-              <caption className="visually-hidden">Fichiers photo et identifiants Unsplash</caption>
-              <thead><tr><th scope="col">Fichier</th><th scope="col">Identifiant Unsplash</th><th scope="col">Description (texte alternatif)</th></tr></thead>
-              <tbody>
-                {ALL_PHOTOS.map((p) => (
-                  <tr key={p.file}><td><code>{p.file}</code></td><td><code>photo-{p.unsplashId}</code></td><td>{p.alt}</td></tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <h2 id="photos">Crédits photo</h2>
+          <p>Photographies Unsplash, licence Unsplash :</p>
+          <ul className="pf-list">
+            {ALL_PHOTOS.map((p) => <li key={p.file}>{p.alt}</li>)}
+          </ul>
         </section>
 
         <section aria-labelledby="kit">
           <h2 id="kit">Mini-kit UI des prototypes</h2>
-          <p><Badge tone="warn">Non officiel</Badge> Styles observés sur apec.fr et composants proposés — valeurs estimées à partir des captures, pas des tokens officiels.</p>
+          <p><Badge tone="warn">Non officiel</Badge> Styles relevés sur apec.fr et composants proposés — valeurs indicatives, pas une charte officielle.</p>
         </section>
       </div>
 
@@ -130,11 +121,11 @@ export function Sources() {
             ))}
           </ul>
           <p className="small">
-            Contrastes calculés (formule WCAG 2) : bleu nuit sur jaune ≈ 8,9:1 ; bleu nuit sur blanc ≈ 14,2:1 ; blanc sur bleu #026096 ≈ 6,7:1 ; bleu #026096 sur blanc ≈ 6,7:1. Le bleu nuit n’est jamais utilisé en texte sur le bleu (≈ 2,1:1) : le texte y est blanc. #6B7280 donne 4,45:1 sur #F5F5FA : le texte secondaire utilise #5F6673 (≥ 5,3:1). Le
-            jaune n’est jamais une couleur de texte sur fond blanc. Ces calculs ne valent pas audit RGAA.
+            Contrastes contrôlés : bleu nuit sur jaune ≈ 8,9:1 ; bleu nuit sur blanc ≈ 14,2:1 ; blanc sur bleu #026096 ≈ 6,7:1 ; bleu #026096 sur blanc ≈ 6,7:1. Le bleu nuit n’est jamais utilisé en texte sur le bleu (≈ 2,1:1) : le texte y est blanc. #6B7280 donne 4,45:1 sur #F5F5FA : le texte secondaire utilise #5F6673 (≥ 5,3:1). Le
+            jaune n’est jamais une couleur de texte sur fond blanc. Ces contrôles ne remplacent pas un audit RGAA.
           </p>
 
-          <h3>Éléments graphiques repris des captures</h3>
+          <h3>Éléments graphiques repris d’apec.fr</h3>
           <div className="kit-row kit-row--top">
             <div className="kit-visual">
               <Illustration name="groupe" tone="yellow" className="svc-visual__img" />
@@ -149,14 +140,14 @@ export function Sources() {
               <KindTag kind="outil" />
             </div>
           </div>
-          <p className="small">Aplats jaune / bleu / bleu nuit selon le type d’aide ; étiquette carrée d’après le motif « Repères » observé sur les visuels d’articles.</p>
+          <p className="small">Aplats jaune / bleu / bleu nuit selon le type d’aide ; étiquette carrée inspirée du motif « Repères » des articles d’apec.fr.</p>
           <div className="kit-navy">
             <label className="sit-tile is-selected"><Search size={34} className="sit-tile__icon" /><span className="sit-tile__label">Tuile sélectionnée</span></label>
             <label className="sit-tile"><Search size={34} className="sit-tile__icon" /><span className="sit-tile__label">Tuile au repos</span></label>
           </div>
 
           <h3>Boutons et états</h3>
-          <p className="small muted">Survol et focus clavier : à tester à la souris et avec Tab. Les états non visibles sur les captures sont des propositions.</p>
+          <p className="small muted">Survol et focus clavier : à tester à la souris et avec Tab. Certains états sont des propositions.</p>
           <div className="kit-row">
             <button type="button" className="btn btn--primary">Principal</button>
             <button type="button" className="btn btn--outline">Secondaire</button>
@@ -189,12 +180,12 @@ export function Sources() {
 
       <div className="pf-container pf-section pf-prose">
         <section aria-labelledby="restant">
-          <h2 id="restant">Ce qui reste à vérifier</h2>
+          <h2 id="restant">À valider avec les équipes</h2>
           <ul className="pf-list">
-            <li>Intitulés et modalités des services « à vérifier », dont les conditions de la présélection pour les TPE/PME.</li>
-            <li>Valeurs CSS exactes, police et états d’interface d’apec.fr.</li>
+            <li>Intitulés et modalités des services provisoires, dont les conditions de la présélection pour les TPE/PME.</li>
+            <li>Alignement sur la charte officielle : couleurs, typographie et composants.</li>
             <li>Audit d’accessibilité complet (lecteurs d’écran, RGAA) : seuls des contrôles de base ont été faits.</li>
-            <li>Hypothèses SEO (requêtes, intentions) avec les outils et données de l’équipe.</li>
+            <li>Hypothèses SEO (requêtes, intentions) avec les outils et les données de l’équipe.</li>
           </ul>
           <Link to="/" className="pf-link">Revenir aux trois cas <ArrowRight size={16} /></Link>
         </section>

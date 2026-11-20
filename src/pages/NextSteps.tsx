@@ -31,7 +31,7 @@ export function NextSteps({ path }: { path: string }) {
   return (
     <ProtoLayout
       path={path}
-      caseLabel="Cas 2 · Accueil guidé"
+      caseLabel="Cas 03 · Inscription accompagnée"
       events={CASE2_EVENTS}
       barNotice={hasBooking ? 'Rendez-vous simulés — aucun rendez-vous réel n’a été réservé.' : undefined}
       onReset={() => setState(INITIAL_ONBOARDING)}
