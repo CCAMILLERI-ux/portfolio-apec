@@ -185,6 +185,7 @@ export function Case3({ path }: { path: string }) {
           </article>
 
           <aside className="sidebar" aria-label="Pour aller plus loin">
+            <SolutionsCompact />
             <h2 className="sidebar__heading">Sur le même sujet</h2>
             <SideArticleCard
               to="/conseil/remuneration"
@@ -193,7 +194,6 @@ export function Case3({ path }: { path: string }) {
               date="19/11/2026"
               rubric="Repères"
             />
-            <SolutionsCompact />
           </aside>
         </div>
 

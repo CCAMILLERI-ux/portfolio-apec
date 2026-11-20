@@ -1228,3 +1228,4 @@ legend { padding: 0; }
 .acard--lg .acard__photo { flex: 1 1 auto; height: auto; min-height: 230px; }
 .acard--lg .acard__body { flex: 0 0 auto; }
 @media (max-width: 760px) { .acard--lg .acard__photo { flex: none; height: 200px; min-height: 0; } }
+.sidebar > .sol-side:first-child { margin-top: 0; }
