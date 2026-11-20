@@ -1014,7 +1014,7 @@ legend { padding: 0; }
 .pf-header:has(.pf-brand--compact) .pf-header__inner { min-height: 60px; }
 .pf-intro {
   display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: var(--s3) var(--s4);
-  align-items: end; padding-top: 20px; padding-bottom: 20px;
+  align-items: start; padding-top: 20px; padding-bottom: 20px;
 }
 .pf-intro__kicker { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pf-accent); margin: 0 0 var(--s1); }
 .pf .pf-intro__h1 { margin: 0; display: flex; flex-direction: column; gap: 6px; }
@@ -1308,3 +1308,101 @@ legend { padding: 0; }
 .pf-route li, .pf-route p { text-wrap: pretty; }
 .pf-route__note { margin: 0; font-size: 0.875rem; color: var(--pf-muted); }
 .pf h1, .pf h2, .pf h3, .pf .pf-case__title { text-wrap: balance; }
+
+/* Accueil : intro alignée en haut, phrase de cadre, plan SEO sous les cas, réassurance en pied de page */
+.pf-intro__about { margin-top: 0; }
+.pf-frame-note { margin: var(--s2) 0 0; font-size: 0.8125rem; color: var(--pf-muted); text-wrap: pretty; }
+.pf-cases-wrap { padding-bottom: var(--s3); }
+.pf-proof { background: #ece4d6; border-top: 1px solid var(--pf-line); padding: var(--s4) 0 var(--s4); margin-top: var(--s3); }
+.pf .pf-proof__title { font-size: 1.375rem; margin: 0 0 var(--s2); }
+.pf-proof .pf-impact__card { padding: 14px 16px; border-radius: 8px; border-top-width: 3px; }
+.pf-proof .pf-impact__figure { font-size: 2.125rem; margin: 2px 0 4px !important; }
+.pf-proof .pf-impact__done, .pf-proof .pf-impact__apec { font-size: 0.8125rem; line-height: 1.45; }
+.pf-proof .pf-impact__apec { margin-top: 8px !important; padding-top: 8px; }
+.pf-proof__cta { margin: var(--s2) 0 0; }
+
+/* Page « Design system & prototypage » */
+.ds-page { max-width: var(--container); }
+.ds-page p, .ds-page li { text-wrap: pretty; }
+.ds-page h2 { margin-top: var(--s4); }
+.ds-page section:first-child h2 { margin-top: 0; }
+.ds-flow { list-style: none; padding: 0; margin: var(--s2) 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--s2); counter-reset: none; }
+.ds-flow__step { position: relative; background: var(--pf-card); border: 1px solid var(--pf-line); border-top: 4px solid var(--pf-accent); border-radius: 8px; padding: var(--s2); }
+.ds-flow__step:not(:last-child)::after { content: '→'; position: absolute; right: -14px; top: 22px; color: var(--pf-accent); font-weight: 700; }
+.ds-flow__step p { margin: 0; font-size: 0.875rem; color: var(--pf-muted); }
+.ds-flow__n { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 4px; background: var(--pf-ink); color: var(--pf-bg); font-size: 0.8125rem; font-weight: 700; margin-bottom: 8px; }
+.pf .ds-flow__title { font-size: 1rem; margin: 0 0 6px; }
+@media (max-width: 960px) {
+  .ds-flow { grid-template-columns: 1fr; }
+  .ds-flow__step:not(:last-child)::after { content: '↓'; right: auto; left: 22px; top: auto; bottom: -21px; }
+}
+.ds-xp p { max-width: 72ch; font-size: 1.0625rem; }
+.ds-lead { max-width: 72ch; }
+.kit-frame h3 { scroll-margin-top: var(--s3); }
+.ds-type { display: grid; gap: 8px; margin-bottom: var(--s2); }
+.ds-type p { margin: 0; }
+.proto .ds-type__h1 { font-size: 2rem; font-weight: 600; line-height: 1.2; }
+.proto .ds-type__h2 { font-size: 1.5rem; font-weight: 600; }
+.ds-type__body { font-size: 1rem; max-width: 60ch; }
+.ds-type__meta { font-size: 0.875rem; color: var(--text-secondary-a11y); }
+.ds-a11y { list-style: none; padding: 0; margin: var(--s2) 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
+@media (max-width: 760px) { .ds-a11y { grid-template-columns: 1fr; } }
+.ds-a11y li { background: var(--pf-card); border: 1px solid var(--pf-line); border-radius: 8px; padding: var(--s2) 20px; }
+.ds-a11y p { margin: 0; font-size: 0.9375rem; }
+.pf .ds-a11y__title { font-size: 1rem; margin: 0 0 4px; }
+.ds-sources { margin: var(--s5) 0 var(--s3); background: var(--pf-card); border: 1px solid var(--pf-line); border-radius: 8px; padding: 20px var(--s3); font-size: 0.875rem; scroll-margin-top: var(--s3); }
+.pf .ds-sources__title { font-size: 1.0625rem; margin: 0 0 var(--s1); }
+.ds-sources p { margin: 0 0 var(--s1); }
+.ds-sources__links { list-style: none; padding: 0; margin: 0 0 var(--s1); display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.ds-sources__links a { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; }
+.ds-sources__note { color: var(--pf-muted); margin-bottom: 0 !important; }
+
+/* Cas 02 — vue « Tous nos services » regroupée par situation */
+.grp-nav { margin: 0 0 var(--s3); }
+.grp-nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.proto .grp-nav__link { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 12px; border: 1px solid var(--border-neutral); background: #fff; color: var(--brand-navy); text-decoration: none; font-size: 0.875rem; font-weight: 600; }
+.proto .grp-nav__link:hover { border-color: var(--brand-navy); }
+.grp-nav__link svg { color: var(--brand-blue); flex: none; }
+.grp { margin-top: var(--s4); }
+.grp:first-of-type { margin-top: 0; }
+.proto .grp__title { display: flex; align-items: center; gap: 12px; margin: 0 0 var(--s2); padding: 12px 16px; background: var(--brand-navy); color: #fff; font-size: 1.25rem; }
+.grp__icon { color: var(--brand-yellow); flex: none; }
+.grp--recruiter { margin-top: var(--s6); padding-top: var(--s4); border-top: 4px solid var(--brand-navy); }
+.grp__audience { margin: 0 0 var(--s1); font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-blue-deep); }
+.grp-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 8px; }
+.grp-format { display: inline-block; padding: 2px 8px; border: 1px solid var(--brand-navy); background: #fff; color: var(--brand-navy); font-size: 0.75rem; font-weight: 700; }
+.grp-also { font-size: 0.8125rem; font-style: italic; color: var(--text-secondary-a11y); }
+.theme-card .grp-meta { margin-bottom: 10px; }
+.theme-card .grp-also { color: #fff; opacity: 0.92; }
+.observed-card .grp-meta { margin-top: -4px; }
+.theme-grid--help { margin-top: var(--s3); }
+@media (max-width: 600px) { .proto .grp__title { font-size: 1.0625rem; } .grp--recruiter { margin-top: var(--s5); } }
+
+/* Cas 03 — tuiles de choix à grandes icônes au trait */
+.choice--icon { flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px 44px 16px 18px; min-height: 132px; }
+.choice--icon.is-selected { padding: 17px 43px 15px 17px; }
+.choice--icon input { position: absolute; top: 14px; right: 14px; margin: 0; }
+.choice__icon { color: var(--brand-blue); flex: none; }
+.choice--icon.is-selected .choice__icon { color: var(--brand-navy); }
+.choice--icon-row { flex-direction: row; align-items: center; min-height: 64px; padding: 12px 44px 12px 14px; }
+.choice--icon-row.is-selected { padding: 11px 43px 11px 13px; }
+.choice--icon-row input { top: 50%; transform: translateY(-50%); }
+.subquestion .choices--inline { grid-template-columns: repeat(2, minmax(0, 300px)); }
+@media (max-width: 600px) { .choice--icon { min-height: 0; } }
+
+/* Cas 03 — recommandations avec photo (traitement homogène) */
+.rec-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rec.rec--photo { display: flex; flex-direction: column; grid-template-columns: none; border-radius: 4px; overflow: hidden; }
+.rec--photo.rec--first { grid-column: 1 / -1; }
+.rec__photo { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--surface-muted); }
+.rec--first .rec__photo { aspect-ratio: 21 / 8; }
+.rec__photo::after { content: ''; position: absolute; inset: 0; background: rgba(37, 37, 85, 0.16); mix-blend-mode: multiply; pointer-events: none; }
+.rec__photo-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rec--photo .rec__body { display: flex; flex-direction: column; flex: 1; }
+.rec--photo .rec__actions { margin-top: auto; padding-top: var(--s1); }
+.rec--photo .rec__rank { z-index: 1; left: 12px; right: auto; top: 12px; bottom: auto; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25); }
+.rec--photo .rec__why li span { min-width: 0; }
+@media (max-width: 760px) {
+  .rec-list { grid-template-columns: 1fr; }
+  .rec__photo, .rec--first .rec__photo { aspect-ratio: 21 / 8; }
+}

@@ -1,5 +1,5 @@
 /**
- * Couleurs du prototype, pour les usages hors CSS (SVG, page Sources).
+ * Couleurs du prototype, pour les usages hors CSS (SVG, page Design system).
  * Doivent rester identiques aux variables de :root dans styles.css.
  *
  * Bleu secondaire : #026096, prélevé sur la capture de référence

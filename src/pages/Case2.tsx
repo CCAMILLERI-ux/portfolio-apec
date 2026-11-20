@@ -1,17 +1,24 @@
 import { useEffect, useRef, useState } from 'react'
 import { Booking } from '../components/Booking'
 import { Case2Coulisses, CASE2_EVENTS } from '../components/Case2Coulisses'
-import { ArrowLeft, ArrowRight, Chat, Check, External, Plus } from '../components/Icons'
+import { ArrowLeft, ArrowRight, Calendar, Chat, Check, Clock, Compass, Doc, External, Plus, Search, Target, TrendUp } from '../components/Icons'
 import { Illustration } from '../components/Illustration'
 import { ModalityChips, Modalities } from '../components/Modalities'
 import { PageBand } from '../components/PageBand'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { KindTag, KIND_TONE } from '../components/ServiceCard'
+import { SERVICE_PHOTO } from '../data/photos'
+import { FORMAT_LABEL } from '../data/situations'
+import { nb } from '../lib/text'
 import { ALEX_PRESET, NEED_OPTIONS, SITUATION_OPTIONS, recommend, type Need } from '../data/onboarding'
 import { getService } from '../data/services'
 import { INITIAL_ONBOARDING, useBookings, useOnboarding, type OnboardingStep } from '../lib/demoState'
 import { Link } from '../lib/router'
 import { track } from '../lib/storage'
+
+/** Grandes icônes au trait des tuiles de choix (même famille que la boussole et les tuiles du cas 02). */
+const SITUATION_ICON = { recherche: Search, evolution: TrendUp, changement: Compass } as const
+const NEED_ICON = { valoriser: Target, cv: Doc, entretien: Chat, possibilites: Compass } as const
 
 const PROGRESS: { step: OnboardingStep; label: string }[] = [
   { step: 'situation', label: 'Situation' },
@@ -94,7 +101,7 @@ export function Case2({ path }: { path: string }) {
         <div className="welcome">
           <div className="welcome__text">
             <p className="welcome__kicker">Votre compte est créé</p>
-            {heading(<>Bienvenue Alex !</>, 'welcome__title')}
+            {heading(<>Bienvenue Alex !</>, 'welcome__title')}
             <p className="lead">
               Ateliers, rendez-vous avec un consultant, outils en ligne : en trois questions, nous vous proposons par
               où commencer. Vous pouvez aussi parcourir tous nos services.
@@ -124,7 +131,7 @@ export function Case2({ path }: { path: string }) {
           if (!answers.situation) return setError('Choisissez la situation qui vous correspond le mieux.')
           go('needs', 'situation')
         }}>
-          {heading(<>Quelle est votre situation ?</>)}
+          {heading(<>Quelle est votre situation ?</>)}
           <fieldset aria-describedby={error ? 'err-situation' : 'help-situation'}>
             <legend className="visually-hidden">Votre situation</legend>
             <p id="help-situation" className="muted small">
@@ -132,9 +139,10 @@ export function Case2({ path }: { path: string }) {
             </p>
             <div className="choices choices--3">
               {SITUATION_OPTIONS.map((o) => (
-                <label key={o.id} className={`choice choice--tile${answers.situation === o.id ? ' is-selected' : ''}`}>
+                <label key={o.id} className={`choice choice--tile choice--icon${answers.situation === o.id ? ' is-selected' : ''}`}>
                   <input type="radio" name="situation" value={o.id} checked={answers.situation === o.id}
                     onChange={() => { setError(''); setState((s) => ({ ...s, answers: { ...s.answers, situation: o.id } })) }} />
+                  {(() => { const Icon = SITUATION_ICON[o.id]; return <Icon size={44} className="choice__icon" /> })()}
                   <span className="choice__body">
                     <span className="choice__title">{o.label}</span>
                     <span className="choice__meta">{o.hint}</span>
@@ -160,15 +168,16 @@ export function Case2({ path }: { path: string }) {
           setState((s) => ({ ...s, recs: recommend(s.answers).map((r) => r.serviceId), removed: [] }))
           go('results', 'needs')
         }}>
-          {heading(<>De quoi avez-vous besoin en ce moment ?</>)}
+          {heading(<>De quoi avez-vous besoin en ce moment ?</>)}
           <fieldset aria-describedby={error ? 'err-needs' : 'help-needs'}>
             <legend className="visually-hidden">Vos besoins</legend>
             <p id="help-needs" className="muted small">Plusieurs réponses possibles.</p>
             <div className="choices choices--2">
               {NEED_OPTIONS.map((o) => (
-                <label key={o.id} className={`choice choice--tile${answers.needs.includes(o.id) ? ' is-selected' : ''}`}>
+                <label key={o.id} className={`choice choice--tile choice--icon${answers.needs.includes(o.id) ? ' is-selected' : ''}`}>
                   <input type="checkbox" name="needs" value={o.id} checked={answers.needs.includes(o.id)}
                     onChange={() => { setError(''); toggleNeed(o.id) }} />
+                  {(() => { const Icon = NEED_ICON[o.id]; return <Icon size={44} className="choice__icon" /> })()}
                   <span className="choice__body"><span className="choice__title">{o.label}</span></span>
                 </label>
               ))}
@@ -178,12 +187,13 @@ export function Case2({ path }: { path: string }) {
 
           {answers.needs.includes('entretien') && (
             <fieldset className="subquestion">
-              <legend>Avez-vous déjà un entretien programmé ?</legend>
+              <legend>Avez-vous déjà un entretien programmé ?</legend>
               <div className="choices choices--inline">
                 {([[false, 'Pas encore'], [true, 'Oui, dans les prochains jours']] as const).map(([v, label]) => (
-                  <label key={String(v)} className={`choice choice--chip${answers.interviewScheduled === v ? ' is-selected' : ''}`}>
+                  <label key={String(v)} className={`choice choice--chip choice--icon choice--icon-row${answers.interviewScheduled === v ? ' is-selected' : ''}`}>
                     <input type="radio" name="interview" checked={answers.interviewScheduled === v}
                       onChange={() => setState((s) => ({ ...s, answers: { ...s.answers, interviewScheduled: v } }))} />
+                    {v ? <Calendar size={32} className="choice__icon" /> : <Clock size={32} className="choice__icon" />}
                     <span className="choice__title">{label}</span>
                   </label>
                 ))}
@@ -204,26 +214,31 @@ export function Case2({ path }: { path: string }) {
           {heading(<>Nos suggestions pour bien démarrer</>)}
           <p className="muted">Sélectionnées d’après vos réponses. Retrouvez-les à tout moment dans « Mon espace ».</p>
           <Link to="/reserver/cep?from=etapes" className="help-link help-link--block">
-            <Chat size={22} /> Vous préférez être conseillé par une personne ? <strong>Échanger avec un consultant</strong>
+            <Chat size={22} /> Vous préférez être conseillé par une personne ? <strong>Échanger avec un consultant</strong>
           </Link>
           <ol className="rec-list">
             {recs.map((r, i) => {
               const s = getService(r.serviceId)!
               return (
-                <li key={r.serviceId} className={`rec rec--${KIND_TONE[s.kind]}`}>
-                  <div className="rec__visual">
-                    <Illustration name={s.illustration} tone={KIND_TONE[s.kind]} className="rec__img" />
-                    <KindTag kind={s.kind} />
+                <li key={r.serviceId} className={`rec rec--photo rec--${KIND_TONE[s.kind]}${i === 0 ? ' rec--first' : ''}`}>
+                  <div className="rec__photo">
+                    {SERVICE_PHOTO[s.id] ? (
+                      <img src={SERVICE_PHOTO[s.id].file} alt="" width={960} height={600}
+                        loading={i === 0 ? 'eager' : 'lazy'} decoding="async" className="rec__photo-img" />
+                    ) : (
+                      <Illustration name={s.illustration} tone={KIND_TONE[s.kind]} className="rec__photo-img" />
+                    )}
                     <span className="rec__rank" aria-hidden="true">{i + 1}</span>
                   </div>
                   <div className="rec__body">
-                    <p className="svc__official">{s.officialTitle}</p>
-                    <h3 className="rec__title">{s.hook}</h3>
+                    <p className="grp-meta"><span className="grp-format">{FORMAT_LABEL[s.kind]}</span></p>
+                    <p className="svc__official">{nb(s.officialTitle)}</p>
+                    <h3 className="rec__title">{nb(s.hook)}</h3>
                     <div className="rec__why">
-                      <h4>Pourquoi ce service ?</h4>
+                      <h4>Pourquoi ce service ?</h4>
                       <ul>
                         {r.reasons.map((reason) => (
-                          <li key={reason}><Plus size={16} className="plus" /> {reason}</li>
+                          <li key={reason}><Plus size={16} className="plus" /> <span>{nb(reason)}</span></li>
                         ))}
                       </ul>
                     </div>
@@ -302,7 +317,7 @@ export function Case2({ path }: { path: string }) {
       body = (
         <div className="step confirm">
           <span className="confirm__check" aria-hidden="true"><Check size={44} /></span>
-          {heading(<>C’est noté, Alex !</>, 'step__title confirm__title')}
+          {heading(<>C’est noté, Alex !</>, 'step__title confirm__title')}
           {chosen && slot && (
             <dl className="recap">
               <div><dt>Service</dt><dd>{chosen.officialTitle}</dd></div>

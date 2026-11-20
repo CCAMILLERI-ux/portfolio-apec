@@ -29,7 +29,7 @@ export function PortfolioLayout({ children, compactBrand = false, minimalFooter 
             <ul className="pf-nav">
               <li><Link to="/">Les trois cas</Link></li>
               <li><Link to="/plan-seo">Plan SEO</Link></li>
-              <li><Link to="/sources">Sources et limites</Link></li>
+              <li><Link to="/design-system">Design system</Link></li>
             </ul>
           </nav>
         </div>

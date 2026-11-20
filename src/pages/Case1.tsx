@@ -9,8 +9,9 @@ import { Picto } from '../components/Picto'
 import { WORKSHOP_SESSIONS } from '../data/slots'
 import { ADVICE_BY_SITUATION, IDEAL_IF } from '../data/piste2'
 import { getService, KIND_LABEL, SERVICES, type Service } from '../data/services'
-import { ALL_DEMO_SERVICE_IDS, SITUATIONS } from '../data/situations'
+import { ALL_DEMO_SERVICE_IDS, FORMAT_LABEL, groupBySituation, otherSituations, SITUATIONS } from '../data/situations'
 import { Link, navigate, type Route } from '../lib/router'
+import { nb } from '../lib/text'
 
 type View = 'existant' | 'piste' | 'piste2' | 'piste3'
 const VIEWS: [View, string][] = [
@@ -46,6 +47,54 @@ export function Case1({ route }: { route: Route }) {
     navigate(`/cas-02-ab-test?${q.toString()}`, { replace: true })
   }
   const resultLabel = isAll ? 'Tous nos services' : situation.label
+  const groups = groupBySituation((id) => getService(id)!.kind)
+
+  /** Rendu d'une liste de services dans la variante affichée. */
+  const renderVariant = (list: Service[], level: 3 | 4, meta?: (s: Service) => React.ReactNode) => {
+    const H = `h${level}` as 'h3' | 'h4'
+    if (view === 'existant') {
+      return (
+        <div className="observed-band">
+          <div className="observed-grid">
+            {list.map((s) => <ObservedServiceCard key={s.id} service={s} from="cas-1" level={level} meta={meta?.(s)} />)}
+          </div>
+        </div>
+      )
+    }
+    if (view === 'piste') {
+      return (
+        <div className="svc-grid">
+          {list.map((s) => <ServiceCard key={s.id} service={s} from="cas-1" level={level} meta={meta?.(s)} />)}
+        </div>
+      )
+    }
+    if (view === 'piste3') return <Piste3 services={list} level={level} meta={meta} keepOrder={!!meta} />
+    return (
+      <ul className="theme-grid" aria-label="Services, avec la situation où chacun est le plus utile">
+        {list.map((s) => {
+          const shown = verified(s.modalities).filter((m) => m.label !== 'Public')
+          return (
+            <li key={s.id} className="theme-card">
+              <Picto kind={s.kind} />
+              {meta ? meta(s) : <p className="theme-card__kind">{KIND_LABEL[s.kind]}</p>}
+              <H className="theme-card__title">{nb(s.hook)}</H>
+              <p className="theme-card__official">{nb(s.officialTitle)}</p>
+              <ul className="theme-card__bullets">
+                {IDEAL_IF[s.id] && <li><strong>Idéal si</strong> {nb(IDEAL_IF[s.id])}</li>}
+                {shown.map((m) => <li key={m.label}>{m.value}</li>)}
+              </ul>
+              <div className="theme-card__actions">
+                <ServiceAction service={s} from="cas-1" />
+                <Link to={`/service/${s.id}?from=cas-1`} className="theme-card__arrow" aria-label={`En savoir plus : ${s.officialTitle}`}>
+                  <ArrowRight size={30} />
+                </Link>
+              </div>
+            </li>
+          )
+        })}
+      </ul>
+    )
+  }
 
   const variantSwitch = (
     <fieldset className="bar-switch">
@@ -78,7 +127,7 @@ export function Case1({ route }: { route: Route }) {
         <div className="container">
           <p className="band__kicker">Nos services</p>
           <h1 className="band__title band__title--xl" tabIndex={-1}>Quelle est votre situation ?</h1>
-          <p className="band__lead">Choisissez votre point de départ : nous vous montrons les services qui vous correspondent.</p>
+          <p className="band__lead">Choisissez votre point de départ : nous vous montrons les services qui vous correspondent.</p>
           <fieldset className="sit-grid">
             <legend className="visually-hidden">Votre situation</legend>
             {SITUATIONS.map((s) => {
@@ -117,52 +166,49 @@ export function Case1({ route }: { route: Route }) {
           )}
         </div>
 
-        {view === 'existant' && (
-          <div className="observed-band">
-            <div className="observed-grid">
-              {services.map((s) => <ObservedServiceCard key={s.id} service={s} from="cas-1" />)}
-            </div>
-          </div>
-        )}
-
-        {view === 'piste' && (
-          <div className="svc-grid">
-            {services.map((s) => <ServiceCard key={s.id} service={s} from="cas-1" />)}
-          </div>
-        )}
-
-        {view === 'piste3' && <Piste3 services={services} />}
-
-        {view === 'piste2' && (
-          <>
-            <ul className="theme-grid" aria-label="Services, avec la situation où chacun est le plus utile">
-              {services.map((s) => {
-                const shown = verified(s.modalities).filter((m) => m.label !== 'Public')
+        {isAll && (
+          <nav className="grp-nav" aria-label="Aller à une situation">
+            <ul>
+              {groups.map((g) => {
+                const Icon = SITUATION_ICON[g.situation.id]
                 return (
-                  <li key={s.id} className="theme-card">
-                    <Picto kind={s.kind} />
-                    <p className="theme-card__kind">{KIND_LABEL[s.kind]}</p>
-                    <h3 className="theme-card__title">{s.hook}</h3>
-                    <p className="theme-card__official">{s.officialTitle}</p>
-                    <ul className="theme-card__bullets">
-                      {IDEAL_IF[s.id] && <li><strong>Idéal si</strong> {IDEAL_IF[s.id]}</li>}
-                      {shown.map((m) => <li key={m.label}>{m.value}</li>)}
-                    </ul>
-                    <div className="theme-card__actions">
-                      <ServiceAction service={s} from="cas-1" />
-                      <Link to={`/service/${s.id}?from=cas-1`} className="theme-card__arrow" aria-label={`En savoir plus : ${s.officialTitle}`}>
-                        <ArrowRight size={30} />
-                      </Link>
-                    </div>
+                  <li key={g.situation.id}>
+                    <a href={`#/cas-02-ab-test?${new URLSearchParams({ situation: ALL, vue: view })}#grp-${g.situation.id}`} className="grp-nav__link">
+                      <Icon size={18} /> {g.situation.label}
+                    </a>
                   </li>
                 )
               })}
+            </ul>
+          </nav>
+        )}
+
+        {isAll
+          ? groups.map((g) => {
+              const Icon = SITUATION_ICON[g.situation.id]
+              const recruiter = g.situation.id === 'recruter-aide'
+              const list = g.serviceIds.map(getService).filter(Boolean) as Service[]
+              return (
+                <section key={g.situation.id} className={`grp${recruiter ? ' grp--recruiter' : ''}`} aria-labelledby={`grp-${g.situation.id}`}>
+                  {recruiter && <p className="grp__audience">Pour les recruteurs</p>}
+                  <h3 id={`grp-${g.situation.id}`} className="grp__title" tabIndex={-1}>
+                    <Icon size={28} className="grp__icon" /> {nb(g.situation.label)}
+                  </h3>
+                  {renderVariant(list, 4, (sv) => <GroupMeta service={sv} primaryId={g.situation.id} />)}
+                </section>
+              )
+            })
+          : renderVariant(services, 3)}
+
+        {view === 'piste2' && (
+          <>
+            <ul className="theme-grid theme-grid--help" aria-label="Aide d’un consultant">
               <li className="theme-card theme-card--navy">
                 <Picto kind="aide" />
-                <p className="theme-card__kind">Échange avec un consultant</p>
+                <p className="theme-card__kind">Échange avec un consultant</p>
                 <h3 className="theme-card__title">Aucun ne vous correspond vraiment ?</h3>
                 <ul className="theme-card__bullets">
-                  <li><strong>Idéal si</strong> vous hésitez ou votre situation est particulière</li>
+                  <li><strong>Idéal si</strong> vous hésitez ou votre situation est particulière</li>
                   <li>Un consultant fait le point avec vous et vous oriente</li>
                 </ul>
                 <div className="theme-card__actions">
@@ -184,7 +230,7 @@ export function Case1({ route }: { route: Route }) {
                           <span className="advice-card__tag">{a.kicker}</span>
                         </span>
                         <span className="advice-card__title">{a.title}</span>
-                        <span className="advice-card__excerpt">{a.excerpt}</span>
+                        <span className="advice-card__excerpt">{nb(a.excerpt)}</span>
                         <ArrowRight size={22} className="advice-card__arrow" />
                       </Link>
                     </li>
@@ -199,10 +245,51 @@ export function Case1({ route }: { route: Route }) {
   )
 }
 
+/** Étiquette de format et autres usages d'un service, dans la vue « Tous ». */
+function GroupMeta({ service, primaryId }: { service: Service; primaryId: string }) {
+  const others = otherSituations(service.id, primaryId)
+  return (
+    <p className="grp-meta">
+      <span className="grp-format">{FORMAT_LABEL[service.kind]}</span>
+      {others.length > 0 && (
+        <span className="grp-also">
+          Aussi utile si{'\u00a0'}: {others.map((o) => o.label.charAt(0).toLowerCase() + o.label.slice(1)).join(' ; ').replace(/ (\S+)$/, '\u00a0$1')}
+        </span>
+      )}
+    </p>
+  )
+}
+
 /** Piste 3 : de l'humain. Ateliers mis en avant, photos à la place des pictogrammes. */
-function Piste3({ services }: { services: Service[] }) {
+function Piste3({ services, level = 3, meta, keepOrder = false }: { services: Service[]; level?: 3 | 4; meta?: (s: Service) => React.ReactNode; keepOrder?: boolean }) {
+  const H = `h${level}` as 'h3' | 'h4'
+  // Vue « Tous » : on garde l'ordre rendez-vous, atelier, outil ; sinon l'atelier passe en tête.
   const workshops = services.filter((s) => s.kind === 'atelier')
   const others = services.filter((s) => s.kind !== 'atelier')
+  if (keepOrder) {
+    return (
+      <div className="svc-grid">
+        {services.map((s) => (
+          <article key={s.id} className={`svc svc--${s.kind}`}>
+            <PhotoVisual service={s} />
+            <div className="svc__body">
+              <p className="svc__official">{nb(s.officialTitle)}</p>
+              {meta?.(s)}
+              <H className="svc__title">{nb(s.hook)}</H>
+              <p className="svc__benefit">{nb(s.benefit)}</p>
+              <ModalityChips items={s.modalities} />
+              <div className="svc__actions">
+                <ServiceAction service={s} from="cas-1" />
+                <Link to={`/service/${s.id}?from=cas-1`} className="link-arrow">
+                  En savoir plus<span className="visually-hidden"> : {s.officialTitle}</span> <ArrowRight size={18} />
+                </Link>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    )
+  }
   return (
     <>
       {workshops.map((s) => (
@@ -210,7 +297,7 @@ function Piste3({ services }: { services: Service[] }) {
           <PhotoVisual service={s} className="workshop__photo" />
           <div className="workshop__body">
             <p className="workshop__kicker">Atelier collectif</p>
-            <p className="svc__official">{s.officialTitle}</p>
+            <p className="svc__official">{nb(s.officialTitle)}</p>
             <h3 className="workshop__title">{s.hook}</h3>
             <p>{s.benefit}</p>
             <ModalityChips items={s.modalities} />
@@ -239,9 +326,9 @@ function Piste3({ services }: { services: Service[] }) {
             <article key={s.id} className={`svc svc--${s.kind}`}>
               <PhotoVisual service={s} />
               <div className="svc__body">
-                <p className="svc__official">{s.officialTitle}</p>
+                <p className="svc__official">{nb(s.officialTitle)}</p>
                 <h3 className="svc__title">{s.hook}</h3>
-                <p className="svc__benefit">{s.benefit}</p>
+                <p className="svc__benefit">{nb(s.benefit)}</p>
                 <ModalityChips items={s.modalities} />
                 <div className="svc__actions">
                   <ServiceAction service={s} from="cas-1" />
@@ -272,6 +359,14 @@ function Case1Coulisses() {
           La vue « existant » reprend la présentation actuelle des services sur apec.fr (rubrique « Entretiens de
           recrutement », novembre 2026). Le regroupement par situation n’existe pas aujourd’hui : c’est lui-même une
           piste.
+        </p>
+      </CrBlock>
+      <CrBlock title="Vue « Tous nos services »">
+        <p>
+          Variante testée : un classement par situation de l’utilisateur, avec le format en second niveau, plutôt qu’un
+          classement par nature d’outil. Chaque service apparaît une seule fois, avec ses autres usages signalés.
+          Indicateurs : clics vers un service depuis la vue Tous, puis inscriptions ou rendez-vous finalisés, comparés
+          à la version{'\u00a0'}actuelle.
         </p>
       </CrBlock>
       <CrBlock title="Les pistes : ce que chacune change">
@@ -313,7 +408,7 @@ function Case1Coulisses() {
         <p>
           Photos Unsplash, licence Unsplash (usage gratuit, sans autorisation requise). Elles
           illustrent des situations et ne représentent ni des salariés, ni des consultants, ni des usagers de l’Apec.
-          Les dates de sessions affichées sont fictives. Détail des sources : page « Sources et limites ».
+          Les dates de sessions affichées sont fictives. Détail des sources : page « Design system ».
         </p>
       </CrBlock>
       <CroGrid

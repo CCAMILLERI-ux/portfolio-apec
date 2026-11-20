@@ -29,6 +29,13 @@ export function Case2Coulisses() {
           <li>« Mes prochaines étapes » utilise une sauvegarde locale de démonstration, effacée par « Réinitialiser la démo » (barre du haut). « Mon espace » est la page d’accueil de l’espace de démonstration.</li>
         </ul>
       </CrBlock>
+      <CrBlock title="Direction graphique">
+        <p>
+          De grandes icônes pour décider vite, des photos pour les services, où une personne accompagne, des
+          illustrations pour l’accueil et le suivi. Hypothèse à tester : des recommandations plus humaines augmentent
+          le taux d’inscriptions finalisées.
+        </p>
+      </CrBlock>
       <CroGrid
         rubrics={{
           constat: (
