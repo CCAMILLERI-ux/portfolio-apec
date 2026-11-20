@@ -1193,3 +1193,24 @@ legend { padding: 0; }
 .sidebar .hcard--entretien .hcard__actions .btn { flex: 1 1 100%; }
 .hcard__sessions { width: 100%; margin-top: var(--s1); }
 .hcard__sessions ul { font-size: 0.875rem; }
+
+/* Introduction compacte d'un prototype (hors maquette, univers portfolio) */
+.demo-intro { background: var(--pf-bg); color: var(--pf-ink); font-family: var(--font-pf); border-bottom: 1px solid var(--pf-line); }
+.demo-intro__inner { max-width: var(--container); margin: 0 auto; padding: 12px var(--s3) 14px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: var(--s4); align-items: end; }
+.demo-intro__kicker { grid-column: 1 / -1; margin: 0 0 2px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pf-accent); }
+.proto .demo-intro__title { font-family: var(--font-pf-display); font-weight: 400; font-size: 1.5rem; line-height: 1.2; color: var(--pf-ink); margin: 0; }
+.demo-intro__text { margin: 0; font-size: 0.9375rem; line-height: 1.45; }
+.demo-intro__note { grid-column: 2; margin: 4px 0 0; font-size: 0.75rem; color: var(--pf-muted); }
+@media (max-width: 760px) {
+  .demo-intro__inner { grid-template-columns: 1fr; padding: 12px var(--s2) 14px; }
+  .demo-intro__text { margin-top: 4px; }
+  .demo-intro__note { grid-column: 1; }
+}
+
+/* Bascule des variantes : quatre options sur deux lignes en mobile (aucune option coupée) */
+@media (max-width: 760px) {
+  .bar-switch { display: grid; grid-template-columns: 1fr 1fr; border-radius: 14px; }
+  .bar-switch__opt + .bar-switch__opt { border-left: 0; }
+  .bar-switch__opt:nth-child(n + 4) { border-top: 1px solid rgba(246, 242, 234, 0.3); }
+  .bar-switch__opt:nth-child(odd) { border-left: 1px solid rgba(246, 242, 234, 0.3); }
+}

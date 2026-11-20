@@ -63,6 +63,12 @@ export function Case1({ route }: { route: Route }) {
     <ProtoLayout
       path={route.path}
       caseLabel="Cas 02 · Clarifier l’offre"
+      intro={{
+        kicker: 'Simulation d’A/B test UX/UI',
+        title: 'Optimiser l’expérience utilisateur et la conversion',
+        text: 'Comparer deux présentations des services pour faciliter le choix. Test envisageable avec AB Tasty.',
+        note: 'Prototype de démonstration — aucun résultat mesuré.',
+      }}
       barControl={variantSwitch}
       events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
       onReset={() => navigate('/cas-1', { replace: true })}
