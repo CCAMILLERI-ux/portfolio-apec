@@ -1014,7 +1014,7 @@ legend { padding: 0; }
 .pf-header:has(.pf-brand--compact) .pf-header__inner { min-height: 60px; }
 .pf-intro {
   display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: var(--s3) var(--s4);
-  align-items: end; padding-top: 20px; padding-bottom: 20px;
+  align-items: start; padding-top: 20px; padding-bottom: 20px;
 }
 .pf-intro__kicker { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pf-accent); margin: 0 0 var(--s1); }
 .pf .pf-intro__h1 { margin: 0; display: flex; flex-direction: column; gap: 6px; }
@@ -1308,3 +1308,15 @@ legend { padding: 0; }
 .pf-route li, .pf-route p { text-wrap: pretty; }
 .pf-route__note { margin: 0; font-size: 0.875rem; color: var(--pf-muted); }
 .pf h1, .pf h2, .pf h3, .pf .pf-case__title { text-wrap: balance; }
+
+/* Accueil : intro alignée en haut, phrase de cadre, plan SEO sous les cas, réassurance en pied de page */
+.pf-intro__about { margin-top: 0; }
+.pf-frame-note { margin: var(--s2) 0 0; font-size: 0.8125rem; color: var(--pf-muted); text-wrap: pretty; }
+.pf-cases-wrap { padding-bottom: var(--s3); }
+.pf-proof { background: #ece4d6; border-top: 1px solid var(--pf-line); padding: var(--s4) 0 var(--s4); margin-top: var(--s3); }
+.pf .pf-proof__title { font-size: 1.375rem; margin: 0 0 var(--s2); }
+.pf-proof .pf-impact__card { padding: 14px 16px; border-radius: 8px; border-top-width: 3px; }
+.pf-proof .pf-impact__figure { font-size: 2.125rem; margin: 2px 0 4px !important; }
+.pf-proof .pf-impact__done, .pf-proof .pf-impact__apec { font-size: 0.8125rem; line-height: 1.45; }
+.pf-proof .pf-impact__apec { margin-top: 8px !important; padding-top: 8px; }
+.pf-proof__cta { margin: var(--s2) 0 0; }

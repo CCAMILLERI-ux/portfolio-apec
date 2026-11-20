@@ -125,7 +125,6 @@ export function Home() {
                 LinkedIn<span className="visually-hidden"> (nouvel onglet)</span>
               </a>
             </li>
-            <li><a href="mailto:camilleri.caro@gmail.com">camilleri.caro@gmail.com</a></li>
             {/* CV : à réactiver une fois la nouvelle version déposée dans public/.
             <li>
               <a href="CV_CHEF_DE_PROJET_ANIMATION_WEB_CCAMILLERI.pdf" className="pf-btn pf-btn--sm" download>
@@ -135,42 +134,6 @@ export function Home() {
             */}
           </ul>
         </div>
-      </section>
-
-      <section className="pf-container pf-impact" aria-labelledby="apport">
-        <h2 id="apport" className="pf-cases-title">Ce que j’apporte à apec.fr</h2>
-        <ul className="pf-impact__grid">
-          {IMPACT.map((i) => (
-            <li key={i.axis} className="pf-impact__card">
-              <p className="pf-impact__axis">{i.axis}</p>
-              <p className="pf-impact__figure">{i.figure}</p>
-              <p className="pf-impact__done">{i.done}</p>
-              <p className="pf-impact__apec"><strong>Pour apec.fr :</strong> {i.apec}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="pf-container pf-plan" aria-labelledby="plan-seo">
-        <article className="pf-case pf-case--wide">
-          <div className="pf-plan__visual" aria-hidden="true">
-            <span>Diagnostic</span><span>4 piliers</span><span>Démonstration</span><span>90 jours</span>
-          </div>
-          <div className="pf-case__body">
-            <p className="pf-case__meta"><span className="pf-case__num">Plan SEO</span></p>
-            <h2 id="plan-seo" className="pf-case__title">Mon plan SEO pour apec.fr</h2>
-            <p className="pf-case__need">
-              Un plan SEO complet pour apec.fr : diagnostic, stratégie en quatre piliers (technique, contenus, maillage,
-              visibilité IA), démonstration et feuille de route sur 90 jours.
-            </p>
-            <ul className="pf-tags" aria-label="Compétences illustrées">
-              <li>SEO technique</li><li>Contenus</li><li>Maillage interne</li><li>Visibilité IA</li><li>Pilotage</li>
-            </ul>
-            <Link to="/plan-seo" className="pf-btn pf-btn--primary pf-btn--sm">
-              Voir le plan SEO<span className="visually-hidden"> pour apec.fr</span> <ArrowRight size={16} />
-            </Link>
-          </div>
-        </article>
       </section>
 
       <section className="pf-container pf-cases-wrap" aria-labelledby="cas">
@@ -197,19 +160,6 @@ export function Home() {
           ))}
         </ol>
 
-        <section className="pf-route" aria-labelledby="parcours-5min">
-          <h3 id="parcours-5min" className="pf-route__title">Parcours conseillé en cinq minutes</h3>
-          <ol className="pf-steps">
-            <li><strong>Cas 01 · 1 min 30</strong> — lisez l’introduction, suivez un lien vers un accompagnement et revenez ; cliquez sur « Comprendre ce cas ».</li>
-            <li><strong>Cas 02 · 1 min 30</strong> — changez de situation, puis comparez « Existant observé » et les pistes 1 à 3 depuis la barre de démo, en haut de page.</li>
-            <li><strong>Cas 03 · 2 min</strong> — « Me guider », cochez « Préparer un entretien », réservez une session, puis ouvrez « Mes prochaines étapes ».</li>
-          </ol>
-          <p className="pf-route__note">
-            Prototypes indépendants inspirés d’apec.fr, sans affiliation officielle : aucune inscription réelle, aucune donnée collectée.{' '}
-            <Link to="/sources" className="pf-link">Sources et limites <ArrowRight size={16} /></Link>
-          </p>
-        </section>
-
         <details className="seo-acc pf-howto-acc">
           <summary><span>Comment explorer les prototypes</span></summary>
           <div className="seo-acc__body">
@@ -221,6 +171,53 @@ export function Home() {
             </p>
           </div>
         </details>
+        <p className="pf-frame-note">
+          Prototypes indépendants inspirés d’apec.fr, sans affiliation officielle : aucune inscription réelle, aucune donnée collectée.{' '}
+          <Link to="/sources" className="pf-link">Sources et limites <ArrowRight size={16} /></Link>
+        </p>
+      </section>
+
+      <section className="pf-container pf-plan" aria-labelledby="plan-seo">
+        <article className="pf-case pf-case--wide">
+          <div className="pf-plan__visual" aria-hidden="true">
+            <span>Diagnostic</span><span>4 piliers</span><span>Démonstration</span><span>90 jours</span>
+          </div>
+          <div className="pf-case__body">
+            <p className="pf-case__meta"><span className="pf-case__num">Plan SEO</span></p>
+            <h2 id="plan-seo" className="pf-case__title">Mon plan SEO pour apec.fr</h2>
+            <p className="pf-case__need">
+              Un plan SEO complet pour apec.fr : diagnostic, stratégie en quatre piliers (technique, contenus, maillage,
+              visibilité IA), démonstration et feuille de route sur 90 jours.
+            </p>
+            <ul className="pf-tags" aria-label="Compétences illustrées">
+              <li>SEO technique</li><li>Contenus</li><li>Maillage interne</li><li>Visibilité IA</li><li>Pilotage</li>
+            </ul>
+            <Link to="/plan-seo" className="pf-btn pf-btn--primary pf-btn--sm">
+              Voir le plan SEO<span className="visually-hidden"> pour apec.fr</span> <ArrowRight size={16} />
+            </Link>
+          </div>
+        </article>
+      </section>
+
+      <section className="pf-proof" aria-labelledby="apport">
+        <div className="pf-container">
+          <h2 id="apport" className="pf-proof__title">Des résultats déjà obtenus, au service d’apec.fr</h2>
+          <ul className="pf-impact__grid">
+            {IMPACT.map((i) => (
+              <li key={i.axis} className="pf-impact__card">
+                <p className="pf-impact__axis">{i.axis}</p>
+                <p className="pf-impact__figure">{i.figure}</p>
+                <p className="pf-impact__done">{i.done}</p>
+                <p className="pf-impact__apec"><strong>Pour apec.fr :</strong> {i.apec}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="pf-proof__cta">
+            <a href="https://www.linkedin.com/in/caroline-camilleri-pro/" target="_blank" rel="noopener noreferrer" className="pf-link">
+              Échanger sur LinkedIn<span className="visually-hidden"> (nouvel onglet)</span> <ArrowRight size={16} />
+            </a>
+          </p>
+        </div>
       </section>
     </PortfolioLayout>
   )
