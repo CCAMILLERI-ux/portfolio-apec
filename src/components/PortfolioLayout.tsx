@@ -10,7 +10,7 @@ export const SIGNATURE = 'Exploration UX, acquisition & conversion — Caroline 
  * compactBrand : l'en-tête n'affiche pas le nom (utilisé sur l'accueil, où l'identité
  * est présentée juste en dessous) pour éviter de le répéter.
  */
-export function PortfolioLayout({ children, compactBrand = false }: { children: ReactNode; compactBrand?: boolean }) {
+export function PortfolioLayout({ children, compactBrand = false, minimalFooter = false }: { children: ReactNode; compactBrand?: boolean; minimalFooter?: boolean }) {
   return (
     <div className="pf">
       <a className="skip-link" href="#contenu" onClick={(e) => {
@@ -29,7 +29,7 @@ export function PortfolioLayout({ children, compactBrand = false }: { children: 
           <nav aria-label="Portfolio">
             <ul className="pf-nav">
               <li><Link to="/">Les trois cas</Link></li>
-              <li><Link to="/plan-seo">Plan d’acquisition SEO</Link></li>
+              <li><Link to="/plan-seo">Plan SEO</Link></li>
               <li><Link to="/sources">Sources et limites</Link></li>
             </ul>
           </nav>
@@ -39,8 +39,12 @@ export function PortfolioLayout({ children, compactBrand = false }: { children: 
       <footer className="pf-footer">
         <div className="pf-container">
           <p className="pf-footer__sig">{SIGNATURE}</p>
-          <p>{DISCLAIMER}</p>
-          <p>Aucun traceur externe, aucune donnée collectée. Pages non indexées.</p>
+          {!minimalFooter && (
+            <>
+              <p>{DISCLAIMER}</p>
+              <p>Aucun traceur externe, aucune donnée collectée. Pages non indexées.</p>
+            </>
+          )}
         </div>
       </footer>
     </div>

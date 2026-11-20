@@ -22,7 +22,7 @@ const TITLES: Record<string, string> = {
   '/cas-3': 'Cas 01 — Préparer un entretien de recrutement',
   '/conseil/remuneration': 'Cas 01 — Aborder la rémunération',
   '/sources': 'Sources et limites',
-  '/plan-seo': 'Du besoin au service : une acquisition SEO utile',
+  '/plan-seo': 'Un plan SEO pour apec.fr',
 }
 
 export default function App() {

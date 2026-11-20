@@ -841,13 +841,6 @@ legend { padding: 0; }
 .seo-hero { padding-bottom: var(--s4); }
 .seo-mention { display: flex; gap: 8px; align-items: flex-start; font-size: 0.875rem; color: var(--pf-muted); max-width: 72ch; }
 .seo-mention svg { flex: none; margin-top: 2px; color: var(--pf-accent); }
-.seo-chain { list-style: none; padding: 0; margin: var(--s3) 0; display: flex; flex-wrap: wrap; gap: 8px; counter-reset: none; }
-.seo-chain li {
-  display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 8px;
-  background: var(--pf-card); border: 1px solid var(--pf-line); border-radius: 4px; font-weight: 600; font-size: 0.9375rem;
-}
-.seo-chain li + li::before { content: '→'; color: var(--pf-accent); margin-right: 4px; font-weight: 700; }
-.seo-chain__n { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 4px; background: var(--pf-ink); color: var(--pf-bg); font-size: 0.8125rem; }
 .seo-levels { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); }
 
 .seo-block { padding-top: var(--s5); padding-bottom: var(--s3); border-top: 1px solid var(--pf-line); }
@@ -903,8 +896,6 @@ legend { padding: 0; }
 .seo-phase__label { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
 .seo-phase__deliv { list-style: none; padding: 0; margin: 0 0 var(--s2); display: grid; gap: 6px; }
 .seo-phase__deliv li { background: var(--pf-bg); border: 1px solid var(--pf-line); border-radius: 4px; padding: 6px 10px; font-size: 0.9375rem; }
-.seo-phase__more summary { cursor: pointer; font-weight: 600; min-height: 40px; display: flex; align-items: center; }
-.seo-phase__more summary:focus-visible { outline: 3px solid var(--pf-accent); }
 .seo-end { padding-bottom: var(--s5); color: var(--pf-muted); }
 
 /* Bloc 2 : parcours démonstrateur */
@@ -1016,24 +1007,6 @@ legend { padding: 0; }
 .proto .theme-card__arrow:hover { color: var(--brand-yellow); transform: translateX(3px); }
 
 /* Module SEO, bloc 3 : présentation courte « des questions aux services » */
-.seo-guide { margin-top: var(--s6); }
-.pf .seo-guide__title { font-family: var(--font-pf-display); font-weight: 700; letter-spacing: -0.02em; font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); max-width: 30ch; margin: 0 0 var(--s2); }
-.seo-guide__intro { font-size: 1.125rem; max-width: 62ch; color: var(--pf-muted); margin-bottom: var(--s4); }
-.seo-steps { list-style: none; padding: 0; margin: 0 0 var(--s4); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s3); }
-@media (max-width: 860px) { .seo-steps { grid-template-columns: 1fr; } }
-.seo-step { background: var(--pf-card); border: 1px solid var(--pf-line); border-radius: 4px; padding: var(--s4) var(--s3) var(--s3); }
-.seo-step p { margin: 0; }
-.seo-step__n { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 4px; background: var(--pf-ink); color: var(--pf-bg); font-family: var(--font-pf-display); font-size: 1.5rem; margin-bottom: var(--s2); font-weight: 700; }
-.pf .seo-step__title { font-size: 1.1875rem; font-weight: 600; margin: 0 0 var(--s1); }
-.seo-example { background: var(--pf-card); border: 1px solid var(--pf-line); border-left: 6px solid var(--pf-accent); border-radius: 4px; padding: var(--s4); margin-bottom: var(--s4); display: flex; flex-direction: column; align-items: flex-start; gap: var(--s1); }
-.seo-example p { margin: 0; max-width: 66ch; }
-.seo-example__label { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--pf-accent); }
-.seo-example__label span { text-transform: none; letter-spacing: 0; font-weight: 500; color: var(--pf-muted); }
-.seo-example__q { font-family: var(--font-pf-display); font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem); line-height: 1.3; font-weight: 700; }
-.seo-example .pf-btn { margin-top: var(--s2); }
-.seo-example__hint { font-size: 0.8125rem; color: var(--pf-muted); }
-.seo-measure { font-size: 1.0625rem; max-width: 72ch; margin-bottom: var(--s2); }
-.seo-ai-note { font-size: 0.9375rem; color: var(--pf-muted); max-width: 72ch; margin: 0; }
 
 /* Accueil du portfolio : entrée compacte (identité + présentation + trois cas
    visibles dès le premier écran sur ordinateur portable). */
@@ -1260,3 +1233,47 @@ legend { padding: 0; }
   .demo-bar__note { font-size: 0.6875rem; }
   .bar-switch__opt { min-height: 30px; }
 }
+
+/* Plan SEO : hero, diagnostic, piliers, plan 90 jours, pilotage */
+.seo-block p, .seo-block li, .seo-block dd, .seo-hero p { text-wrap: pretty; }
+.pf .seo-hero__title { max-width: 24ch; }
+.seo-goals { list-style: none; padding: 0; margin: var(--s3) 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+@media (max-width: 860px) { .seo-goals { grid-template-columns: 1fr; } }
+.seo-goal { background: var(--pf-card); border: 1px solid var(--pf-line); border-top: 4px solid var(--pf-accent); border-radius: 4px; padding: var(--s2) 20px; }
+.seo-goal p { margin: 0; }
+.seo-goal__n { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 4px; background: var(--pf-ink); color: var(--pf-bg); font-size: 0.8125rem; font-weight: 700; margin-bottom: 8px; }
+.seo-goal__title { font-family: var(--font-pf-display); font-weight: 700; font-size: 1.125rem; margin-bottom: 4px !important; }
+.seo-goal__text { color: var(--pf-muted); font-size: 0.9375rem; }
+.seo-hero .seo-mention { margin-top: var(--s2); }
+
+.seo-diag { list-style: none; padding: 0; margin: var(--s2) 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
+@media (max-width: 760px) { .seo-diag { grid-template-columns: 1fr; } }
+.seo-diag__item { background: var(--pf-card); border: 1px solid var(--pf-line); border-radius: 4px; padding: var(--s3); }
+.pf .seo-diag__title { font-size: 1.0625rem; margin: 0 0 var(--s1); }
+.seo-diag__item p { margin: 0 0 var(--s1); }
+.seo-diag__lever { color: var(--pf-ink); border-top: 1px solid var(--pf-line); padding-top: var(--s1); margin-bottom: 0 !important; }
+
+.seo-pillars { list-style: none; padding: 0; margin: var(--s2) 0 var(--s4); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
+@media (max-width: 760px) { .seo-pillars { grid-template-columns: 1fr; } }
+.seo-pillar { background: var(--pf-card); border: 1px solid var(--pf-line); border-left: 5px solid var(--pf-ink); border-radius: 4px; padding: var(--s3); display: flex; flex-direction: column; gap: var(--s1); }
+.seo-pillar__n { margin: 0; font-family: var(--font-pf-display); font-weight: 700; font-size: 1.5rem; line-height: 1; color: var(--pf-accent); }
+.pf .seo-pillar__title { font-size: 1.25rem; margin: 0; }
+.seo-pillar__points { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; }
+.seo-pillar .pf-link { margin-top: auto; }
+.seo-cocon { list-style: none; padding: 0; margin: var(--s1) 0 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.seo-cocon li { background: var(--pf-bg); border: 1px solid var(--pf-line); border-radius: 4px; padding: 4px 10px; font-size: 0.875rem; font-weight: 600; }
+.seo-cocon li + li::before { content: '↔'; color: var(--pf-accent); margin-right: 8px; font-weight: 700; }
+.pf .seo-sub { font-size: 1.25rem; margin: var(--s3) 0 var(--s1); scroll-margin-top: var(--s3); }
+
+.seo-phase__actions { margin: 0 0 var(--s2); padding-left: 1.2rem; display: grid; gap: 6px; font-size: 0.9375rem; }
+
+.seo-pilot { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
+@media (max-width: 860px) { .seo-pilot { grid-template-columns: 1fr; } }
+.seo-pilot__col { background: var(--pf-card); border: 1px solid var(--pf-line); border-radius: 4px; padding: var(--s3); }
+.seo-pilot__col .seo-sub:first-child { margin-top: 0; }
+.seo-kpis, .seo-rituals { margin: 0; display: grid; gap: 12px; }
+.seo-kpis > div, .seo-rituals > div { border-top: 1px solid var(--pf-line); padding-top: 10px; }
+.seo-kpis dt, .seo-rituals dt { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--pf-accent); margin-bottom: 4px; }
+.seo-kpis dd, .seo-rituals dd { margin: 0; }
+.seo-kpis ul { margin: 0; padding-left: 1.2rem; }
+.pf .seo-hero__title, .seo-block h2, .seo-block h3, .seo-block h4 { text-wrap: balance; }

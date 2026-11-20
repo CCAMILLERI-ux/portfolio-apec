@@ -12,15 +12,18 @@ Portfolio de candidature au poste de Chef de projet animation web. Un seul site 
 | 03 (`#/cas-2`) | **Accompagner l’utilisateur à chaque étape de son inscription** — anciennement « Guider un nouvel inscrit » : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes prochaines étapes » | Parcours, activation, recommandation déterministe |
 | 01 (`#/cas-3`) | **De la recherche Google à l’utilisation des services** — anciennement « Relier une recherche à un accompagnement » : page conseil « Comment préparer un entretien de recrutement ? », maillage interne, compléments SEO, GEO et coordination multicanale | SEO éditorial, maillage, acquisition |
 
-## Module « Du besoin au service : une acquisition SEO utile »
+## Plan SEO pour apec.fr
 
-Route `#/plan-seo`, accessible depuis l’accueil et l’en-tête du portfolio. Plan d’acquisition SEO orienté vers l’utilisation des services, en trois blocs :
+Route `#/plan-seo`, accessible depuis l’accueil et l’en-tête du portfolio. « Un plan SEO pour apec.fr : de la recherche au service utilisé », en six parties :
 
-1. **Matrice des besoins** : six situations (recherche d’emploi, premier emploi, évolution, reconversion, TPE/PME qui recrute, RH) → besoin, exemples de recherches, intention, contenu, services, conversion finale. Requêtes exploratoires, sans volume ni classement. Services marqués « service existant » (repris d’apec.fr) ou « intitulé provisoire ».
-2. **Parcours démonstrateur** « Préparer mon entretien de recrutement » : A recherche (aperçu illustratif) → B page conseil originale (six étapes, checklist utilisable, trois aides contextualisées) → C fiche service → D conversion simulée. Écran piloté par l’URL (`?ecran=a|b|c|d|r&service=…`) : le bouton retour du navigateur fonctionne. Bouton « Voir la logique de maillage ». Réinitialisation, retour, checklist conservée localement.
-3. **Méthode** : feuille de route 90 jours, puis une présentation courte « Partir des questions des cadres pour les guider vers les services de l’Apec » : trois étapes (comprendre les recherches, apporter une réponse utile, faciliter le passage à l’action), un exemple de parcours (reconversion → échange avec un consultant, vers la prise de rendez-vous de démonstration), la mesure et une note sur l’usage de l’IA.
+0. **Hero** : ambition, trois objectifs (visibilité hors marque, trafic qualifié vers les services, conversion mesurée).
+1. **Diagnostic** : quatre observations sur les pages publiques (titre de connexion indexé, title et H1 divergents, données structurées absentes, actifs peu reliés), sans chiffre.
+2. **Stratégie en quatre piliers** : technique et indexation, contenus et intentions (matrice des six situations), maillage (cocon fiche métier ↔ offres ↔ salaires ↔ conseils ↔ services), popularité et visibilité IA.
+3. **Démonstration** : parcours « Préparer mon entretien de recrutement » (recherche → page conseil → fiche service → inscription simulée).
+4. **Plan 90 jours** : actions et livrables visibles.
+5. **Pilotage** : indicateurs, A/B tests et rituels.
 
-Contenus centralisés dans `src/data/seoPlan.ts` ; parcours dans `src/components/SeoJourney.tsx` ; page dans `src/pages/SeoPlan.tsx`. Le portfolio étant en `noindex`, les éléments SEO sont une démonstration de méthode, pas un dispositif de positionnement.
+Contenus centralisés dans `src/data/seoPlan.ts` ; parcours dans `src/components/SeoJourney.tsx` ; page dans `src/pages/SeoPlan.tsx`.
 
 ## Cas 3 — solutions recommandées
 

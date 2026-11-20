@@ -1,10 +1,10 @@
 /**
  * Module « Du besoin au service : une acquisition SEO utile ».
- * Contenus centralisés : proposition exploratoire de la candidate, à valider avec
+ * Contenus centralisés : proposition de la candidate, à valider avec
  * les équipes et les données de l'Apec. Aucune donnée interne de l'Apec n'est utilisée.
  *
  * Règles :
- * - les requêtes sont des exemples exploratoires (aucun volume, aucun classement) ;
+ * - les requêtes sont des exemples (aucun volume, aucun classement) ;
  * - un service « observé » a un intitulé lisible sur les captures d'apec.fr ;
  *   sinon l'intitulé est générique et signalé « à vérifier » ;
  * - aucune URL officielle, disponibilité ou condition d'éligibilité n'est inventée.
@@ -12,7 +12,7 @@
 
 export interface SeoService {
   label: string
-  /** true : intitulé observé sur une capture d'apec.fr ; false : intitulé générique à vérifier. */
+  /** true : service existant sur apec.fr ; false : intitulé provisoire. */
   observed: boolean
 }
 
@@ -57,6 +57,7 @@ export const SEO_SITUATIONS: SeoSituation[] = [
     intent: 'Informationnelle : se rassurer et trouver des exemples adaptés au début de carrière.',
     content: 'Conseils et exemples adaptés au début de carrière (stages, alternance, projets).',
     services: [
+      { label: 'Fiches métiers', observed: true },
       { label: 'Accompagnement au premier emploi', observed: false },
       { label: 'Atelier candidature pour jeunes diplômés', observed: false },
     ],
@@ -71,8 +72,8 @@ export const SEO_SITUATIONS: SeoSituation[] = [
     intent: 'Informationnelle et réflexive : comparer, se situer, préparer un échange avec son employeur.',
     content: 'Guide rémunération ou guide évolution professionnelle.',
     services: [
-      { label: 'Outil d’estimation de salaire', observed: false },
-      { label: 'Conseil en évolution professionnelle', observed: false },
+      { label: 'Simulateur de salaire', observed: true },
+      { label: 'Conseil en évolution professionnelle (CEP)', observed: true },
     ],
     conversion: 'Simulation terminée ou rendez-vous confirmé.',
   },
@@ -85,7 +86,8 @@ export const SEO_SITUATIONS: SeoSituation[] = [
     intent: 'Exploratoire : comprendre les options et les étapes, souvent sur plusieurs semaines.',
     content: 'Dossier pour explorer les options et les prochaines étapes.',
     services: [
-      { label: 'Accompagnement au projet professionnel', observed: false },
+      { label: 'Conseil en évolution professionnelle (CEP)', observed: true },
+      { label: 'Fiches métiers', observed: true },
       { label: 'Outils d’orientation', observed: false },
     ],
     conversion: 'Rendez-vous confirmé ou outil terminé.',
@@ -100,11 +102,11 @@ export const SEO_SITUATIONS: SeoSituation[] = [
     intent: 'Pratique : obtenir une méthode rapide et savoir où se faire aider.',
     content: 'Guide pratique de recrutement (définir le poste, rédiger l’offre, sélectionner).',
     services: [
+      { label: 'Dépôt d’offre', observed: true },
       { label: 'Conseil en recrutement', observed: false },
-      { label: 'Dépôt d’offre', observed: false },
     ],
     conversion: 'Demande d’accompagnement envoyée ou offre effectivement déposée.',
-    note: 'Certains services aux entreprises sont soumis à conditions : à vérifier avant toute mise en avant.',
+    note: 'Certains services aux entreprises sont soumis à des conditions d’accès, à rappeler dans les contenus.',
   },
   {
     id: 'rh',
@@ -115,6 +117,7 @@ export const SEO_SITUATIONS: SeoSituation[] = [
     intent: 'Expertise : méthodes, données de marché, retours d’expérience.',
     content: 'Méthodes, études et données (contenus d’expertise existants à valoriser).',
     services: [
+      { label: 'Candidapec (CVthèque)', observed: true },
       { label: 'Conseil sourcing', observed: false },
       { label: 'Accompagnement au recrutement et à l’intégration', observed: false },
     ],
@@ -169,7 +172,8 @@ export const ROADMAP = [
       'Cadrer les services et publics prioritaires.',
       'Vérifier les capacités d’accueil et les conditions d’accès des services.',
       'Définir les conversions (inscription, rendez-vous, outil terminé).',
-      'Analyser Search Console et analytics, si l’accès est donné.',
+      'Analyser Search Console et analytics : requêtes hors marque, gabarits, pages en perte.',
+      'Auditer la technique : indexation, gabarits title/H1, données structurées, offres expirées.',
       'Recueillir les questions des consultants et des utilisateurs.',
       'Auditer les contenus existants avant d’envisager de nouvelles pages.',
       'Examiner les principaux freins techniques avec les équipes.',
@@ -180,12 +184,14 @@ export const ROADMAP = [
     period: 'Jours 31–60',
     title: 'Mettre en œuvre un pilote',
     actions: [
-      'Sélectionner une thématique (ex. entretiens de recrutement).',
+      'Corriger les pages en 2e page de Google, au plus près du top 10.',
+      'Sélectionner une thématique pilote (ex. entretiens de recrutement).',
       'Optimiser un petit ensemble cohérent de pages existantes.',
       'Préparer les briefs éditoriaux.',
       'Faire valider les contenus par les métiers.',
       'Améliorer le maillage et les appels à l’action.',
       'Mettre en place le suivi avec l’analyste.',
+      'Lancer un premier A/B test (title, appel à l’action ou module de maillage).',
       'Réaliser la recette fonctionnelle, mobile et accessibilité.',
     ],
     deliverables: ['Briefs éditoriaux', 'Pages et composants optimisés', 'Plan de marquage', 'Recette'],
@@ -195,7 +201,7 @@ export const ROADMAP = [
     title: 'Observer et ajuster',
     actions: [
       'Contrôler l’indexation des pages modifiées.',
-      'Examiner les premiers signaux, avec prudence.',
+      'Examiner les premiers signaux et le résultat du premier A/B test.',
       'Analyser les parcours vers les services.',
       'Recueillir des retours qualitatifs (consultants, utilisateurs).',
       'Corriger ce qui bloque.',
@@ -205,30 +211,106 @@ export const ROADMAP = [
   },
 ]
 
-/* Synthèse de la méthode : présentation courte pour l'entretien. */
-export const GUIDE_STEPS = [
+/* ------------------------------ Hero ------------------------------ */
+
+export const OBJECTIVES = [
+  { title: 'Visibilité hors marque', text: 'Être trouvé par les cadres et les recruteurs qui ne cherchent pas encore « Apec ».' },
+  { title: 'Trafic qualifié vers les services', text: 'Conduire chaque visite vers l’offre, l’outil ou l’accompagnement qui répond à sa situation.' },
+  { title: 'Conversion mesurée', text: 'Suivre ce que le SEO produit vraiment : comptes, candidatures, rendez-vous et offres déposées.' },
+]
+
+/* ------------------------------ Diagnostic ------------------------------ */
+
+/** Observations faites sur les pages publiques d'apec.fr. Aucun chiffre. */
+export const DIAGNOSTIC = [
   {
-    title: 'Comprendre les recherches',
-    text: 'Identifier les questions des cadres et les sujets sur lesquels renforcer la visibilité de l’Apec.',
+    title: 'Un titre de connexion à la place du contenu',
+    finding: 'Des pages apparaissent dans les moteurs sous des titres comme « Vous avez déjà un compte ? » : le bloc de connexion est placé avant le contenu dans le code.',
+    lever: 'Placer le contenu principal en premier dans le code et fixer un title explicite par gabarit.',
   },
   {
-    title: 'Apporter une réponse utile',
-    text: 'Améliorer les contenus existants : réponses claires, conseils concrets et liens vers les ressources pertinentes.',
+    title: 'Title et H1 qui ne disent pas la même chose',
+    finding: 'La page Conseils a pour title « L’actualité du marché de l’emploi cadres » et pour H1 « Tous nos conseils ».',
+    lever: 'Aligner title, H1 et intention de recherche, gabarit par gabarit.',
   },
   {
-    title: 'Faciliter le passage à l’action',
-    text: 'Proposer une suite logique : découvrir un outil, s’inscrire à un atelier ou échanger avec un consultant.',
+    title: 'Peu de données structurées',
+    finding: 'Pas de données structurées repérées (fil d’Ariane, Article, FAQ). Le balisage JobPosting des offres reste à auditer.',
+    lever: 'Baliser les gabarits clés et contrôler la conformité JobPosting pour Google for Jobs.',
+  },
+  {
+    title: 'Des actifs riches encore isolés',
+    finding: 'Fiches métiers, offres, simulateur de salaire et études sont encore peu reliés entre eux.',
+    lever: 'Construire un maillage qui fait circuler l’autorité et l’utilisateur d’un actif à l’autre.',
   },
 ]
 
-export const GUIDE_EXAMPLE = {
-  question: 'Comment préparer une reconversion quand on est cadre ?',
-  explanation:
-    'Une page qui explique les premières étapes, renvoie vers les ressources utiles et propose un échange avec un consultant.',
-  cta: 'Faire le point avec un consultant',
+/* ------------------------------ Stratégie : 4 piliers ------------------------------ */
+
+export const PILLARS = [
+  {
+    id: 'technique',
+    title: 'Technique et indexation',
+    points: [
+      'Offres expirées : redirection vers des offres proches et date de fin renseignée dans JobPosting.',
+      'Google for Jobs : balisage JobPosting complet et conforme.',
+      'Gabarits : règles de title et de H1 par type de page.',
+      'Sitemaps par type de page, suivis dans Search Console.',
+      'Vitesse (Core Web Vitals) et rendu mobile.',
+    ],
+  },
+  {
+    id: 'contenus',
+    title: 'Contenus et intentions',
+    points: [
+      'Partir des situations des cadres et des recruteurs, pas seulement des mots-clés.',
+      'Optimiser l’existant avant de créer de nouvelles pages.',
+      'Relier chaque contenu au service qui prolonge la réponse.',
+    ],
+    link: { anchor: 'matrice', label: 'Voir les six situations' },
+  },
+  {
+    id: 'maillage',
+    title: 'Maillage',
+    points: [
+      'Un cocon autour de chaque métier, conçu avec les équipes produit.',
+      'Des liens placés là où ils répondent à un besoin, avec des ancres descriptives.',
+    ],
+    cocon: ['Fiche métier', 'Offres du métier', 'Salaires', 'Conseils', 'Services'],
+  },
+  {
+    id: 'geo',
+    title: 'Popularité et visibilité IA (GEO)',
+    points: [
+      'Contenus structurés en questions-réponses, faciles à citer.',
+      'Données et études de l’Apec mises en avant comme sources citables.',
+      'Suivi des mentions de l’Apec dans les réponses des IA, et des liens qu’elles renvoient.',
+    ],
+  },
+]
+
+/* ------------------------------ Pilotage ------------------------------ */
+
+export const KPIS = [
+  { family: 'Visibilité', items: ['Impressions et clics hors marque'] },
+  { family: 'Pertinence', items: ['CTR par gabarit : offres, fiches métiers, conseils, services'] },
+  { family: 'Santé technique', items: ['Pages indexées par gabarit', 'Core Web Vitals'] },
+  { family: 'Conversions issues du SEO', items: ['Comptes créés', 'Candidatures', 'Rendez-vous', 'Offres déposées'] },
+]
+
+export const AB_TESTS = [
+  'Titles et méta-descriptions d’un gabarit, pour améliorer le CTR.',
+  'Place et libellé des appels à l’action vers les services.',
+  'Modules de maillage entre fiches métiers, offres et conseils.',
+]
+
+export const RITUALS = [
+  { who: 'Webanalyste', what: 'Point régulier sur le tableau de bord SEO et lecture des A/B tests.' },
+  { who: 'DSI et produit', what: 'Backlog technique priorisé : gabarits, données structurées, performance.' },
+  { who: 'Contributeurs et experts métiers', what: 'Comité éditorial : briefs, mises à jour et validation des contenus.' },
+]
+
+/** Insère une espace insécable entre les deux derniers mots : pas de mot seul en fin de paragraphe. */
+export function nb(text: string): string {
+  return text.replace(/\s+(\S+)\s*$/, '\u00a0$1')
 }
-
-export const GUIDE_MEASURE = 'visites depuis Google, clics vers les services et rendez-vous pris à la suite du parcours.'
-
-export const GUIDE_AI_NOTE =
-  'L’IA peut aider à explorer les questions et préparer les contenus, avec validation des équipes Apec.'
