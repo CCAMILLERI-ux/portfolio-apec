@@ -23,7 +23,7 @@ const RELATED: Record<string, { to: string; anchor?: string; label: string; text
     { to: '/cas-01-seo', anchor: 'checklist', label: 'Checklist de la veille de l’entretien', text: 'Les points à contrôler avant le jour J.', tone: 'blue' },
   ],
   'simulateur-entretien': [
-    { to: '/service/entretien-programme?from=cas-3', label: 'Un entretien fixé ? Répétez-le avec un consultant', text: 'Simulation individuelle d’1 h.', tone: 'blue' },
+    { to: '/service/entretien-programme?from=cas-3', label: 'Un entretien fixé ? Répétez-le avec un consultant', text: 'Simulation individuelle avec un consultant.', tone: 'blue' },
   ],
   'jeunes-diplomes-confiance': [
     { to: '/service/remuneration-premier-emploi?from=cas-3', label: 'Aborder la rémunération pour un 1er emploi', text: 'Un atelier pour discuter et négocier son salaire de premier emploi.', tone: 'blue' },

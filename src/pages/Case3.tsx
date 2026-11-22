@@ -128,7 +128,7 @@ export function Case3({ path }: { path: string }) {
               </p>
               <p className="callout">
                 <strong>Votre entretien est déjà fixé ?</strong>{' '}
-                <Link to="/service/entretien-programme?from=cas-3">Répétez-le lors d’une simulation individuelle d’1 h avec un consultant</Link>,
+                <Link to="/service/entretien-programme?from=cas-3">Répétez-le lors d’une simulation individuelle avec un{'\u00a0'}consultant</Link>,
                 adaptée au poste visé.
               </p>
 
@@ -209,7 +209,7 @@ const SEO_DESC =
 const LINK_MAP = [
   ['Conseil — préparer un entretien', 'Simulateur d’entretien', '« simulateur d’entretien en ligne, pour vous entraîner en autonomie »', 'S’entraîner seul'],
   ['Conseil — préparer un entretien', 'Atelier « Réussir vos entretiens »', '« atelier collectif Réussir vos entretiens de recrutement »', 'Se préparer en groupe'],
-  ['Conseil — préparer un entretien', 'Entretien programmé (simulation)', '« Répétez-le lors d’une simulation individuelle d’1 h »', 'Entretien déjà fixé'],
+  ['Conseil — préparer un entretien', 'Entretien programmé (simulation)', '« Répétez-le lors d’une simulation individuelle avec un consultant »', 'Entretien déjà fixé'],
   ['Conseil — préparer un entretien', 'Repères rémunération', '« quelques repères pour aborder le salaire »', 'Question fréquente'],
   ['Conseil — questions (salaire)', 'Convertisseur Urssaf (externe)', '« convertisseur salaire brut / net de l’Urssaf »', 'Passer du brut au net'],
   ...CAS3_SOLUTIONS.map((s) => ['Conseil — bloc final et colonne', s.official, s.format === 'humain' ? `« ${s.cta} : ${s.official} »` : `« ${s.cta} »`, s.focus ?? s.title]),

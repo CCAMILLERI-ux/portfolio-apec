@@ -157,7 +157,7 @@ export const SIMULATOR_CHOICES = ['Entretien de motivation', 'Entretien techniqu
 export const LINK_LOGIC = [
   { from: 'Page conseil', section: 'S’entraîner à répondre', to: 'Simulateur d’entretien', anchor: 's’entraîner seul avec le simulateur d’entretien' },
   { from: 'Page conseil', section: 'Se faire accompagner', to: 'Atelier entretiens', anchor: 'participer à l’atelier « Réussir vos entretiens de recrutement »' },
-  { from: 'Page conseil', section: 'Se faire accompagner', to: 'Rendez-vous consultant', anchor: 'préparer un entretien prévu avec un consultant' },
+  { from: 'Page conseil', section: 'Se faire accompagner', to: 'Entretien programmé', anchor: 'préparer un entretien prévu avec un consultant' },
   { from: 'Page conseil', section: 'Aborder la rémunération', to: 'Ressource rémunération', anchor: 'repères pour préparer votre fourchette' },
   { from: 'Fiches service', section: 'Préparation', to: 'Checklist (page conseil)', anchor: 'utiliser la checklist de préparation' },
 ]

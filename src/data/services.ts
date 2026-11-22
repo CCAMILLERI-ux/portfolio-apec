@@ -140,7 +140,7 @@ export const SERVICES: Service[] = [
     kind: 'individuel',
     modalities: [
       { label: 'Format', value: 'Individuel, en face à face', provenance: 'capture' },
-      { label: 'Durée', value: '1 h', provenance: 'capture' },
+      TBC('Durée'), // aucune durée indiquée par l'Apec
       { label: 'Tarif', value: 'Service gratuit', provenance: 'capture' },
       { label: 'Public', value: 'Cadres et jeunes diplômés', provenance: 'capture' },
     ],

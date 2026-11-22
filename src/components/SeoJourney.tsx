@@ -333,7 +333,7 @@ export function SeoJourney({ route }: { route: Route }) {
       : screen === 'c' || screen === 'd'
         ? 'Démonstration\u00a0: aucune inscription réelle.'
         : screen === 'r'
-          ? 'Aperçu léger d’un contenu secondaire, non développé dans la démonstration.'
+          ? 'Aperçu léger d’un contenu secondaire, non développé dans la\u00a0démonstration.'
           : 'Page conseil rédigée pour la démonstration (contenu original).'
 
   return (
@@ -376,7 +376,7 @@ export function SeoJourney({ route }: { route: Route }) {
             <ul className="sj-map__targets">
               <li><Link to={journeyHref('c', 'simulateur')} className="sj-node">Simulateur<span>depuis « S’entraîner à répondre »</span></Link></li>
               <li><Link to={journeyHref('c', 'atelier')} className="sj-node">Atelier<span>depuis « Se faire accompagner »</span></Link></li>
-              <li><Link to={journeyHref('c', 'consultant')} className="sj-node">Rendez-vous consultant<span>depuis « Se faire accompagner »</span></Link></li>
+              <li><Link to={journeyHref('c', 'consultant')} className="sj-node">Entretien programmé<span>depuis « Se faire accompagner »</span></Link></li>
               <li><Link to={journeyHref('r', key)} className="sj-node sj-node--light">Ressource rémunération<span>depuis « Aborder la rémunération »</span></Link></li>
             </ul>
             <p className="sj-map__back">↩ Chaque fiche service renvoie vers la <Link to={journeyHref('b', key)} anchor="sj-checklist">checklist de préparation</Link>.</p>

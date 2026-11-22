@@ -128,3 +128,7 @@ La barre du haut propose « Retour au portfolio » et « Réinitialiser la démo
 - Les requêtes SEO sont des hypothèses sans volume ; l’aperçu du titre est pédagogique.
 - La bascule de comparaison n’est pas un test A/B. Un vrai test demande une répartition aléatoire stable, un public défini, une instrumentation, un échantillon et une durée adaptés, à fixer avec le webanalyste.
 - Le prototype n’est relié à aucun outil (AB Tasty, Piano, Google Analytics, Jahia…) : il illustre une méthode.
+
+## Contrôle des liens vers un consultant
+
+`npm run check:links` (lancé aussi par `npm run build`, donc à chaque mise en ligne) vérifie que tout lien générique vers un consultant (« Échanger avec un consultant », « Prendre rendez-vous avec un consultant », « Vous hésitez ? », « Aucune suggestion ne vous convient ? »…) mène à la réservation du Rendez-vous conseil (`/reserver/rendez-vous-conseil`). Le build échoue sinon, en particulier pour un lien générique vers `/reserver/cep`. `node scripts/check-consultant-links.mjs --list` liste tous les liens vers `/reserver/` et `/service/` avec leur cible.
