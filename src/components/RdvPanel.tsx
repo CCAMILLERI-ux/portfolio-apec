@@ -1,18 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { getService } from '../data/services'
-import { RDV_COUNT, RDV_NEEDS, RDV_START_ID, type RdvMotif, type RdvNeedId } from '../data/rendezVous'
-import { navigate } from '../lib/router'
+import { RDV_COUNT, RDV_NEEDS, RDV_START, RDV_START_ID, type RdvMotif, type RdvNeedId } from '../data/rendezVous'
+import { SITUATION_ICON, SITUATIONS } from '../data/situations'
+import { navigate, useRoute } from '../lib/router'
 import { track } from '../lib/storage'
 import { nb } from '../lib/text'
-import { ArrowRight, Close, Compass, Graduation, Lightbulb, Target, TrendUp } from './Icons'
+import { ArrowRight, Close } from './Icons'
 
-const NEED_ICON: Record<RdvNeedId, typeof Target> = {
-  poste: Target,
-  evoluer: TrendUp,
-  point: Compass,
-  former: Graduation,
-  creer: Lightbulb,
-}
+/** Intitulé de la situation, lu dans situations.ts (même vocabulaire que « Nos services »). */
+const labelOf = (id: RdvNeedId) => SITUATIONS.find((s) => s.id === id)!.label
+const START_LABEL = 'Je ne sais pas par où commencer'
 
 /** Lien vers les ateliers : vue « Tous » du cas 02 filtrée sur le format Atelier. */
 const WORKSHOPS = '/cas-02-ab-test?situation=tous&vue=piste&format=atelier'
@@ -20,12 +17,17 @@ const WORKSHOPS = '/cas-02-ab-test?situation=tous&vue=piste&format=atelier'
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
 /**
- * Panneau « Prendre un rendez-vous individuel » : 17 motifs officiels regroupés en 5 besoins.
+ * Panneau « Prendre un rendez-vous individuel » : 17 motifs officiels, regroupés selon les
+ * 4 situations candidat de « Nos services ».
  * Fenêtre modale accessible : focus sur le titre à l'ouverture, piégé dans le panneau,
  * rendu au bouton d'origine à la fermeture, fermeture avec Échap.
  */
 export function RdvPanel({ onClose }: { onClose: (restoreFocus?: boolean) => void }) {
-  const [need, setNeed] = useState<RdvNeedId>(RDV_NEEDS[0].id)
+  const route = useRoute()
+  // Ouvert depuis « Nos services » avec une situation choisie : même situation présélectionnée.
+  const fromServices = route.path === '/cas-02-ab-test' ? route.query.get('situation') : null
+  const initial = RDV_NEEDS.find((n) => n.id === fromServices)?.id ?? RDV_NEEDS[0].id
+  const [need, setNeed] = useState<RdvNeedId>(initial)
   const [showAll, setShowAll] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
@@ -79,12 +81,12 @@ export function RdvPanel({ onClose }: { onClose: (restoreFocus?: boolean) => voi
             <legend className="rdv__step">1. Quel est votre besoin{' '}?</legend>
             <div className="rdv-needs__grid">
               {RDV_NEEDS.map((n) => {
-                const Icon = NEED_ICON[n.id]
+                const Icon = SITUATION_ICON[n.id]
                 return (
                   <label key={n.id} className={`sit-tile rdv-tile${need === n.id ? ' is-selected' : ''}`}>
                     <input type="radio" name="rdv-besoin" value={n.id} checked={need === n.id} onChange={() => setNeed(n.id)} className="visually-hidden" />
                     <Icon size={30} className="sit-tile__icon" />
-                    <span className="sit-tile__label">{nb(n.label)}</span>
+                    <span className="sit-tile__label">{nb(labelOf(n.id))}</span>
                   </label>
                 )
               })}
@@ -92,7 +94,7 @@ export function RdvPanel({ onClose }: { onClose: (restoreFocus?: boolean) => voi
           </fieldset>
 
           <div className="rdv-start">
-            <p className="rdv-start__title">Je ne sais pas par où commencer</p>
+            <p className="rdv-start__title">{START_LABEL}</p>
             <p className="rdv-start__text">Un consultant fait le point avec vous et vous oriente vers le bon{' '}accompagnement.</p>
             <button type="button" className="btn btn--primary btn--sm" onClick={() => choose(RDV_START_ID)}>
               Choisir le {start.officialTitle.toLowerCase()}
@@ -102,7 +104,7 @@ export function RdvPanel({ onClose }: { onClose: (restoreFocus?: boolean) => voi
           <section className="rdv-step" aria-labelledby="rdv-etape-2">
             <h3 id="rdv-etape-2" className="rdv__step">2. Choisissez votre rendez-vous</h3>
             <p className="visually-hidden" role="status" aria-live="polite">
-              {`${current.motifs.length} motifs de rendez-vous pour : ${current.label}.`}
+              {`${current.motifs.length} motifs de rendez-vous pour : ${labelOf(current.id)}.`}
             </p>
             <MotifList motifs={current.motifs} onChoose={choose} />
           </section>
@@ -115,10 +117,14 @@ export function RdvPanel({ onClose }: { onClose: (restoreFocus?: boolean) => voi
             <div id="rdv-tous" hidden={!showAll}>
               {RDV_NEEDS.map((n) => (
                 <section key={n.id} className="rdv-group" aria-labelledby={`rdv-g-${n.id}`}>
-                  <h4 id={`rdv-g-${n.id}`} className="rdv-group__title">{n.label}</h4>
+                  <h4 id={`rdv-g-${n.id}`} className="rdv-group__title">{labelOf(n.id)}</h4>
                   <MotifList motifs={n.motifs} onChoose={choose} level={5} />
                 </section>
               ))}
+              <section className="rdv-group" aria-labelledby="rdv-g-debut">
+                <h4 id="rdv-g-debut" className="rdv-group__title">{START_LABEL}</h4>
+                <MotifList motifs={[RDV_START]} onChoose={choose} level={5} />
+              </section>
             </div>
           </div>
 

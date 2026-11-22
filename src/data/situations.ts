@@ -3,6 +3,7 @@
  * travail (hypothèses de la candidate, non validés par l'Apec). Ils ne sont
  * jamais affichés aux visiteurs dans la démo utilisateur.
  */
+import { Compass, Graduation, Handshake, Search, TrendUp } from '../components/Icons'
 import type { ServiceKind } from './services'
 
 export interface Situation {
@@ -50,6 +51,15 @@ export const SITUATIONS: Situation[] = [
     serviceIds: ['conseil-recrutement', 'publication-offre', 'preselection'],
   },
 ]
+
+/** Icône de chaque tuile de situation (page « Nos services » et panneau de rendez-vous). */
+export const SITUATION_ICON: Record<string, typeof Search> = {
+  'nouvel-emploi': Search,
+  'premier-emploi': Graduation,
+  evoluer: TrendUp,
+  reconversion: Compass,
+  'recruter-aide': Handshake,
+}
 
 export const ALL_DEMO_SERVICE_IDS = Array.from(
   new Set(SITUATIONS.flatMap((s) => s.serviceIds)),

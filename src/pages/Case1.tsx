@@ -1,6 +1,6 @@
 import { Badge } from '../components/Badge'
 import { CrBlock, CroGrid } from '../components/Coulisses'
-import { ArrowRight, Calendar, Chat, Compass, Graduation, Handshake, Search, TrendUp } from '../components/Icons'
+import { ArrowRight, Calendar, Chat } from '../components/Icons'
 import { Illustration } from '../components/Illustration'
 import { ModalityChips } from '../components/Modalities'
 import { ProtoLayout } from '../components/ProtoLayout'
@@ -9,7 +9,7 @@ import { Picto } from '../components/Picto'
 import { WORKSHOP_SESSIONS } from '../data/slots'
 import { ADVICE_BY_SITUATION, IDEAL_IF } from '../data/piste2'
 import { getService, SERVICES, type Service } from '../data/services'
-import { ALL_DEMO_SERVICE_IDS, FORMAT_LABEL, groupBySituation, otherSituations, SITUATIONS } from '../data/situations'
+import { ALL_DEMO_SERVICE_IDS, FORMAT_LABEL, groupBySituation, otherSituations, SITUATION_ICON, SITUATIONS } from '../data/situations'
 import { Link, navigate, type Route } from '../lib/router'
 import { nb } from '../lib/text'
 
@@ -22,13 +22,6 @@ const VIEWS: [View, string][] = [
 ]
 const ALL = 'tous'
 
-const SITUATION_ICON: Record<string, typeof Search> = {
-  'nouvel-emploi': Search,
-  'premier-emploi': Graduation,
-  evoluer: TrendUp,
-  reconversion: Compass,
-  'recruter-aide': Handshake,
-}
 
 export function Case1({ route }: { route: Route }) {
   const rawView = route.query.get('vue')

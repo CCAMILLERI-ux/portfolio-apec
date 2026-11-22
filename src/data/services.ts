@@ -82,6 +82,10 @@ const TBC = (label: Modality['label']): Modality => ({
   provenance: 'a-verifier',
 })
 
+/** Rendez-vous dont l'intitulé est relevé sur « Tous nos services » (modalités non reprises). */
+const LISTED_RDV_NOTE =
+  'Fiche d’aperçu : intitulé repris de la page « Tous nos services » d’apec.fr ; durée, tarif et public restent à confirmer.'
+
 const SYNTHESIS_NOTE =
   "Fiche d'aperçu : ce service n'est pas détaillé dans la démo. Intitulé et modalités à confirmer avec les équipes ; le lien renvoie vers le site officiel."
 
@@ -402,16 +406,16 @@ export const SERVICES: Service[] = [
   {
     id: 'evolution-interne',
     audience: 'candidat',
-    officialTitle: 'Accompagnement à l’évolution interne',
-    titleProvenance: 'a-verifier',
+    officialTitle: 'Concrétiser son changement de poste',
+    titleProvenance: 'capture',
     hook: 'Préparez une évolution dans votre entreprise',
     benefit: 'Identifier les opportunités internes et préparer les échanges qui s’y rattachent.',
     kind: 'individuel',
     modalities: [TBC('Format'), TBC('Durée'), TBC('Tarif'), TBC('Public')],
     illustration: 'echange',
-    action: { kind: 'external', label: 'Voir l’offre officielle sur apec.fr', url: OFFICIAL_SERVICES_URL },
+    action: { kind: 'booking', label: 'Découvrir le rendez-vous' },
     depth: 'synthese',
-    scopeNote: SYNTHESIS_NOTE,
+    scopeNote: LISTED_RDV_NOTE,
   },
   {
     id: 'formation',
@@ -444,16 +448,16 @@ export const SERVICES: Service[] = [
   {
     id: 'premier-emploi',
     audience: 'candidat',
-    officialTitle: 'Objectif premier emploi',
-    titleProvenance: 'a-verifier',
+    officialTitle: 'Clés d’Emploi',
+    titleProvenance: 'capture',
     hook: 'Préparez votre entrée dans la vie professionnelle',
     benefit: 'Clarifier son projet et cibler ses premières candidatures après les études.',
     kind: 'individuel',
     modalities: [TBC('Format'), TBC('Durée'), TBC('Tarif'), TBC('Public')],
     illustration: 'boussole',
-    action: { kind: 'external', label: 'Voir l’offre officielle sur apec.fr', url: OFFICIAL_SERVICES_URL },
+    action: { kind: 'booking', label: 'Découvrir le rendez-vous' },
     depth: 'synthese',
-    scopeNote: SYNTHESIS_NOTE,
+    scopeNote: LISTED_RDV_NOTE,
   },
   {
     id: 'profil-debutant',

@@ -26,7 +26,7 @@ export function Case2Coulisses() {
       </CrBlock>
       <CrBlock title="Prise de rendez-vous">
         <p>
-          Prise de rendez-vous{'\u00a0'}: 17 motifs officiels de rendez-vous individuels regroupés en 5 besoins, avec une
+          Prise de rendez-vous{'\u00a0'}: 17 motifs officiels de rendez-vous individuels regroupés selon les 4 situations de « Nos services », avec une
           porte d’entrée pour les candidats qui ne savent pas par où commencer et un lien vers les ateliers pour ceux
           qui préfèrent le collectif. L’offre complète reste accessible en un{'\u00a0'}clic.
         </p>

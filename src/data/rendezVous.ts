@@ -1,18 +1,23 @@
 /**
- * Prise de rendez-vous individuel (côté candidat) : 17 motifs, regroupés en 5 besoins.
+ * Prise de rendez-vous individuel (côté candidat) : 17 motifs, regroupés selon les 4 situations
+ * candidat de la page « Nos services » (mêmes intitulés et icônes, importés de situations.ts),
+ * plus le « Rendez-vous conseil » réservé à l'encart « Je ne sais pas par où commencer ».
  *
- * Intitulés relevés sur la page « Tous nos services » d'apec.fr. Trois motifs réutilisent
- * des services déjà présents dans la démo (candidature, entretien-programme, cep) ; les
- * quatorze autres sont déclarés ici et ajoutés au catalogue des services (fiche + réservation).
+ * Intitulés relevés sur la page « Tous nos services » d'apec.fr. Cinq motifs réutilisent des
+ * services déjà présents dans la démo (candidature, entretien-programme, premier-emploi,
+ * evolution-interne, cep) : même identifiant, même intitulé et même « Idéal si » (piste2.ts).
+ * Les douze autres sont déclarés ici et ajoutés au catalogue des services (fiche + réservation).
  *
  * Aucune durée, aucun prix ni aucune modalité n'est inventé : seules indications affichées,
  * « 45 min » pour « Réussir sa candidature » et « Gratuit » pour le CEP.
  * Les phrases « Idéal si… » sont des aides au choix rédigées par la candidate, pas des
  * informations officielles.
  */
+import { IDEAL_IF } from './piste2'
 import type { Modality, Service } from './services'
 
-export type RdvNeedId = 'poste' | 'evoluer' | 'point' | 'former' | 'creer'
+/** Les 4 situations candidat de « Nos services » (identifiants de situations.ts). */
+export type RdvNeedId = 'nouvel-emploi' | 'premier-emploi' | 'evoluer' | 'reconversion'
 
 export interface RdvMotif {
   serviceId: string
@@ -23,8 +28,8 @@ export interface RdvMotif {
 }
 
 export interface RdvNeed {
+  /** Identifiant de la situation (libellé et icône lus dans situations.ts). */
   id: RdvNeedId
-  label: string
   motifs: RdvMotif[]
 }
 
@@ -49,17 +54,13 @@ const rdv = (id: string, officialTitle: string, ideal: string, illustration: Ser
   scopeNote: NOTE,
 })
 
+/** « Idéal si » propres au panneau ; ceux des services de « Nos services » viennent de piste2.ts. */
 const IDEAL = {
-  candidature: 'vous voulez un avis sur votre CV et votre lettre',
-  'entretien-programme': 'vous avez un entretien dans les prochains jours',
   'potentiel-marche': 'vous voulez savoir si votre profil est recherché',
   'experience-talents': 'vous voulez valoriser votre parcours',
   doctorat: 'vous êtes docteur et visez l’entreprise',
-  'cles-emploi': 'votre premier emploi tarde à venir',
-  'changement-poste': 'une opportunité se présente',
   'mi-carriere': 'vous cherchez un nouveau défi',
   international: 'vous visez un poste à l’étranger',
-  cep: 'vous voulez construire votre projet',
   'rendez-vous-conseil': 'vous voulez faire le point sur votre situation',
   'solution-formation': 'vous voulez structurer et financer une formation',
   'diagnostic-formation': 'vous hésitez entre plusieurs formations',
@@ -69,13 +70,11 @@ const IDEAL = {
   'accompagnement-creation': 'vous vous lancez',
 } as const
 
-/** Les quatorze rendez-vous qui n'existaient pas encore dans la démo. */
+/** Les douze rendez-vous qui n'existaient pas encore dans la démo. */
 export const RDV_SERVICES: Service[] = [
   rdv('potentiel-marche', 'Votre Potentiel Marché', IDEAL['potentiel-marche'], 'boussole'),
   rdv('experience-talents', 'Faire de son expérience un atout - Expérience et talents', IDEAL['experience-talents']),
   rdv('doctorat', 'Comment valoriser votre doctorat ?', IDEAL.doctorat, 'document'),
-  rdv('cles-emploi', 'Clés d’Emploi', IDEAL['cles-emploi']),
-  rdv('changement-poste', 'Concrétiser son changement de poste', IDEAL['changement-poste'], 'boussole'),
   rdv('mi-carriere', 'Evoluer à mi-carrière', IDEAL['mi-carriere'], 'boussole'),
   rdv('international', 'Rendez-vous conseil international', IDEAL.international, 'boussole'),
   rdv('rendez-vous-conseil', 'Rendez-vous conseil', IDEAL['rendez-vous-conseil']),
@@ -87,21 +86,32 @@ export const RDV_SERVICES: Service[] = [
   rdv('accompagnement-creation', 'Etre accompagné dans sa création d’entreprise', IDEAL['accompagnement-creation'], 'boussole'),
 ]
 
-const m = (serviceId: keyof typeof IDEAL, tag?: string): RdvMotif => ({ serviceId, ideal: IDEAL[serviceId], tag })
+/** Un seul « Idéal si » par service : celui de « Nos services » s'il existe, sinon celui du panneau. */
+const m = (serviceId: string, tag?: string): RdvMotif => ({
+  serviceId,
+  ideal: IDEAL_IF[serviceId] ?? IDEAL[serviceId as keyof typeof IDEAL],
+  tag,
+})
 
+/** Le premier motif de chaque situation est le rendez-vous mis en avant sur « Nos services ». */
 export const RDV_NEEDS: RdvNeed[] = [
   {
-    id: 'poste',
-    label: 'Décrocher un poste',
-    motifs: [m('candidature', '45 min'), m('entretien-programme'), m('potentiel-marche'), m('experience-talents'), m('doctorat'), m('cles-emploi')],
+    id: 'nouvel-emploi',
+    motifs: [m('candidature', '45 min'), m('entretien-programme'), m('potentiel-marche'), m('experience-talents'), m('formation-embauche')],
   },
-  { id: 'evoluer', label: 'Évoluer, changer de poste', motifs: [m('changement-poste'), m('mi-carriere'), m('international')] },
-  { id: 'point', label: 'Faire le point, me reconvertir', motifs: [m('cep', 'Gratuit'), m('rendez-vous-conseil')] },
-  { id: 'former', label: 'Me former', motifs: [m('solution-formation'), m('diagnostic-formation'), m('formation-embauche')] },
-  { id: 'creer', label: 'Créer mon entreprise', motifs: [m('pret-creation'), m('challenger-idee'), m('accompagnement-creation')] },
+  { id: 'premier-emploi', motifs: [m('premier-emploi'), m('doctorat')] },
+  { id: 'evoluer', motifs: [m('evolution-interne'), m('mi-carriere'), m('international')] },
+  {
+    id: 'reconversion',
+    motifs: [m('cep', 'Gratuit'), m('diagnostic-formation'), m('solution-formation'), m('pret-creation'), m('challenger-idee'), m('accompagnement-creation')],
+  },
 ]
 
-export const RDV_COUNT = RDV_NEEDS.reduce((n, g) => n + g.motifs.length, 0)
+/** Porte d'entrée « Je ne sais pas par où commencer » (hors tuiles). */
+export const RDV_START: RdvMotif = m('rendez-vous-conseil')
+
+/** Total affiché dans « Voir les 17 motifs » : motifs des situations + Rendez-vous conseil. */
+export const RDV_COUNT = RDV_NEEDS.reduce((n, g) => n + g.motifs.length, 0) + 1
 
 /** Porte d'entrée pour les candidats qui ne savent pas par où commencer. */
-export const RDV_START_ID = 'rendez-vous-conseil'
+export const RDV_START_ID = RDV_START.serviceId
