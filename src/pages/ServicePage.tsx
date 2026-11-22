@@ -24,6 +24,9 @@ const RELATED: Record<string, { to: string; anchor?: string; label: string; text
   'simulateur-entretien': [
     { to: '/service/entretien-programme?from=cas-3', label: 'Un entretien fixé ? Répétez-le avec un consultant', text: 'Simulation individuelle d’1 h.', tone: 'blue' },
   ],
+  'jeunes-diplomes-confiance': [
+    { to: '/service/remuneration-premier-emploi?from=cas-3', label: 'Aborder la rémunération pour un 1er emploi', text: 'Un atelier pour discuter et négocier son salaire de premier emploi.', tone: 'blue' },
+  ],
   candidature: [
     { to: '/cas-01-seo', anchor: 'etapes', label: 'Préparer ensuite l’entretien en 5 étapes', text: 'Conseil complet, utile avant même d’être convoqué.', tone: 'blue' },
   ],

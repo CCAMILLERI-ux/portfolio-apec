@@ -461,6 +461,8 @@ legend { padding: 0; }
 .modalities__item:nth-last-child(-n + 2):nth-child(odd),
 .modalities__item:last-child { border-bottom: 0; }
 .modalities__item dd { margin: 0; }
+.modalities:has(> .modalities__item:only-child) { grid-template-columns: 1fr; display: inline-grid; min-width: min(100%, 280px); }
+.modalities__item:only-child { border-right: 0; }
 .modalities__icon { flex: none; color: var(--brand-navy); }
 @media (max-width: 420px) { .modalities { grid-template-columns: 1fr; } .modalities__item { border-right: 0; border-bottom: 1px solid var(--border-neutral) !important; } .modalities__item:last-child { border-bottom: 0 !important; } }
 
@@ -1406,3 +1408,29 @@ legend { padding: 0; }
   .rec-list { grid-template-columns: 1fr; }
   .rec__photo, .rec--first .rec__photo { aspect-ratio: 21 / 8; }
 }
+
+/* ---------- Cas 01 : solutions regroupées par besoin ---------- */
+.sol-need + .sol-need { margin-top: var(--s3); }
+.sol-grid--need { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sol-card__main { flex: 1 0 auto; }
+.sol-card--row { grid-column: 1 / -1; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--s1) var(--s3); }
+.sol-card--row .sol-icon--lg { margin: 0; }
+.sol-card--row .sol-card__main p:last-child { margin-bottom: 0; }
+.sol-card--row .btn { margin: 0; align-self: center; }
+.sol-side__list--mixed { gap: var(--s1); }
+.sol-more { margin-top: var(--s3); padding: var(--s2) 20px; background: var(--brand-blue-tint, #ebf2f7); border-left: 5px solid var(--brand-blue); }
+.sol-more p { margin: 0; text-wrap: pretty; }
+.sol-more p + p { margin-top: var(--s1); }
+.sol-more a { display: inline-block; padding: 6px 0; font-weight: 600; }
+@media (max-width: 760px) {
+  .sol-grid--need { grid-template-columns: 1fr; }
+  .sol-card--row { display: flex; flex-direction: column; align-items: flex-start; }
+  .sol-card--row .sol-icon--lg { margin-bottom: var(--s2); }
+  .sol-card--row .btn { align-self: flex-start; margin-top: var(--s1); }
+}
+.sol-more__links { list-style: none; margin: 0; padding: 0; }
+.sol-more__links + p { margin-top: var(--s1); }
+/* Pas de mot seul en fin de ligne dans l'article et les cartes de services. */
+.article-layout p, .article-layout li, .article-layout dd { text-wrap: pretty; }
+.article-layout h1, .article-layout h2, .article-layout h3, .article-layout h4, .acard__title, .hcard__title { text-wrap: balance; }
+.band__title, .service-title, .side-card__title { text-wrap: balance; }

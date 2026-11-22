@@ -212,7 +212,11 @@ const LINK_MAP = [
   ['Conseil — préparer un entretien', 'Entretien programmé (simulation)', '« Répétez-le lors d’une simulation individuelle d’1 h »', 'Entretien déjà fixé'],
   ['Conseil — préparer un entretien', 'Repères rémunération', '« quelques repères pour aborder le salaire »', 'Question fréquente'],
   ['Conseil — questions (salaire)', 'Convertisseur Urssaf (externe)', '« convertisseur salaire brut / net de l’Urssaf »', 'Passer du brut au net'],
-  ...CAS3_SOLUTIONS.map((s) => ['Conseil — bloc final et colonne', s.official, `« ${s.cta} »`, s.focus ?? s.title]),
+  ...CAS3_SOLUTIONS.map((s) => ['Conseil — bloc final et colonne', s.official, s.format === 'humain' ? `« ${s.cta} : ${s.official} »` : `« ${s.cta} »`, s.focus ?? s.title]),
+  ['Conseil — « Selon votre profil »', 'Jeunes diplômés : gagnez en confiance, même sans expérience', '« Jeunes diplômés : gagnez en confiance, même sans expérience »', 'Profil : peu d’expérience'],
+  ['Conseil — « Selon votre profil »', 'Valoriser les atouts de son expérience senior', '« Valoriser les atouts de son expérience senior »', 'Profil : expérience senior'],
+  ['Conseil — « Pas encore d’entretien ? »', 'Réussir sa candidature', '« Réussir sa candidature »', 'En amont de l’entretien'],
+  ['Fiche « Jeunes diplômés »', 'Aborder la rémunération pour un 1er emploi', '« Aborder la rémunération pour un 1er emploi »', 'Premier salaire'],
   ['Fiche atelier', 'Conseil — étapes', '« Lire nos conseils pour préparer votre séance »', 'Préparer la séance'],
   ['Repères rémunération', 'Conseil — questions', '« les autres questions fréquentes »', 'Retour au besoin principal'],
 ]
@@ -231,8 +235,13 @@ export function Case3Coulisses() {
       </CrBlock>
       <CrBlock title="Solutions recommandées : ordre et provenance">
         <p>
-          Même liste, même ordre et mêmes destinations dans la colonne et en bas d’article : d’abord les
-          accompagnements humains (photos), puis les outils en autonomie (icônes). Le simulateur d’entretien prépare
+          Les services sont regroupés par besoin (s’entraîner, parler salaire, préparer ses questions) pour éviter
+          la surcharge de choix{'\u00a0'}; les services selon le profil et en amont de l’entretien sont proposés en
+          liens internes.
+        </p>
+        <p>
+          Mêmes groupes, même ordre et mêmes destinations dans la colonne et en bas d’article{'\u00a0'}: dans
+          chaque groupe, les accompagnements humains (photos), puis les outils en autonomie (icônes). Le simulateur d’entretien prépare
           les <strong>réponses</strong> ; Odiapazon aide à préparer les <strong>questions</strong> et à clarifier ses
           attentes (usage suggéré, à partir de sa présentation sur apec.fr : « se projeter pour préparer une
           collaboration réussie »).
@@ -240,6 +249,7 @@ export function Case3Coulisses() {
         <ul>
           <li>Descriptions fidèles aux pages d’apec.fr : « Entretien programmé » est une simulation pour un entretien prévu, pas un coaching général ; l’atelier porte sur les différents types d’entretien.</li>
           <li>« Simulateur de salaire cadre » : intitulé provisoire, à confirmer avec les équipes.</li>
+          <li>Ateliers « Parler rémunération en entretiens », « Jeunes diplômés{'\u00a0'}: gagnez en confiance, même sans expérience », « Aborder la rémunération pour un 1er emploi », « Valoriser les atouts de son expérience senior » et rendez-vous « Réussir sa candidature » (45{'\u00a0'}minutes) : intitulés et format repris de la page « Tous nos services » d’apec.fr, vers laquelle renvoient leurs fiches.</li>
           <li>Outils : la fiche du prototype renvoie vers la page « Tous nos outils » d’apec.fr ; les liens directs et l’éventuelle connexion à un compte Apec seraient à préciser dans une vraie mise en œuvre.</li>
           <li>Data Cadres, fiches métiers et fiches entreprises sont cités dans le texte ; les liens seraient ajoutés dans le CMS.</li>
           <li>Lien externe : convertisseur salaire brut / net de l’Urssaf.</li>
@@ -266,7 +276,7 @@ export function Case3Coulisses() {
           <ul>
             <li>Introduction qui répond en quelques lignes, puis sommaire.</li>
             <li>Liens intégrés au texte, avec ancres descriptives et différenciées selon la situation.</li>
-            <li>Bloc final « Se faire accompagner » en trois cas, sans liste de liens artificielle.</li>
+            <li>Bloc final en trois besoins, puis deux lignes de liens internes, sans liste de liens artificielle.</li>
             <li>Contenu connexe court (rémunération) plutôt que des pages de remplissage.</li>
           </ul>
         ),
@@ -326,7 +336,7 @@ export function Case3Coulisses() {
               <li>H2 — Les 5 étapes (5 × H3)</li>
               <li>H2 — Exemples de questions</li>
               <li>H2 — Checklist</li>
-              <li>H2 — Se faire accompagner</li>
+              <li>H2 — L’Apec vous accompagne pour préparer vos entretiens (3 × H3, un par besoin)</li>
             </ul>
           </li>
         </ul>

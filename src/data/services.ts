@@ -83,6 +83,10 @@ const TBC = (label: Modality['label']): Modality => ({
 const SYNTHESIS_NOTE =
   "Fiche d'aperçu : ce service n'est pas détaillé dans la démo. Intitulé et modalités à confirmer avec les équipes ; le lien renvoie vers le site officiel."
 
+/** Services relevés sur la page « Tous nos services » : seuls l'intitulé et le format (et une durée si indiquée) sont repris. */
+const LISTED_NOTE =
+  'Fiche d’aperçu : intitulé et format repris de la page « Tous nos services » d’apec.fr ; le lien renvoie vers cette page.'
+
 export const SERVICES: Service[] = [
   /* ---------------- Parcours entretien (fiches détaillées) ---------------- */
   {
@@ -311,6 +315,83 @@ export const SERVICES: Service[] = [
     depth: 'synthese',
     scopeNote:
       'Fiche d’aperçu : intitulé provisoire ; lien direct et conditions d’accès (compte Apec éventuel) à confirmer avec les équipes. Le lien ouvre la page publique des outils d’apec.fr.',
+  },
+
+  /* ---------------- Cas 01 : services liés à l'entretien (intitulés relevés sur « Tous nos services ») ---------------- */
+  {
+    id: 'atelier-remuneration',
+    audience: 'candidat',
+    officialTitle: 'Parler rémunération en entretiens',
+    titleProvenance: 'capture',
+    hook: 'Préparez vos prétentions salariales pour l’entretien',
+    benefit: 'Arriver en entretien avec une position claire sur la rémunération.',
+    kind: 'atelier',
+    modalities: [{ label: 'Format', value: 'Atelier', provenance: 'capture' }, TBC('Durée'), TBC('Tarif'), TBC('Public')],
+    illustration: 'groupe',
+    action: { kind: 'external', label: 'Voir l’atelier sur apec.fr', url: OFFICIAL_SERVICES_URL },
+    depth: 'synthese',
+    scopeNote: LISTED_NOTE,
+  },
+  {
+    id: 'jeunes-diplomes-confiance',
+    audience: 'candidat',
+    officialTitle: 'Jeunes diplômés : gagnez en confiance, même sans expérience',
+    titleProvenance: 'capture',
+    hook: 'Présentez vos atouts, même avec peu d’expérience',
+    benefit: 'Mettre en valeur ce que vous apportez au poste, même en début de parcours.',
+    kind: 'atelier',
+    modalities: [{ label: 'Format', value: 'Atelier', provenance: 'capture' }, TBC('Durée'), TBC('Tarif'), TBC('Public')],
+    illustration: 'groupe',
+    action: { kind: 'external', label: 'Voir l’atelier sur apec.fr', url: OFFICIAL_SERVICES_URL },
+    depth: 'synthese',
+    scopeNote: LISTED_NOTE,
+  },
+  {
+    id: 'remuneration-premier-emploi',
+    audience: 'candidat',
+    officialTitle: 'Aborder la rémunération pour un 1er emploi',
+    titleProvenance: 'capture',
+    hook: 'Discutez et négociez votre salaire de premier emploi',
+    benefit: 'Aborder la question du salaire sereinement, dès le premier poste.',
+    kind: 'atelier',
+    modalities: [{ label: 'Format', value: 'Atelier', provenance: 'capture' }, TBC('Durée'), TBC('Tarif'), TBC('Public')],
+    illustration: 'groupe',
+    action: { kind: 'external', label: 'Voir l’atelier sur apec.fr', url: OFFICIAL_SERVICES_URL },
+    depth: 'synthese',
+    scopeNote: LISTED_NOTE,
+  },
+  {
+    id: 'experience-senior',
+    audience: 'candidat',
+    officialTitle: 'Valoriser les atouts de son expérience senior',
+    titleProvenance: 'capture',
+    hook: 'Faites de votre expérience un atout',
+    benefit: 'Montrer au recruteur ce que votre parcours apporte au poste visé.',
+    kind: 'atelier',
+    modalities: [{ label: 'Format', value: 'Atelier', provenance: 'capture' }, TBC('Durée'), TBC('Tarif'), TBC('Public')],
+    illustration: 'groupe',
+    action: { kind: 'external', label: 'Voir l’atelier sur apec.fr', url: OFFICIAL_SERVICES_URL },
+    depth: 'synthese',
+    scopeNote: LISTED_NOTE,
+  },
+  {
+    id: 'reussir-candidature',
+    audience: 'candidat',
+    officialTitle: 'Réussir sa candidature',
+    titleProvenance: 'capture',
+    hook: 'Retravaillez votre CV et votre lettre',
+    benefit: 'Un rendez-vous individuel pour rendre votre candidature plus convaincante, avant même l’entretien.',
+    kind: 'individuel',
+    modalities: [
+      { label: 'Format', value: 'Rendez-vous individuel', provenance: 'capture' },
+      { label: 'Durée', value: '45 minutes', provenance: 'capture' },
+      TBC('Tarif'),
+      TBC('Public'),
+    ],
+    illustration: 'document',
+    action: { kind: 'external', label: 'Voir le service sur apec.fr', url: OFFICIAL_SERVICES_URL },
+    depth: 'synthese',
+    scopeNote: LISTED_NOTE,
   },
 
   /* ---------------- Fiches synthétiques (intitulés à vérifier) ---------------- */
