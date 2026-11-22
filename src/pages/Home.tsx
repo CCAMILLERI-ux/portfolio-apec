@@ -29,7 +29,7 @@ const WORKS = [
   {
     n: '03',
     to: '/cas-03-inscription',
-    mission: 'Performance & conversion · Animation',
+    mission: 'Performance & conversion\u00a0·\u00a0Animation',
     title: 'Inscription accompagnée',
     text: 'Un tunnel guidé, de la création de compte au premier service utilisé.',
     skills: ['Parcours utilisateur', 'Activation', 'Recommandation'],
