@@ -1,3 +1,4 @@
+import { nb } from '../lib/text'
 import { useEffect, useId, useRef, useState } from 'react'
 import { KIND_LABEL, type Service } from '../data/services'
 import { INDIVIDUAL_SLOTS, WORKSHOP_SESSIONS, type Slot } from '../data/slots'
@@ -53,7 +54,7 @@ export function Booking({
           Récapitulatif
         </h2>
         <dl className="recap">
-          <div><dt>Service</dt><dd>{service.officialTitle}</dd></div>
+          <div><dt>Service</dt><dd>{nb(service.officialTitle)}</dd></div>
           <div><dt>Type</dt><dd>{KIND_LABEL[service.kind]}</dd></div>
           <div><dt>{isWorkshop ? 'Session' : 'Rendez-vous'}</dt><dd>{slot.date} à {slot.time}</dd></div>
           <div><dt>Lieu</dt><dd>{slot.place}</dd></div>
@@ -82,7 +83,7 @@ export function Booking({
       <h2 id={`${groupId}-choose`} ref={chooseRef} tabIndex={-1} className="booking__title">
         {isWorkshop ? 'Choisissez une session' : 'Choisissez un créneau'}
       </h2>
-      <p className="muted">{service.officialTitle}</p>
+      <p className="muted">{nb(service.officialTitle)}</p>
       <fieldset className="slots" aria-describedby={error ? `${groupId}-err` : undefined}>
         <legend>
           {isWorkshop ? 'Sessions' : 'Créneaux'} disponibles

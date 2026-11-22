@@ -1,3 +1,4 @@
+import { nb } from '../lib/text'
 import { useEffect, useRef, useState } from 'react'
 import { Booking, type BookingResult } from '../components/Booking'
 import { CrBlock } from '../components/Coulisses'
@@ -50,7 +51,7 @@ export function BookingPage({ id, route }: { id: string; route: Route }) {
               <span className="confirm__check" aria-hidden="true"><Check size={44} /></span>
               <h2 ref={doneRef} tabIndex={-1} className="step__title confirm__title">C’est noté !</h2>
               <dl className="recap">
-                <div><dt>Service</dt><dd>{service.officialTitle}</dd></div>
+                <div><dt>Service</dt><dd>{nb(service.officialTitle)}</dd></div>
                 <div><dt>Date</dt><dd>{done.slot.date} à {done.slot.time}</dd></div>
                 <div><dt>Lieu</dt><dd>{done.slot.place}</dd></div>
               </dl>

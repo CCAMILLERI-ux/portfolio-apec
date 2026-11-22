@@ -24,6 +24,13 @@ export function Case2Coulisses() {
           <li>« Mes prochaines étapes » utilise une sauvegarde locale de démonstration, effacée par « Réinitialiser la démo » (barre du haut). « Mon espace » est la page d’accueil de l’espace de démonstration.</li>
         </ul>
       </CrBlock>
+      <CrBlock title="Prise de rendez-vous">
+        <p>
+          Prise de rendez-vous{'\u00a0'}: 17 motifs officiels de rendez-vous individuels regroupés en 5 besoins, avec une
+          porte d’entrée pour les candidats qui ne savent pas par où commencer et un lien vers les ateliers pour ceux
+          qui préfèrent le collectif. L’offre complète reste accessible en un{'\u00a0'}clic.
+        </p>
+      </CrBlock>
       <CrBlock title="Direction graphique">
         <p>
           De grandes icônes pour décider vite, des photos pour les services, où une personne accompagne, des

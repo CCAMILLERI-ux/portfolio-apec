@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { flushSync } from 'react-dom'
 import { Link } from '../lib/router'
 import { resetAll } from '../lib/storage'
 import { Coulisses } from './Coulisses'
+import { RdvPanel } from './RdvPanel'
 import { ArrowLeft, ArrowRight, Calendar, Close, Info, Menu, Reset, User } from './Icons'
 
 const PROTO_NAV = [
@@ -55,6 +56,12 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
 
   // Les coulisses ne sont affichées qu'à la demande ; à l'ouverture, on y descend.
   const [explain, setExplain] = useState(false)
+  const [rdvOpen, setRdvOpen] = useState(false)
+  const rdvBtn = useRef<HTMLButtonElement>(null)
+  const closeRdv = useCallback((restoreFocus = true) => {
+    setRdvOpen(false)
+    if (restoreFocus) window.setTimeout(() => rdvBtn.current?.focus(), 0)
+  }, [])
   const toggleExplain = () => {
     if (explain) {
       setExplain(false)
@@ -138,9 +145,16 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
               espace cadres
             </Link>
             <span className="proto-header__right">
-              <Link to="/reserver/cep?from=espace" className="proto-account">
+              <button
+                ref={rdvBtn}
+                type="button"
+                className="proto-account proto-account--btn"
+                aria-haspopup="dialog"
+                aria-expanded={rdvOpen}
+                onClick={() => setRdvOpen(true)}
+              >
                 <Calendar size={22} /> <span>Prendre rendez-vous</span>
-              </Link>
+              </button>
               <Link to="/espace" className="proto-account" aria-current={path === '/espace' ? 'page' : undefined}>
                 <User size={22} /> <span>Mon espace</span>
               </Link>
@@ -173,6 +187,7 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
       </div>
 
       <Coulisses events={events} hidden={!explain}>{coulisses}</Coulisses>
+      {rdvOpen && <RdvPanel onClose={closeRdv} />}
     </div>
   )
 }

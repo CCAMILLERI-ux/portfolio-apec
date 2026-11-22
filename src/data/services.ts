@@ -12,6 +12,8 @@
  * la candidate, distinctes des intitulés existants.
  */
 
+import { RDV_SERVICES } from './rendezVous'
+
 export type Provenance = 'capture' | 'a-verifier'
 export type ServiceKind = 'atelier' | 'individuel' | 'outil'
 export type Audience = 'candidat' | 'recruteur'
@@ -379,8 +381,8 @@ export const SERVICES: Service[] = [
   {
     id: 'cep',
     audience: 'candidat',
-    officialTitle: 'Conseil en évolution professionnelle (CEP)',
-    titleProvenance: 'a-verifier',
+    officialTitle: 'Conseil en évolution professionnelle',
+    titleProvenance: 'capture',
     hook: 'Faites le point avec un consultant sur votre projet',
     benefit:
       'Prendre du recul sur son parcours, clarifier ses options et construire un projet, en poste ou en transition.',
@@ -388,13 +390,14 @@ export const SERVICES: Service[] = [
     modalities: [
       { label: 'Format', value: 'Accompagnement individuel', provenance: 'a-verifier' },
       TBC('Durée'),
-      TBC('Tarif'),
+      { label: 'Tarif', value: 'Gratuit', provenance: 'capture' },
       TBC('Public'),
     ],
     illustration: 'boussole',
     action: { kind: 'booking', label: 'Découvrir le rendez-vous' },
     depth: 'synthese',
-    scopeNote: SYNTHESIS_NOTE,
+    scopeNote:
+      'Fiche d’aperçu : intitulé et gratuité repris de la page « Tous nos services » d’apec.fr ; les autres modalités restent à confirmer.',
   },
   {
     id: 'evolution-interne',
@@ -530,6 +533,9 @@ export const SERVICES: Service[] = [
       'Fiche d’aperçu : les conditions d’éligibilité ne sont pas reproduites ici et doivent être vérifiées sur le site officiel.',
   },
 ]
+
+// Rendez-vous individuels du panneau « Prendre un rendez-vous individuel » (src/data/rendezVous.ts).
+SERVICES.push(...RDV_SERVICES)
 
 export const SERVICE_BY_ID: Record<string, Service> = Object.fromEntries(
   SERVICES.map((s) => [s.id, s]),
