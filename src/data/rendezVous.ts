@@ -4,8 +4,8 @@
  * plus le « Rendez-vous conseil » réservé à l'encart « Je ne sais pas par où commencer ».
  *
  * Intitulés relevés sur la page « Tous nos services » d'apec.fr. Cinq motifs réutilisent des
- * services déjà présents dans la démo (candidature, entretien-programme, premier-emploi,
- * evolution-interne, cep) : même identifiant, même intitulé et même « Idéal si » (piste2.ts).
+ * services de « Nos services » ou du cas 01 (candidature, entretien-programme, cles-emploi, cep ;
+ * changement-poste est déclaré ici et repris sur « Nos services ») : même identifiant, même intitulé et même « Idéal si » (piste2.ts).
  * Les douze autres sont déclarés ici et ajoutés au catalogue des services (fiche + réservation).
  *
  * Aucune durée, aucun prix ni aucune modalité n'est inventé : seules indications affichées,
@@ -39,13 +39,19 @@ const NOTE =
   'Fiche d’aperçu : intitulé repris de la page « Tous nos services » d’apec.fr ; le contenu du rendez-vous n’est pas détaillé dans la démo.'
 
 /** Rendez-vous individuel déclaré pour le panneau : intitulé officiel, rien d'autre d'affirmé. */
-const rdv = (id: string, officialTitle: string, ideal: string, illustration: Service['illustration'] = 'echange'): Service => ({
+const rdv = (
+  id: string,
+  officialTitle: string,
+  ideal: string,
+  illustration: Service['illustration'] = 'echange',
+  text?: { hook: string; benefit: string },
+): Service => ({
   id,
   audience: 'candidat',
   officialTitle,
   titleProvenance: 'capture',
-  hook: 'Un rendez-vous individuel avec un consultant Apec',
-  benefit: `Idéal si ${ideal}.`,
+  hook: text?.hook ?? 'Un rendez-vous individuel avec un consultant Apec',
+  benefit: text?.benefit ?? `Idéal si ${ideal}.`,
   kind: 'individuel',
   modalities: [TBC('Format'), TBC('Durée'), TBC('Tarif'), TBC('Public')],
   illustration,
@@ -70,11 +76,16 @@ const IDEAL = {
   'accompagnement-creation': 'vous vous lancez',
 } as const
 
-/** Les douze rendez-vous qui n'existaient pas encore dans la démo. */
+/** Les rendez-vous déclarés pour le panneau (changement-poste est aussi affiché sur « Nos services »). */
 export const RDV_SERVICES: Service[] = [
   rdv('potentiel-marche', 'Votre Potentiel Marché', IDEAL['potentiel-marche'], 'boussole'),
   rdv('experience-talents', 'Faire de son expérience un atout - Expérience et talents', IDEAL['experience-talents']),
   rdv('doctorat', 'Comment valoriser votre doctorat ?', IDEAL.doctorat, 'document'),
+  // Aussi affiché sur « Nos services » (situation « évoluer ») : accroche propre.
+  rdv('changement-poste', 'Concrétiser son changement de poste', IDEAL_IF['changement-poste'], 'boussole', {
+    hook: 'Concrétisez votre changement de poste',
+    benefit: 'Un rendez-vous individuel avec un consultant pour passer de l’opportunité au nouveau poste.',
+  }),
   rdv('mi-carriere', 'Evoluer à mi-carrière', IDEAL['mi-carriere'], 'boussole'),
   rdv('international', 'Rendez-vous conseil international', IDEAL.international, 'boussole'),
   rdv('rendez-vous-conseil', 'Rendez-vous conseil', IDEAL['rendez-vous-conseil']),
@@ -99,8 +110,8 @@ export const RDV_NEEDS: RdvNeed[] = [
     id: 'nouvel-emploi',
     motifs: [m('candidature', '45 min'), m('entretien-programme'), m('potentiel-marche'), m('experience-talents'), m('formation-embauche')],
   },
-  { id: 'premier-emploi', motifs: [m('premier-emploi'), m('doctorat')] },
-  { id: 'evoluer', motifs: [m('evolution-interne'), m('mi-carriere'), m('international')] },
+  { id: 'premier-emploi', motifs: [m('cles-emploi'), m('doctorat')] },
+  { id: 'evoluer', motifs: [m('changement-poste'), m('mi-carriere'), m('international')] },
   {
     id: 'reconversion',
     motifs: [m('cep', 'Gratuit'), m('diagnostic-formation'), m('solution-formation'), m('pret-creation'), m('challenger-idee'), m('accompagnement-creation')],

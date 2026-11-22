@@ -62,7 +62,7 @@ export function ServiceAction({ service, from, className = 'btn btn--primary' }:
       >
         {service.action.label}
         <External size={18} />
-        <span className="visually-hidden"> (nouvel onglet)</span>
+        <span className="visually-hidden"> — {service.officialTitle} (nouvel onglet)</span>
       </a>
     )
   }
@@ -85,7 +85,8 @@ export function ServiceCard({ service, from, meta, level = 3 }: { service: Servi
         {meta}
         <H className="svc__title">{nb(service.hook)}</H>
         <p className="svc__benefit">{nb(service.benefit)}</p>
-        <ModalityChips items={service.modalities} />
+        {/* Le format est déjà donné par l'étiquette (meta) : pas de pastille en double. */}
+        <ModalityChips items={meta ? service.modalities.filter((m) => m.label !== 'Format') : service.modalities} />
         <div className="svc__actions">
           <ServiceAction service={service} from={from} />
           <Link to={`/service/${service.id}?from=${from}`} className="link-arrow">

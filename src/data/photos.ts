@@ -43,23 +43,31 @@ export const PHOTOS = {
 
 /** Photo associée à chaque service dans la piste 3. */
 export const SERVICE_PHOTO: Record<string, Photo> = {
-  'atelier-entretiens': PHOTOS.atelierPostIt,
-  'atelier-remuneration': PHOTOS.reunionTable,
-  'atelier-iag': PHOTOS.atelierOrdinateurs,
-  'entretien-programme': PHOTOS.entretienRecrutement,
+  // Je cherche un nouvel emploi
   candidature: PHOTOS.relectureEcran,
+  'atelier-entretiens': PHOTOS.atelierPostIt,
   'simulateur-entretien': PHOTOS.entretienCandidate,
-  'creer-cv': PHOTOS.posteDeTravail,
-  cep: PHOTOS.conversation,
+  // Je prépare mon premier emploi
+  'cles-emploi': PHOTOS.jeunesDiplomes,
+  'jeunes-diplomes-confiance': PHOTOS.equipeJeune,
+  'quel-job': PHOTOS.formationSalle,
+  // Je souhaite évoluer dans ma carrière
+  'changement-poste': PHOTOS.entretienFaceAFace,
   'evolution-interne': PHOTOS.collegues,
-  formation: PHOTOS.formationSalle,
+  trajectoires: PHOTOS.posteDeTravail,
+  // Je réfléchis à une reconversion
+  cep: PHOTOS.conversation,
   reconversion: PHOTOS.cadreSouriante,
-  'premier-emploi': PHOTOS.jeunesDiplomes,
-  'profil-debutant': PHOTOS.equipeJeune,
-  'premier-salaire': PHOTOS.posteDeTravail,
+  'fiches-metiers': PHOTOS.atelierOrdinateurs,
+  // Je recrute et j'ai besoin d'aide
   'conseil-recrutement': PHOTOS.reunionTable,
-  'publication-offre': PHOTOS.bureauEquipe,
-  preselection: PHOTOS.travailEquipe,
+  'offre-attractive': PHOTOS.bureauEquipe,
+  osim: PHOTOS.travailEquipe,
+  // Autres pages (cas 01 et cas 03)
+  'entretien-programme': PHOTOS.entretienRecrutement,
+  'atelier-iag': PHOTOS.atelierOrdinateurs,
+  'creer-cv': PHOTOS.posteDeTravail,
+  'atelier-remuneration': PHOTOS.reunionTable,
 }
 
 export const ALL_PHOTOS: Photo[] = Object.values(PHOTOS)

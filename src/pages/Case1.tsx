@@ -8,8 +8,8 @@ import { ObservedServiceCard, PhotoVisual, ServiceAction, ServiceCard } from '..
 import { Picto } from '../components/Picto'
 import { WORKSHOP_SESSIONS } from '../data/slots'
 import { ADVICE_BY_SITUATION, IDEAL_IF } from '../data/piste2'
-import { getService, SERVICES, type Service } from '../data/services'
-import { ALL_DEMO_SERVICE_IDS, FORMAT_LABEL, groupBySituation, otherSituations, SITUATION_ICON, SITUATIONS } from '../data/situations'
+import { getService, OFFICIAL_SERVICES_URL, OFFICIAL_TOOLS_URL, SERVICES, type Service } from '../data/services'
+import { ALL_DEMO_SERVICE_IDS, FORMAT_LABEL, groupBySituation, SITUATION_ICON, SITUATIONS } from '../data/situations'
 import { Link, navigate, type Route } from '../lib/router'
 import { nb } from '../lib/text'
 
@@ -51,10 +51,10 @@ export function Case1({ route }: { route: Route }) {
   const renderVariant = (
     list: Service[],
     level: 3 | 4,
-    meta?: (s: Service) => React.ReactNode,
-    primaryId?: string,
     withHelp = false,
   ) => {
+    // Étiquette de format visible sur chaque carte, dans toutes les vues.
+    const meta = (sv: Service) => <FormatMeta service={sv} />
     if (view === 'existant') {
       return (
         <div className="observed-band">
@@ -71,10 +71,10 @@ export function Case1({ route }: { route: Route }) {
         </div>
       )
     }
-    if (view === 'piste3') return <Piste3 services={list} level={level} meta={meta} keepOrder={!!meta} />
+    if (view === 'piste3') return <Piste3 services={list} level={level} meta={meta} grouped={level === 4} />
     return (
       <ul className="dlist" aria-label="Services, avec la situation où chacun est le plus utile">
-        {list.map((s) => <DecisionRow key={s.id} service={s} level={level} primaryId={primaryId} />)}
+        {list.map((s) => <DecisionRow key={s.id} service={s} level={level} />)}
         {withHelp && <HelpRow level={level} />}
       </ul>
     )
@@ -110,7 +110,15 @@ export function Case1({ route }: { route: Route }) {
         <div className="container">
           <p className="band__kicker">Nos services</p>
           <h1 className="band__title band__title--xl" tabIndex={-1}>Des services pour chaque étape de votre{'\u00a0'}carrière</h1>
-          <p className="band__lead">Choisissez votre point de départ : nous vous montrons les services qui vous correspondent.</p>
+          <p className="band__lead band__lead--wide">
+            Une sélection de services de l’Apec pour cette{'\u00a0'}démonstration.{' '}
+            <a href={OFFICIAL_SERVICES_URL} target="_blank" rel="noopener noreferrer" className="band__link">
+              Voir tous les services<span className="visually-hidden"> de l’Apec (nouvel onglet)</span>
+            </a>{' '}et{' '}
+            <a href={OFFICIAL_TOOLS_URL} target="_blank" rel="noopener noreferrer" className="band__link">
+              tous les{'\u00a0'}outils<span className="visually-hidden"> de l’Apec (nouvel onglet)</span>
+            </a>
+          </p>
           <fieldset className="sit-grid">
             <legend className="sit-legend">Où en êtes-vous{'\u00a0'}?</legend>
             {SITUATIONS.map((s) => {
@@ -183,11 +191,11 @@ export function Case1({ route }: { route: Route }) {
                   <h3 id={`grp-${g.situation.id}`} className="grp__title" tabIndex={-1}>
                     <Icon size={28} className="grp__icon" /> {nb(g.situation.label)}
                   </h3>
-                  {renderVariant(list, 4, (sv) => <GroupMeta service={sv} primaryId={g.situation.id} />, g.situation.id)}
+                  {renderVariant(list, 4)}
                 </section>
               )
             })
-          : renderVariant(services, 3, undefined, undefined, view === 'piste2')}
+          : renderVariant(services, 3, view === 'piste2')}
 
         {view === 'piste2' && (
           <>
@@ -225,27 +233,18 @@ export function Case1({ route }: { route: Route }) {
   )
 }
 
-/** Autres situations d'un service, en minuscule initiale, sans mot seul en fin de ligne. */
-function alsoLabel(serviceId: string, primaryId: string) {
-  const others = otherSituations(serviceId, primaryId)
-  if (others.length === 0) return null
-  return others.map((o) => o.label.charAt(0).toLowerCase() + o.label.slice(1)).join(' ; ').replace(/ (\S+)$/, '\u00a0$1')
-}
-
 /**
  * Piste 2 — ligne de la liste de décision : pictogramme, accroche en titre, « Idéal si »,
  * format, puis le bouton d'action principal (seul élément cliquable de la ligne).
  */
-function DecisionRow({ service, level, primaryId }: { service: Service; level: 3 | 4; primaryId?: string }) {
+function DecisionRow({ service, level }: { service: Service; level: 3 | 4 }) {
   const H = `h${level}` as 'h3' | 'h4'
-  const also = primaryId ? alsoLabel(service.id, primaryId) : null
   return (
     <li className="drow">
       <span className="drow__icon"><Picto kind={service.kind} size={36} /></span>
       <div className="drow__main">
         <H className="drow__title">{nb(service.hook)}</H>
         {IDEAL_IF[service.id] && <p className="drow__ideal"><strong>Idéal si</strong> {nb(IDEAL_IF[service.id])}</p>}
-        {also && <p className="drow__also">Aussi utile si{'\u00a0'}: {also}</p>}
       </div>
       <div className="drow__foot">
         <p className="drow__format"><span className="visually-hidden">Format{'\u00a0'}: </span>{FORMAT_LABEL[service.kind]}</p>
@@ -277,59 +276,62 @@ function HelpRow({ level }: { level: 3 | 4 }) {
   )
 }
 
-/** Étiquette de format et autres usages d'un service, dans la vue « Tous ». */
-function GroupMeta({ service, primaryId }: { service: Service; primaryId: string }) {
-  const also = alsoLabel(service.id, primaryId)
+/** Étiquette de format (rendez-vous individuel, atelier, outil en ligne), visible sur chaque carte. */
+function FormatMeta({ service }: { service: Service }) {
   return (
     <p className="grp-meta">
       <span className="grp-format">{FORMAT_LABEL[service.kind]}</span>
-      {also && <span className="grp-also">Aussi utile si{'\u00a0'}: {also}</span>}
     </p>
   )
 }
 
-/** Piste 3 : de l'humain. Ateliers mis en avant, photos à la place des pictogrammes. */
-function Piste3({ services, level = 3, meta, keepOrder = false }: { services: Service[]; level?: 3 | 4; meta?: (s: Service) => React.ReactNode; keepOrder?: boolean }) {
+/** Piste 3 : de l'humain. Photos à la place des pictogrammes ; ordre rendez-vous, atelier, outil. */
+function Piste3({ services, level = 3, meta, grouped = false }: { services: Service[]; level?: 3 | 4; meta: (s: Service) => React.ReactNode; grouped?: boolean }) {
   const H = `h${level}` as 'h3' | 'h4'
-  // Vue « Tous » : on garde l'ordre rendez-vous, atelier, outil ; sinon l'atelier passe en tête.
-  const workshops = services.filter((s) => s.kind === 'atelier')
-  const others = services.filter((s) => s.kind !== 'atelier')
-  if (keepOrder) {
-    return (
-      <div className="svc-grid">
-        {services.map((s) => (
-          <article key={s.id} className={`svc svc--${s.kind}`}>
-            <PhotoVisual service={s} />
-            <div className="svc__body">
-              <p className="svc__official">{nb(s.officialTitle)}</p>
-              {meta?.(s)}
-              <H className="svc__title">{nb(s.hook)}</H>
-              <p className="svc__benefit">{nb(s.benefit)}</p>
-              <ModalityChips items={s.modalities} />
-              <div className="svc__actions">
-                <ServiceAction service={s} from="cas-1" />
-                <Link to={`/service/${s.id}?from=cas-1`} className="link-arrow">
-                  En savoir plus<span className="visually-hidden"> : {s.officialTitle}</span> <ArrowRight size={18} />
-                </Link>
-              </div>
-            </div>
-          </article>
-        ))}
+  const card = (s: Service) => (
+    <article key={s.id} className={`svc svc--${s.kind}`}>
+      <PhotoVisual service={s} />
+      <div className="svc__body">
+        <p className="svc__official">{nb(s.officialTitle)}</p>
+        {meta(s)}
+        <H className="svc__title">{nb(s.hook)}</H>
+        <p className="svc__benefit">{nb(s.benefit)}</p>
+        <ModalityChips items={s.modalities.filter((m) => m.label !== 'Format')} />
+        <div className="svc__actions">
+          <ServiceAction service={s} from="cas-1" />
+          <Link to={`/service/${s.id}?from=cas-1`} className="link-arrow">
+            En savoir plus<span className="visually-hidden"> : {s.officialTitle}</span> <ArrowRight size={18} />
+          </Link>
+        </div>
       </div>
-    )
+    </article>
+  )
+  // Vue « Tous » : trois cartes côte à côte par situation.
+  if (grouped) return <div className="svc-grid">{services.map(card)}</div>
+  // Situation choisie : l'atelier garde sa grande carte photo, à sa place (entre le rendez-vous et l'outil).
+  const segments: (Service | Service[])[] = []
+  for (const s of services) {
+    const last = segments[segments.length - 1]
+    if (s.kind === 'atelier') segments.push(s)
+    else if (Array.isArray(last)) last.push(s)
+    else segments.push([s])
   }
   return (
     <>
-      {workshops.map((s) => (
-        <article key={s.id} className="workshop">
-          <PhotoVisual service={s} className="workshop__photo" />
+      {segments.map((seg) => Array.isArray(seg) ? (
+        <div key={seg[0].id} className={`svc-grid${seg.length === 1 ? ' svc-grid--solo' : seg.length === 2 ? ' svc-grid--duo' : ''}`}>
+          {seg.map(card)}
+        </div>
+      ) : (
+        <article key={seg.id} className="workshop">
+          <PhotoVisual service={seg} className="workshop__photo" />
           <div className="workshop__body">
-            <p className="workshop__kicker">Atelier collectif</p>
-            <p className="svc__official">{nb(s.officialTitle)}</p>
-            <h3 className="workshop__title">{s.hook}</h3>
-            <p>{s.benefit}</p>
-            <ModalityChips items={s.modalities} />
-            {s.action.kind === 'booking' && (
+            <p className="svc__official">{nb(seg.officialTitle)}</p>
+            {meta(seg)}
+            <H className="workshop__title">{nb(seg.hook)}</H>
+            <p>{nb(seg.benefit)}</p>
+            <ModalityChips items={seg.modalities.filter((m) => m.label !== 'Format')} />
+            {seg.action.kind === 'booking' && (
               <div className="workshop__sessions">
                 <p className="workshop__sessions-title"><Calendar size={18} /> Prochaines sessions</p>
                 <ul>
@@ -340,35 +342,14 @@ function Piste3({ services, level = 3, meta, keepOrder = false }: { services: Se
               </div>
             )}
             <div className="svc__actions">
-              <ServiceAction service={s} from="cas-1" />
-              <Link to={`/service/${s.id}?from=cas-1`} className="link-arrow">
-                En savoir plus<span className="visually-hidden"> : {s.officialTitle}</span> <ArrowRight size={18} />
+              <ServiceAction service={seg} from="cas-1" />
+              <Link to={`/service/${seg.id}?from=cas-1`} className="link-arrow">
+                En savoir plus<span className="visually-hidden"> : {seg.officialTitle}</span> <ArrowRight size={18} />
               </Link>
             </div>
           </div>
         </article>
       ))}
-      {others.length > 0 && (
-        <div className={`svc-grid${others.length === 2 ? ' svc-grid--duo' : ''}`}>
-          {others.map((s) => (
-            <article key={s.id} className={`svc svc--${s.kind}`}>
-              <PhotoVisual service={s} />
-              <div className="svc__body">
-                <p className="svc__official">{nb(s.officialTitle)}</p>
-                <h3 className="svc__title">{s.hook}</h3>
-                <p className="svc__benefit">{nb(s.benefit)}</p>
-                <ModalityChips items={s.modalities} />
-                <div className="svc__actions">
-                  <ServiceAction service={s} from="cas-1" />
-                  <Link to={`/service/${s.id}?from=cas-1`} className="link-arrow">
-                    En savoir plus<span className="visually-hidden"> : {s.officialTitle}</span> <ArrowRight size={18} />
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      )}
     </>
   )
 }
@@ -400,10 +381,17 @@ function Case1Coulisses() {
           vers un service, puis le taux d’inscription ou de rendez-vous{'\u00a0'}finalisé.
         </p>
       </CrBlock>
+      <CrBlock title="Sélection des services">
+        <p>
+          Pour chaque situation, un rendez-vous individuel, un atelier et un outil, proposés ensemble sur une même
+          page : on ne sépare plus les outils des services, on part de la situation de l’utilisateur. Sélection
+          volontairement courte pour la{'\u00a0'}démonstration.
+        </p>
+      </CrBlock>
       <CrBlock title="Vue « Tous nos services »">
         <p>
           Variante testée : un classement par situation de l’utilisateur, avec le format en second niveau, plutôt qu’un
-          classement par nature d’outil. Chaque service apparaît une seule fois, avec ses autres usages signalés.
+          classement par nature d’outil. Chaque service apparaît une seule fois, dans sa situation.
           Indicateurs : clics vers un service depuis la vue Tous, puis inscriptions ou rendez-vous finalisés, comparés
           à la version{'\u00a0'}actuelle.
         </p>
@@ -510,7 +498,6 @@ function Case1Coulisses() {
           des propositions rédactionnelles.
         </p>
         <ul className="inline-list">{tbc.map((s) => <li key={s.id}>{s.officialTitle}</li>)}</ul>
-        <p>La présélection est soumise à des conditions (TPE/PME notamment), à préciser : elle n’est pas présentée comme ouverte à tous.</p>
       </CrBlock>
     </>
   )

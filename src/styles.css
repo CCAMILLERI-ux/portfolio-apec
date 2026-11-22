@@ -276,9 +276,19 @@ main:focus-visible { outline: none; }
 }
 .proto .proto-wordmark { white-space: nowrap; }
 @media (max-width: 640px) {
-  .proto-header__inner { gap: var(--s2); }
-  .proto-header__right { gap: var(--s2); }
+  .proto-header__inner { gap: 12px; }
+  .proto-header__right { gap: 4px; }
+  .proto .proto-account { min-width: 40px; gap: 0; justify-content: center; }
+  .proto-menu-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .proto-menu-btn { min-width: 44px; justify-content: center; }
+  .proto .proto-wordmark { font-size: 1rem; }
   .proto-account span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  /* Icônes seules : le libellé apparaît au focus clavier, sous l'icône. */
+  .proto .proto-account { position: relative; }
+  .proto .proto-account:focus-visible span {
+    width: auto; height: auto; overflow: visible; clip: auto; white-space: nowrap; z-index: 20;
+    top: calc(100% + 4px); right: 0; padding: 4px 8px; background: var(--brand-yellow); color: var(--brand-navy); font-size: 0.8125rem;
+  }
 }
 .proto-wordmark__dot { width: 12px; height: 12px; background: var(--brand-yellow); border-radius: 50%; }
 .proto-header__right { margin-left: auto; display: flex; gap: var(--s3); }
@@ -1563,3 +1573,24 @@ legend { padding: 0; }
 .nowrap { white-space: nowrap; }
 /* Prototypes : pas de mot seul en fin de ligne dans les textes courants. */
 .proto p:not(.visually-hidden), .proto li, .proto dd { text-wrap: pretty; }
+/* En-tête des prototypes, mobile : icônes seules, sans dépassement (après la règle de base). */
+@media (max-width: 640px) {
+  .proto-header__right { gap: 4px; }
+  .proto .proto-account { gap: 0; }
+}
+.proto .band__link { position: relative; color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.proto .band__link:hover { color: #fff; text-decoration-color: var(--brand-yellow); }
+.proto .band__link:focus-visible { outline: 3px solid var(--brand-yellow); outline-offset: 2px; }
+/* Piste 3, situation choisie : rendez-vous et outil en pleine largeur, photo à gauche (l'atelier garde sa grande carte). */
+.svc-grid--solo { grid-template-columns: 1fr; margin-bottom: var(--s3); }
+.svc-grid--solo .svc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); }
+.svc-grid--solo .photo-visual { height: 100%; border-bottom: 0; border-right: 5px solid var(--brand-blue); }
+.svc-grid--solo .svc--outil .photo-visual { border-right-color: var(--brand-navy); }
+.svc-grid--solo .photo-visual__img { height: 100%; min-height: 240px; }
+@media (max-width: 760px) {
+  .svc-grid--solo .svc { display: flex; }
+  .svc-grid--solo .photo-visual { height: auto; border-right: 0; }
+  .svc-grid--solo .photo-visual__img { min-height: 0; height: 200px; }
+}
+.band__lead--wide { max-width: none; }
+.proto .band__link { white-space: nowrap; }

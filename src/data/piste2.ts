@@ -13,15 +13,17 @@ export const IDEAL_IF: Record<string, string> = {
   'creer-cv': 'vous voulez mettre votre CV à jour en autonomie',
   odiapazon: 'vous voulez savoir quelles questions poser au recruteur',
   cep: 'vous voulez faire le point sur votre projet',
+  'cles-emploi': 'vous terminez vos études ou cherchez votre premier poste',
+  'jeunes-diplomes-confiance': 'vous débutez et voulez présenter vos atouts avec assurance',
+  'quel-job': 'vous cherchez les métiers ouverts par votre diplôme',
+  'changement-poste': 'une opportunité se présente',
   'evolution-interne': 'vous visez un nouveau poste dans votre entreprise',
-  formation: 'vous envisagez une formation et voulez la relier à un projet',
+  trajectoires: 'vous voulez explorer les évolutions possibles de votre métier',
   reconversion: 'vous envisagez un autre métier',
-  'premier-emploi': 'vous terminez vos études ou cherchez votre premier poste',
-  'profil-debutant': 'vous avez surtout des stages ou de l’alternance à valoriser',
-  'premier-salaire': 'vous devez annoncer vos prétentions pour la première fois',
+  'fiches-metiers': 'vous voulez découvrir des métiers avant de vous décider',
+  'offre-attractive': 'vous rédigez une offre et voulez attirer les bons candidats',
+  osim: 'vous voulez évaluer les candidats sur des situations concrètes',
   'conseil-recrutement': 'vous recrutez un cadre sans service RH dédié',
-  'publication-offre': 'votre poste est défini et vous cherchez des candidatures',
-  preselection: 'vous êtes une TPE/PME et remplissez les conditions',
 }
 
 export interface Advice {
