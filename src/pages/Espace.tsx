@@ -60,7 +60,7 @@ export function Espace({ path }: { path: string }) {
             <p>
               {kept.length
                 ? `${kept.length} service${kept.length > 1 ? 's' : ''} conservé${kept.length > 1 ? 's' : ''}.`
-                : 'Aucun service conservé pour l’instant.'}
+                : 'Aucun service conservé pour\u00a0l’instant.'}
             </p>
             <Link to="/cas-03-inscription/prochaines-etapes" className="link-arrow link-arrow--light">
               Voir mes prochaines étapes <ArrowRight size={18} />
@@ -90,7 +90,7 @@ export function Espace({ path }: { path: string }) {
           <section className="space-card" aria-labelledby="sp-services">
             <Search size={36} className="space-card__icon space-card__icon--dark" />
             <h2 id="sp-services" className="space-card__title space-card__title--dark">Nos services</h2>
-            <p>Ateliers, accompagnements et outils selon votre situation.</p>
+            <p>Ateliers, accompagnements et outils selon votre{'\u00a0'}situation.</p>
             <Link to="/cas-02-ab-test" className="link-arrow">Explorer nos services <ArrowRight size={18} /></Link>
           </section>
 
