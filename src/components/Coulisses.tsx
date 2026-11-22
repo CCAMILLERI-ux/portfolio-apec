@@ -1,16 +1,13 @@
 import type { ReactNode } from 'react'
 import { Link } from '../lib/router'
 import { EventLog } from './EventLog'
-import { DISCLAIMER, SIGNATURE } from './PortfolioLayout'
 
 /** Pied de page « Coulisses du prototype » : seul endroit où le prototype s'explique. */
 export function Coulisses({ events, hidden, children }: { events: string[]; hidden?: boolean; children: ReactNode }) {
   return (
     <section id="coulisses" className="coulisses" tabIndex={-1} aria-labelledby="coulisses-titre" hidden={hidden}>
       <div className="pf-container">
-        <p className="coulisses__kicker">{SIGNATURE}</p>
         <h2 id="coulisses-titre" className="coulisses__title">Coulisses du prototype</h2>
-        <p className="coulisses__disclaimer">{DISCLAIMER}</p>
         <p className="coulisses__hint">
           Retour au portfolio, réinitialisation et fermeture de ces explications : barre en haut de page.{' '}
           <Link to="/design-system" className="pf-link">Design system et sources</Link>
@@ -23,7 +20,7 @@ export function Coulisses({ events, hidden, children }: { events: string[]; hidd
           <p>
             Événements prévus ici : {events.map((e, i) => (
               <span key={e}>{i > 0 && ', '}<code>{e}</code></span>
-            ))}. Enregistrés uniquement dans ce navigateur, sans donnée personnelle ni traceur externe.
+            ))}.
             Ce journal illustre le plan de marquage : ce ne sont <strong>pas</strong> des résultats d’expérimentation.
           </p>
           <EventLog />

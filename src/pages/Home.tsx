@@ -1,214 +1,123 @@
-import { ArrowRight, Clock } from '../components/Icons'
+import { ArrowRight, Clock, LinkedIn } from '../components/Icons'
 import { PortfolioLayout } from '../components/PortfolioLayout'
 import { Link } from '../lib/router'
 
-const CASES = [
+const LINKEDIN = 'https://www.linkedin.com/in/caroline-camilleri-pro/'
+
+/** Les quatre réalisations : même format de carte. */
+const WORKS = [
   {
-    n: 1,
+    n: '01',
     to: '/cas-01-seo',
-    title: 'De la recherche Google à l’utilisation des services',
-    need: 'Un article optimisé pour le SEO qui oriente vers les outils et accompagnements adaptés.',
-    skills: ['SEO éditorial', 'Maillage interne', 'Acquisition'],
+    mission: 'Acquisition',
+    title: 'De la recherche Google aux services',
+    text: 'Un article SEO qui oriente vers les outils et accompagnements adaptés.',
+    skills: ['SEO éditorial', 'Maillage interne', 'Intention de recherche'],
     duration: '1 min 30',
-    thumb: 'article',
+    cta: 'Explorer la démo',
   },
   {
-    n: 2,
+    n: '02',
     to: '/cas-02-ab-test',
-    title: 'Clarifier l’offre pour faciliter le choix',
-    need: 'Un A/B test UX/UI pour clarifier l’offre de services et améliorer la conversion.',
-    skills: ['A/B testing', 'KPI', 'Conversion', 'Design system / Figma'],
+    mission: 'Performance & conversion',
+    title: 'Clarifier l’offre pour faciliter le choix',
+    text: 'Un A/B test UX/UI pour rendre l’offre de services plus lisible.',
+    skills: ['A/B testing', 'KPI', 'Design system'],
     duration: '1 min 30',
-    thumb: 'services',
+    cta: 'Explorer la démo',
   },
   {
-    n: 3,
+    n: '03',
     to: '/cas-03-inscription',
-    title: 'Accompagner l’utilisateur à chaque étape de son inscription',
-    need: 'Un tunnel guidé pour faciliter la création de compte et l’accès aux services.',
-    skills: ['Parcours utilisateur', 'Activation', 'Conversion'],
+    mission: 'Performance & conversion · Animation',
+    title: 'Inscription accompagnée',
+    text: 'Un tunnel guidé, de la création de compte au premier service utilisé.',
+    skills: ['Parcours utilisateur', 'Activation', 'Recommandation'],
     duration: '2 min',
-    thumb: 'onboarding',
+    cta: 'Explorer la démo',
   },
-] as const
+  {
+    n: '04',
+    to: '/plan-seo',
+    mission: 'Acquisition',
+    title: 'Plan SEO pour apec.fr',
+    text: 'Diagnostic, stratégie en quatre piliers et feuille de route sur 90 jours.',
+    skills: ['SEO technique', 'Stratégie de contenus', 'Visibilité IA'],
+    duration: '2 min',
+    cta: 'Découvrir le plan',
+  },
+]
 
-/** Miniature schématique de l'écran prototype (purement décorative). */
-function Thumb({ kind }: { kind: (typeof CASES)[number]['thumb'] }) {
-  return (
-    <div className={`thumb thumb--${kind}`} aria-hidden="true">
-      <div className="thumb__bar" />
-      {kind === 'services' && (
-        <>
-          <div className="thumb__band">
-            <span className="thumb__tile is-on" /><span className="thumb__tile" /><span className="thumb__tile" />
-            <span className="thumb__tile" /><span className="thumb__tile" /><span className="thumb__tile" />
-          </div>
-          <div className="thumb__cards">
-            <span className="thumb__card thumb__card--y" /><span className="thumb__card thumb__card--b" /><span className="thumb__card thumb__card--n" />
-          </div>
-        </>
-      )}
-      {kind === 'onboarding' && (
-        <>
-          <div className="thumb__band thumb__band--short" />
-          <div className="thumb__sheet">
-            <div className="thumb__progress"><span className="is-on" /><span className="is-on" /><span className="is-cur" /><span /><span /></div>
-            <span className="thumb__line thumb__line--title" />
-            <span className="thumb__choice is-on" /><span className="thumb__choice" />
-            <span className="thumb__btn" />
-          </div>
-        </>
-      )}
-      {kind === 'article' && (
-        <>
-          <div className="thumb__band thumb__band--short" />
-          <div className="thumb__article">
-            <div className="thumb__main">
-              <span className="thumb__line thumb__line--title" />
-              <span className="thumb__hero" />
-              <span className="thumb__line" /><span className="thumb__line" /><span className="thumb__line thumb__line--short" />
-            </div>
-            <div className="thumb__side"><span className="thumb__card thumb__card--b" /><span className="thumb__card thumb__card--n" /></div>
-          </div>
-        </>
-      )}
-    </div>
-  )
-}
-
-/** Résultats de la candidate (sans nom d'employeur), projetés sur le poste. */
-const IMPACT = [
-  {
-    axis: 'Acquisition',
-    figure: '83 %',
-    done: 'de conformité SEO technique sur un site de marque, dont j’ai piloté toute la stratégie SEO (technique, contenus, maillage).',
-    apec: 'faire de la recherche naturelle un levier d’accès aux services.',
-  },
-  {
-    axis: 'Conversion',
-    figure: '× 2',
-    done: 'sur la conversion du tunnel de création de compte d’un espace client B2B, grâce à l’optimisation UX et aux A/B tests.',
-    apec: 'transformer les visites en comptes, candidatures et rendez-vous.',
-  },
-  {
-    axis: 'Animation',
-    figure: '7 sites',
-    done: 'et plus de 25 services digitaux pilotés en BUILD et en RUN, avec la DSI et 6 agences.',
-    apec: 'une roadmap d’animation tenue, déployée dans le CMS avec les équipes.',
-  },
+/** Résultats de la candidate (sans nom d'employeur). */
+const RESULTS = [
+  { figure: '83 %', text: 'conformité SEO technique d’un site de marque dont j’ai piloté la stratégie SEO' },
+  { figure: '× 2', text: 'conversion d’un tunnel de création de compte B2B' },
+  { figure: '7 sites', text: 'et plus de 25 services digitaux pilotés avec la DSI et 6 agences' },
 ]
 
 export function Home() {
   return (
-    <PortfolioLayout compactBrand>
-      <section className="pf-container pf-intro" aria-labelledby="identite">
-        <div className="pf-intro__id">
-          <p className="pf-intro__kicker">Candidature à l’Apec</p>
-          <h1 id="identite" className="pf-intro__h1" tabIndex={-1}>
-            <span className="pf-intro__name">Caroline Camilleri</span>
-            <span className="pf-intro__role">Cheffe de projet Animation Web</span>
-          </h1>
-          <p className="pf-intro__baseline">
-            Développer le trafic qualifié, animer les contenus et optimiser les parcours pour favoriser l’utilisation des services.
-          </p>
-        </div>
-        <div className="pf-intro__about">
-          <h2 className="pf-intro__h2">À propos de moi</h2>
-          <p>
-            Référente de la performance de sites à fort trafic de services, je relie SEO, animation éditoriale et
-            optimisation de la conversion. Je pilote la roadmap d’animation, je maquette les variantes sur Figma à partir du design system, je teste, je mesure et je déploie dans le CMS
-            avec la DSI, les équipes produit et les agences. Ici, trois cas concrets pour apec.fr et mon plan SEO.
-          </p>
-          <ul className="pf-contact" aria-label="Me contacter">
-            <li>
-              <a href="https://www.linkedin.com/in/caroline-camilleri-pro/" target="_blank" rel="noopener noreferrer">
-                LinkedIn<span className="visually-hidden"> (nouvel onglet)</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+    <PortfolioLayout isHome>
+      <section className="pf-container pf-accroche" aria-labelledby="accroche">
+        <p className="pf-accroche__kicker">Candidature · Chef de projet Animation{'\u00a0'}Web</p>
+        <p className="pf-accroche__name">
+          Caroline Camilleri
+          <a
+            href={LINKEDIN}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pf-accroche__linkedin"
+            aria-label="Profil LinkedIn de Caroline Camilleri (nouvel onglet)"
+          >
+            <LinkedIn size={22} />
+          </a>
+        </p>
+        <h1 id="accroche" className="pf-accroche__h1" tabIndex={-1}>
+          Faire venir les bons publics sur apec.fr et les guider vers le bon{' '}service
+        </h1>
+        <p className="pf-accroche__text">
+          Quatre réalisations pour illustrer les missions du poste{' '}: acquisition SEO, performance et
+          conversion, animation du site. Chacune se parcourt en deux{' '}minutes.
+        </p>
+        <Link to="/" anchor="realisations" className="pf-btn pf-btn--primary">
+          Découvrir mes réalisations <ArrowRight size={18} />
+        </Link>
       </section>
 
-      <section className="pf-container pf-cases-wrap" aria-labelledby="cas">
-        <h2 id="cas" className="pf-cases-title">Trois cas concrets pour apec.fr</h2>
-        <ol className="pf-cases">
-          {CASES.map((c) => (
-            <li key={c.n} className="pf-case">
-              <Thumb kind={c.thumb} />
-              <div className="pf-case__body">
-                <p className="pf-case__meta">
-                  <span className="pf-case__num">Cas 0{c.n}</span>
-                  <span className="pf-case__duration"><Clock size={14} /> {c.duration}<span className="visually-hidden"> (durée indicative)</span></span>
-                </p>
-                <h3 className="pf-case__title">{c.title}</h3>
-                <p className="pf-case__need">{c.need}</p>
-                <ul className="pf-tags" aria-label="Compétences illustrées">
-                  {c.skills.map((s) => <li key={s}>{s}</li>)}
-                </ul>
-                <Link to={c.to} className="pf-btn pf-btn--primary pf-btn--sm">
-                  Explorer la démo<span className="visually-hidden"> — cas {c.n} : {c.title}</span> <ArrowRight size={16} />
-                </Link>
-              </div>
+      <section className="pf-container pf-works-wrap" aria-labelledby="realisations">
+        <h2 id="realisations" className="pf-works-title" tabIndex={-1}>Réalisations</h2>
+        <ol className="pf-works">
+          {WORKS.map((w) => (
+            <li key={w.n} className={`pf-work${w.n === '04' ? ' pf-work--wide' : ''}`}>
+              <p className="pf-work__meta">
+                <span className="pf-work__num" aria-hidden="true">{w.n}</span>
+                <span className="pf-work__duration"><Clock size={14} /> {w.duration}<span className="visually-hidden"> (durée indicative)</span></span>
+              </p>
+              <p className="pf-work__mission"><span className="visually-hidden">Mission{' '}: </span>{w.mission}</p>
+              <h3 className="pf-work__title">{w.title}</h3>
+              <p className="pf-work__text">{w.text}</p>
+              <ul className="pf-tags" aria-label="Compétences illustrées">
+                {w.skills.map((s) => <li key={s}>{s}</li>)}
+              </ul>
+              <Link to={w.to} className="pf-btn pf-btn--primary pf-btn--sm">
+                {w.cta}<span className="visually-hidden"> — réalisation {w.n}{' '}: {w.title}</span> <ArrowRight size={16} />
+              </Link>
             </li>
           ))}
         </ol>
-
-        <details className="seo-acc pf-howto-acc">
-          <summary><span>Comment explorer les prototypes</span></summary>
-          <div className="seo-acc__body">
-            <p>
-              Chaque prototype s’ouvre dans un univers inspiré d’apec.fr et se parcourt comme un utilisateur. Une barre de
-              démo, en haut de page et hors maquette, permet de revenir au portfolio, de changer de variante, de
-              réinitialiser et d’ouvrir « Comprendre ce cas » : mes choix, hypothèses et indicateurs sont regroupés en bas
-              de page, dans <em>« Coulisses du prototype »</em>.
-            </p>
-          </div>
-        </details>
-        <p className="pf-frame-note">
-          Prototypes indépendants inspirés d’apec.fr, sans affiliation officielle : aucune inscription réelle, aucune donnée collectée.{' '}
-          <Link to="/design-system" anchor="sources" className="pf-link">Sources et mentions <ArrowRight size={16} /></Link>
-        </p>
       </section>
 
-      <section className="pf-container pf-plan" aria-labelledby="plan-seo">
-        <article className="pf-case pf-case--wide">
-          <div className="pf-plan__visual" aria-hidden="true">
-            <span>Diagnostic</span><span>4 piliers</span><span>Démonstration</span><span>90 jours</span>
-          </div>
-          <div className="pf-case__body">
-            <h2 id="plan-seo" className="pf-case__title">Stratégie SEO – Méthode de travail</h2>
-            <p className="pf-case__need">
-              Un plan SEO complet pour apec.fr : diagnostic, stratégie en quatre piliers (technique, contenus, maillage,
-              visibilité IA), démonstration et feuille de route sur 90 jours.
-            </p>
-            <ul className="pf-tags" aria-label="Compétences illustrées">
-              <li>SEO technique</li><li>Contenus</li><li>Maillage interne</li><li>Visibilité IA</li><li>Pilotage</li>
-            </ul>
-            <Link to="/plan-seo" className="pf-btn pf-btn--primary pf-btn--sm">
-              Découvrir la méthode<span className="visually-hidden"> : stratégie SEO pour apec.fr</span> <ArrowRight size={16} />
-            </Link>
-          </div>
-        </article>
-      </section>
-
-      <section className="pf-proof" aria-labelledby="apport">
+      <section className="pf-results" aria-labelledby="resultats">
         <div className="pf-container">
-          <h2 id="apport" className="pf-proof__title">Des résultats déjà obtenus, au service d’apec.fr</h2>
-          <ul className="pf-impact__grid">
-            {IMPACT.map((i) => (
-              <li key={i.axis} className="pf-impact__card">
-                <p className="pf-impact__axis">{i.axis}</p>
-                <p className="pf-impact__figure">{i.figure}</p>
-                <p className="pf-impact__done">{i.done}</p>
-                <p className="pf-impact__apec"><strong>Pour apec.fr :</strong> {i.apec}</p>
+          <h2 id="resultats" className="pf-results__title">Mes résultats</h2>
+          <ul className="pf-results__list">
+            {RESULTS.map((r) => (
+              <li key={r.figure}>
+                <span className="pf-results__figure">{r.figure}</span>
+                <span className="pf-results__text">{r.text}</span>
               </li>
             ))}
           </ul>
-          <p className="pf-proof__cta">
-            <a href="https://www.linkedin.com/in/caroline-camilleri-pro/" target="_blank" rel="noopener noreferrer" className="pf-link">
-              Échanger sur LinkedIn<span className="visually-hidden"> (nouvel onglet)</span> <ArrowRight size={16} />
-            </a>
-          </p>
         </div>
       </section>
     </PortfolioLayout>

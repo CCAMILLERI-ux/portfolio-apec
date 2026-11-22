@@ -33,7 +33,7 @@ export function NextSteps({ path }: { path: string }) {
       path={path}
       caseLabel="Cas 03 · Inscription accompagnée"
       events={CASE2_EVENTS}
-      barNotice={hasBooking ? 'Rendez-vous simulés — aucun rendez-vous réel n’a été réservé.' : undefined}
+      barNotice={hasBooking ? 'Démonstration\u00a0: aucune inscription réelle.' : undefined}
       onReset={() => setState(INITIAL_ONBOARDING)}
       coulisses={<Case2Coulisses />}
     >
