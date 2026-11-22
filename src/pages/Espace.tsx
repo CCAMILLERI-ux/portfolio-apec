@@ -10,7 +10,7 @@ import { Link, navigate } from '../lib/router'
 export function Espace({ path }: { path: string }) {
   const [state, setState] = useOnboarding()
   const [bookings] = useBookings()
-  const kept = state.recs.filter((id) => !state.removed.includes(id))
+  const kept = state.program
   const booked = Object.entries(bookings)
   const guided = state.recs.length > 0
 
@@ -59,8 +59,8 @@ export function Espace({ path }: { path: string }) {
             <h2 id="sp-steps" className="space-card__title">Mes prochaines étapes</h2>
             <p>
               {kept.length
-                ? `${kept.length} service${kept.length > 1 ? 's' : ''} conservé${kept.length > 1 ? 's' : ''}.`
-                : 'Aucun service conservé pour\u00a0l’instant.'}
+                ? `${kept.length} service${kept.length > 1 ? 's' : ''} dans mon\u00a0programme.`
+                : 'Aucun service dans mon programme pour\u00a0l’instant.'}
             </p>
             <Link to="/cas-03-inscription/prochaines-etapes" className="link-arrow link-arrow--light">
               Voir mes prochaines étapes <ArrowRight size={18} />
@@ -82,7 +82,7 @@ export function Espace({ path }: { path: string }) {
             ) : (
               <p>Aucun rendez-vous à venir.</p>
             )}
-            <Link to="/reserver/cep?from=espace" className="link-arrow link-arrow--light">
+            <Link to="/reserver/rendez-vous-conseil?from=espace" className="link-arrow link-arrow--light">
               Prendre rendez-vous avec un consultant <ArrowRight size={18} />
             </Link>
           </section>

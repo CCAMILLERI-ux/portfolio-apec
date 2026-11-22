@@ -10,7 +10,9 @@ import { KindTag, KIND_TONE } from '../components/ServiceCard'
 import { SERVICE_PHOTO } from '../data/photos'
 import { FORMAT_LABEL } from '../data/situations'
 import { nb } from '../lib/text'
-import { ALEX_PRESET, NEED_OPTIONS, SITUATION_OPTIONS, recommend, type Need } from '../data/onboarding'
+import { ALEX_PRESET, NEED_OPTIONS, SITUATION_OPTIONS, recommend, TOP_COUNT, type Need } from '../data/onboarding'
+import { Picto } from '../components/Picto'
+import type { Service } from '../data/services'
 import { getService } from '../data/services'
 import { INITIAL_ONBOARDING, useBookings, useOnboarding, type OnboardingStep } from '../lib/demoState'
 import { Link } from '../lib/router'
@@ -24,7 +26,7 @@ const PROGRESS: { step: OnboardingStep; label: string }[] = [
   { step: 'situation', label: 'Situation' },
   { step: 'needs', label: 'Besoins' },
   { step: 'results', label: 'Suggestions' },
-  { step: 'action', label: 'Première action' },
+  { step: 'program', label: 'Mon programme' },
   { step: 'confirm', label: 'Confirmation' },
 ]
 
@@ -57,6 +59,7 @@ export function Case2({ path }: { path: string }) {
   const [state, setState] = useOnboarding()
   const [bookings, setBookings] = useBookings()
   const [error, setError] = useState('')
+  const [status, setStatus] = useState('')
   const headingRef = useRef<HTMLHeadingElement>(null)
   const firstRender = useRef(true)
   const { step, answers } = state
@@ -67,9 +70,12 @@ export function Case2({ path }: { path: string }) {
       return
     }
     headingRef.current?.focus()
-  }, [step])
+  }, [step, state.chosenId])
 
   const recs = recommend(answers)
+  const top = recs.slice(0, TOP_COUNT)
+  const more = recs.slice(TOP_COUNT)
+  const program = state.program
   const recKey = step === 'results' ? recs.map((r) => r.serviceId).join(',') : ''
   useEffect(() => {
     if (recKey) track('recommendation_view', recKey)
@@ -88,6 +94,33 @@ export function Case2({ path }: { path: string }) {
     })
 
   const chosen = state.chosenId ? getService(state.chosenId) : undefined
+  const countLabel = (n: number) => `${n} service${n > 1 ? 's' : ''} dans mon programme`
+
+  /** Ajoute ou retire un service du programme (plusieurs choix possibles). */
+  const toggle = (s: Service) => {
+    const on = program.includes(s.id)
+    const next = on ? program.filter((x) => x !== s.id) : [...program, s.id]
+    track('service_cta_click', `${s.id} (accueil guidé, ${on ? 'retiré' : 'ajouté'})`)
+    setStatus(`${s.officialTitle} ${on ? 'retiré de' : 'ajouté à'} votre programme. ${countLabel(next.length)}.`)
+    setState((st) => ({ ...st, program: next, removed: st.removed.filter((x) => x !== s.id) }))
+  }
+
+  const ToggleButton = ({ s, compact = false }: { s: Service; compact?: boolean }) => {
+    const on = program.includes(s.id)
+    return (
+      <button type="button" aria-pressed={on} onClick={() => toggle(s)}
+        className={`btn ${on ? 'btn--added' : 'btn--primary'}${compact ? ' btn--sm' : ''}`}>
+        {on ? <><Check size={16} /> Ajouté</> : compact ? 'Ajouter' : 'Ajouter à mon programme'}
+        <span className="visually-hidden"> : {s.officialTitle}</span>
+      </button>
+    )
+  }
+
+  /** Action propre à chaque service du programme. */
+  const actionLabel = (s: Service) =>
+    s.action.kind === 'external'
+      ? (s.kind === 'outil' ? 'Ouvrir l’outil sur apec.fr' : s.action.label)
+      : s.kind === 'atelier' ? 'Choisir une session' : 'Choisir un créneau'
   const prefilled = answers.situation === ALEX_PRESET.situation
 
   const heading = (children: React.ReactNode, className = 'step__title') => (
@@ -114,7 +147,7 @@ export function Case2({ path }: { path: string }) {
             </div>
             <p className="small">
               Vous préférez en parler à quelqu’un ?{' '}
-              <Link to="/reserver/cep?from=etapes">Prendre rendez-vous avec un consultant</Link>
+              <Link to="/reserver/rendez-vous-conseil?from=etapes">Prendre rendez-vous avec un consultant</Link>
             </p>
           </div>
           <div className="welcome__visual">
@@ -212,15 +245,15 @@ export function Case2({ path }: { path: string }) {
       body = (
         <div className="step">
           {heading(<>Nos suggestions pour bien démarrer</>)}
-          <p className="muted">Sélectionnées d’après vos réponses. Retrouvez-les à tout moment dans « Mon espace ».</p>
-          <Link to="/reserver/cep?from=etapes" className="help-link help-link--block">
-            <Chat size={22} /> Vous préférez être conseillé par une personne ? <strong>Échanger avec un consultant</strong>
+          <p className="muted">Sélectionnées d’après vos réponses. Ajoutez à votre programme tous les services qui vous{'\u00a0'}intéressent.</p>
+          <Link to="/reserver/rendez-vous-conseil?from=etapes" className="help-link help-link--block">
+            <Chat size={22} /> Vous préférez un rendez-vous individuel{'\u00a0'}? <strong>Échanger avec un consultant</strong>
           </Link>
           <ol className="rec-list">
-            {recs.map((r, i) => {
+            {top.map((r, i) => {
               const s = getService(r.serviceId)!
               return (
-                <li key={r.serviceId} className={`rec rec--photo rec--${KIND_TONE[s.kind]}${i === 0 ? ' rec--first' : ''}`}>
+                <li key={r.serviceId} className={`rec rec--photo rec--${KIND_TONE[s.kind]}${i === 0 ? ' rec--first' : ''}${program.includes(s.id) ? ' is-added' : ''}`}>
                   <div className="rec__photo">
                     {SERVICE_PHOTO[s.id] ? (
                       <img src={SERVICE_PHOTO[s.id].file} alt="" width={960} height={600}
@@ -235,36 +268,54 @@ export function Case2({ path }: { path: string }) {
                     <p className="svc__official">{nb(s.officialTitle)}</p>
                     <h3 className="rec__title">{nb(s.hook)}</h3>
                     <div className="rec__why">
-                      <h4>Pourquoi ce service ?</h4>
+                      <h4>Pourquoi ce service ?</h4>
                       <ul>
                         {r.reasons.map((reason) => (
                           <li key={reason}><Plus size={16} className="plus" /> <span>{nb(reason)}</span></li>
                         ))}
                       </ul>
                     </div>
-                    <ModalityChips items={s.modalities} />
-                    <div className="rec__actions">
-                      {s.action.kind === 'booking' ? (
-                        <button type="button" className="btn btn--primary" onClick={() => {
-                          track('service_cta_click', `${s.id} (accueil guidé)`)
-                          setState((st) => ({ ...st, chosenId: s.id }))
-                          go('action', 'results')
-                        }}>
-                          Commencer par ce service<span className="visually-hidden"> : {s.officialTitle}</span>
-                        </button>
-                      ) : (
-                        <a className="btn btn--outline" href={s.action.url} target="_blank" rel="noopener noreferrer"
-                          onClick={() => track('service_cta_click', `${s.id} (externe)`)}>
-                          {s.action.label} <External size={18} />
-                          <span className="visually-hidden"> (nouvel onglet)</span>
-                        </a>
-                      )}
-                    </div>
+                    <ModalityChips items={s.modalities.filter((m) => m.label !== 'Format')} />
+                    <div className="rec__actions"><ToggleButton s={s} /></div>
                   </div>
                 </li>
               )
             })}
           </ol>
+
+          {more.length > 0 && (
+            <section className="rec-more" aria-labelledby="rec-more-titre">
+              <h3 id="rec-more-titre" className="rec-more__title">Également utiles pour vous</h3>
+              <ul className="dlist rec-more__list">
+                {more.map((r) => {
+                  const s = getService(r.serviceId)!
+                  return (
+                    <li key={r.serviceId} className={`drow rec-row${program.includes(s.id) ? ' is-added' : ''}`}>
+                      <span className="drow__icon"><Picto kind={s.kind} size={30} /></span>
+                      <div className="drow__main">
+                        <h4 className="drow__title">{nb(s.officialTitle)}</h4>
+                        <p className="drow__ideal">{nb(r.reasons[0])}</p>
+                      </div>
+                      <div className="drow__foot">
+                        <p className="drow__format"><span className="visually-hidden">Format{'\u00a0'}: </span>{FORMAT_LABEL[s.kind]}</p>
+                        <div className="drow__action"><ToggleButton s={s} compact /></div>
+                      </div>
+                    </li>
+                  )
+                })}
+              </ul>
+            </section>
+          )}
+
+          <p className="visually-hidden" role="status" aria-live="polite">{status}</p>
+          {program.length > 0 && (
+            <div className="program-bar">
+              <p className="program-bar__count"><strong>{program.length}</strong> service{program.length > 1 ? 's' : ''} dans mon{'\u00a0'}programme</p>
+              <button type="button" className="btn btn--primary" onClick={() => { setStatus(''); go('program', 'results') }}>
+                Continuer <ArrowRight size={18} />
+              </button>
+            </div>
+          )}
           <div className="step__actions">
             <button type="button" className="btn btn--link" onClick={() => go('needs')}><ArrowLeft size={18} /> Modifier mes réponses</button>
             <Link to="/cas-03-inscription/prochaines-etapes" className="btn btn--outline">Mon espace</Link>
@@ -273,7 +324,7 @@ export function Case2({ path }: { path: string }) {
       )
       break
 
-    case 'action':
+    case 'program':
       body = chosen ? (
         <div className="step">
           <div className="action-head">
@@ -296,49 +347,108 @@ export function Case2({ path }: { path: string }) {
           <Booking
             key={chosen.id}
             service={chosen}
-            cancelLabel="Revenir aux suggestions"
-            onCancel={() => go('results')}
+            cancelLabel="Revenir à mon programme"
+            onCancel={() => setState((st) => ({ ...st, chosenId: null }))}
             onComplete={({ serviceId, slot }) => {
               setBookings((b) => ({ ...b, [serviceId]: slot }))
-              go('confirm', 'action')
+              setStatus(`${chosen.officialTitle} : réservé le ${slot.date} à ${slot.time}.`)
+              setState((st) => ({ ...st, chosenId: null }))
             }}
           />
         </div>
       ) : (
         <div className="step">
-          {heading(<>Aucun service choisi</>)}
-          <button type="button" className="btn btn--primary" onClick={() => go('results')}>Revenir aux suggestions</button>
-        </div>
-      )
-      break
-
-    case 'confirm': {
-      const slot = chosen ? bookings[chosen.id] : undefined
-      body = (
-        <div className="step confirm">
-          <span className="confirm__check" aria-hidden="true"><Check size={44} /></span>
-          {heading(<>C’est noté, Alex !</>, 'step__title confirm__title')}
-          {chosen && slot && (
-            <dl className="recap">
-              <div><dt>Service</dt><dd>{chosen.officialTitle}</dd></div>
-              <div><dt>{chosen.kind === 'atelier' ? 'Session' : 'Rendez-vous'}</dt><dd>{slot.date} à {slot.time}</dd></div>
-              <div><dt>Lieu</dt><dd>{slot.place}</dd></div>
-            </dl>
+          {heading(<>Mon programme</>)}
+          <p className="muted">Réservez chaque service quand vous le souhaitez, puis revenez ici pour le{'\u00a0'}suivant.</p>
+          <p className="visually-hidden" role="status" aria-live="polite">{status}</p>
+          {program.length === 0 ? (
+            <div className="empty">
+              <p>Votre programme est vide.</p>
+              <button type="button" className="btn btn--primary" onClick={() => go('results')}>Revenir aux suggestions</button>
+            </div>
+          ) : (
+            <ul className="next-list program-list">
+              {program.map((id) => {
+                const s = getService(id)!
+                const slot = bookings[id]
+                return (
+                  <li key={id} className={`next-item next-item--${KIND_TONE[s.kind]}`}>
+                    <div className="next-item__tag"><KindTag kind={s.kind} /></div>
+                    <div className="next-item__main">
+                      <p className="grp-meta"><span className="grp-format">{FORMAT_LABEL[s.kind]}</span></p>
+                      <h3 className="next-item__title">{nb(s.officialTitle)}</h3>
+                      <p className="muted">{nb(s.hook)}</p>
+                      {slot ? (
+                        <p className="next-item__status">
+                          <Check size={18} /> <span><strong>Réservé{'\u00a0'}:</strong> {slot.date} à {slot.time} — {slot.place}</span>
+                        </p>
+                      ) : (
+                        <div className="next-item__actions">
+                          {s.action.kind === 'booking' ? (
+                            <button type="button" className="btn btn--primary btn--sm" onClick={() => setState((st) => ({ ...st, chosenId: s.id }))}>
+                              {actionLabel(s)}<span className="visually-hidden"> : {s.officialTitle}</span>
+                            </button>
+                          ) : (
+                            <a className="btn btn--outline btn--sm" href={s.action.url} target="_blank" rel="noopener noreferrer"
+                              onClick={() => track('service_cta_click', `${s.id} (programme, externe)`)}>
+                              {actionLabel(s)} <External size={16} />
+                              <span className="visually-hidden"> — {s.officialTitle} (nouvel onglet)</span>
+                            </a>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
           )}
-          <p>Vos suggestions restent disponibles dans votre espace : vous pouvez les modifier, en retirer ou reprendre le guidage.</p>
           <div className="step__actions">
-            <Link to="/cas-03-inscription/prochaines-etapes" className="btn btn--primary" onClick={() => track('onboarding_step_complete', 'confirm')}>
-              Mes prochaines étapes <ArrowRight size={18} />
-            </Link>
+            {program.length > 0 && (
+              <button type="button" className="btn btn--primary" onClick={() => go('confirm', 'program')}>
+                Terminer <ArrowRight size={18} />
+              </button>
+            )}
+            <button type="button" className="btn btn--link" onClick={() => go('results')}><ArrowLeft size={18} /> Modifier mes choix</button>
           </div>
         </div>
       )
       break
-    }
+
+    case 'confirm':
+      body = (
+        <div className="step confirm">
+          <span className="confirm__check" aria-hidden="true"><Check size={44} /></span>
+          {heading(<>C’est noté, Alex{'\u00a0'}!</>, 'step__title confirm__title')}
+          <p>Votre programme compte {countLabel(program.length).replace(' dans mon programme', '')}{'\u00a0'}:</p>
+          <ul className="program-recap">
+            {program.map((id) => {
+              const s = getService(id)!
+              const slot = bookings[id]
+              return (
+                <li key={id}>
+                  <span className="program-recap__title">{nb(s.officialTitle)}</span>
+                  <span className={`program-recap__status${slot ? ' is-done' : ''}`}>
+                    {slot ? <>Réservé{'\u00a0'}: {slot.date} à {slot.time}</> : 'À faire'}
+                  </span>
+                </li>
+              )
+            })}
+          </ul>
+          <p>Retrouvez votre programme dans «{'\u00a0'}Mes prochaines étapes{'\u00a0'}» : vous pouvez réserver les services restants, en retirer ou reprendre le{'\u00a0'}guidage.</p>
+          <div className="step__actions">
+            <Link to="/cas-03-inscription/prochaines-etapes" className="btn btn--primary" onClick={() => track('onboarding_step_complete', 'confirm')}>
+              Mes prochaines étapes <ArrowRight size={18} />
+            </Link>
+            <button type="button" className="btn btn--link" onClick={() => go('program')}><ArrowLeft size={18} /> Revenir à mon programme</button>
+          </div>
+        </div>
+      )
+      break
   }
 
   const barNotice =
-    step === 'confirm' || step === 'action' ? 'Démonstration\u00a0: aucune inscription réelle.' : undefined
+    step === 'confirm' || step === 'program' ? 'Démonstration\u00a0: aucune inscription réelle.' : undefined
 
   return (
     <ProtoLayout

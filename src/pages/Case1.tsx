@@ -151,7 +151,7 @@ export function Case1({ route }: { route: Route }) {
             {isAll ? resultLabel : <>Pour vous : <span className="results-title__sit">{resultLabel}</span></>}
           </h2>
           {(view === 'piste' || view === 'piste3') && (
-            <Link to="/reserver/cep?from=cas-1" className="help-link">
+            <Link to="/reserver/rendez-vous-conseil?from=cas-1" className="help-link">
               <Chat size={22} /> Vous hésitez ? <strong>Échanger avec un consultant</strong>
             </Link>
           )}
@@ -269,7 +269,7 @@ function HelpRow({ level }: { level: 3 | 4 }) {
       <div className="drow__foot">
         <p className="drow__format"><span className="visually-hidden">Format{'\u00a0'}: </span>Avec un consultant</p>
         <div className="drow__action">
-          <Link to="/reserver/cep?from=cas-1" className="btn btn--primary btn--sm">Échanger avec un consultant</Link>
+          <Link to="/reserver/rendez-vous-conseil?from=cas-1" className="btn btn--primary btn--sm">Échanger avec un consultant</Link>
         </div>
       </div>
     </li>

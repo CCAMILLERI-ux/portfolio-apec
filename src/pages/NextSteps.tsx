@@ -14,17 +14,18 @@ export function NextSteps({ path }: { path: string }) {
   const [status, setStatus] = useState('')
   const listRef = useRef<HTMLHeadingElement>(null)
 
-  const kept = state.recs.filter((id) => !state.removed.includes(id))
-  const removed = state.recs.filter((id) => state.removed.includes(id))
+  // Le programme composé dans le parcours guidé ; les services retirés restent rétablissables.
+  const kept = state.program
+  const removed = state.removed.filter((id) => !kept.includes(id))
   const hasBooking = kept.some((id) => bookings[id])
 
   const remove = (id: string) => {
-    setState((s) => ({ ...s, removed: [...s.removed, id] }))
-    setStatus(`${getService(id)?.officialTitle} retiré de vos prochaines étapes.`)
+    setState((s) => ({ ...s, program: s.program.filter((x) => x !== id), removed: [...s.removed.filter((x) => x !== id), id] }))
+    setStatus(`${getService(id)?.officialTitle} retiré de votre programme.`)
     listRef.current?.focus()
   }
   const restore = (id: string) => {
-    setState((s) => ({ ...s, removed: s.removed.filter((x) => x !== id) }))
+    setState((s) => ({ ...s, program: [...s.program, id], removed: s.removed.filter((x) => x !== id) }))
     setStatus(`${getService(id)?.officialTitle} rétabli.`)
   }
 
@@ -42,12 +43,12 @@ export function NextSteps({ path }: { path: string }) {
         <div className="sheet sheet--narrow">
           <p className="visually-hidden" role="status" aria-live="polite">{status}</p>
           <h2 ref={listRef} tabIndex={-1} className="step__title">
-            Services conservés ({kept.length})
+            Mon programme ({kept.length})
           </h2>
 
           {kept.length === 0 ? (
             <div className="empty">
-              <p>Vous n’avez pas encore de service dans votre liste.</p>
+              <p>Vous n’avez pas encore de service dans votre{'\u00a0'}programme.</p>
               <button type="button" className="btn btn--primary" onClick={() => {
                 setState((s) => ({ ...s, step: s.answers.needs.length ? 'needs' : 'welcome' }))
                 navigate('/cas-03-inscription')

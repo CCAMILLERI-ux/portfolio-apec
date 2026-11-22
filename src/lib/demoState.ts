@@ -3,14 +3,18 @@ import { ALEX_PRESET, type Answers } from '../data/onboarding'
 import type { Slot } from '../data/slots'
 import { load, save } from './storage'
 
-export type OnboardingStep = 'welcome' | 'situation' | 'needs' | 'results' | 'action' | 'confirm'
+export type OnboardingStep = 'welcome' | 'situation' | 'needs' | 'results' | 'program' | 'confirm'
 
 export interface OnboardingState {
   step: OnboardingStep
   answers: Answers
+  /** Service en cours de réservation depuis « Mon programme » (null : liste du programme). */
   chosenId: string | null
-  /** Services recommandés conservés dans « Mes prochaines étapes ». */
+  /** Toutes les suggestions, triées (les trois premières sont mises en avant). */
   recs: string[]
+  /** Services ajoutés par le candidat à son programme, dans l'ordre d'ajout. */
+  program: string[]
+  /** Services retirés du programme depuis « Mes prochaines étapes » (rétablissables). */
   removed: string[]
 }
 
@@ -19,6 +23,7 @@ export const INITIAL_ONBOARDING: OnboardingState = {
   answers: ALEX_PRESET,
   chosenId: null,
   recs: [],
+  program: [],
   removed: [],
 }
 
@@ -52,8 +57,20 @@ function usePersistent<T>(key: string, initial: T) {
   return [value, update] as const
 }
 
+/** Sauvegarde d'une version précédente de la démo : champs manquants et ancienne étape « action ». */
+function normalize(v: OnboardingState): OnboardingState {
+  const step = (v.step as string) === 'action' ? 'program' : v.step
+  return { ...INITIAL_ONBOARDING, ...v, step, program: v.program ?? [], removed: v.removed ?? [] }
+}
+
 export function useOnboarding() {
-  return usePersistent<OnboardingState>('onboarding', INITIAL_ONBOARDING)
+  const [value, update] = usePersistent<OnboardingState>('onboarding', INITIAL_ONBOARDING)
+  const set = useCallback(
+    (next: OnboardingState | ((prev: OnboardingState) => OnboardingState)) =>
+      update((prev) => (typeof next === 'function' ? next(normalize(prev)) : next)),
+    [update],
+  )
+  return [normalize(value), set] as const
 }
 
 /** Réservations simulées, par service. */

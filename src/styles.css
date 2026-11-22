@@ -1702,3 +1702,32 @@ legend { padding: 0; }
   .pf-real__grid, .pf-proof2__list { grid-template-columns: 1fr; }
   .pf-proof2__list { gap: var(--s2); }
 }
+
+/* ---------- Cas 03 : programme composé par le candidat ---------- */
+.proto .btn--added { background: #fff; color: var(--brand-navy); border: 2px solid var(--brand-navy); gap: 6px; }
+.proto .btn--added:hover { background: var(--brand-blue-tint); color: var(--brand-navy); }
+.rec.is-added { box-shadow: inset 0 0 0 3px var(--brand-navy); }
+.rec-more { margin-top: var(--s4); }
+.proto .rec-more__title { margin: 0 0 var(--s1); font-size: 1.125rem; }
+.rec-more__list .drow { grid-template-columns: 40px minmax(0, 1fr) auto auto; min-height: 0; padding: 12px 14px; gap: 6px 14px; }
+.rec-more__list .drow__icon { width: 40px; height: 40px; }
+.proto .rec-more__list .drow__title { font-size: 1rem; }
+.rec-more__list .drow__ideal { font-size: 0.875rem; }
+.rec-more__list .drow.is-added { background: var(--brand-blue-tint); }
+.program-bar {
+  position: sticky; bottom: 0; z-index: 5; margin-top: var(--s3);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px var(--s2);
+  padding: 12px 16px; background: var(--brand-navy); color: #fff;
+}
+.program-bar__count { margin: 0; font-weight: 600; }
+.program-bar__count strong { color: var(--brand-yellow); font-size: 1.25rem; }
+.program-bar :focus-visible { outline-color: var(--brand-yellow); }
+.program-list { margin-top: var(--s2); }
+.program-recap { list-style: none; margin: 0 0 var(--s2); padding: 0; border-top: 1px solid var(--border-neutral); text-align: left; }
+.program-recap li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px var(--s2); padding: 10px 0; border-bottom: 1px solid var(--border-neutral); }
+.program-recap__title { font-weight: 600; }
+.program-recap__status { font-size: 0.875rem; color: var(--text-secondary-a11y); }
+.program-recap__status.is-done { color: var(--ok); font-weight: 600; }
+@media (max-width: 760px) {
+  .rec-more__list .drow { grid-template-columns: 40px minmax(0, 1fr); grid-template-areas: "icon main" "foot foot"; }
+}
