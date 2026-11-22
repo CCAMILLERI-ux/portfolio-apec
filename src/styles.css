@@ -1762,4 +1762,5 @@ legend { padding: 0; }
   .bar-variant__label { float: none; display: block; margin: 0 0 4px; line-height: 1.3; }
   .bar-variant .bar-switch { width: 100%; }
 }
-@media (max-width: 1400px) { .demo-bar__hide-md { display: none; } }
+/* Libellé raccourci à l'écran, nom accessible complet conservé (« Réinitialiser la démo »). */
+@media (max-width: 1400px) { .demo-bar__hide-md { display: inline; position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
