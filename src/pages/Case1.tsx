@@ -81,14 +81,16 @@ export function Case1({ route }: { route: Route }) {
   }
 
   const variantSwitch = (
-    <fieldset className="bar-switch">
-      <legend className="visually-hidden">Variante affichée</legend>
+    <fieldset className="bar-variant">
+      <legend className="bar-variant__label">Variante affichée</legend>
+      <div className="bar-switch">
       {VIEWS.map(([v, label]) => (
         <label key={v} className={`bar-switch__opt${view === v ? ' is-selected' : ''}`}>
           <input type="radio" name="vue" value={v} checked={view === v} onChange={() => update({ vue: v })} />
           {v === 'existant' ? <>Existant<span className="demo-bar__hide-sm"> observé</span></> : label}
         </label>
       ))}
+      </div>
     </fieldset>
   )
 
@@ -96,11 +98,6 @@ export function Case1({ route }: { route: Route }) {
     <ProtoLayout
       path={route.path}
       caseLabel="Cas 02 · Clarifier l’offre"
-      intro={{
-        kicker: 'Simulation d’A/B test UX/UI',
-        title: 'Optimiser l’expérience utilisateur et la conversion',
-        text: 'Comparer deux présentations des services pour faciliter le choix. Test envisageable avec AB Tasty.',
-      }}
       barControl={variantSwitch}
       events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
       onReset={() => navigate('/cas-02-ab-test', { replace: true })}
@@ -110,15 +107,6 @@ export function Case1({ route }: { route: Route }) {
         <div className="container">
           <p className="band__kicker">Nos services</p>
           <h1 className="band__title band__title--xl" tabIndex={-1}>Des services pour chaque étape de votre{'\u00a0'}carrière</h1>
-          <p className="band__lead band__lead--wide">
-            Une sélection de services de l’Apec pour cette{'\u00a0'}démonstration.{' '}
-            <a href={OFFICIAL_SERVICES_URL} target="_blank" rel="noopener noreferrer" className="band__link">
-              Voir tous les services<span className="visually-hidden"> de l’Apec (nouvel onglet)</span>
-            </a>{' '}et{' '}
-            <a href={OFFICIAL_TOOLS_URL} target="_blank" rel="noopener noreferrer" className="band__link">
-              tous les{'\u00a0'}outils<span className="visually-hidden"> de l’Apec (nouvel onglet)</span>
-            </a>
-          </p>
           <fieldset className="sit-grid">
             <legend className="sit-legend">Où en êtes-vous{'\u00a0'}?</legend>
             {SITUATIONS.map((s) => {
@@ -150,11 +138,6 @@ export function Case1({ route }: { route: Route }) {
           <h2 className="results-title">
             {isAll ? resultLabel : <>Pour vous : <span className="results-title__sit">{resultLabel}</span></>}
           </h2>
-          {(view === 'piste' || view === 'piste3') && (
-            <Link to="/reserver/rendez-vous-conseil?from=cas-1" className="help-link">
-              <Chat size={22} /> Vous hésitez ? <strong>Échanger avec un consultant</strong>
-            </Link>
-          )}
         </div>
 
         {onlyWorkshops && (
@@ -196,6 +179,15 @@ export function Case1({ route }: { route: Route }) {
               )
             })
           : renderVariant(services, 3, view === 'piste2')}
+
+        {/* Porte de sortie, après les services (la piste 2 a déjà sa ligne « Aucun ne vous correspond vraiment ? »). */}
+        {(view === 'piste' || view === 'piste3') && (
+          <p className="help-after">
+            <Link to="/reserver/rendez-vous-conseil?from=cas-1" className="help-link">
+              <Chat size={22} /> Vous hésitez{'\u00a0'}? <strong>Échanger avec un consultant</strong>
+            </Link>
+          </p>
+        )}
 
         {view === 'piste2' && (
           <>
@@ -331,7 +323,7 @@ function Piste3({ services, level = 3, meta, grouped = false }: { services: Serv
             <H className="workshop__title">{nb(seg.hook)}</H>
             <p>{nb(seg.benefit)}</p>
             <ModalityChips items={seg.modalities.filter((m) => m.label !== 'Format')} />
-            {seg.action.kind === 'booking' && (
+            {seg.kind === 'atelier' && (
               <div className="workshop__sessions">
                 <p className="workshop__sessions-title"><Calendar size={18} /> Prochaines sessions</p>
                 <ul>
@@ -359,6 +351,13 @@ function Case1Coulisses() {
   return (
     <>
       <h3 className="coulisses__case">Cas 02 — Clarifier l’offre pour faciliter le choix</h3>
+      <CrBlock title="Objectif du test">
+        <p className="cr-kicker">Simulation d’A/B test UX/UI</p>
+        <p>
+          <strong>Optimiser l’expérience utilisateur et la conversion.</strong> Comparer deux présentations des services
+          pour faciliter le choix. Test envisageable avec AB{'\u00a0'}Tasty.
+        </p>
+      </CrBlock>
       <CrBlock title="Comment lire cette démo">
         <p>
           La barre du haut bascule entre quatre variantes sur les mêmes services : <strong>Existant observé</strong>,
@@ -386,6 +385,15 @@ function Case1Coulisses() {
           Pour chaque situation, un rendez-vous individuel, un atelier et un outil, proposés ensemble sur une même
           page : on ne sépare plus les outils des services, on part de la situation de l’utilisateur. Sélection
           volontairement courte pour la{'\u00a0'}démonstration.
+        </p>
+        <p>
+          Une sélection de services de l’Apec pour cette démonstration. Offre complète{'\u00a0'}:{' '}
+          <a href={OFFICIAL_SERVICES_URL} target="_blank" rel="noopener noreferrer">
+            tous les services<span className="visually-hidden"> de l’Apec (nouvel onglet)</span>
+          </a>{' '}et{' '}
+          <a href={OFFICIAL_TOOLS_URL} target="_blank" rel="noopener noreferrer">
+            tous les{'\u00a0'}outils<span className="visually-hidden"> de l’Apec (nouvel onglet)</span>
+          </a>.
         </p>
       </CrBlock>
       <CrBlock title="Vue « Tous nos services »">
@@ -494,7 +502,7 @@ function Case1Coulisses() {
       <CrBlock title={<>Points à confirmer avec les équipes <Badge tone="warn">Provisoire</Badge></>}>
         <p>
           Les formats, durées et conditions ne sont affichés que lorsqu’ils figurent sur apec.fr. Les intitulés
-          suivants sont provisoires ; leurs fiches renvoient vers le site officiel. Les formulations « Idéal si… » sont
+          suivants sont provisoires. Les formulations « Idéal si… » sont
           des propositions rédactionnelles.
         </p>
         <ul className="inline-list">{tbc.map((s) => <li key={s.id}>{s.officialTitle}</li>)}</ul>

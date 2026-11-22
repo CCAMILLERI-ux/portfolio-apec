@@ -48,7 +48,7 @@ export const RULES: Rule[] = [
     serviceId: 'entretien-programme',
     points: 6,
     when: (a) => has(a, 'entretien') && a.interviewScheduled,
-    reason: 'Vous avez un entretien déjà programmé : une simulation individuelle d’1 h permet de le répéter avec un consultant.',
+    reason: 'Vous avez un entretien déjà programmé : une simulation individuelle permet de le répéter avec un consultant.',
   },
   {
     serviceId: 'atelier-entretiens',

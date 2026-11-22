@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Badge } from '../components/Badge'
 import { CrBlock } from '../components/Coulisses'
 import { ArrowRight, Laptop, Plus } from '../components/Icons'
@@ -23,7 +23,7 @@ const RELATED: Record<string, { to: string; anchor?: string; label: string; text
     { to: '/cas-01-seo', anchor: 'checklist', label: 'Checklist de la veille de l’entretien', text: 'Les points à contrôler avant le jour J.', tone: 'blue' },
   ],
   'simulateur-entretien': [
-    { to: '/service/entretien-programme?from=cas-3', label: 'Un entretien fixé ? Répétez-le avec un consultant', text: 'Simulation individuelle d’1 h.', tone: 'blue' },
+    { to: '/service/entretien-programme?from=cas-3', label: 'Un entretien fixé ? Répétez-le avec un consultant', text: 'Simulation individuelle avec un consultant.', tone: 'blue' },
   ],
   'jeunes-diplomes-confiance': [
     { to: '/service/remuneration-premier-emploi?from=cas-3', label: 'Aborder la rémunération pour un 1er emploi', text: 'Un atelier pour discuter et négocier son salaire de premier emploi.', tone: 'blue' },
@@ -38,12 +38,17 @@ export function ServicePage({ id, route }: { id: string; route: Route }) {
   const from = safeFrom(route.query.get('from'))
   const back = backFor(from)
 
+  // Outil : « Lancer l'outil » affiche dans la barre de démo que l'outil n'est pas reproduit.
+  const [toolLaunched, setToolLaunched] = useState(false)
+  useEffect(() => setToolLaunched(false), [id])
+
   useEffect(() => {
     if (service) track('service_view', service.id)
   }, [service])
 
   if (!service) return <NotFound />
   const related = RELATED[service.id] ?? []
+  const isTool = service.kind === 'outil'
 
   return (
     <ProtoLayout
@@ -51,6 +56,7 @@ export function ServicePage({ id, route }: { id: string; route: Route }) {
       caseLabel={caseLabelFor(from)}
       events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
       coulisses={<ServiceCoulisses service={service} />}
+      barNotice={toolLaunched ? 'Démonstration\u00a0: outil non reproduit.' : undefined}
     >
       <PageBand back={back} title={service.officialTitle} titleIsHeading={false} />
       <div className="container overlap">
@@ -66,7 +72,13 @@ export function ServicePage({ id, route }: { id: string; route: Route }) {
               </ul>
             )}
             <div className="service-actions">
-              <ServiceAction service={service} from={from} />
+              {isTool ? (
+                <button type="button" className="btn btn--primary" onClick={() => { track('service_cta_click', `${service.id} (lancer l’outil)`); setToolLaunched(true) }}>
+                  Lancer l’outil<span className="visually-hidden"> — {service.officialTitle}</span>
+                </button>
+              ) : (
+                <ServiceAction service={service} from={from} />
+              )}
             </div>
             {service.details && (
               <>

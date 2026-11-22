@@ -35,7 +35,7 @@ const WORKS: {
   {
     n: '02',
     to: '/cas-02-ab-test',
-    mission: 'Performance & conversion',
+    mission: 'Performance &\u00a0conversion',
     title: 'Clarifier l’offre pour faciliter le choix',
     text: 'Un A/B test UX/UI pour rendre l’offre de services plus lisible.',
     duration: '1 min 30',
@@ -47,7 +47,7 @@ const WORKS: {
   {
     n: '03',
     to: '/cas-03-inscription',
-    mission: 'Performance & conversion · Animation',
+    mission: 'Performance &\u00a0conversion · Animation',
     title: 'Inscription accompagnée',
     text: 'Un tunnel guidé, de la création de compte au premier service utilisé.',
     duration: '2 min',

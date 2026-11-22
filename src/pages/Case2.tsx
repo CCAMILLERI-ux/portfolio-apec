@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Booking } from '../components/Booking'
 import { Case2Coulisses, CASE2_EVENTS } from '../components/Case2Coulisses'
-import { ArrowLeft, ArrowRight, Calendar, Chat, Check, Clock, Compass, Doc, External, Plus, Search, Target, TrendUp } from '../components/Icons'
+import { ArrowLeft, ArrowRight, Calendar, Chat, Check, Clock, Compass, Doc, Plus, Search, Target, TrendUp } from '../components/Icons'
 import { Illustration } from '../components/Illustration'
 import { ModalityChips, Modalities } from '../components/Modalities'
 import { PageBand } from '../components/PageBand'
@@ -12,6 +12,7 @@ import { FORMAT_LABEL } from '../data/situations'
 import { nb } from '../lib/text'
 import { ALEX_PRESET, NEED_OPTIONS, SITUATION_OPTIONS, recommend, TOP_COUNT, type Need } from '../data/onboarding'
 import { Picto } from '../components/Picto'
+import { isBookable, ProgramAction, toBook } from '../components/ProgramAction'
 import type { Service } from '../data/services'
 import { getService } from '../data/services'
 import { INITIAL_ONBOARDING, useBookings, useOnboarding, type OnboardingStep } from '../lib/demoState'
@@ -62,6 +63,8 @@ export function Case2({ path }: { path: string }) {
   const [status, setStatus] = useState('')
   const headingRef = useRef<HTMLHeadingElement>(null)
   const firstRender = useRef(true)
+  /** Ligne du programme à reprendre au retour d'une réservation (focus rendu sur cette ligne). */
+  const focusRow = useRef<string | null>(null)
   const { step, answers } = state
 
   useEffect(() => {
@@ -69,7 +72,10 @@ export function Case2({ path }: { path: string }) {
       firstRender.current = false
       return
     }
-    headingRef.current?.focus()
+    const row = focusRow.current && !state.chosenId ? document.getElementById(`row-${focusRow.current}`) : null
+    focusRow.current = null
+    if (row) row.focus()
+    else headingRef.current?.focus()
   }, [step, state.chosenId])
 
   const recs = recommend(answers)
@@ -116,11 +122,47 @@ export function Case2({ path }: { path: string }) {
     )
   }
 
-  /** Action propre à chaque service du programme. */
-  const actionLabel = (s: Service) =>
-    s.action.kind === 'external'
-      ? (s.kind === 'outil' ? 'Ouvrir l’outil sur apec.fr' : s.action.label)
-      : s.kind === 'atelier' ? 'Choisir une session' : 'Choisir un créneau'
+  /** Réservation d'un service du programme, depuis « Mon programme » ou l'écran Confirmation. */
+  const bookingView = (cancelLabel: string) => {
+    const c = chosen!
+    return (
+        <div className="step">
+          <div className="action-head">
+            <div className="action-head__visual">
+              <Illustration name={c.illustration} tone={KIND_TONE[c.kind]} className="action-head__img" />
+              <KindTag kind={c.kind} />
+            </div>
+            <div>
+              <p className="svc__official">{c.officialTitle}</p>
+              {heading(<>{c.hook}</>)}
+              <p>{c.benefit}</p>
+            </div>
+          </div>
+          <Modalities items={c.modalities} />
+          {c.details && (
+            <ul className="plus-list">
+              {c.details.points.map((p) => <li key={p}><Plus size={18} className="plus" /> {p}</li>)}
+            </ul>
+          )}
+          <Booking
+            key={c.id}
+            service={c}
+            cancelLabel={cancelLabel}
+            onCancel={() => {
+              focusRow.current = c.id
+              setState((st) => ({ ...st, chosenId: null }))
+            }}
+            onComplete={({ serviceId, slot }) => {
+              setBookings((b) => ({ ...b, [serviceId]: slot }))
+              setStatus(`${c.officialTitle}\u00a0: réservé le ${slot.date} à ${slot.time}.`)
+              focusRow.current = serviceId
+              setState((st) => ({ ...st, chosenId: null }))
+            }}
+          />
+        </div>
+    )
+  }
+
   const prefilled = answers.situation === ALEX_PRESET.situation
 
   const heading = (children: React.ReactNode, className = 'step__title') => (
@@ -246,9 +288,6 @@ export function Case2({ path }: { path: string }) {
         <div className="step">
           {heading(<>Nos suggestions pour bien démarrer</>)}
           <p className="muted">Sélectionnées d’après vos réponses. Ajoutez à votre programme tous les services qui vous{'\u00a0'}intéressent.</p>
-          <Link to="/reserver/rendez-vous-conseil?from=etapes" className="help-link help-link--block">
-            <Chat size={22} /> Vous préférez un rendez-vous individuel{'\u00a0'}? <strong>Échanger avec un consultant</strong>
-          </Link>
           <ol className="rec-list">
             {top.map((r, i) => {
               const s = getService(r.serviceId)!
@@ -316,6 +355,12 @@ export function Case2({ path }: { path: string }) {
               </button>
             </div>
           )}
+          {/* Porte de sortie : après toutes les propositions, juste avant les boutons de navigation. */}
+          <p className="help-after">
+            <Link to="/reserver/rendez-vous-conseil?from=etapes" className="help-link">
+              <Chat size={22} /> Aucune suggestion ne vous convient{'\u00a0'}? <strong>Échanger avec un consultant</strong>
+            </Link>
+          </p>
           <div className="step__actions">
             <button type="button" className="btn btn--link" onClick={() => go('needs')}><ArrowLeft size={18} /> Modifier mes réponses</button>
             <Link to="/cas-03-inscription/prochaines-etapes" className="btn btn--outline">Mon espace</Link>
@@ -326,36 +371,7 @@ export function Case2({ path }: { path: string }) {
 
     case 'program':
       body = chosen ? (
-        <div className="step">
-          <div className="action-head">
-            <div className="action-head__visual">
-              <Illustration name={chosen.illustration} tone={KIND_TONE[chosen.kind]} className="action-head__img" />
-              <KindTag kind={chosen.kind} />
-            </div>
-            <div>
-              <p className="svc__official">{chosen.officialTitle}</p>
-              {heading(<>{chosen.hook}</>)}
-              <p>{chosen.benefit}</p>
-            </div>
-          </div>
-          <Modalities items={chosen.modalities} />
-          {chosen.details && (
-            <ul className="plus-list">
-              {chosen.details.points.map((p) => <li key={p}><Plus size={18} className="plus" /> {p}</li>)}
-            </ul>
-          )}
-          <Booking
-            key={chosen.id}
-            service={chosen}
-            cancelLabel="Revenir à mon programme"
-            onCancel={() => setState((st) => ({ ...st, chosenId: null }))}
-            onComplete={({ serviceId, slot }) => {
-              setBookings((b) => ({ ...b, [serviceId]: slot }))
-              setStatus(`${chosen.officialTitle} : réservé le ${slot.date} à ${slot.time}.`)
-              setState((st) => ({ ...st, chosenId: null }))
-            }}
-          />
-        </div>
+        bookingView('Revenir à mon programme')
       ) : (
         <div className="step">
           {heading(<>Mon programme</>)}
@@ -372,7 +388,7 @@ export function Case2({ path }: { path: string }) {
                 const s = getService(id)!
                 const slot = bookings[id]
                 return (
-                  <li key={id} className={`next-item next-item--${KIND_TONE[s.kind]}`}>
+                  <li key={id} id={`row-${id}`} tabIndex={-1} className={`next-item next-item--${KIND_TONE[s.kind]}`}>
                     <div className="next-item__tag"><KindTag kind={s.kind} /></div>
                     <div className="next-item__main">
                       <p className="grp-meta"><span className="grp-format">{FORMAT_LABEL[s.kind]}</span></p>
@@ -384,17 +400,7 @@ export function Case2({ path }: { path: string }) {
                         </p>
                       ) : (
                         <div className="next-item__actions">
-                          {s.action.kind === 'booking' ? (
-                            <button type="button" className="btn btn--primary btn--sm" onClick={() => setState((st) => ({ ...st, chosenId: s.id }))}>
-                              {actionLabel(s)}<span className="visually-hidden"> : {s.officialTitle}</span>
-                            </button>
-                          ) : (
-                            <a className="btn btn--outline btn--sm" href={s.action.url} target="_blank" rel="noopener noreferrer"
-                              onClick={() => track('service_cta_click', `${s.id} (programme, externe)`)}>
-                              {actionLabel(s)} <External size={16} />
-                              <span className="visually-hidden"> — {s.officialTitle} (nouvel onglet)</span>
-                            </a>
-                          )}
+                          <ProgramAction service={s} from="etapes" onChoose={isBookable(s) ? () => setState((st) => ({ ...st, chosenId: s.id })) : undefined} />
                         </div>
                       )}
                     </div>
@@ -415,8 +421,9 @@ export function Case2({ path }: { path: string }) {
       )
       break
 
-    case 'confirm':
-      body = (
+    case 'confirm': {
+      const remaining = toBook(program, bookings, getService)
+      body = chosen ? bookingView('Revenir à la confirmation') : (
         <div className="step confirm">
           <span className="confirm__check" aria-hidden="true"><Check size={44} /></span>
           {heading(<>C’est noté, Alex{'\u00a0'}!</>, 'step__title confirm__title')}
@@ -426,16 +433,21 @@ export function Case2({ path }: { path: string }) {
               const s = getService(id)!
               const slot = bookings[id]
               return (
-                <li key={id}>
+                <li key={id} id={`row-${id}`} tabIndex={-1}>
                   <span className="program-recap__title">{nb(s.officialTitle)}</span>
-                  <span className={`program-recap__status${slot ? ' is-done' : ''}`}>
-                    {slot ? <>Réservé{'\u00a0'}: {slot.date} à {slot.time}</> : 'À faire'}
+                  <span className="program-recap__action">
+                    <ProgramAction service={s} slot={slot} onChoose={() => setState((st) => ({ ...st, chosenId: s.id }))} />
                   </span>
                 </li>
               )
             })}
           </ul>
-          <p>Retrouvez votre programme dans «{'\u00a0'}Mes prochaines étapes{'\u00a0'}» : vous pouvez réserver les services restants, en retirer ou reprendre le{'\u00a0'}guidage.</p>
+          <p className="visually-hidden" role="status" aria-live="polite">{status}</p>
+          <p>
+            {remaining.length > 0
+              ? <>Vous pouvez réserver maintenant ou plus tard depuis «{'\u00a0'}Mes prochaines{'\u00a0'}étapes{'\u00a0'}».</>
+              : <>Tout est réservé. Retrouvez votre programme dans «{'\u00a0'}Mes prochaines{'\u00a0'}étapes{'\u00a0'}».</>}
+          </p>
           <div className="step__actions">
             <Link to="/cas-03-inscription/prochaines-etapes" className="btn btn--primary" onClick={() => track('onboarding_step_complete', 'confirm')}>
               Mes prochaines étapes <ArrowRight size={18} />
@@ -445,6 +457,7 @@ export function Case2({ path }: { path: string }) {
         </div>
       )
       break
+    }
   }
 
   const barNotice =

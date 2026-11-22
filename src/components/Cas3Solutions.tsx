@@ -214,6 +214,13 @@ export function SolutionsCards() {
           <strong>Pas encore d’entretien{'\u00a0'}?</strong> <ServiceLink id={CAS3_BEFORE_LINK} where="en amont" />
         </p>
       </div>
+
+      {/* Porte de sortie : en dernier, après les groupes de services et les liens internes. */}
+      <p className="help-after">
+        <Link to="/reserver/rendez-vous-conseil?from=cas-1-seo" className="help-link">
+          <Chat size={22} /> Vous hésitez{'\u00a0'}? <strong>Échanger avec un consultant</strong>
+        </Link>
+      </p>
     </section>
   )
 }

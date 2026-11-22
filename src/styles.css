@@ -1731,3 +1731,36 @@ legend { padding: 0; }
 @media (max-width: 760px) {
   .rec-more__list .drow { grid-template-columns: 40px minmax(0, 1fr); grid-template-areas: "icon main" "foot foot"; }
 }
+
+/* ---------- Cas 03 : action par service (Confirmation et « Mes prochaines étapes ») ---------- */
+.program-recap li { align-items: center; }
+.program-recap li:focus-visible, .next-item:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.program-recap__action { margin-left: auto; }
+.pa-status { display: inline-flex; align-items: center; gap: 6px; margin: 0; font-size: 0.875rem; color: var(--ok); }
+.pa-status svg { flex: none; }
+.pa-status strong { font-weight: 700; }
+.proto .pa-btn { white-space: nowrap; }
+@media (max-width: 640px) {
+  .program-recap li { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .program-recap__action { margin-left: 0; }
+}
+
+/* Lien générique vers un consultant : porte de sortie discrète, après les propositions. */
+.help-after { margin: var(--s3) 0 0; }
+
+/* Cas 02 : sélecteur de variante dans la barre de démo, avec un libellé visible. */
+.bar-variant { display: flex; align-items: center; gap: 8px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.bar-variant__label { float: left; padding: 0; margin-right: 8px; font-size: 0.75rem; font-weight: 600; color: #fff; opacity: 0.9; white-space: nowrap; line-height: 32px; }
+@media (max-width: 640px) { .bar-variant__label { font-size: 0.6875rem; margin-right: 6px; } }
+/* Sélecteur de variante : une seule ligne de barre sur ordinateur, libellé au-dessus sur mobile. */
+@media (min-width: 761px) {
+  .bar-variant .bar-switch__opt { padding: 6px 10px; }
+  .bar-variant__label { margin-right: 4px; }
+}
+@media (max-width: 760px) {
+  .bar-variant { order: 5; width: 100%; display: block; }
+  .bar-variant__label { float: none; display: block; margin: 0 0 4px; line-height: 1.3; }
+  .bar-variant .bar-switch { width: 100%; }
+}
+/* Libellé raccourci à l'écran, nom accessible complet conservé (« Réinitialiser la démo »). */
+@media (max-width: 1400px) { .demo-bar__hide-md { display: inline; position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }

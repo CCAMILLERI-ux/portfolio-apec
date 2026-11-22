@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { KIND_LABEL, type Service, type ServiceKind } from '../data/services'
 import { Link } from '../lib/router'
 import { track } from '../lib/storage'
-import { ArrowRight, Chat, External, Group, Laptop } from './Icons'
+import { ArrowRight, Chat, Group, Laptop } from './Icons'
 import { Illustration, type Tone } from './Illustration'
 import { ModalityChips } from './Modalities'
 import { SERVICE_PHOTO } from '../data/photos'
@@ -46,29 +46,23 @@ export function PhotoVisual({ service, className = '' }: { service: Service; cla
   )
 }
 
+/**
+ * Action principale d'un service dans le prototype, toujours simulée (aucun lien vers apec.fr),
+ * avec le vocabulaire du site : atelier « Inscrivez-vous » (choix d'une session), rendez-vous
+ * « Prenez rendez-vous » (choix d'un créneau), outil « Accéder à l'outil » (fiche de l'outil).
+ */
+export function serviceActionLabel(s: Service) {
+  return s.kind === 'atelier' ? 'Inscrivez-vous' : s.kind === 'individuel' ? 'Prenez rendez-vous' : 'Accéder à l’outil'
+}
+
 export function serviceActionTarget(s: Service, from: string) {
-  return s.action.kind === 'booking' ? `/reserver/${s.id}?from=${from}` : `/service/${s.id}?from=${from}`
+  return s.kind === 'outil' ? `/service/${s.id}?from=${from}` : `/reserver/${s.id}?from=${from}`
 }
 
 export function ServiceAction({ service, from, className = 'btn btn--primary' }: { service: Service; from: string; className?: string }) {
-  if (service.action.kind === 'external') {
-    return (
-      <a
-        className={className}
-        href={service.action.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => track('service_cta_click', `${service.id} (externe)`)}
-      >
-        {service.action.label}
-        <External size={18} />
-        <span className="visually-hidden"> — {service.officialTitle} (nouvel onglet)</span>
-      </a>
-    )
-  }
   return (
     <Link className={className} to={serviceActionTarget(service, from)} onClick={() => track('service_cta_click', service.id)}>
-      {service.action.label}
+      {serviceActionLabel(service)}
       <span className="visually-hidden"> — {service.officialTitle}</span>
     </Link>
   )

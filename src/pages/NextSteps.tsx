@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { Case2Coulisses, CASE2_EVENTS } from '../components/Case2Coulisses'
-import { ArrowRight, Calendar, External } from '../components/Icons'
+import { ProgramAction } from '../components/ProgramAction'
+import { ArrowRight } from '../components/Icons'
 import { PageBand } from '../components/PageBand'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { KindTag, KIND_TONE } from '../components/ServiceCard'
@@ -62,30 +63,14 @@ export function NextSteps({ path }: { path: string }) {
                 const s = getService(id)!
                 const slot = bookings[id]
                 return (
-                  <li key={id} className={`next-item next-item--${KIND_TONE[s.kind]}`}>
+                  <li key={id} id={`row-${id}`} tabIndex={-1} className={`next-item next-item--${KIND_TONE[s.kind]}`}>
                     <div className="next-item__tag"><KindTag kind={s.kind} /></div>
                     <div className="next-item__main">
                       <h3 className="next-item__title">{s.officialTitle}</h3>
                       <p className="muted">{s.hook}</p>
-                      {slot ? (
-                        <p className="next-item__status">
-                          <Calendar size={18} /> <span><strong>Réservé :</strong> {slot.date} à {slot.time} — {slot.place}</span>
-                        </p>
-                      ) : (
-                        <p className="next-item__status next-item__status--todo">À faire</p>
-                      )}
                       <div className="next-item__actions">
-                        {!slot && s.action.kind === 'booking' && (
-                          <Link to={`/reserver/${id}?from=etapes`} className="btn btn--primary btn--sm">
-                            {s.action.label}<span className="visually-hidden"> : {s.officialTitle}</span>
-                          </Link>
-                        )}
-                        {s.action.kind === 'external' && (
-                          <a className="btn btn--outline btn--sm" href={s.action.url} target="_blank" rel="noopener noreferrer">
-                            {s.action.label} <External size={16} />
-                            <span className="visually-hidden"> (nouvel onglet)</span>
-                          </a>
-                        )}
+                        {/* Même logique que l'écran Confirmation : la date si réservé, sinon l'action du service. */}
+                        <ProgramAction service={s} slot={slot} from="etapes" />
                         <Link to={`/service/${id}?from=etapes`} className="link-arrow">
                           En savoir plus<span className="visually-hidden"> : {s.officialTitle}</span> <ArrowRight size={16} />
                         </Link>
