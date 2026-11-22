@@ -1,7 +1,7 @@
 import type { Modality } from '../data/services'
-import { Clock, Gift, People, Target } from './Icons'
+import { Clock, Download, Gift, People, Target } from './Icons'
 
-const ICON = { Format: People, Durée: Clock, Tarif: Gift, Public: Target }
+const ICON: Record<Modality['label'], typeof Clock> = { Format: People, Durée: Clock, Tarif: Gift, Public: Target, Résultats: Download }
 
 /** Modalités vérifiées uniquement : rien d'inventé n'est affiché à l'utilisateur. */
 export function verified(items: Modality[]) {

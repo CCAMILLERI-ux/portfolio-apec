@@ -24,7 +24,7 @@ export type IllustrationKey =
   | 'recrutement'
 
 export interface Modality {
-  label: 'Format' | 'Durée' | 'Tarif' | 'Public'
+  label: 'Format' | 'Durée' | 'Tarif' | 'Public' | 'Résultats'
   value: string
   provenance: Provenance
 }
@@ -283,20 +283,20 @@ export const SERVICES: Service[] = [
     audience: 'candidat',
     officialTitle: 'Odiapazon',
     titleProvenance: 'capture',
-    hook: 'Clarifiez vos attentes sur la future collaboration',
+    hook: 'Formulez les questions qui comptent pour vous',
     benefit:
-      'Se projeter dans le poste et l’environnement de travail pour clarifier ses attentes et préparer les questions à poser au recruteur.',
+      'En 10 minutes, un formulaire en ligne analyse vos attentes sur les cinq dimensions du travail. Vous téléchargez vos résultats et des suggestions de questions à approfondir lors de votre prochain entretien.',
     kind: 'outil',
     modalities: [
-      { label: 'Format', value: 'Outil', provenance: 'capture' },
-      TBC('Durée'),
+      { label: 'Format', value: 'Outil en ligne (formulaire)', provenance: 'capture' },
+      { label: 'Durée', value: '10 minutes', provenance: 'capture' },
+      { label: 'Résultats', value: 'Résultats téléchargeables', provenance: 'capture' },
       TBC('Tarif'),
       TBC('Public'),
     ],
     illustration: 'outil',
     action: { kind: 'external', label: 'Trouver l’outil sur apec.fr', url: OFFICIAL_TOOLS_URL },
     depth: 'synthese',
-    observedSummary: 'Managers, candidats à l’aide de cet outil, projetez-vous pour préparer une collaboration réussie !',
     observedCta: 'Commencez',
     scopeNote:
       'L’outil n’est pas reproduit dans la démo. Le lien ouvre la page publique des outils d’apec.fr (site externe) ; le lien direct vers l’outil et l’éventuelle connexion à un compte seraient précisés lors de la mise en œuvre.',

@@ -12,7 +12,7 @@
  *   pour les cadres ayant un entretien prévu (et non un coaching général) ;
  * - atelier « Réussir vos entretiens de recrutement » : maîtriser chaque type d'entretien ;
  * - simulateur d'entretien : s'entraîner, vivre l'entretien des deux côtés ;
- * - Odiapazon : se projeter pour préparer une collaboration réussie.
+ * - Odiapazon : formuler les questions à poser en entretien.
  * - atelier « Parler rémunération en entretiens » : préparer ses prétentions salariales.
  * Le simulateur de salaire cadre n'apparaît sur aucune capture : intitulé à vérifier.
  */
@@ -132,7 +132,7 @@ export const CAS3_SOLUTIONS: Solution[] = [
     title: 'Odiapazon',
     serviceId: 'odiapazon',
     official: 'Odiapazon',
-    description: 'Clarifiez vos attentes sur le poste et l’environnement de travail pour préparer les questions à poser au recruteur.',
+    description: 'En 10 minutes, analysez vos attentes sur les cinq dimensions du travail et repartez avec les questions à poser en entretien.',
     cta: 'Préparer mes questions',
     format: 'outil',
     need: 'questions',
