@@ -67,6 +67,13 @@ export function Espace({ path }: { path: string }) {
             </Link>
           </section>
 
+          <section className="space-card" aria-labelledby="sp-services">
+            <Search size={36} className="space-card__icon space-card__icon--dark" />
+            <h2 id="sp-services" className="space-card__title space-card__title--dark">Nos services</h2>
+            <p>Ateliers, accompagnements et outils selon votre{'\u00a0'}situation.</p>
+            <Link to="/cas-02-ab-test" className="link-arrow">Explorer nos services <ArrowRight size={18} /></Link>
+          </section>
+
           <section className="space-card space-card--navy" aria-labelledby="sp-rdv">
             <Calendar size={36} className="space-card__icon" />
             <h2 id="sp-rdv" className="space-card__title">Mes rendez-vous</h2>
@@ -85,13 +92,6 @@ export function Espace({ path }: { path: string }) {
             <Link to="/reserver/rendez-vous-conseil?from=espace" className="link-arrow link-arrow--light">
               Prendre rendez-vous avec un consultant <ArrowRight size={18} />
             </Link>
-          </section>
-
-          <section className="space-card" aria-labelledby="sp-services">
-            <Search size={36} className="space-card__icon space-card__icon--dark" />
-            <h2 id="sp-services" className="space-card__title space-card__title--dark">Nos services</h2>
-            <p>Ateliers, accompagnements et outils selon votre{'\u00a0'}situation.</p>
-            <Link to="/cas-02-ab-test" className="link-arrow">Explorer nos services <ArrowRight size={18} /></Link>
           </section>
 
           <section className="space-card" aria-labelledby="sp-conseils">

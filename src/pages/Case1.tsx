@@ -150,11 +150,6 @@ export function Case1({ route }: { route: Route }) {
           <h2 className="results-title">
             {isAll ? resultLabel : <>Pour vous : <span className="results-title__sit">{resultLabel}</span></>}
           </h2>
-          {(view === 'piste' || view === 'piste3') && (
-            <Link to="/reserver/rendez-vous-conseil?from=cas-1" className="help-link">
-              <Chat size={22} /> Vous hésitez ? <strong>Échanger avec un consultant</strong>
-            </Link>
-          )}
         </div>
 
         {onlyWorkshops && (
@@ -196,6 +191,15 @@ export function Case1({ route }: { route: Route }) {
               )
             })
           : renderVariant(services, 3, view === 'piste2')}
+
+        {/* Porte de sortie, après les services (la piste 2 a déjà sa ligne « Aucun ne vous correspond vraiment ? »). */}
+        {(view === 'piste' || view === 'piste3') && (
+          <p className="help-after">
+            <Link to="/reserver/rendez-vous-conseil?from=cas-1" className="help-link">
+              <Chat size={22} /> Vous hésitez{'\u00a0'}? <strong>Échanger avec un consultant</strong>
+            </Link>
+          </p>
+        )}
 
         {view === 'piste2' && (
           <>

@@ -1744,3 +1744,6 @@ legend { padding: 0; }
   .program-recap li { flex-direction: column; align-items: flex-start; gap: 8px; }
   .program-recap__action { margin-left: 0; }
 }
+
+/* Lien générique vers un consultant : porte de sortie discrète, après les propositions. */
+.help-after { margin: var(--s3) 0 0; }

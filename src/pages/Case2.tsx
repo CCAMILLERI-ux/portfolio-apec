@@ -293,9 +293,6 @@ export function Case2({ path }: { path: string }) {
         <div className="step">
           {heading(<>Nos suggestions pour bien démarrer</>)}
           <p className="muted">Sélectionnées d’après vos réponses. Ajoutez à votre programme tous les services qui vous{'\u00a0'}intéressent.</p>
-          <Link to="/reserver/rendez-vous-conseil?from=etapes" className="help-link help-link--block">
-            <Chat size={22} /> Vous préférez un rendez-vous individuel{'\u00a0'}? <strong>Échanger avec un consultant</strong>
-          </Link>
           <ol className="rec-list">
             {top.map((r, i) => {
               const s = getService(r.serviceId)!
@@ -363,6 +360,12 @@ export function Case2({ path }: { path: string }) {
               </button>
             </div>
           )}
+          {/* Porte de sortie : après toutes les propositions, juste avant les boutons de navigation. */}
+          <p className="help-after">
+            <Link to="/reserver/rendez-vous-conseil?from=etapes" className="help-link">
+              <Chat size={22} /> Aucune suggestion ne vous convient{'\u00a0'}? <strong>Échanger avec un consultant</strong>
+            </Link>
+          </p>
           <div className="step__actions">
             <button type="button" className="btn btn--link" onClick={() => go('needs')}><ArrowLeft size={18} /> Modifier mes réponses</button>
             <Link to="/cas-03-inscription/prochaines-etapes" className="btn btn--outline">Mon espace</Link>
