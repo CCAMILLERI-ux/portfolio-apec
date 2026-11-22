@@ -331,7 +331,7 @@ export function SeoJourney({ route }: { route: Route }) {
     screen === 'a'
       ? 'Aperçu illustratif — ne représente pas une position réelle dans Google.'
       : screen === 'c' || screen === 'd'
-        ? 'Démonstration : aucune inscription ni réservation réelle n’est effectuée.'
+        ? 'Démonstration\u00a0: aucune inscription réelle.'
         : screen === 'r'
           ? 'Aperçu léger d’un contenu secondaire, non développé dans la démonstration.'
           : 'Page conseil rédigée pour la démonstration (contenu original).'

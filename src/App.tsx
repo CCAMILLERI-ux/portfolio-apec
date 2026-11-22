@@ -48,8 +48,8 @@ export default function App() {
 
   // Défilement et focus à chaque changement de page ou d'ancre.
   useEffect(() => {
-    const section = path.startsWith('/service/') ? 'Fiche service' : path.startsWith('/reserver/') ? 'Réservation simulée' : TITLES[path] ?? 'Page'
-    document.title = `${section} · Portfolio indépendant — C. Camilleri`
+    const section = path.startsWith('/service/') ? 'Fiche service' : path.startsWith('/reserver/') ? 'Réservation' : TITLES[path] ?? 'Page'
+    document.title = `${section} · Portfolio de Caroline Camilleri`
 
     const isFirst = firstLoad.current
     firstLoad.current = false

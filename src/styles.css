@@ -461,6 +461,8 @@ legend { padding: 0; }
 .modalities__item:nth-last-child(-n + 2):nth-child(odd),
 .modalities__item:last-child { border-bottom: 0; }
 .modalities__item dd { margin: 0; }
+.modalities:has(> .modalities__item:only-child) { grid-template-columns: 1fr; display: inline-grid; min-width: min(100%, 280px); }
+.modalities__item:only-child { border-right: 0; }
 .modalities__icon { flex: none; color: var(--brand-navy); }
 @media (max-width: 420px) { .modalities { grid-template-columns: 1fr; } .modalities__item { border-right: 0; border-bottom: 1px solid var(--border-neutral) !important; } .modalities__item:last-child { border-bottom: 0 !important; } }
 
@@ -1438,4 +1440,71 @@ legend { padding: 0; }
 @media (max-width: 760px) {
   .drow__action .btn { display: inline-block; }
   .drow__action .btn svg { display: inline-block; vertical-align: -3px; margin-left: 4px; }
+}
+
+/* ---------- Cas 01 : solutions regroupées par besoin ---------- */
+.sol-need + .sol-need { margin-top: var(--s3); }
+.sol-grid--need { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sol-card__main { flex: 1 0 auto; }
+.sol-card--row { grid-column: 1 / -1; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--s1) var(--s3); }
+.sol-card--row .sol-icon--lg { margin: 0; }
+.sol-card--row .sol-card__main p:last-child { margin-bottom: 0; }
+.sol-card--row .btn { margin: 0; align-self: center; }
+.sol-side__list--mixed { gap: var(--s1); }
+.sol-more { margin-top: var(--s3); padding: var(--s2) 20px; background: var(--brand-blue-tint, #ebf2f7); border-left: 5px solid var(--brand-blue); }
+.sol-more p { margin: 0; text-wrap: pretty; }
+.sol-more p + p { margin-top: var(--s1); }
+.sol-more a { display: inline-block; padding: 6px 0; font-weight: 600; }
+@media (max-width: 760px) {
+  .sol-grid--need { grid-template-columns: 1fr; }
+  .sol-card--row { display: flex; flex-direction: column; align-items: flex-start; }
+  .sol-card--row .sol-icon--lg { margin-bottom: var(--s2); }
+  .sol-card--row .btn { align-self: flex-start; margin-top: var(--s1); }
+}
+.sol-more__links { list-style: none; margin: 0; padding: 0; }
+.sol-more__links + p { margin-top: var(--s1); }
+/* Pas de mot seul en fin de ligne dans l'article et les cartes de services. */
+.article-layout p, .article-layout li, .article-layout dd { text-wrap: pretty; }
+.article-layout h1, .article-layout h2, .article-layout h3, .article-layout h4, .acard__title, .hcard__title { text-wrap: balance; }
+.band__title, .service-title, .side-card__title { text-wrap: balance; }
+/* ---------- Accueil simplifié : accroche, réalisations, résultats ---------- */
+.pf-accroche { padding-top: var(--s5); padding-bottom: var(--s4); }
+.pf-accroche__kicker { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pf-accent); margin: 0 0 var(--s2); }
+.pf-accroche__name { display: flex; align-items: center; gap: 4px; font-weight: 600; font-size: 1.25rem; margin: 0 0 var(--s1); }
+.pf-accroche__linkedin { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #0a66c2; }
+.pf-accroche__linkedin:hover { color: var(--pf-ink); }
+.pf-accroche__h1 { font-family: var(--font-pf-display); font-weight: 700; font-size: clamp(2rem, 1.3rem + 2.4vw, 3.25rem); line-height: 1.08; letter-spacing: -0.03em; margin: 0 0 var(--s2); max-width: 22ch; text-wrap: balance; }
+.pf-accroche__text { font-size: 1.125rem; line-height: 1.55; color: var(--pf-muted); max-width: 56ch; margin: 0 0 var(--s3); text-wrap: pretty; }
+
+.pf-works-wrap { padding-bottom: var(--s5); }
+.pf-works-title { font-family: var(--font-pf-display); font-weight: 700; font-size: 1.75rem; letter-spacing: -0.02em; margin: 0 0 var(--s3); }
+.pf-works { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+.pf-work { display: flex; flex-direction: column; background: var(--pf-card); border: 1px solid var(--pf-line); border-radius: 10px; padding: var(--s3); }
+.pf-work--wide { grid-column: 1 / -1; }
+.pf-work__meta { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s1); margin: 0; }
+.pf-work__num { font-family: var(--font-pf-display); font-weight: 700; font-size: 1.5rem; color: var(--pf-accent); line-height: 1; }
+.pf-work__duration { display: inline-flex; align-items: center; gap: 4px; font-size: 0.8125rem; color: var(--pf-muted); }
+.pf-work__mission { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pf-muted); margin: 12px 0 6px; }
+.pf-work__title { font-family: var(--font-pf-display); font-weight: 700; font-size: 1.375rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 8px; text-wrap: balance; }
+.pf-work__text { color: var(--pf-muted); font-size: 0.9375rem; margin: 0 0 12px; flex: 1 0 auto; text-wrap: pretty; }
+.pf-work .pf-tags { margin-bottom: var(--s2); }
+.pf-work .pf-tags li { font-size: 0.75rem; padding: 2px 8px; }
+.pf-work .pf-btn { align-self: flex-start; }
+.pf-work--wide .pf-work__text { flex: none; }
+
+.pf-results { background: #ece4d6; border-top: 1px solid var(--pf-line); padding: var(--s3) 0; }
+.pf-results__title { font-family: var(--font-pf-display); font-weight: 700; font-size: 1.125rem; margin: 0 0 var(--s2); }
+.pf-results__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s3); }
+.pf-results__list li { display: flex; flex-direction: column; gap: 2px; }
+.pf-results__figure { font-family: var(--font-pf-display); font-weight: 700; font-size: 2rem; line-height: 1.1; letter-spacing: -0.03em; color: var(--pf-accent); }
+.pf-results__text { font-size: 0.875rem; line-height: 1.4; text-wrap: pretty; }
+
+.pf-footer { padding: var(--s2) 0; font-size: 0.8125rem; }
+.pf-footer__line { margin: 0; line-height: 1.6; }
+.pf-footer__line a { color: inherit; text-decoration: underline; text-underline-offset: 2px; padding: 12px 0; }
+
+@media (max-width: 900px) {
+  .pf-works { grid-template-columns: 1fr; }
+  .pf-results__list { grid-template-columns: 1fr; gap: var(--s2); }
+  .pf-accroche { padding-top: var(--s4); }
 }

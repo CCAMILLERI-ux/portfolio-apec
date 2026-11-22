@@ -30,19 +30,13 @@ export function BookingPage({ id, route }: { id: string; route: Route }) {
       path={route.path}
       caseLabel={caseLabelFor(from)}
       events={['booking_start', 'booking_complete_demo']}
-      barNotice={
-        done
-          ? 'Simulation terminée — aucun rendez-vous réel n’a été réservé.'
-          : 'Réservation simulée : créneaux fictifs, rien n’est envoyé.'
-      }
+      barNotice={'Démonstration\u00a0: aucune inscription réelle.'}
       coulisses={
         <>
-          <h3 className="coulisses__case">Réservation simulée</h3>
+          <h3 className="coulisses__case">Réservation</h3>
           <CrBlock title="Ce qui se passe ici">
             <p>
-              Créneaux et sessions fictifs, sans nom de consultant ni centre réel. Aucune donnée n’est saisie ni
-              envoyée ; aucun système de l’Apec n’est contacté. La réservation est enregistrée uniquement dans ce
-              navigateur, pour l’afficher dans « Mon espace ».
+              La réservation est enregistrée dans ce navigateur, pour l’afficher dans « Mon espace ».
             </p>
           </CrBlock>
         </>

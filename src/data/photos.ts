@@ -44,6 +44,7 @@ export const PHOTOS = {
 /** Photo associée à chaque service dans la piste 3. */
 export const SERVICE_PHOTO: Record<string, Photo> = {
   'atelier-entretiens': PHOTOS.atelierPostIt,
+  'atelier-remuneration': PHOTOS.reunionTable,
   'atelier-iag': PHOTOS.atelierOrdinateurs,
   'entretien-programme': PHOTOS.entretienRecrutement,
   candidature: PHOTOS.relectureEcran,

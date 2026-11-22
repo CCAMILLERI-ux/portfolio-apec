@@ -2,7 +2,8 @@
  * Cas 3 — solutions recommandées en fin d'article et en colonne latérale.
  * Une seule source pour les deux emplacements : même ordre, mêmes destinations.
  *
- * Ordre imposé : accompagnements humains (photos), puis outils en autonomie (icônes).
+ * Regroupement par besoin (s'entraîner, parler salaire, préparer ses questions) : dans chaque
+ * groupe, accompagnements humains (photos) puis outils en autonomie (icônes).
  * Accompagnements humains : deux designs distincts — carte « atelier » (photo avec liseré bleu,
  * titre, intitulé, phrase, un bouton) et carte « entretien programmé » (photo d'entretien,
  * phrase et puces reprises de la fiche observée, boutons « En savoir plus » / « Prenez rendez-vous »).
@@ -12,9 +13,12 @@
  * - atelier « Réussir vos entretiens de recrutement » : maîtriser chaque type d'entretien ;
  * - simulateur d'entretien : s'entraîner, vivre l'entretien des deux côtés ;
  * - Odiapazon : se projeter pour préparer une collaboration réussie.
+ * - atelier « Parler rémunération en entretiens » : préparer ses prétentions salariales.
  * Le simulateur de salaire cadre n'apparaît sur aucune capture : intitulé à vérifier.
  */
 import { PHOTOS, type Photo } from './photos'
+
+export type SolutionNeed = 'entrainer' | 'salaire' | 'questions'
 
 export type SolutionIcon = 'chat' | 'questions' | 'calculator'
 
@@ -33,7 +37,10 @@ export interface Solution {
   official: string
   description: string
   cta: string
-  group: 'humain' | 'outil'
+  /** Accompagnement humain (photo) ou outil en autonomie (icône). */
+  format: 'humain' | 'outil'
+  /** Besoin auquel répond la solution (groupe affiché). */
+  need: SolutionNeed
   photo?: Photo
   icon?: SolutionIcon
   /** Repère qui distingue les deux outils d'entraînement. */
@@ -57,7 +64,8 @@ export const CAS3_SOLUTIONS: Solution[] = [
     official: 'Entretien programmé : entrainez vous avec un consultant !',
     description: 'Préparez-vous sereinement pour votre entretien d’embauche avec une simulation sur-mesure et le feedback d’un professionnel !',
     cta: 'Prenez rendez-vous',
-    group: 'humain',
+    format: 'humain',
+    need: 'entrainer',
     photo: PHOTOS.entretienRecrutement,
     design: 'entretien',
     points: [
@@ -75,7 +83,8 @@ export const CAS3_SOLUTIONS: Solution[] = [
     official: 'Réussir vos entretiens de recrutement',
     description: 'Préparez en groupe les différents types d’entretien d’embauche.',
     cta: 'Découvrir les ateliers',
-    group: 'humain',
+    format: 'humain',
+    need: 'entrainer',
     photo: PHOTOS.atelierPostIt,
     design: 'atelier',
     primary: { label: 'Découvrir les ateliers', href: '/service/atelier-entretiens?from=cas-3' },
@@ -87,20 +96,24 @@ export const CAS3_SOLUTIONS: Solution[] = [
     official: 'Simulateur d’entretien',
     description: 'Entraînez-vous à répondre aux questions du recruteur, en vivant l’entretien des deux côtés.',
     cta: 'M’entraîner à l’entretien',
-    group: 'outil',
+    format: 'outil',
+    need: 'entrainer',
     icon: 'chat',
     focus: 'Préparer vos réponses',
   },
   {
-    id: 'odiapazon',
-    title: 'Odiapazon',
-    serviceId: 'odiapazon',
-    official: 'Odiapazon',
-    description: 'Clarifiez vos attentes sur le poste et l’environnement de travail pour préparer les questions à poser au recruteur.',
-    cta: 'Préparer mes questions',
-    group: 'outil',
-    icon: 'questions',
-    focus: 'Préparer vos questions',
+    id: 'atelier-remuneration',
+    title: 'Atelier collectif',
+    serviceId: 'atelier-remuneration',
+    official: 'Parler rémunération en entretiens',
+    description: 'Préparez en groupe vos prétentions salariales pour l’entretien.',
+    cta: 'Découvrir l’atelier',
+    format: 'humain',
+    need: 'salaire',
+    photo: PHOTOS.reunionTable,
+    design: 'atelier',
+    focus: 'Parler salaire en groupe',
+    primary: { label: 'Découvrir l’atelier', href: '/service/atelier-remuneration?from=cas-3' },
   },
   {
     id: 'salaire',
@@ -109,11 +122,35 @@ export const CAS3_SOLUTIONS: Solution[] = [
     official: 'Simulateur de salaire cadre',
     description: 'Situez votre rémunération par rapport au marché pour préparer vos prétentions salariales.',
     cta: 'Estimer mon salaire',
-    group: 'outil',
+    format: 'outil',
+    need: 'salaire',
     icon: 'calculator',
     focus: 'Préparer vos prétentions',
   },
+  {
+    id: 'odiapazon',
+    title: 'Odiapazon',
+    serviceId: 'odiapazon',
+    official: 'Odiapazon',
+    description: 'Clarifiez vos attentes sur le poste et l’environnement de travail pour préparer les questions à poser au recruteur.',
+    cta: 'Préparer mes questions',
+    format: 'outil',
+    need: 'questions',
+    icon: 'questions',
+    focus: 'Préparer vos questions',
+  },
 ]
+
+/** Les trois besoins, dans l'ordre d'affichage (même ordre dans la colonne et en bas d'article). */
+export const CAS3_NEEDS: { id: SolutionNeed; title: string }[] = [
+  { id: 'entrainer', title: 'M’entraîner à l’entretien' },
+  { id: 'salaire', title: 'Parler salaire' },
+  { id: 'questions', title: 'Préparer mes questions' },
+]
+
+/** Liens internes sous les groupes : services selon le profil, et en amont de l'entretien. */
+export const CAS3_PROFILE_LINKS = ['jeunes-diplomes-confiance', 'experience-senior']
+export const CAS3_BEFORE_LINK = 'candidature'
 
 export const CAS3_SOLUTIONS_TITLE = 'L’Apec vous accompagne pour préparer vos entretiens'
 export const CAS3_SOLUTIONS_INTRO = 'Avec un consultant, en groupe ou en autonomie : choisissez la solution adaptée à votre besoin.'

@@ -102,7 +102,6 @@ export function Case1({ route }: { route: Route }) {
         kicker: 'Simulation d’A/B test UX/UI',
         title: 'Optimiser l’expérience utilisateur et la conversion',
         text: 'Comparer deux présentations des services pour faciliter le choix. Test envisageable avec AB Tasty.',
-        note: 'Prototype de démonstration — aucun résultat mesuré.',
       }}
       barControl={variantSwitch}
       events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
@@ -488,7 +487,7 @@ function Case1Coulisses() {
           ),
         }}
       />
-      <CrBlock title="Personas de travail (hypothèses, non validées par l’Apec)">
+      <CrBlock title="Personas de travail">
         <p>Jamais affichés aux visiteurs. Aucune situation n’est déduite de l’âge. La situation « optimiser mes recrutements » (recruteur RH professionnel) a été retirée : elle ne relève pas de cet espace orienté cadres.</p>
         <table className="data-table">
           <caption className="visually-hidden">Correspondance entre situations et personas</caption>
