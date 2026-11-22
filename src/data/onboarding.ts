@@ -62,6 +62,25 @@ export const RULES: Rule[] = [
     when: (a) => has(a, 'entretien'),
     reason: 'Pour vous entraîner seul, à votre rythme, en complément.',
   },
+  // Groupes du cas 01 : préparer ses questions, puis parler salaire (moins de points que l'entraînement).
+  {
+    serviceId: 'odiapazon',
+    points: 2,
+    when: (a) => has(a, 'entretien'),
+    reason: 'Pour préparer les questions à poser au recruteur.',
+  },
+  {
+    serviceId: 'atelier-remuneration',
+    points: 1,
+    when: (a) => has(a, 'entretien'),
+    reason: 'Pour préparer vos prétentions salariales.',
+  },
+  {
+    serviceId: 'simulateur-salaire',
+    points: 1,
+    when: (a) => has(a, 'entretien'),
+    reason: 'Pour situer votre rémunération sur le marché.',
+  },
   {
     serviceId: 'candidature',
     points: 4,
@@ -79,6 +98,13 @@ export const RULES: Rule[] = [
     points: 1,
     when: (a) => a.situation === 'recherche' && (has(a, 'cv') || has(a, 'valoriser')),
     reason: 'Vous êtes en recherche active : un CV ciblé est utile dès les premières candidatures.',
+  },
+  {
+    // Même entrée de données que le panneau « Prendre un rendez-vous individuel ».
+    serviceId: 'experience-talents',
+    points: 2,
+    when: (a) => has(a, 'valoriser'),
+    reason: 'Vous souhaitez valoriser votre expérience : un rendez-vous pour faire de votre parcours un atout.',
   },
   {
     serviceId: 'creer-cv',
@@ -106,18 +132,30 @@ export const RULES: Rule[] = [
   },
 ]
 
-/** Ordre de départage fixe, pour un résultat stable. */
+/**
+ * Ordre de départage fixe, pour un résultat stable. Les outils d'entraînement passent avant les
+ * autres services à égalité : dans le scénario d'Alex (recherche, valoriser, entretien pas encore
+ * programmé), les trois premières suggestions restent un atelier, un rendez-vous et un outil.
+ */
 const TIE_ORDER = [
   'entretien-programme',
   'atelier-entretiens',
   'candidature',
   'cep',
   'simulateur-entretien',
+  'odiapazon',
+  'experience-talents',
   'creer-cv',
   'atelier-iag',
+  'atelier-remuneration',
+  'simulateur-salaire',
 ]
 
-export function recommend(a: Answers, max = 3): Recommendation[] {
+/** Nombre de suggestions mises en avant ; les suivantes forment « Également utiles pour vous ». */
+export const TOP_COUNT = 3
+
+/** Liste complète des services pertinents, triée (score, puis ordre fixe). */
+export function recommend(a: Answers): Recommendation[] {
   const byId = new Map<string, Recommendation>()
   for (const rule of RULES) {
     if (!rule.when(a)) continue
@@ -130,7 +168,6 @@ export function recommend(a: Answers, max = 3): Recommendation[] {
     .sort(
       (x, y) => y.score - x.score || TIE_ORDER.indexOf(x.serviceId) - TIE_ORDER.indexOf(y.serviceId),
     )
-    .slice(0, max)
 }
 
 /** Scénario fictif d'Alex : présélection modifiable. */

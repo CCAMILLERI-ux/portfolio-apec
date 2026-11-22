@@ -56,9 +56,10 @@ export function Case2Coulisses() {
           modification: (
             <ul>
               <li>Choix entre « Me guider » et « Explorer librement ».</li>
-              <li>Trois questions, puis trois recommandations maximum, chacune justifiée.</li>
+              <li>Trois questions, puis des recommandations, chacune justifiée.</li>
               <li>Règles déterministes lisibles (pas d’IA).</li>
-              <li>Première action immédiate, aide humaine en alternative, page « Mes prochaines étapes ».</li>
+              <li>Le candidat compose son programme{'\u00a0'}: trois suggestions mises en avant, les autres services pertinents accessibles, plusieurs choix possibles.</li>
+              <li>Aide humaine en alternative (Rendez-vous conseil), page « Mes prochaines étapes ».</li>
             </ul>
           ),
           kpi: (
@@ -86,11 +87,13 @@ export function Case2Coulisses() {
           <tbody>
             <tr><td>« Préparer un entretien » et entretien déjà programmé</td><td>Simulation individuelle avec un consultant</td></tr>
             <tr><td>« Préparer un entretien », pas encore d’entretien</td><td>Atelier entretiens (+ simulateur en complément)</td></tr>
+            <tr><td>« Préparer un entretien »</td><td>Odiapazon (questions à poser), puis atelier « Parler rémunération en entretiens » et simulateur de salaire</td></tr>
             <tr><td>« Actualiser mon CV » ou « Valoriser mon expérience »</td><td>Conseil sur la candidature (+ outil CV)</td></tr>
+            <tr><td>« Valoriser mon expérience »</td><td>Rendez-vous « Faire de son expérience un atout - Expérience et talents »</td></tr>
             <tr><td>« Identifier mes possibilités », ou évolution / changement de voie</td><td>Conseil en évolution professionnelle</td></tr>
           </tbody>
         </table>
-        <p>Trois résultats maximum, départage dans un ordre fixe : les mêmes réponses donnent toujours le même résultat.</p>
+        <p>Trois suggestions mises en avant, les autres dans «{'\u00a0'}Également utiles pour vous{'\u00a0'}». Départage dans un ordre fixe : les mêmes réponses donnent toujours le même{'\u00a0'}résultat.</p>
       </CrBlock>
     </>
   )
