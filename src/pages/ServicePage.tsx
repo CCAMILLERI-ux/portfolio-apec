@@ -10,6 +10,7 @@ import { getService, KIND_LABEL, type Service } from '../data/services'
 import { backFor, caseLabelFor, safeFrom } from '../lib/nav'
 import { Link, type Route } from '../lib/router'
 import { track } from '../lib/storage'
+import { nb } from '../lib/text'
 import { NotFound } from './NotFound'
 
 /** Liens contextuels de la colonne latérale — différents selon le service. */
@@ -23,6 +24,9 @@ const RELATED: Record<string, { to: string; anchor?: string; label: string; text
   ],
   'simulateur-entretien': [
     { to: '/service/entretien-programme?from=cas-3', label: 'Un entretien fixé ? Répétez-le avec un consultant', text: 'Simulation individuelle d’1 h.', tone: 'blue' },
+  ],
+  'jeunes-diplomes-confiance': [
+    { to: '/service/remuneration-premier-emploi?from=cas-3', label: 'Aborder la rémunération pour un 1er emploi', text: 'Un atelier pour discuter et négocier son salaire de premier emploi.', tone: 'blue' },
   ],
   candidature: [
     { to: '/cas-01-seo', anchor: 'etapes', label: 'Préparer ensuite l’entretien en 5 étapes', text: 'Conseil complet, utile avant même d’être convoqué.', tone: 'blue' },
@@ -54,11 +58,11 @@ export function ServicePage({ id, route }: { id: string; route: Route }) {
           <article className="sheet" aria-labelledby="titre-service">
             <h1 id="titre-service" tabIndex={-1} className="service-title">{service.officialTitle}</h1>
             <Modalities items={service.modalities} />
-            {service.observedSummary && <p className="small">{service.observedSummary}</p>}
-            <p className="service-hook"><strong>{service.hook}.</strong> {service.benefit}</p>
+            {service.observedSummary && <p className="small">{nb(service.observedSummary)}</p>}
+            <p className="service-hook"><strong>{service.hook}.</strong> {nb(service.benefit)}</p>
             {service.details && (
               <ul className="plus-list">
-                {service.details.points.map((p) => <li key={p}><Plus size={18} className="plus" /> {p}</li>)}
+                {service.details.points.map((p) => <li key={p}><Plus size={18} className="plus" /> {nb(p)}</li>)}
               </ul>
             )}
             <div className="service-actions">
@@ -68,11 +72,11 @@ export function ServicePage({ id, route }: { id: string; route: Route }) {
               <>
                 <hr className="sep" />
                 <h2>À qui s’adresse ce service ?</h2>
-                <p>{service.details.forWhom}</p>
+                <p>{nb(service.details.forWhom)}</p>
                 {service.details.prepare && (
                   <>
                     <h2>Comment s’y préparer ?</h2>
-                    <p>{service.details.prepare}</p>
+                    <p>{nb(service.details.prepare)}</p>
                   </>
                 )}
               </>
