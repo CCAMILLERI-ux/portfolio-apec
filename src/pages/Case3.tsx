@@ -249,7 +249,7 @@ export function Case3Coulisses() {
         <ul>
           <li>Descriptions fidèles aux pages d’apec.fr : « Entretien programmé » est une simulation pour un entretien prévu, pas un coaching général ; l’atelier porte sur les différents types d’entretien.</li>
           <li>« Simulateur de salaire cadre » : intitulé provisoire, à confirmer avec les équipes.</li>
-          <li>Ateliers « Parler rémunération en entretiens », « Jeunes diplômés{'\u00a0'}: gagnez en confiance, même sans expérience », « Aborder la rémunération pour un 1er emploi », « Valoriser les atouts de son expérience senior » et rendez-vous « Réussir sa candidature » (45{'\u00a0'}minutes) : intitulés et format repris de la page « Tous nos services » d’apec.fr, vers laquelle renvoient leurs fiches.</li>
+          <li>Ateliers « Parler rémunération en entretiens », « Jeunes diplômés{'\u00a0'}: gagnez en confiance, même sans expérience », « Aborder la rémunération pour un 1er emploi », « Valoriser les atouts de son expérience senior » : intitulés et format repris de la page « Tous nos services » d’apec.fr, vers laquelle renvoient leurs fiches. « Réussir sa candidature » renvoie à la fiche existante du prototype, complétée par la durée relevée sur cette page (45{'\u00a0'}minutes).</li>
           <li>Outils : la fiche du prototype renvoie vers la page « Tous nos outils » d’apec.fr ; les liens directs et l’éventuelle connexion à un compte Apec seraient à préciser dans une vraie mise en œuvre.</li>
           <li>Data Cadres, fiches métiers et fiches entreprises sont cités dans le texte ; les liens seraient ajoutés dans le CMS.</li>
           <li>Lien externe : convertisseur salaire brut / net de l’Urssaf.</li>

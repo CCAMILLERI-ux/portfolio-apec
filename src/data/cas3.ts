@@ -150,7 +150,7 @@ export const CAS3_NEEDS: { id: SolutionNeed; title: string }[] = [
 
 /** Liens internes sous les groupes : services selon le profil, et en amont de l'entretien. */
 export const CAS3_PROFILE_LINKS = ['jeunes-diplomes-confiance', 'experience-senior']
-export const CAS3_BEFORE_LINK = 'reussir-candidature'
+export const CAS3_BEFORE_LINK = 'candidature'
 
 export const CAS3_SOLUTIONS_TITLE = 'L’Apec vous accompagne pour préparer vos entretiens'
 export const CAS3_SOLUTIONS_INTRO = 'Avec un consultant, en groupe ou en autonomie : choisissez la solution adaptée à votre besoin.'
