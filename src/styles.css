@@ -1594,3 +1594,111 @@ legend { padding: 0; }
 }
 .band__lead--wide { max-width: none; }
 .proto .band__link { white-space: nowrap; }
+
+/* =====================================================================
+   PORTFOLIO — palette et typographie du design system Apec
+   (portée limitée à .pf : les pages du prototype, la barre de démo et les coulisses ne changent pas)
+   ===================================================================== */
+.pf {
+  --pf-bg: #ffffff;
+  --pf-card: #ffffff;
+  --pf-ink: var(--brand-navy);          /* #252555 : 14,2:1 sur blanc */
+  --pf-muted: #4f5075;                  /* navy adouci : 7,7:1 sur blanc, 6,8:1 sur #EBF2F7 */
+  --pf-accent: var(--brand-blue);       /* #026096 : texte d'accent, 6,7:1 sur blanc */
+  --pf-accent-soft: var(--brand-blue-tint);
+  --pf-line: #dfe3ea;
+  --pf-yellow: var(--brand-yellow);     /* décor uniquement (traits, puces) : jamais en texte sur blanc */
+  --font-pf: var(--font-proto);
+  --font-pf-display: var(--font-proto);
+  background: #fff;
+}
+.pf :focus-visible { outline: 3px solid var(--brand-navy); outline-offset: 2px; }
+.pf-proof, .pf-results { background: var(--brand-blue-tint); }
+.pf .sj-node--hub span { color: #fff; }
+
+/* En-tête : nom + fonction, navigation à droite, 64 px maximum */
+.pf .pf-header { background: #fff; border-bottom: 1px solid var(--pf-line); }
+.pf .pf-header__inner { min-height: 0; height: 63px; flex-wrap: nowrap; }
+.pf-id { display: flex; flex-direction: column; justify-content: center; text-decoration: none; line-height: 1.2; min-height: 44px; }
+.pf-id__name { font-weight: 700; font-size: 1.0625rem; color: var(--brand-navy); }
+.pf-id__role { font-size: 0.8125rem; color: var(--pf-muted); }
+.pf .pf-nav { gap: var(--s3); }
+.pf .pf-nav a { font-weight: 600; font-size: 0.9375rem; color: var(--brand-navy); text-decoration: none; padding: 10px 0; box-shadow: inset 0 -2px 0 transparent; }
+.pf .pf-nav a:hover { box-shadow: inset 0 -3px 0 var(--pf-yellow); }
+
+/* Accroche compacte */
+.pf-hero2 { padding-top: 28px; padding-bottom: 20px; }
+.pf-hero2__kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brand-navy); }
+.pf-hero2__kicker::before { content: ''; flex: none; width: 28px; height: 4px; background: var(--pf-yellow); }
+.pf .pf-hero2__h1 { margin: 0 0 10px; font-weight: 700; font-size: clamp(1.625rem, 1.1rem + 1.6vw, 2.125rem); line-height: 1.15; letter-spacing: -0.02em; text-wrap: balance; }
+.pf-hero2__h1:focus { outline: none; }
+.pf-hero2__text { margin: 0; font-size: 1.0625rem; line-height: 1.5; color: var(--pf-muted); max-width: 70ch; text-wrap: pretty; }
+
+/* Réalisations : 4 cartes colorées */
+.pf-real { padding-bottom: var(--s4); }
+.pf .pf-real__title { margin: 0 0 var(--s2); font-size: 1.25rem; font-weight: 700; letter-spacing: 0; }
+.pf-real__title:focus { outline: none; }
+.pf-real__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
+.pf-rcard { display: flex; flex-direction: column; padding: 16px 18px 18px; border-radius: 8px; color: var(--brand-navy); }
+.pf .pf-rcard__illu { display: block; width: 114px; max-width: 100%; height: 64px; border-radius: 4px; margin-bottom: 12px; }
+.pf-rcard__meta { display: flex; align-items: baseline; gap: 10px; margin: 0 0 6px; }
+.pf-rcard__num { font-size: 1.25rem; font-weight: 700; line-height: 1; }
+.pf-rcard__mission { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.3; }
+.pf .pf-rcard__title { margin: 0 0 6px; font-size: 1.0625rem; font-weight: 700; line-height: 1.25; color: inherit; text-wrap: balance; }
+.pf-rcard__text { margin: 0 0 12px; font-size: 0.875rem; line-height: 1.45; flex: 1 0 auto; text-wrap: pretty; }
+.pf-rcard__foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.pf-rcard__duration { display: inline-flex; align-items: center; gap: 4px; font-size: 0.8125rem; }
+.pf .pf-rcard__btn { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 14px; border-radius: 4px; font-size: 0.875rem; font-weight: 700; text-decoration: none; }
+.pf .pf-rcard__btn:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* 01 : navy, texte blanc, numéro et étiquette jaunes (8,9:1), bouton jaune texte navy */
+.pf-rcard--navy { background: var(--brand-navy); color: #fff; }
+.pf .pf-rcard--navy .pf-rcard__title { color: #fff; }
+.pf-rcard--navy .pf-rcard__num, .pf-rcard--navy .pf-rcard__mission { color: var(--brand-yellow); }
+.pf .pf-rcard--navy .pf-rcard__btn { background: var(--brand-yellow); color: var(--brand-navy); }
+.pf .pf-rcard--navy :focus-visible { outline-color: var(--brand-yellow); }
+/* 02 : jaune, texte navy (8,9:1), bouton navy texte blanc */
+.pf-rcard--yellow { background: var(--brand-yellow); }
+.pf .pf-rcard--yellow .pf-rcard__btn { background: var(--brand-navy); color: #fff; }
+/* 03 : bleu, texte blanc (6,7:1), bouton blanc texte bleu */
+.pf-rcard--blue { background: var(--brand-blue); color: #fff; }
+.pf .pf-rcard--blue .pf-rcard__title { color: #fff; }
+.pf .pf-rcard--blue .pf-rcard__btn { background: #fff; color: var(--brand-blue); }
+.pf .pf-rcard--blue :focus-visible { outline-color: var(--brand-yellow); }
+/* 04 : bleu clair, texte navy (12,6:1), bouton navy texte blanc */
+.pf-rcard--tint { background: var(--brand-blue-tint); }
+.pf .pf-rcard--tint .pf-rcard__btn { background: var(--brand-navy); color: #fff; }
+
+/* Résultats */
+.pf-proof2 { background: var(--brand-blue-tint); padding: var(--s4) 0; }
+.pf .pf-proof2__title { margin: 0 0 var(--s3); font-size: 1.25rem; font-weight: 700; letter-spacing: 0; }
+.pf-proof2__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--s3); align-items: start; }
+.pf-proof2__list li { display: flex; flex-direction: column; gap: 6px; }
+.pf-proof2__figure { display: inline-block; align-self: flex-start; font-size: 1.875rem; font-weight: 700; line-height: 1.1; color: var(--brand-navy); padding-bottom: 6px; box-shadow: inset 0 -4px 0 var(--pf-yellow); }
+.pf-proof2__text { font-size: 0.875rem; line-height: 1.4; color: var(--brand-navy); text-wrap: pretty; }
+
+/* À propos */
+.pf-about { padding-top: var(--s5); padding-bottom: var(--s5); }
+.pf .pf-about__title { margin: 0 0 var(--s2); font-size: 1.25rem; font-weight: 700; letter-spacing: 0; }
+.pf-about__title:focus { outline: none; }
+.pf-about__text { margin: 0 0 var(--s3); max-width: 72ch; font-size: 1rem; line-height: 1.6; text-wrap: pretty; }
+.pf .pf-about__btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 20px; border-radius: 4px; background: var(--brand-navy); color: #fff; font-weight: 700; text-decoration: none; }
+.pf .pf-about__btn:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Pied de page : navy sur blanc */
+.pf .pf-footer { background: #fff; color: var(--brand-navy); border-top: 1px solid var(--pf-line); }
+.pf .pf-footer a { color: var(--brand-navy); }
+
+@media (max-width: 1199px) {
+  .pf-real__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pf-proof2__list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .pf-proof2__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .pf .pf-header__inner { height: auto; min-height: 64px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; row-gap: 4px; }
+  .pf .pf-nav { gap: var(--s2); }
+  .pf .pf-nav a { font-size: 0.875rem; }
+  .pf-real__grid, .pf-proof2__list { grid-template-columns: 1fr; }
+  .pf-proof2__list { gap: var(--s2); }
+}

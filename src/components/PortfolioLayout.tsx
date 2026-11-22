@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Link } from '../lib/router'
 
-/** Habillage du portfolio : identité propre, volontairement distincte de l'univers Apec. */
+/** Habillage du portfolio : couleurs et typographie du design system Apec, sans les éléments propres au prototype. */
 export function PortfolioLayout({ children, isHome = false }: { children: ReactNode; isHome?: boolean }) {
   return (
     <div className="pf">
@@ -13,13 +13,15 @@ export function PortfolioLayout({ children, isHome = false }: { children: ReactN
       </a>
       <header className="pf-header">
         <div className="pf-container pf-header__inner">
-          <Link to="/" className="pf-brand pf-brand--compact" aria-current={isHome ? 'page' : undefined}>
-            <span className="pf-brand__name">Portfolio</span>
+          <Link to="/" className="pf-id" aria-current={isHome ? 'page' : undefined}>
+            <span className="pf-id__name">Caroline Camilleri</span>
+            <span className="pf-id__role">Cheffe de projet Animation Web</span>
           </Link>
           <nav aria-label="Portfolio">
             <ul className="pf-nav">
               <li><Link to="/" anchor="realisations">Réalisations</Link></li>
               <li><Link to="/design-system">Design system</Link></li>
+              <li><Link to="/" anchor="a-propos">À propos</Link></li>
             </ul>
           </nav>
         </div>
