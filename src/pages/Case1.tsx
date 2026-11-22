@@ -2,13 +2,13 @@ import { Badge } from '../components/Badge'
 import { CrBlock, CroGrid } from '../components/Coulisses'
 import { ArrowRight, Calendar, Chat, Compass, Graduation, Handshake, Search, TrendUp } from '../components/Icons'
 import { Illustration } from '../components/Illustration'
-import { ModalityChips, verified } from '../components/Modalities'
+import { ModalityChips } from '../components/Modalities'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { ObservedServiceCard, PhotoVisual, ServiceAction, ServiceCard } from '../components/ServiceCard'
 import { Picto } from '../components/Picto'
 import { WORKSHOP_SESSIONS } from '../data/slots'
 import { ADVICE_BY_SITUATION, IDEAL_IF } from '../data/piste2'
-import { getService, KIND_LABEL, SERVICES, type Service } from '../data/services'
+import { getService, SERVICES, type Service } from '../data/services'
 import { ALL_DEMO_SERVICE_IDS, FORMAT_LABEL, groupBySituation, otherSituations, SITUATIONS } from '../data/situations'
 import { Link, navigate, type Route } from '../lib/router'
 import { nb } from '../lib/text'
@@ -50,8 +50,13 @@ export function Case1({ route }: { route: Route }) {
   const groups = groupBySituation((id) => getService(id)!.kind)
 
   /** Rendu d'une liste de services dans la variante affichée. */
-  const renderVariant = (list: Service[], level: 3 | 4, meta?: (s: Service) => React.ReactNode) => {
-    const H = `h${level}` as 'h3' | 'h4'
+  const renderVariant = (
+    list: Service[],
+    level: 3 | 4,
+    meta?: (s: Service) => React.ReactNode,
+    primaryId?: string,
+    withHelp = false,
+  ) => {
     if (view === 'existant') {
       return (
         <div className="observed-band">
@@ -70,28 +75,9 @@ export function Case1({ route }: { route: Route }) {
     }
     if (view === 'piste3') return <Piste3 services={list} level={level} meta={meta} keepOrder={!!meta} />
     return (
-      <ul className="theme-grid" aria-label="Services, avec la situation où chacun est le plus utile">
-        {list.map((s) => {
-          const shown = verified(s.modalities).filter((m) => m.label !== 'Public')
-          return (
-            <li key={s.id} className="theme-card">
-              <Picto kind={s.kind} />
-              {meta ? meta(s) : <p className="theme-card__kind">{KIND_LABEL[s.kind]}</p>}
-              <H className="theme-card__title">{nb(s.hook)}</H>
-              <p className="theme-card__official">{nb(s.officialTitle)}</p>
-              <ul className="theme-card__bullets">
-                {IDEAL_IF[s.id] && <li><strong>Idéal si</strong> {nb(IDEAL_IF[s.id])}</li>}
-                {shown.map((m) => <li key={m.label}>{m.value}</li>)}
-              </ul>
-              <div className="theme-card__actions">
-                <ServiceAction service={s} from="cas-1" />
-                <Link to={`/service/${s.id}?from=cas-1`} className="theme-card__arrow" aria-label={`En savoir plus : ${s.officialTitle}`}>
-                  <ArrowRight size={30} />
-                </Link>
-              </div>
-            </li>
-          )
-        })}
+      <ul className="dlist" aria-label="Services, avec la situation où chacun est le plus utile">
+        {list.map((s) => <DecisionRow key={s.id} service={s} level={level} primaryId={primaryId} />)}
+        {withHelp && <HelpRow level={level} />}
       </ul>
     )
   }
@@ -194,28 +180,19 @@ export function Case1({ route }: { route: Route }) {
                   <h3 id={`grp-${g.situation.id}`} className="grp__title" tabIndex={-1}>
                     <Icon size={28} className="grp__icon" /> {nb(g.situation.label)}
                   </h3>
-                  {renderVariant(list, 4, (sv) => <GroupMeta service={sv} primaryId={g.situation.id} />)}
+                  {renderVariant(list, 4, (sv) => <GroupMeta service={sv} primaryId={g.situation.id} />, g.situation.id)}
                 </section>
               )
             })
-          : renderVariant(services, 3)}
+          : renderVariant(services, 3, undefined, undefined, view === 'piste2')}
 
         {view === 'piste2' && (
           <>
-            <ul className="theme-grid theme-grid--help" aria-label="Aide d’un consultant">
-              <li className="theme-card theme-card--navy">
-                <Picto kind="aide" />
-                <p className="theme-card__kind">Échange avec un consultant</p>
-                <h3 className="theme-card__title">Aucun ne vous correspond vraiment ?</h3>
-                <ul className="theme-card__bullets">
-                  <li><strong>Idéal si</strong> vous hésitez ou votre situation est particulière</li>
-                  <li>Un consultant fait le point avec vous et vous oriente</li>
-                </ul>
-                <div className="theme-card__actions">
-                  <Link to="/reserver/cep?from=cas-1" className="btn btn--primary">Échanger avec un consultant</Link>
-                </div>
-              </li>
-            </ul>
+            {isAll && (
+              <ul className="dlist dlist--help" aria-label="Aide d’un consultant">
+                <HelpRow level={3} />
+              </ul>
+            )}
 
             {advice.length > 0 && (
               <section className="advice" aria-labelledby="nos-conseils">
@@ -245,17 +222,65 @@ export function Case1({ route }: { route: Route }) {
   )
 }
 
+/** Autres situations d'un service, en minuscule initiale, sans mot seul en fin de ligne. */
+function alsoLabel(serviceId: string, primaryId: string) {
+  const others = otherSituations(serviceId, primaryId)
+  if (others.length === 0) return null
+  return others.map((o) => o.label.charAt(0).toLowerCase() + o.label.slice(1)).join(' ; ').replace(/ (\S+)$/, '\u00a0$1')
+}
+
+/**
+ * Piste 2 — ligne de la liste de décision : pictogramme, accroche en titre, « Idéal si »,
+ * format, puis le bouton d'action principal (seul élément cliquable de la ligne).
+ */
+function DecisionRow({ service, level, primaryId }: { service: Service; level: 3 | 4; primaryId?: string }) {
+  const H = `h${level}` as 'h3' | 'h4'
+  const also = primaryId ? alsoLabel(service.id, primaryId) : null
+  return (
+    <li className="drow">
+      <span className="drow__icon"><Picto kind={service.kind} size={36} /></span>
+      <div className="drow__main">
+        <H className="drow__title">{nb(service.hook)}</H>
+        {IDEAL_IF[service.id] && <p className="drow__ideal"><strong>Idéal si</strong> {nb(IDEAL_IF[service.id])}</p>}
+        {also && <p className="drow__also">Aussi utile si{'\u00a0'}: {also}</p>}
+      </div>
+      <div className="drow__foot">
+        <p className="drow__format"><span className="visually-hidden">Format{'\u00a0'}: </span>{FORMAT_LABEL[service.kind]}</p>
+        <div className="drow__action">
+          <ServiceAction service={service} from="cas-1" className="btn btn--primary btn--sm" />
+        </div>
+      </div>
+    </li>
+  )
+}
+
+/** Dernière ligne : l'aide d'un consultant, au même format, sur fond bleu nuit. */
+function HelpRow({ level }: { level: 3 | 4 }) {
+  const H = `h${level}` as 'h3' | 'h4'
+  return (
+    <li className="drow drow--help">
+      <span className="drow__icon"><Picto kind="aide" size={36} /></span>
+      <div className="drow__main">
+        <H className="drow__title">Aucun ne vous correspond vraiment{'\u00a0'}?</H>
+        <p className="drow__ideal"><strong>Idéal si</strong> vous hésitez ou votre situation est{'\u00a0'}particulière</p>
+      </div>
+      <div className="drow__foot">
+        <p className="drow__format"><span className="visually-hidden">Format{'\u00a0'}: </span>Avec un consultant</p>
+        <div className="drow__action">
+          <Link to="/reserver/cep?from=cas-1" className="btn btn--primary btn--sm">Échanger avec un consultant</Link>
+        </div>
+      </div>
+    </li>
+  )
+}
+
 /** Étiquette de format et autres usages d'un service, dans la vue « Tous ». */
 function GroupMeta({ service, primaryId }: { service: Service; primaryId: string }) {
-  const others = otherSituations(service.id, primaryId)
+  const also = alsoLabel(service.id, primaryId)
   return (
     <p className="grp-meta">
       <span className="grp-format">{FORMAT_LABEL[service.kind]}</span>
-      {others.length > 0 && (
-        <span className="grp-also">
-          Aussi utile si{'\u00a0'}: {others.map((o) => o.label.charAt(0).toLowerCase() + o.label.slice(1)).join(' ; ').replace(/ (\S+)$/, '\u00a0$1')}
-        </span>
-      )}
+      {also && <span className="grp-also">Aussi utile si{'\u00a0'}: {also}</span>}
     </p>
   )
 }
@@ -361,6 +386,17 @@ function Case1Coulisses() {
           piste.
         </p>
       </CrBlock>
+      <CrBlock title="Hypothèses des trois pistes">
+        <ul>
+          <li><strong>Piste 1 :</strong> des tuiles visuelles avec icônes facilitent le{'\u00a0'}repérage.</li>
+          <li><strong>Piste 2 :</strong> une liste de décision (« Idéal si ») aide à choisir entre des services{'\u00a0'}proches.</li>
+          <li><strong>Piste 3 :</strong> des photos rendent l’offre plus humaine et{'\u00a0'}rassurante.</li>
+        </ul>
+        <p>
+          Chaque piste teste une seule hypothèse face à l’existant{'\u00a0'}; l’indicateur principal est le taux de clic
+          vers un service, puis le taux d’inscription ou de rendez-vous{'\u00a0'}finalisé.
+        </p>
+      </CrBlock>
       <CrBlock title="Vue « Tous nos services »">
         <p>
           Variante testée : un classement par situation de l’utilisateur, avec le format en second niveau, plutôt qu’un
@@ -376,19 +412,19 @@ function Case1Coulisses() {
             <thead><tr><th scope="col">Élément</th><th scope="col">Existant observé</th><th scope="col">Piste 1 — valoriser</th><th scope="col">Piste 2 — aider à choisir</th><th scope="col">Piste 3 — montrer l’humain</th></tr></thead>
             <tbody>
               <tr><td>Entrée</td><td>Par thème</td><td>Par situation</td><td>Par situation</td><td>Par situation</td></tr>
-              <tr><td>Carte</td><td>Pictogramme, intitulé, phrase</td><td>Visuel coloré, accroche bénéfice, intitulé conservé</td><td><strong>Carte thématique bleue</strong> (kit) : pictogramme bicolore, puces jaunes <strong>« Idéal si… »</strong>, format et durée</td><td><strong>Photo</strong> + étiquette du type d’aide</td></tr>
-              <tr><td>Modalités</td><td>Sur la fiche</td><td>Pastilles sur la carte (vérifiées)</td><td>Puces sur la carte (vérifiées)</td><td>Sur la carte (vérifiées)</td></tr>
-              <tr><td>Ateliers</td><td>Encadré texte, comme les autres</td><td>Visuel jaune + étiquette</td><td>Carte bleue, pictogramme « groupe »</td><td><strong>Carte vedette</strong> : grande photo, « Atelier collectif », prochaines sessions</td></tr>
-              <tr><td>Actions</td><td>« En savoir plus » + action</td><td>Une action principale + lien</td><td>Une action principale + lien</td><td>Une action principale + lien</td></tr>
-              <tr><td>Aide humaine</td><td>—</td><td>Lien à côté du titre</td><td>Carte bleu nuit dans la grille, comme une option</td><td>Lien à côté du titre</td></tr>
+              <tr><td>Carte</td><td>Pictogramme, intitulé, phrase</td><td>Visuel coloré, accroche bénéfice, intitulé conservé</td><td><strong>Liste de décision</strong> : une ligne par service, pictogramme, accroche, <strong>« Idéal si… »</strong>, format</td><td><strong>Photo</strong> + étiquette du type d’aide</td></tr>
+              <tr><td>Modalités</td><td>Sur la fiche</td><td>Pastilles sur la carte (vérifiées)</td><td>Sur la fiche</td><td>Sur la carte (vérifiées)</td></tr>
+              <tr><td>Ateliers</td><td>Encadré texte, comme les autres</td><td>Visuel jaune + étiquette</td><td>Ligne de la liste, étiquette « Atelier »</td><td><strong>Carte vedette</strong> : grande photo, « Atelier collectif », prochaines sessions</td></tr>
+              <tr><td>Actions</td><td>« En savoir plus » + action</td><td>Une action principale + lien</td><td>Un seul bouton par ligne</td><td>Une action principale + lien</td></tr>
+              <tr><td>Aide humaine</td><td>—</td><td>Lien à côté du titre</td><td>Dernière ligne de la liste, fond bleu nuit</td><td>Lien à côté du titre</td></tr>
               <tr><td>Contenus conseils</td><td>Bloc séparé, plus bas</td><td>—</td><td><strong>« Nos conseils »</strong> reliés à la situation</td><td>—</td></tr>
             </tbody>
           </table>
         </div>
         <p>
-          <strong>Repères visuels :</strong> chaque piste reprend un type de carte du mini-kit — carte service blanche
-          (piste 1), carte thématique bleue inspirée des cartes « Nos consultantes et nos consultants » d’apec.fr
-          (piste 2), carte éditoriale avec photo (piste 3).
+          <strong>Repères visuels :</strong> chaque piste reprend un composant du mini-kit — carte service blanche
+          (piste 1), liste de décision compacte avec pictogrammes bicolores (piste 2), carte éditoriale avec
+          photo (piste 3).
         </p>
         <p>
           <strong>Ce que la piste 2 cherche à améliorer :</strong> la piste 1 montre mieux chaque service, mais laisse le
