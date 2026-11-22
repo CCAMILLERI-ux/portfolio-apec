@@ -11,6 +11,7 @@ export const IDEAL_IF: Record<string, string> = {
   candidature: 'vous voulez un avis sur votre CV avant de postuler',
   'atelier-iag': 'vous voulez utiliser l’IA générative avec méthode',
   'creer-cv': 'vous voulez mettre votre CV à jour en autonomie',
+  odiapazon: 'vous voulez savoir quelles questions poser au recruteur',
   cep: 'vous voulez faire le point sur votre projet',
   'evolution-interne': 'vous visez un nouveau poste dans votre entreprise',
   formation: 'vous envisagez une formation et voulez la relier à un projet',

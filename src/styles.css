@@ -463,6 +463,7 @@ legend { padding: 0; }
 .modalities__item dd { margin: 0; }
 .modalities:has(> .modalities__item:only-child) { grid-template-columns: 1fr; display: inline-grid; min-width: min(100%, 280px); }
 .modalities__item:only-child { border-right: 0; }
+.modalities__item:last-child:nth-child(odd) { grid-column: 1 / -1; border-right: 0; }
 .modalities__icon { flex: none; color: var(--brand-navy); }
 @media (max-width: 420px) { .modalities { grid-template-columns: 1fr; } .modalities__item { border-right: 0; border-bottom: 1px solid var(--border-neutral) !important; } .modalities__item:last-child { border-bottom: 0 !important; } }
 

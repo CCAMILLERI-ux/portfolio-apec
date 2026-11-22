@@ -241,9 +241,8 @@ export function Case3Coulisses() {
         <p>
           Mêmes groupes, même ordre et mêmes destinations dans la colonne et en bas d’article{'\u00a0'}: dans
           chaque groupe, les accompagnements humains (photos), puis les outils en autonomie (icônes). Le simulateur d’entretien prépare
-          les <strong>réponses</strong> ; Odiapazon aide à préparer les <strong>questions</strong> et à clarifier ses
-          attentes (usage suggéré, à partir de sa présentation sur apec.fr : « se projeter pour préparer une
-          collaboration réussie »).
+          les <strong>réponses</strong> ; Odiapazon aide à formuler les <strong>questions</strong> à poser au recruteur, à partir d’une
+          analyse des cinq dimensions du{'\u00a0'}travail.
         </p>
         <ul>
           <li>Descriptions fidèles aux pages d’apec.fr : « Entretien programmé » est une simulation pour un entretien prévu, pas un coaching général ; l’atelier porte sur les différents types d’entretien.</li>
