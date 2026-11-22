@@ -1,6 +1,6 @@
 import { Badge } from '../components/Badge'
 import { CrBlock, CroGrid } from '../components/Coulisses'
-import { ArrowRight, Calendar, Chat, Compass, Graduation, Handshake, Search, TrendUp } from '../components/Icons'
+import { ArrowRight, Calendar, Chat } from '../components/Icons'
 import { Illustration } from '../components/Illustration'
 import { ModalityChips } from '../components/Modalities'
 import { ProtoLayout } from '../components/ProtoLayout'
@@ -9,7 +9,7 @@ import { Picto } from '../components/Picto'
 import { WORKSHOP_SESSIONS } from '../data/slots'
 import { ADVICE_BY_SITUATION, IDEAL_IF } from '../data/piste2'
 import { getService, SERVICES, type Service } from '../data/services'
-import { ALL_DEMO_SERVICE_IDS, FORMAT_LABEL, groupBySituation, otherSituations, SITUATIONS } from '../data/situations'
+import { ALL_DEMO_SERVICE_IDS, FORMAT_LABEL, groupBySituation, otherSituations, SITUATION_ICON, SITUATIONS } from '../data/situations'
 import { Link, navigate, type Route } from '../lib/router'
 import { nb } from '../lib/text'
 
@@ -22,13 +22,6 @@ const VIEWS: [View, string][] = [
 ]
 const ALL = 'tous'
 
-const SITUATION_ICON: Record<string, typeof Search> = {
-  'nouvel-emploi': Search,
-  'premier-emploi': Graduation,
-  evoluer: TrendUp,
-  reconversion: Compass,
-  'recruter-aide': Handshake,
-}
 
 export function Case1({ route }: { route: Route }) {
   const rawView = route.query.get('vue')
@@ -46,8 +39,13 @@ export function Case1({ route }: { route: Route }) {
     const q = new URLSearchParams({ situation: next.situation ?? current, vue: next.vue ?? view })
     navigate(`/cas-02-ab-test?${q.toString()}`, { replace: true })
   }
-  const resultLabel = isAll ? 'Tous nos services' : situation.label
+  /** Filtre « Ateliers » de la vue Tous (lien « Voir les ateliers » du panneau de rendez-vous). */
+  const onlyWorkshops = isAll && route.query.get('format') === 'atelier'
+  const resultLabel = isAll ? (onlyWorkshops ? 'Tous nos ateliers' : 'Tous nos services') : situation.label
   const groups = groupBySituation((id) => getService(id)!.kind)
+    .map((g) => ({ ...g, serviceIds: onlyWorkshops ? g.serviceIds.filter((id) => getService(id)?.kind === 'atelier') : g.serviceIds }))
+    .filter((g) => g.serviceIds.length > 0)
+  const shownCount = isAll ? groups.reduce((n, g) => n + g.serviceIds.length, 0) : services.length
 
   /** Rendu d'une liste de services dans la variante affichée. */
   const renderVariant = (
@@ -138,7 +136,7 @@ export function Case1({ route }: { route: Route }) {
 
       <div className="container section">
         <p className="visually-hidden" role="status" aria-live="polite">
-          {`${services.length} services affichés pour : ${resultLabel}.`}
+          {`${shownCount} services affichés pour : ${resultLabel}.`}
         </p>
         <div className="results-head">
           <h2 className="results-title">
@@ -151,6 +149,12 @@ export function Case1({ route }: { route: Route }) {
           )}
         </div>
 
+        {onlyWorkshops && (
+          <p className="grp-filter">
+            Format affiché{'\u00a0'}: <strong>ateliers</strong>{' '}
+            <Link to={`/cas-02-ab-test?${new URLSearchParams({ situation: ALL, vue: view })}`} className="grp-filter__reset">Voir tous les{"\u00a0"}formats</Link>
+          </p>
+        )}
         {isAll && (
           <nav className="grp-nav" aria-label="Aller à une situation">
             <ul>
@@ -158,7 +162,7 @@ export function Case1({ route }: { route: Route }) {
                 const Icon = SITUATION_ICON[g.situation.id]
                 return (
                   <li key={g.situation.id}>
-                    <a href={`#/cas-02-ab-test?${new URLSearchParams({ situation: ALL, vue: view })}#grp-${g.situation.id}`} className="grp-nav__link">
+                    <a href={`#/cas-02-ab-test?${new URLSearchParams({ situation: ALL, vue: view, ...(onlyWorkshops ? { format: 'atelier' } : {}) })}#grp-${g.situation.id}`} className="grp-nav__link">
                       <Icon size={18} /> {g.situation.label}
                     </a>
                   </li>
