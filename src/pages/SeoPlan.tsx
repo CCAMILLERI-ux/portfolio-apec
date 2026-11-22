@@ -20,7 +20,7 @@ export function SeoPlan({ route }: { route: Route }) {
   const sit = SEO_SITUATIONS.find((s) => s.id === sitId)!
 
   return (
-    <PortfolioLayout minimalFooter>
+    <PortfolioLayout>
       {/* ---------------- 0. Hero ---------------- */}
       <section className="pf-hero pf-hero--compact seo-hero">
         <div className="pf-container">
@@ -46,10 +46,6 @@ export function SeoPlan({ route }: { route: Route }) {
               Découvrir le plan <ArrowRight size={18} />
             </Link>
           </div>
-          <p className="seo-mention">
-            <Info size={16} /> Proposition indépendante de Caroline Camilleri : hypothèses à valider avec les
-            données de l’Apec.
-          </p>
         </div>
       </section>
 
@@ -219,11 +215,7 @@ export function SeoPlan({ route }: { route: Route }) {
       </section>
 
       <section className="pf-container seo-block seo-end">
-        <p className="small">
-          Ce portfolio est en <code>noindex</code> : les éléments SEO présentés illustrent une méthode et ne visent pas à
-          positionner ce portfolio sur les requêtes de l’Apec.
-        </p>
-        <Link to="/" className="pf-link">Revenir aux cas du portfolio <ArrowRight size={16} /></Link>
+        <Link to="/" anchor="realisations" className="pf-link">Revenir aux réalisations <ArrowRight size={16} /></Link>
       </section>
     </PortfolioLayout>
   )

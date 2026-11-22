@@ -223,8 +223,7 @@ export function Case3Coulisses() {
       <h3 className="coulisses__case">Cas 01 — De la recherche Google à l’utilisation des services</h3>
       <CrBlock title="Statut de la page">
         <p>
-          Page conseil originale, rédigée pour ce portfolio, sans statistique citée. Elle imite une page SEO pour la
-          démonstration mais n’a pas vocation à être référencée (noindex). Les services mentionnés renvoient aux
+          Page conseil originale, rédigée pour ce portfolio, sans statistique citée. Les services mentionnés renvoient aux
           fiches du prototype, rédigées à partir des pages d’apec.fr. La page « rémunération » est un contenu
           connexe court, pas une page de remplissage.
         </p>
@@ -293,7 +292,7 @@ export function Case3Coulisses() {
           P1, cadre en recherche active, souvent juste après une convocation ou en anticipation.
           Intention informationnelle avec un prolongement pratique possible.
         </p>
-        <h4>Requêtes envisagées <Badge tone="warn">Hypothèses à valider</Badge></h4>
+        <h4>Requêtes envisagées <Badge tone="warn">Volumes à confirmer</Badge></h4>
         <ul className="inline-list">
           <li>comment préparer un entretien de recrutement</li>
           <li>préparer un entretien d’embauche cadre</li>

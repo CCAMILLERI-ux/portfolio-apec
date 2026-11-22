@@ -338,11 +338,7 @@ export function Case2({ path }: { path: string }) {
   }
 
   const barNotice =
-    step === 'confirm'
-      ? 'Simulation terminée — aucun rendez-vous réel n’a été réservé.'
-      : step === 'action'
-        ? 'Réservation simulée : créneaux fictifs, rien n’est envoyé.'
-        : undefined
+    step === 'confirm' || step === 'action' ? 'Démonstration\u00a0: aucune inscription réelle.' : undefined
 
   return (
     <ProtoLayout
