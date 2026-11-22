@@ -1731,3 +1731,16 @@ legend { padding: 0; }
 @media (max-width: 760px) {
   .rec-more__list .drow { grid-template-columns: 40px minmax(0, 1fr); grid-template-areas: "icon main" "foot foot"; }
 }
+
+/* ---------- Cas 03 : action par service (Confirmation et « Mes prochaines étapes ») ---------- */
+.program-recap li { align-items: center; }
+.program-recap li:focus-visible, .next-item:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.program-recap__action { margin-left: auto; }
+.pa-status { display: inline-flex; align-items: center; gap: 6px; margin: 0; font-size: 0.875rem; color: var(--ok); }
+.pa-status svg { flex: none; }
+.pa-status strong { font-weight: 700; }
+.proto .pa-btn { white-space: nowrap; }
+@media (max-width: 640px) {
+  .program-recap li { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .program-recap__action { margin-left: 0; }
+}
