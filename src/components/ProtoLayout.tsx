@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { flushSync } from 'react-dom'
-import { Link } from '../lib/router'
+import { Link, useRoute } from '../lib/router'
 import { resetAll } from '../lib/storage'
 import { Coulisses } from './Coulisses'
 import { RdvPanel } from './RdvPanel'
-import { ArrowLeft, ArrowRight, Calendar, Close, Info, Menu, Reset, User } from './Icons'
+import { ArrowLeft, ArrowRight, Calendar, Close, Grid, Info, Menu, Reset, User } from './Icons'
 
 const PROTO_NAV = [
   { to: '/espace', label: 'Mon espace' },
@@ -57,6 +57,10 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
   // Les coulisses ne sont affichées qu'à la demande ; à l'ouverture, on y descend.
   const [explain, setExplain] = useState(false)
   const [rdvOpen, setRdvOpen] = useState(false)
+  // « Nos services » : vue Tous, en conservant la variante affichée (vue) si elle est dans l'adresse.
+  const route = useRoute()
+  const vue = route.query.get('vue')
+  const servicesHref = `/cas-02-ab-test?${new URLSearchParams({ situation: 'tous', ...(vue ? { vue } : {}) })}`
   const rdvBtn = useRef<HTMLButtonElement>(null)
   const closeRdv = useCallback((restoreFocus = true) => {
     setRdvOpen(false)
@@ -145,6 +149,14 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
               espace cadres
             </Link>
             <span className="proto-header__right">
+              <Link
+                to={servicesHref}
+                className="proto-account"
+                aria-label="Nos services"
+                aria-current={path === '/cas-02-ab-test' ? 'page' : undefined}
+              >
+                <Grid size={22} /> <span>Nos services</span>
+              </Link>
               <button
                 ref={rdvBtn}
                 type="button"
@@ -152,10 +164,11 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
                 aria-haspopup="dialog"
                 aria-expanded={rdvOpen}
                 onClick={() => setRdvOpen(true)}
+                aria-label="Prendre rendez-vous"
               >
                 <Calendar size={22} /> <span>Prendre rendez-vous</span>
               </button>
-              <Link to="/espace" className="proto-account" aria-current={path === '/espace' ? 'page' : undefined}>
+              <Link to="/espace" className="proto-account" aria-label="Mon espace" aria-current={path === '/espace' ? 'page' : undefined}>
                 <User size={22} /> <span>Mon espace</span>
               </Link>
             </span>
