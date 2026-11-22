@@ -33,7 +33,7 @@ export interface Modality {
 
 export type ServiceAction =
   | { kind: 'booking'; label: string } // réservation simulée dans la démo
-  | { kind: 'external'; label: string; url: string } // lien explicite vers apec.fr
+  | { kind: 'external'; label: string; url: string } // page officielle (référence ; le prototype simule l'action)
 
 export interface Service {
   id: string
@@ -92,7 +92,7 @@ const TOOLS_NOTE =
   'Fiche d’aperçu : intitulé et présentation repris de la page « Tous nos outils » d’apec.fr ; l’outil n’est pas reproduit dans la démo.'
 
 const LISTED_NOTE =
-  'Fiche d’aperçu : intitulé et format repris de la page « Tous nos services » d’apec.fr ; le lien renvoie vers cette page.'
+  'Fiche d’aperçu : intitulé et format repris de la page « Tous nos services » d’apec.fr ; inscription simulée dans le prototype.'
 
 export const SERVICES: Service[] = [
   /* ---------------- Parcours entretien (fiches détaillées) ---------------- */
@@ -195,7 +195,7 @@ export const SERVICES: Service[] = [
       forWhom: 'Les personnes qui préfèrent commencer seules ou s’entraîner plusieurs fois.',
     },
     scopeNote:
-      'L’outil n’est pas reproduit dans la démo. Le lien ouvre la page publique des outils d’apec.fr (site externe).',
+      'L’outil n’est pas reproduit dans la démo : « Lancer l’outil » le signale dans la barre de démo.',
   },
   {
     id: 'candidature',
@@ -282,7 +282,7 @@ export const SERVICES: Service[] = [
     },
     depth: 'synthese',
     scopeNote:
-      'L’outil n’est pas reproduit dans la démo. Le lien ouvre la page publique des outils d’apec.fr (site externe).',
+      'L’outil n’est pas reproduit dans la démo : « Lancer l’outil » le signale dans la barre de démo.',
   },
 
   {
@@ -306,7 +306,7 @@ export const SERVICES: Service[] = [
     depth: 'synthese',
     observedCta: 'Commencez',
     scopeNote:
-      'L’outil n’est pas reproduit dans la démo. Le lien ouvre la page publique des outils d’apec.fr (site externe) ; le lien direct vers l’outil et l’éventuelle connexion à un compte seraient précisés lors de la mise en œuvre.',
+      'L’outil n’est pas reproduit dans la démo : « Lancer l’outil » le signale dans la barre de démo. L’accès réel (lien direct, compte Apec éventuel) serait précisé lors de la mise en œuvre.',
   },
   {
     id: 'simulateur-salaire',
@@ -321,7 +321,7 @@ export const SERVICES: Service[] = [
     action: { kind: 'external', label: 'Trouver l’outil sur apec.fr', url: OFFICIAL_TOOLS_URL },
     depth: 'synthese',
     scopeNote:
-      'Fiche d’aperçu : intitulé provisoire ; lien direct et conditions d’accès (compte Apec éventuel) à confirmer avec les équipes. Le lien ouvre la page publique des outils d’apec.fr.',
+      'Fiche d’aperçu : intitulé provisoire ; lien direct et conditions d’accès (compte Apec éventuel) à confirmer avec les équipes. L’outil n’est pas reproduit dans la démo.',
   },
 
   /* ---------------- Cas 01 : services liés à l'entretien (intitulés relevés sur « Tous nos services ») ---------------- */

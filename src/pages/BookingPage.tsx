@@ -23,7 +23,8 @@ export function BookingPage({ id, route }: { id: string; route: Route }) {
     if (done) doneRef.current?.focus()
   }, [done])
 
-  if (!service || service.action.kind !== 'booking') return <NotFound />
+  // Ateliers (inscription à une session) et rendez-vous (créneau) ; un outil ne se réserve pas.
+  if (!service || service.kind === 'outil') return <NotFound />
   const serviceBack = { to: `/service/${id}?from=${from}`, label: service.officialTitle }
 
   return (

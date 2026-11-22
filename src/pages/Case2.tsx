@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Booking } from '../components/Booking'
 import { Case2Coulisses, CASE2_EVENTS } from '../components/Case2Coulisses'
-import { ArrowLeft, ArrowRight, Calendar, Chat, Check, Clock, Compass, Doc, External, Plus, Search, Target, TrendUp } from '../components/Icons'
+import { ArrowLeft, ArrowRight, Calendar, Chat, Check, Clock, Compass, Doc, Plus, Search, Target, TrendUp } from '../components/Icons'
 import { Illustration } from '../components/Illustration'
 import { ModalityChips, Modalities } from '../components/Modalities'
 import { PageBand } from '../components/PageBand'
@@ -12,7 +12,7 @@ import { FORMAT_LABEL } from '../data/situations'
 import { nb } from '../lib/text'
 import { ALEX_PRESET, NEED_OPTIONS, SITUATION_OPTIONS, recommend, TOP_COUNT, type Need } from '../data/onboarding'
 import { Picto } from '../components/Picto'
-import { ProgramAction, toBook } from '../components/ProgramAction'
+import { isBookable, ProgramAction, toBook } from '../components/ProgramAction'
 import type { Service } from '../data/services'
 import { getService } from '../data/services'
 import { INITIAL_ONBOARDING, useBookings, useOnboarding, type OnboardingStep } from '../lib/demoState'
@@ -163,11 +163,6 @@ export function Case2({ path }: { path: string }) {
     )
   }
 
-  /** Action propre à chaque service du programme. */
-  const actionLabel = (s: Service) =>
-    s.action.kind === 'external'
-      ? (s.kind === 'outil' ? 'Ouvrir l’outil sur apec.fr' : s.action.label)
-      : s.kind === 'atelier' ? 'Choisir une session' : 'Choisir un créneau'
   const prefilled = answers.situation === ALEX_PRESET.situation
 
   const heading = (children: React.ReactNode, className = 'step__title') => (
@@ -405,17 +400,7 @@ export function Case2({ path }: { path: string }) {
                         </p>
                       ) : (
                         <div className="next-item__actions">
-                          {s.action.kind === 'booking' ? (
-                            <button type="button" className="btn btn--primary btn--sm" onClick={() => setState((st) => ({ ...st, chosenId: s.id }))}>
-                              {actionLabel(s)}<span className="visually-hidden"> : {s.officialTitle}</span>
-                            </button>
-                          ) : (
-                            <a className="btn btn--outline btn--sm" href={s.action.url} target="_blank" rel="noopener noreferrer"
-                              onClick={() => track('service_cta_click', `${s.id} (programme, externe)`)}>
-                              {actionLabel(s)} <External size={16} />
-                              <span className="visually-hidden"> — {s.officialTitle} (nouvel onglet)</span>
-                            </a>
-                          )}
+                          <ProgramAction service={s} from="etapes" onChoose={isBookable(s) ? () => setState((st) => ({ ...st, chosenId: s.id })) : undefined} />
                         </div>
                       )}
                     </div>
