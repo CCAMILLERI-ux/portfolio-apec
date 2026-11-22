@@ -109,10 +109,10 @@ export function Case1({ route }: { route: Route }) {
       <div className="band band--tall">
         <div className="container">
           <p className="band__kicker">Nos services</p>
-          <h1 className="band__title band__title--xl" tabIndex={-1}>Quelle est votre situation ?</h1>
+          <h1 className="band__title band__title--xl" tabIndex={-1}>Des services pour chaque étape de votre{'\u00a0'}carrière</h1>
           <p className="band__lead">Choisissez votre point de départ : nous vous montrons les services qui vous correspondent.</p>
           <fieldset className="sit-grid">
-            <legend className="visually-hidden">Votre situation</legend>
+            <legend className="sit-legend">Où en êtes-vous{'\u00a0'}?</legend>
             {SITUATIONS.map((s) => {
               const Icon = SITUATION_ICON[s.id]
               return (
