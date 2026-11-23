@@ -68,7 +68,7 @@ export function DesignSystem() {
 
       <div className="pf-container pf-section ds-page">
         <section aria-labelledby="facon">
-          <h2 id="facon">Comment j’ai l’habitude de travailler</h2>
+          <h2 id="facon">Mes habitudes de travail</h2>
           <ol className="ds-flow">
             {STEPS.map((s, i) => (
               <li key={s.title} className="ds-flow__step">
