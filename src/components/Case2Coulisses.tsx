@@ -26,8 +26,8 @@ export function Case2Coulisses() {
       </CrBlock>
       <CrBlock title="Mon espace">
         <p>
-          L’espace candidat est reproduit tel qu’il existe. Seul ajout{'\u00a0'}: une porte d’entrée vers le parcours guidé,
-          intégrée dans la carte « Ma relation avec l’Apec », au format des lignes{'\u00a0'}existantes.
+          L’espace candidat est reproduit tel qu’il existe. Seul ajout{'\u00a0'}: un encart mis en avant (étiquette « Nouveau »),
+          en tête de la carte « Ma relation avec l’Apec »{'\u00a0'}: il ouvre le parcours guidé, puis donne accès au programme{'\u00a0'}composé.
         </p>
       </CrBlock>
       <CrBlock title="Prise de rendez-vous">
