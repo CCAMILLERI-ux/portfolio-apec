@@ -126,7 +126,7 @@ export function Home() {
 
       <section className="pf-proof2" aria-labelledby="resultats">
         <div className="pf-container">
-          <h2 id="resultats" className="pf-proof2__title">Quelques résultats obtenus en{' '}équipe</h2>
+          <h2 id="resultats" className="pf-proof2__title">Quelques résultats obtenus sur mes{' '}projets</h2>
           <ul className="pf-proof2__list">
             {RESULTS.map((r) => (
               <li key={r.figure}>

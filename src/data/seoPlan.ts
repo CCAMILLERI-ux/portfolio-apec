@@ -157,7 +157,7 @@ export const OBJECTIVES = [
   { title: 'Conversion mesurée', text: 'Suivre ce que le SEO / GEO produit vraiment : comptes, inscriptions, rendez-vous, candidatures.' },
 ]
 
-/* ------------------------------ Comment j'ai l'habitude de travailler ------------------------------ */
+/* ------------------------------ Mes habitudes de travail ------------------------------ */
 
 export const WAYS = [
   {

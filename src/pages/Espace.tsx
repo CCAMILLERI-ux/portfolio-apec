@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { Case2Coulisses, CASE2_EVENTS } from '../components/Case2Coulisses'
 import { ArrowRight, Doc, DuoArrowCircle, DuoLaptop, DuoSearch, DuoSpiral, DuoTarget, DuoUser, Eye, Lightbulb, Pencil, Pin, Plus } from '../components/Icons'
+import { Illustration } from '../components/Illustration'
 import { toBook } from '../components/ProgramAction'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { getService } from '../data/services'
@@ -9,9 +10,26 @@ import { Link, navigate } from '../lib/router'
 
 /**
  * « Mon espace » candidat : reproduction de la structure de l'espace candidat d'apec.fr
- * (compte récent d'Alex, persona du cas 03). Seul ajout : la première ligne de la carte
- * « Ma relation avec l'Apec », porte d'entrée vers le parcours guidé.
+ * (compte récent d'Alex, persona du cas 03). Seul ajout : l'encart mis en avant en tête de la carte
+ * « Ma relation avec l'Apec », porte d'entrée vers le parcours guidé puis vers le programme.
  */
+
+/** Encart mis en avant : illustration, étiquette « Nouveau », accroche, action. */
+function GuideFeature({ title, text, cta, to, onClick }: { title: ReactNode; text: ReactNode; cta: string; to?: string; onClick?: () => void }) {
+  const body = (
+    <>
+      <Illustration name="boussole" tone="yellow" className="esp-feature__img" />
+      <span className="esp-feature__main">
+        <span className="esp-badge">Nouveau</span>
+        <span className="esp-feature__title">{title}</span>
+        <span className="esp-feature__text">{text}</span>
+        <span className="esp-feature__cta">{cta} <ArrowRight size={18} /></span>
+      </span>
+    </>
+  )
+  if (to) return <li><Link to={to} className="esp-feature">{body}</Link></li>
+  return <li><button type="button" className="esp-feature" onClick={onClick}>{body}</button></li>
+}
 
 /** Ligne de carte : titre en gras, texte, flèche. Sans destination dans le prototype : affichée, non cliquable. */
 function Row({ title, count, text, to, onClick, badge }: { title: ReactNode; count?: number; text?: ReactNode; to?: string; onClick?: () => void; badge?: string }) {
@@ -73,19 +91,20 @@ export function Espace({ path }: { path: string }) {
             <h2 id="esp-relation" className="esp-card__title"><DuoArrowCircle size={32} className="esp-card__icon" /> Ma relation avec l’Apec</h2>
             <ul className="esp-rows">
               {program.length === 0 ? (
-                <Row
-                  title={<>Vous ne savez pas par où commencer{' '}?</>}
-                  text="Trois questions pour trouver les services faits pour vous."
-                  badge="Nouveau"
+                <GuideFeature
+                  title={<>Vous ne savez pas quels services l’Apec peut vous{'\u00a0'}proposer{'\u00a0'}?</>}
+                  text={<>Laissez-vous guider en quelques étapes{'\u00a0'}: ateliers, rendez-vous ou outils, selon votre{'\u00a0'}situation.</>}
+                  cta="Me laisser guider"
                   onClick={() => {
                     setState((s) => ({ ...s, step: 'welcome' }))
                     navigate('/cas-03-inscription')
                   }}
                 />
               ) : (
-                <Row
-                  title={`Mon programme (${program.length} service${program.length > 1 ? 's' : ''})`}
-                  text={`${booked} réservé${booked > 1 ? 's' : ''}, ${remaining} à faire`}
+                <GuideFeature
+                  title={`Votre programme sur mesure (${program.length}\u00a0service${program.length > 1 ? 's' : ''})`}
+                  text={`${booked} réservé${booked > 1 ? 's' : ''}, ${remaining} à faire. Retrouvez vos prochaines étapes et ajustez vos choix à tout\u00a0moment.`}
+                  cta="Voir mes prochaines étapes"
                   to="/cas-03-inscription/prochaines-etapes"
                 />
               )}
