@@ -106,12 +106,12 @@ export const SEO_SITUATIONS: SeoSituation[] = [
     aiQuestions: ['Comment attirer des cadres sur un métier en tension ?', 'Comment réussir l’intégration d’un cadre recruté ?'],
     intent: 'Expertise : méthodes, données de marché, retours d’expérience.',
     content: 'Méthodes, études et données (contenus d’expertise existants à valoriser).',
-    services: ['Rencontrer un consultant', 'Intégrer les nouvelles recrues, les incontournables'],
+    services: ['Rencontrer un consultant', 'Rédiger une offre d’emploi attractive, les incontournables'],
     conversion: 'Demande d’accompagnement finalisée.',
   },
 ]
 
-/* ------------------------------ Bloc 4 : démonstration ------------------------------ */
+/* ------------------------------ Bloc 4 : une piste illustrée ------------------------------ */
 
 export type JourneyServiceKey = 'simulateur' | 'atelier' | 'consultant'
 
@@ -242,7 +242,7 @@ export const PILLARS: {
   },
 ]
 
-/* ------------------------------ Mesurer et partager ------------------------------ */
+/* ------------------------------ Indicateurs ------------------------------ */
 
 export const KPI_SEO = [
   'Impressions et clics hors marque',
@@ -255,18 +255,6 @@ export const KPI_GEO = [
   'Trafic venant des assistants IA',
 ]
 export const KPI_CONVERSION = ['Comptes créés', 'Inscriptions', 'Rendez-vous', 'Candidatures']
-
-export const AB_TESTS = [
-  'Titles et méta-descriptions d’un gabarit, pour mesurer l’effet sur le CTR.',
-  'Place et libellé des appels à l’action vers les services.',
-  'Modules de maillage entre fiches métiers, offres et conseils.',
-]
-
-export const RITUALS = [
-  { who: 'Avec le webanalyste', what: 'Lire ensemble le suivi SEO / GEO et les résultats des A/B tests.' },
-  { who: 'Avec le produit et la DSI', what: 'Inscrire les sujets techniques (gabarits, données structurées, performance) dans le backlog existant.' },
-  { who: 'Avec les contributeurs et les experts métiers', what: 'Préparer les briefs, les mises à jour et la validation des contenus.' },
-]
 
 /**
  * Typographie : espace insécable avant : ; ? ! % et à l'intérieur des guillemets,

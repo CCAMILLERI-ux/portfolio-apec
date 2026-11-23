@@ -94,7 +94,7 @@ export function ServiceCard({ service, from, meta, level = 3 }: { service: Servi
 }
 
 /**
- * Carte « existant observé » : reconstruction du motif vu sur les captures
+ * Carte « version actuelle » : reconstruction du motif vu sur les captures
  * (pictogramme, intitulé, description courte, « En savoir plus » + action).
  */
 export function ObservedServiceCard({ service, from, meta, level = 3 }: { service: Service; from: string; meta?: ReactNode; level?: 3 | 4 }) {

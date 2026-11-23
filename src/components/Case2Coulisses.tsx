@@ -40,7 +40,7 @@ export function Case2Coulisses() {
       <CrBlock title="Direction graphique">
         <p>
           De grandes icônes pour décider vite, des photos pour les services, où une personne accompagne, des
-          illustrations pour l’accueil et le suivi. Hypothèse à explorer avec l’équipe : des recommandations plus humaines
+          illustrations pour l’accueil et le suivi. Hypothèse à tester avec l’équipe : des recommandations plus humaines
           pourraient augmenter le taux d’inscriptions{'\u00a0'}finalisées.
         </p>
       </CrBlock>
@@ -55,7 +55,7 @@ export function Case2Coulisses() {
           hypothese: (
             <p>
               Si l’on propose, sans l’imposer, un guidage court qui aboutit à une première action concrète, alors
-              davantage de nouveaux inscrits pourraient utiliser un service. Hypothèse à explorer avec{'\u00a0'}l’équipe.
+              davantage de nouveaux inscrits pourraient utiliser un service. Hypothèse à tester avec{'\u00a0'}l’équipe.
             </p>
           ),
           modification: (

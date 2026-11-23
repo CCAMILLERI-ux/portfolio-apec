@@ -38,7 +38,7 @@ export type ServiceAction =
 export interface Service {
   id: string
   audience: Audience
-  /** Intitulé existant observé (ou à vérifier). */
+  /** Intitulé repris de la version actuelle (ou à vérifier). */
   officialTitle: string
   titleProvenance: Provenance
   /** Accroche proposée par le prototype. */

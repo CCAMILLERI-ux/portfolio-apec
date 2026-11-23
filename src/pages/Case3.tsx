@@ -267,7 +267,7 @@ export function Case3Coulisses() {
           <p>
             Si la page répond directement au besoin puis propose, au bon endroit du texte, l’accompagnement
             qui correspond à la situation (seul, en groupe, entretien fixé), alors davantage de lecteurs
-            pourraient utiliser un service. Hypothèse à explorer avec{'\u00a0'}l’équipe.
+            pourraient utiliser un service. Hypothèse à tester avec{'\u00a0'}l’équipe.
           </p>
         ),
         modification: (

@@ -57,7 +57,7 @@ const WORKS: {
     to: '/plan-seo',
     mission: 'Acquisition',
     title: 'Ma démarche SEO / GEO',
-    text: 'Ma façon de travailler, mes repères SEO et GEO, et des pistes illustrées par une démonstration.',
+    text: 'Ma méthode et une piste illustrée, à discuter avec l’équipe.',
     cta: 'Découvrir la démarche',
     color: 'tint',
     scene: 'document',
@@ -67,7 +67,7 @@ const WORKS: {
 
 /** Résultats de la candidate (sans nom d'employeur). */
 const RESULTS = [
-  { figure: '83 %', text: 'conformité SEO technique des sites dont je pilote la stratégie SEO' },
+  { figure: '83 %', text: 'conformité SEO technique des sites dont je pilote la stratégie SEO / GEO' },
   { figure: '× 2', text: 'conversion du tunnel de création de compte d’un espace client B2B, grâce à l’UX et aux A/B tests' },
   { figure: '70 %', text: 'des comptes clients créés en ligne via cet espace\u00a0client' },
   { figure: '3,6 M€', text: 'de chiffre d’affaires digital généré par cet espace client' },
@@ -81,7 +81,7 @@ export function Home() {
       <section className="pf-container pf-hero2" aria-labelledby="accroche">
         <p className="pf-hero2__kicker">Candidature · Chef de projet Animation{' '}Web</p>
         <h1 id="accroche" className="pf-hero2__h1" tabIndex={-1}>
-          Contribuer à un apec.fr toujours plus fluide, utile et{' '}performant
+          Rendre apec.fr toujours plus fluide, utile et{' '}performant
         </h1>
         <p className="pf-hero2__text">
           Quatre réalisations autour des missions du poste{'\u00a0'}: acquisition SEO / GEO, performance et conversion,
@@ -116,8 +116,8 @@ export function Home() {
         <p className="pf-about__text">
           Cheffe de projet digital et Product Owner, je pilote des sites et services web de bout en bout{' '}: roadmap
           d’animation, SEO / GEO, parcours utilisateurs, A/B tests et déploiement dans le CMS. Je coordonne les métiers, la DSI
-          et les agences, avec un fil rouge{'\u00a0'}: améliorer l’expérience utilisateur, mesures à l’appui. J’aime travailler en
-          équipe, proposer des pistes et les tester{'\u00a0'}ensemble.
+          et les agences, avec un fil rouge{'\u00a0'}: améliorer l’expérience utilisateur, mesures à l’appui. J’aime proposer des pistes, les
+          tester et les faire évoluer en{'\u00a0'}équipe.
         </p>
         <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="pf-about__btn">
           Voir mon profil LinkedIn<span className="visually-hidden"> (nouvel onglet)</span> <ArrowRight size={16} />
