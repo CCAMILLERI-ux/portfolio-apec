@@ -1701,7 +1701,14 @@ legend { padding: 0; }
   .rec-more__list .drow { grid-template-columns: 40px minmax(0, 1fr); grid-template-areas: "icon main" "foot foot"; }
 }
 
-/* ---------- Cas 03 : action par service (Confirmation et « Mes prochaines étapes ») ---------- */
+/* ---------- Cas 03 : action par service (Confirmation et « Mes services sélectionnés ») ---------- */
+.sel-summary { margin: 0 0 var(--s3); padding: var(--s2) var(--s3); background: var(--brand-blue-tint); border-left: 5px solid var(--brand-yellow); color: var(--brand-navy); text-wrap: pretty; }
+.sel-summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.sel-group + .sel-group { margin-top: var(--s4); }
+.sel-group__title { font-size: 1.25rem; font-weight: 600; margin: 0 0 var(--s2); color: var(--brand-navy); }
+.sel-group__count { font-weight: 400; color: var(--text-secondary-a11y); }
+.confirm__sub { margin: var(--s3) 0 var(--s2); }
+.confirm__summary { margin: var(--s3) 0 0; text-wrap: pretty; }
 .program-recap li { align-items: center; }
 .program-recap li:focus-visible, .next-item:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 .program-recap__action { margin-left: auto; }

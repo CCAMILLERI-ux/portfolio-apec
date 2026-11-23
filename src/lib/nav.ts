@@ -11,7 +11,7 @@ const ORIGINS: Record<string, BackTarget> = {
   'cas-1-seo': { to: '/cas-01-seo', label: 'Conseil : préparer un entretien de recrutement', anchor: 'accompagnement' },
   'cas-3-accompagnement': { to: '/cas-01-seo', label: 'Conseil : préparer un entretien de recrutement', anchor: 'accompagnement' },
   remuneration: { to: '/conseil/remuneration', label: 'Aborder la rémunération en entretien' },
-  etapes: { to: '/cas-03-inscription/prochaines-etapes', label: 'Mes prochaines étapes' },
+  etapes: { to: '/cas-03-inscription/services-selectionnes', label: 'Mes services sélectionnés' },
   espace: { to: '/espace', label: 'Mon espace' },
   'plan-seo': { to: '/plan-seo', label: 'SEO / GEO\u00a0: quelques pistes', anchor: 'parcours' },
 }

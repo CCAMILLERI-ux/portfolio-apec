@@ -5,6 +5,7 @@ import { CrBlock } from '../components/Coulisses'
 import { ArrowLeft, ArrowRight, Check } from '../components/Icons'
 import { WorkshopSignup } from '../components/WorkshopSignup'
 import { PageBand } from '../components/PageBand'
+import { SELECTION_PATH } from '../components/ProgramAction'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { getService } from '../data/services'
 import { useBookings } from '../lib/demoState'
@@ -85,8 +86,8 @@ export function BookingPage({ id, route }: { id: string; route: Route }) {
                 <Link to={origin.to} anchor={origin.anchor} className="btn btn--primary">
                   Retour : {origin.label}
                 </Link>
-                <Link to="/cas-03-inscription/prochaines-etapes" className="link-arrow">
-                  Mon espace <ArrowRight size={18} />
+                <Link to={SELECTION_PATH} className="link-arrow">
+                  Voir mes services sélectionnés <ArrowRight size={18} />
                 </Link>
               </div>
             </div>

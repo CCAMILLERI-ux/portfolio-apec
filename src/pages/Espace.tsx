@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { Case2Coulisses, CASE2_EVENTS } from '../components/Case2Coulisses'
 import { ArrowRight, Doc, DuoArrowCircle, DuoLaptop, DuoSearch, DuoSpiral, DuoTarget, DuoUser, Eye, Lightbulb, Pencil, Pin, Plus } from '../components/Icons'
 import { Illustration } from '../components/Illustration'
-import { toBook } from '../components/ProgramAction'
+import { SELECTION_PATH, selectionCounts, selectionSummary } from '../components/ProgramAction'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { getService } from '../data/services'
 import { INITIAL_ONBOARDING, useBookings, useOnboarding } from '../lib/demoState'
@@ -11,16 +11,16 @@ import { Link, navigate } from '../lib/router'
 /**
  * « Mon espace » candidat : reproduction de la structure de l'espace candidat d'apec.fr
  * (compte récent d'Alex, persona du cas 03). Seul ajout : l'encart mis en avant en tête de la carte
- * « Ma relation avec l'Apec », porte d'entrée vers le parcours guidé puis vers le programme.
+ * « Ma relation avec l'Apec », porte d'entrée vers le parcours guidé puis vers les services sélectionnés.
  */
 
-/** Encart mis en avant : illustration, étiquette « Nouveau », accroche, action. */
-function GuideFeature({ title, text, cta, to, onClick }: { title: ReactNode; text: ReactNode; cta: string; to?: string; onClick?: () => void }) {
+/** Encart mis en avant : illustration, étiquette « Nouveau » (avant toute sélection), accroche, action. */
+function GuideFeature({ title, text, cta, to, onClick, isNew = false }: { title: ReactNode; text: ReactNode; cta: string; to?: string; onClick?: () => void; isNew?: boolean }) {
   const body = (
     <>
       <Illustration name="boussole" tone="yellow" className="esp-feature__img" />
       <span className="esp-feature__main">
-        <span className="esp-badge">Nouveau</span>
+        {isNew && <span className="esp-badge">Nouveau</span>}
         <span className="esp-feature__title">{title}</span>
         <span className="esp-feature__text">{text}</span>
         <span className="esp-feature__cta">{cta} <ArrowRight size={18} /></span>
@@ -64,8 +64,7 @@ export function Espace({ path }: { path: string }) {
   const [bookings] = useBookings()
   const [partners, setPartners] = useState(false)
   const program = state.program
-  const booked = program.filter((id) => bookings[id]).length
-  const remaining = toBook(program, bookings, getService).length
+  const summary = selectionSummary(selectionCounts(program, bookings, getService))
 
   return (
     <ProtoLayout
@@ -95,6 +94,7 @@ export function Espace({ path }: { path: string }) {
                   title={<>Vous ne savez pas quels services l’Apec peut vous{'\u00a0'}proposer{'\u00a0'}?</>}
                   text={<>Laissez-vous guider en quelques étapes{'\u00a0'}: ateliers, rendez-vous ou outils, selon votre{'\u00a0'}situation.</>}
                   cta="Me laisser guider"
+                  isNew
                   onClick={() => {
                     setState((s) => ({ ...s, step: 'welcome' }))
                     navigate('/cas-03-inscription')
@@ -102,10 +102,10 @@ export function Espace({ path }: { path: string }) {
                 />
               ) : (
                 <GuideFeature
-                  title={`Votre programme sur mesure (${program.length}\u00a0service${program.length > 1 ? 's' : ''})`}
-                  text={`${booked} réservé${booked > 1 ? 's' : ''}, ${remaining} à faire. Retrouvez vos prochaines étapes et ajustez vos choix à tout\u00a0moment.`}
-                  cta="Voir mes prochaines étapes"
-                  to="/cas-03-inscription/prochaines-etapes"
+                  title={`Mes services sélectionnés (${program.length})`}
+                  text={summary}
+                  cta="Voir mes services sélectionnés"
+                  to={SELECTION_PATH}
                 />
               )}
               <Row
