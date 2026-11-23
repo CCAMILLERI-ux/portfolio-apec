@@ -49,7 +49,9 @@ export default function App() {
   // Défilement et focus à chaque changement de page ou d'ancre.
   useEffect(() => {
     const section = path.startsWith('/service/') ? 'Fiche service' : path.startsWith('/reserver/') ? 'Réservation' : TITLES[path] ?? 'Page'
-    document.title = `${section} · Portfolio de Caroline Camilleri`
+    // Le nom de la candidate n'apparaît que sur les pages du portfolio, jamais sur les écrans du prototype.
+    const portfolio = path === '/' || path === '/plan-seo' || path === '/design-system'
+    document.title = portfolio ? `${section} · Portfolio de Caroline Camilleri` : `${section} · Portfolio de candidature`
 
     const isFirst = firstLoad.current
     firstLoad.current = false
