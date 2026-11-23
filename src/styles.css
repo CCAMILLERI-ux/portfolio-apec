@@ -882,14 +882,6 @@ legend { padding: 0; }
 @media (max-width: 640px) { .seo-why > div { grid-template-columns: 1fr; gap: 2px; } }
 
 /* Bloc 3 : feuille de route */
-.seo-roadmap { list-style: none; padding: 0; margin: var(--s3) 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); }
-@media (max-width: 860px) { .seo-roadmap { grid-template-columns: 1fr; } }
-.seo-phase { background: var(--pf-card); border: 1px solid var(--pf-line); border-top: 5px solid var(--pf-ink); border-radius: 4px; padding: var(--s3); }
-.seo-phase__period { font-weight: 700; color: var(--pf-accent); margin-bottom: 4px; }
-.pf .seo-phase__title { font-size: 1.25rem; margin: 0 0 var(--s2); }
-.seo-phase__label { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
-.seo-phase__deliv { list-style: none; padding: 0; margin: 0 0 var(--s2); display: grid; gap: 6px; }
-.seo-phase__deliv li { background: var(--pf-bg); border: 1px solid var(--pf-line); border-radius: 4px; padding: 6px 10px; font-size: 0.9375rem; }
 .seo-end { padding-bottom: var(--s5); color: var(--pf-muted); }
 
 /* Bloc 2 : parcours démonstrateur */
@@ -1247,17 +1239,7 @@ legend { padding: 0; }
 .seo-cocon li + li::before { content: '↔'; color: var(--pf-accent); margin-right: 8px; font-weight: 700; }
 .pf .seo-sub { font-size: 1.25rem; margin: var(--s3) 0 var(--s1); scroll-margin-top: var(--s3); }
 
-.seo-phase__actions { margin: 0 0 var(--s2); padding-left: 1.2rem; display: grid; gap: 6px; font-size: 0.9375rem; }
 
-.seo-pilot { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
-@media (max-width: 860px) { .seo-pilot { grid-template-columns: 1fr; } }
-.seo-pilot__col { background: var(--pf-card); border: 1px solid var(--pf-line); border-radius: 4px; padding: var(--s3); }
-.seo-pilot__col .seo-sub:first-child { margin-top: 0; }
-.seo-kpis, .seo-rituals { margin: 0; display: grid; gap: 12px; }
-.seo-kpis > div, .seo-rituals > div { border-top: 1px solid var(--pf-line); padding-top: 10px; }
-.seo-kpis dt, .seo-rituals dt { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--pf-accent); margin-bottom: 4px; }
-.seo-kpis dd, .seo-rituals dd { margin: 0; }
-.seo-kpis ul { margin: 0; padding-left: 1.2rem; }
 .pf .seo-hero__title, .seo-block h2, .seo-block h3, .seo-block h4 { text-wrap: balance; }
 
 /* Accueil : en-tête avec sous-titre, contact, apports, plan SEO, parcours */

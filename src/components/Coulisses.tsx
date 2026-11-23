@@ -9,7 +9,7 @@ export function Coulisses({ events, hidden, children }: { events: string[]; hidd
       <div className="pf-container">
         <h2 id="coulisses-titre" className="coulisses__title">Coulisses du prototype</h2>
         <p className="coulisses__lead">
-          Une proposition exploratoire, conçue comme une piste à discuter avec l’équipe, en complément de{'\u00a0'}l’existant.
+          Une proposition, conçue comme une piste à discuter avec l’équipe, en complément de{'\u00a0'}l’existant.
         </p>
         <p className="coulisses__hint">
           Retour au portfolio, réinitialisation et fermeture de ces explications : barre en haut de page.{' '}
@@ -43,7 +43,7 @@ export interface CroRubrics {
 
 const LABELS: [keyof CroRubrics, string][] = [
   ['constat', '1. Besoin utilisateur'],
-  ['hypothese', '2. Hypothèse à explorer avec l’équipe'],
+  ['hypothese', '2. Hypothèse à tester avec l’équipe'],
   ['modification', '3. Piste proposée'],
   ['kpi', '4. KPI et garde-fous'],
   ['equipes', '5. Équipes à associer'],

@@ -8,20 +8,20 @@ Portfolio de candidature au poste de Chef de projet animation web. Un seul site 
 
 | Cas | Démo | Compétences illustrées |
 | --- | --- | --- |
-| 02 (`#/cas-02-ab-test`) | **Clarifier l’offre pour faciliter le choix** — anciennement « Rendre les services plus faciles à choisir » : entrée par situation, cartes de services, bascule « Existant observé / Piste exploratoire » | UX/UI, animation du site, hypothèse CRO |
+| 02 (`#/cas-02-ab-test`) | **Présenter l’offre par situation** — anciennement « Clarifier l’offre pour faciliter le choix » : entrée par situation, cartes de services, bascule « Version actuelle / Piste exploratoire » | UX/UI, animation du site, hypothèse CRO |
 | 03 (`#/cas-03-inscription`) | **Accompagner l’utilisateur à chaque étape de son inscription** — anciennement « Guider un nouvel inscrit » : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes prochaines étapes » | Parcours, activation, recommandation déterministe |
 | 01 (`#/cas-01-seo`) | **De la recherche Google à l’utilisation des services** — anciennement « Relier une recherche à un accompagnement » : page conseil « Comment préparer un entretien de recrutement ? », maillage interne, compléments SEO, GEO et coordination multicanale | SEO éditorial, maillage, acquisition |
 
-## Plan SEO pour apec.fr
+## Ma démarche SEO / GEO
 
-Route `#/plan-seo`, accessible depuis l’accueil et l’en-tête du portfolio. « Un plan SEO pour apec.fr : de la recherche au service utilisé », en six parties :
+Route `#/plan-seo` (route historique conservée), accessible depuis l’accueil. « Ma démarche SEO / GEO » présente une façon de travailler et quelques pistes pour l’illustrer, à discuter avec l’équipe — sans constat sur apec.fr ni plan d’action :
 
-0. **Hero** : ambition, trois objectifs (visibilité hors marque, trafic qualifié vers les services, conversion mesurée).
-1. **Diagnostic** : quatre observations sur les pages publiques (titre de connexion indexé, title et H1 divergents, données structurées absentes, actifs peu reliés), sans chiffre.
-2. **Stratégie en quatre piliers** : technique et indexation, contenus et intentions (matrice des six situations), maillage (cocon fiche métier ↔ offres ↔ salaires ↔ conseils ↔ services), popularité et visibilité IA.
-3. **Démonstration** : parcours « Préparer mon entretien de recrutement » (recherche → page conseil → fiche service → inscription simulée).
-4. **Plan 90 jours** : actions et livrables visibles.
-5. **Pilotage** : indicateurs, A/B tests et rituels.
+0. **Introduction** : ce que je vise dans mes projets (visibilité hors marque, trafic qualifié vers les services, conversion mesurée).
+1. **Ma façon de travailler** : comprendre les données et les usages, prioriser avec l’équipe selon la roadmap, déployer dans le CMS avec les équipes, mesurer et partager.
+2. **Quatre piliers SEO / GEO** : mes repères de travail (technique et indexation, contenus et intentions, maillage et parcours, autorité et citabilité).
+3. **Contenus et intentions : six situations** : besoin, exemples de recherches, questions posées aux IA, piste de contenu, services (intitulés de « Nos services »).
+4. **Une piste illustrée : préparer un entretien de recrutement** : parcours (recherche → page conseil → fiche service → inscription simulée).
+5. **Les indicateurs auxquels je suis attentive** : SEO, GEO et conversion, sans objectif chiffré.
 
 Contenus centralisés dans `src/data/seoPlan.ts` ; parcours dans `src/components/SeoJourney.tsx` ; page dans `src/pages/SeoPlan.tsx`.
 
@@ -34,7 +34,7 @@ La colonne latérale et le bas de l’article présentent la même liste, dans l
 - **Portfolio** (accueil, sources) : identité propre à la candidate (fond crème, Plus Jakarta Sans + Inter, accent terracotta), volontairement distincte de l’univers Apec.
 - **Prototypes** : univers inspiré d’apec.fr (bleu nuit, jaune, bleu ; Montserrat), **sans aucune explication dans les écrans utilisateur**.
 - **Coulisses du prototype** : masquées par défaut, affichées uniquement au clic sur « Comprendre ce cas », sous le pied de page, dans l’univers portfolio. Elles regroupent la mention d’indépendance, le retour au portfolio, la réinitialisation, la méthode (constat, hypothèse, modification, KPI et garde-fous, équipes), la provenance des informations et le journal local.
-- **Barre de démo** (univers portfolio), en haut de page et hors maquette : « Retour au portfolio », nom du cas, choix de variante (cas 1 : Existant observé / Piste 1 / Piste 2 / Piste 3), « Comprendre ce cas » (affiche ou masque les coulisses) et « Réinitialiser la démo ». Pendant et après une réservation, elle affiche « Réservation simulée… » puis « Simulation terminée — aucun rendez-vous réel n’a été réservé ».
+- **Barre de démo** (univers portfolio), en haut de page et hors maquette : « Retour au portfolio », nom du cas, choix de variante (cas 1 : Version actuelle / Piste 1 / Piste 2 / Piste 3), « Comprendre ce cas » (affiche ou masque les coulisses) et « Réinitialiser la démo ». Pendant et après une réservation, elle affiche « Réservation simulée… » puis « Simulation terminée — aucun rendez-vous réel n’a été réservé ».
 - **Mon espace** : page d’accueil de l’espace fictif d’Alex (guidage, prochaines étapes, rendez-vous, services, conseils).
 
 ## Installation et lancement
@@ -73,7 +73,7 @@ Le `noindex` est porté par la balise meta de chaque page. Le `robots.txt` du do
 
 1. **Accueil** : trois cartes, un clic par cas.
 2. **Cas 03 (≈ 2 min)** : « Me guider » → la situation est présélectionnée (modifiable) → cocher « Préparer un entretien », puis « Oui, dans les prochains jours » → les recommandations changent et s’expliquent (« Pourquoi ce service ? ») → « Commencer par ce service » → choisir un créneau fictif → récapitulatif → valider → « Simulation terminée — aucun rendez-vous réel n’a été réservé » → « Mes prochaines étapes » (retirer, modifier ses besoins, reprendre, remettre à zéro).
-3. **Cas 02 (≈ 1 min 30)** : changer de situation (« Je recrute et j’ai besoin d’aide ») puis comparer « Existant observé », « Piste 1 » (visuels illustrés), « Piste 2 » (aide au choix) et « Piste 3 » (photos, ateliers mis en avant) depuis la barre du haut.
+3. **Cas 02 (≈ 1 min 30)** : changer de situation (« Je recrute et j’ai besoin d’aide ») puis comparer « Version actuelle », « Piste 1 » (visuels illustrés), « Piste 2 » (aide au choix) et « Piste 3 » (photos, ateliers mis en avant) depuis la barre du haut.
 4. **Cas 01 (≈ 1 min 30)** : lire l’introduction, suivre « simulation individuelle d’1 h » puis revenir avec la flèche du bandeau ; bouton « Comprendre ce cas » de la barre du haut pour le maillage, l’aperçu du titre, le GEO et la coordination.
 
 La barre du haut propose « Retour au portfolio » et « Réinitialiser la démo » ; chaque fiche a une flèche de retour contextuelle (le lien d’origine est transmis par `?from=`).

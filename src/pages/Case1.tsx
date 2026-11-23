@@ -368,7 +368,7 @@ function Case1Coulisses() {
           recrutement », novembre 2026). Le regroupement par situation est lui-même une piste à{'\u00a0'}explorer.
         </p>
       </CrBlock>
-      <CrBlock title="Hypothèses à explorer avec l’équipe">
+      <CrBlock title="Hypothèses à tester avec l’équipe">
         <ul>
           <li><strong>Piste 1 :</strong> des tuiles visuelles avec icônes facilitent le{'\u00a0'}repérage.</li>
           <li><strong>Piste 2 :</strong> une liste de décision (« Idéal si ») aide à choisir entre des services{'\u00a0'}proches.</li>
@@ -428,13 +428,13 @@ function Case1Coulisses() {
           <strong>Ce que la piste 2 explore :</strong> la piste 1 met en avant chaque service{'\u00a0'}; la piste 2 y ajoute
           une aide à la comparaison. Elle formule le critère de choix (« Idéal si… »), présente les services comme des
           options comparables, traite l’aide humaine comme une option à part entière et relie le choix à des contenus
-          utiles (maillage vers le cas 01). Hypothèse à explorer avec l’équipe : moins d’hésitation, pas forcément plus de{'\u00a0'}clics.
+          utiles (maillage vers le cas 01). Hypothèse à tester avec l’équipe : moins d’hésitation, pas forcément plus de{'\u00a0'}clics.
         </p>
         <p>
           <strong>Ce que la piste 3 explore :</strong> une mise en avant des ateliers collectifs{'\u00a0'}: carte vedette, grande photo de
           groupe, étiquette « Atelier collectif » et prochaines sessions visibles sans clic. Les photographies, déjà
           présentes dans les contenus et réseaux sociaux de l’Apec, montrent la dimension humaine des accompagnements.
-          Hypothèse à explorer avec l’équipe : davantage d’inscriptions aux ateliers, à suivre avec la présence{'\u00a0'}effective.
+          Hypothèse à tester avec l’équipe : davantage d’inscriptions aux ateliers, à suivre avec la présence{'\u00a0'}effective.
         </p>
       </CrBlock>
       <CrBlock title="Photographies de la piste 3">
