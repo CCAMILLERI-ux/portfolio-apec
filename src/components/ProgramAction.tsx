@@ -13,7 +13,7 @@ import { Check } from './Icons'
 /** Le service se réserve dans la démo : rendez-vous (créneau) ou atelier (session). Un outil ne se réserve pas. */
 export const isBookable = (s: Service) => s.kind !== 'outil'
 
-/** Services du programme qui restent à réserver (les outils n'en font pas partie). */
+/** Services sélectionnés qui restent à réserver (les outils n'en font pas partie). */
 export const toBook = (ids: string[], bookings: Record<string, Slot>, get: (id: string) => Service | undefined) =>
   ids.filter((id) => {
     const s = get(id)
@@ -100,7 +100,7 @@ export function ProgramAction({
   // Outil : fiche de l'outil dans le prototype (aucun lien vers apec.fr).
   return (
     <Link to={`/service/${s.id}?from=${from ?? 'etapes'}`} className="btn btn--outline btn--sm pa-btn"
-      onClick={() => track('service_cta_click', `${s.id} (programme, outil)`)}>
+      onClick={() => track('service_cta_click', `${s.id} (sélection, outil)`)}>
       Accéder à l’outil<span className="visually-hidden">{'\u00a0'}: {s.officialTitle}</span>
     </Link>
   )

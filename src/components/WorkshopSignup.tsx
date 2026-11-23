@@ -19,7 +19,7 @@ export function WorkshopSignup({
 }: {
   service: Service
   onComplete: (r: BookingResult) => void
-  /** Action secondaire sous la carte (ex. « Revenir à mon programme »). */
+  /** Action secondaire sous la carte (ex. « Revenir à ma sélection »). */
   footer?: ReactNode
 }) {
   const uid = useId()

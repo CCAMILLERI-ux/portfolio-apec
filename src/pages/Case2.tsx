@@ -28,7 +28,7 @@ const PROGRESS: { step: OnboardingStep; label: string }[] = [
   { step: 'situation', label: 'Situation' },
   { step: 'needs', label: 'Besoins' },
   { step: 'results', label: 'Suggestions' },
-  { step: 'program', label: 'Mon programme' },
+  { step: 'program', label: 'Ma sélection' },
   { step: 'confirm', label: 'Confirmation' },
 ]
 
@@ -64,7 +64,7 @@ export function Case2({ path }: { path: string }) {
   const [status, setStatus] = useState('')
   const headingRef = useRef<HTMLHeadingElement>(null)
   const firstRender = useRef(true)
-  /** Ligne du programme à reprendre au retour d'une réservation (focus rendu sur cette ligne). */
+  /** Ligne de la sélection à reprendre au retour d'une réservation (focus rendu sur cette ligne). */
   const focusRow = useRef<string | null>(null)
   const { step, answers } = state
 
@@ -101,14 +101,14 @@ export function Case2({ path }: { path: string }) {
     })
 
   const chosen = state.chosenId ? getService(state.chosenId) : undefined
-  const countLabel = (n: number) => `${n} service${n > 1 ? 's' : ''} dans mon programme`
+  const countLabel = (n: number) => `${n} service${n > 1 ? 's' : ''} dans ma sélection`
 
-  /** Ajoute ou retire un service du programme (plusieurs choix possibles). */
+  /** Ajoute ou retire un service de la sélection (plusieurs choix possibles). */
   const toggle = (s: Service) => {
     const on = program.includes(s.id)
     const next = on ? program.filter((x) => x !== s.id) : [...program, s.id]
     track('service_cta_click', `${s.id} (accueil guidé, ${on ? 'retiré' : 'ajouté'})`)
-    setStatus(`${s.officialTitle} ${on ? 'retiré de' : 'ajouté à'} votre programme. ${countLabel(next.length)}.`)
+    setStatus(`${s.officialTitle} ${on ? 'retiré de' : 'ajouté à'} votre sélection. ${countLabel(next.length)}.`)
     setState((st) => ({ ...st, program: next, removed: st.removed.filter((x) => x !== s.id) }))
   }
 
@@ -117,13 +117,13 @@ export function Case2({ path }: { path: string }) {
     return (
       <button type="button" aria-pressed={on} onClick={() => toggle(s)}
         className={`btn ${on ? 'btn--added' : 'btn--primary'}${compact ? ' btn--sm' : ''}`}>
-        {on ? <><Check size={16} /> Ajouté</> : compact ? 'Ajouter' : 'Ajouter à mon programme'}
+        {on ? <><Check size={16} /> Ajouté</> : compact ? 'Ajouter' : 'Ajouter à ma sélection'}
         <span className="visually-hidden"> : {s.officialTitle}</span>
       </button>
     )
   }
 
-  /** Réservation d'un service du programme, depuis « Mon programme » ou l'écran Confirmation. */
+  /** Réservation d'un service sélectionné, depuis « Ma sélection » ou l'écran Confirmation. */
   const bookingView = (cancelLabel: string) => {
     const c = chosen!
     const back = () => {
@@ -311,7 +311,7 @@ export function Case2({ path }: { path: string }) {
       body = (
         <div className="step">
           {heading(<>Nos suggestions pour bien démarrer</>)}
-          <p className="muted">Sélectionnées d’après vos réponses. Ajoutez à votre programme tous les services qui vous{'\u00a0'}intéressent.</p>
+          <p className="muted">Sélectionnées d’après vos réponses. Ajoutez à votre sélection tous les services qui vous{'\u00a0'}intéressent.</p>
           <ol className="rec-list">
             {top.map((r, i) => {
               const s = getService(r.serviceId)!
@@ -373,7 +373,7 @@ export function Case2({ path }: { path: string }) {
           <p className="visually-hidden" role="status" aria-live="polite">{status}</p>
           {program.length > 0 && (
             <div className="program-bar">
-              <p className="program-bar__count"><strong>{program.length}</strong> service{program.length > 1 ? 's' : ''} dans mon{'\u00a0'}programme</p>
+              <p className="program-bar__count"><strong>{program.length}</strong> service{program.length > 1 ? 's' : ''} dans ma{'\u00a0'}sélection</p>
               <button type="button" className="btn btn--primary" onClick={() => { setStatus(''); go('program', 'results') }}>
                 Continuer <ArrowRight size={18} />
               </button>
@@ -395,15 +395,15 @@ export function Case2({ path }: { path: string }) {
 
     case 'program':
       body = chosen ? (
-        bookingView('Revenir à mon programme')
+        bookingView('Revenir à ma sélection')
       ) : (
         <div className="step">
-          {heading(<>Mon programme</>)}
+          {heading(<>Ma sélection</>)}
           <p className="muted">Réservez chaque service quand vous le souhaitez, puis revenez ici pour le{'\u00a0'}suivant.</p>
           <p className="visually-hidden" role="status" aria-live="polite">{status}</p>
           {program.length === 0 ? (
             <div className="empty">
-              <p>Votre programme est vide.</p>
+              <p>Votre sélection est vide.</p>
               <button type="button" className="btn btn--primary" onClick={() => go('results')}>Revenir aux suggestions</button>
             </div>
           ) : (
@@ -472,7 +472,7 @@ export function Case2({ path }: { path: string }) {
             <Link to={SELECTION_PATH} className="btn btn--primary" onClick={() => track('onboarding_step_complete', 'confirm')}>
               Voir mes services sélectionnés <ArrowRight size={18} />
             </Link>
-            <button type="button" className="btn btn--link" onClick={() => go('program')}><ArrowLeft size={18} /> Revenir à mon programme</button>
+            <button type="button" className="btn btn--link" onClick={() => go('program')}><ArrowLeft size={18} /> Revenir à ma sélection</button>
           </div>
           <div className="step__actions step__actions--back">
             <Link to="/espace" className="btn btn--outline"><ArrowLeft size={18} /> Retour à mon espace</Link>
