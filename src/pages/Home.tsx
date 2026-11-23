@@ -57,7 +57,7 @@ const WORKS: {
     to: '/plan-seo',
     mission: 'Acquisition',
     title: 'Ma démarche SEO / GEO',
-    text: 'Méthode, piliers SEO et GEO, démonstration et premiers 90 jours.',
+    text: 'Ma façon de travailler, mes repères SEO et GEO, et des pistes illustrées par une démonstration.',
     cta: 'Découvrir la démarche',
     color: 'tint',
     scene: 'document',
@@ -81,7 +81,7 @@ export function Home() {
       <section className="pf-container pf-hero2" aria-labelledby="accroche">
         <p className="pf-hero2__kicker">Candidature · Chef de projet Animation{' '}Web</p>
         <h1 id="accroche" className="pf-hero2__h1" tabIndex={-1}>
-          Rendre apec.fr toujours plus fluide, utile et{' '}performant
+          Contribuer à un apec.fr toujours plus fluide, utile et{' '}performant
         </h1>
         <p className="pf-hero2__text">
           Quatre réalisations autour des missions du poste{'\u00a0'}: acquisition SEO / GEO, performance et conversion,

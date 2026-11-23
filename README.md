@@ -12,16 +12,16 @@ Portfolio de candidature au poste de Chef de projet animation web. Un seul site 
 | 03 (`#/cas-03-inscription`) | **Accompagner l’utilisateur à chaque étape de son inscription** — anciennement « Guider un nouvel inscrit » : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes prochaines étapes » | Parcours, activation, recommandation déterministe |
 | 01 (`#/cas-01-seo`) | **De la recherche Google à l’utilisation des services** — anciennement « Relier une recherche à un accompagnement » : page conseil « Comment préparer un entretien de recrutement ? », maillage interne, compléments SEO, GEO et coordination multicanale | SEO éditorial, maillage, acquisition |
 
-## Plan SEO pour apec.fr
+## Ma démarche SEO / GEO
 
-Route `#/plan-seo`, accessible depuis l’accueil et l’en-tête du portfolio. « Un plan SEO pour apec.fr : de la recherche au service utilisé », en six parties :
+Route `#/plan-seo` (route historique conservée), accessible depuis l’accueil. « Ma démarche SEO / GEO » présente une façon de travailler et quelques pistes pour l’illustrer, à discuter avec l’équipe — sans constat sur apec.fr ni plan d’action :
 
-0. **Hero** : ambition, trois objectifs (visibilité hors marque, trafic qualifié vers les services, conversion mesurée).
-1. **Diagnostic** : quatre observations sur les pages publiques (titre de connexion indexé, title et H1 divergents, données structurées absentes, actifs peu reliés), sans chiffre.
-2. **Stratégie en quatre piliers** : technique et indexation, contenus et intentions (matrice des six situations), maillage (cocon fiche métier ↔ offres ↔ salaires ↔ conseils ↔ services), popularité et visibilité IA.
-3. **Démonstration** : parcours « Préparer mon entretien de recrutement » (recherche → page conseil → fiche service → inscription simulée).
-4. **Plan 90 jours** : actions et livrables visibles.
-5. **Pilotage** : indicateurs, A/B tests et rituels.
+0. **Introduction** : ce que je vise dans mes projets (visibilité hors marque, trafic qualifié vers les services, conversion mesurée).
+1. **Ma façon de travailler** : comprendre les données et les usages, prioriser avec l’équipe selon la roadmap, déployer dans le CMS avec les équipes, mesurer et partager.
+2. **Quatre piliers SEO / GEO** : mes repères de travail (technique et indexation, contenus et intentions, maillage et parcours, autorité et citabilité).
+3. **Contenus et intentions : six situations** : besoin, exemples de recherches, questions posées aux IA, piste de contenu, services.
+4. **Démonstration** : parcours « Préparer mon entretien de recrutement » (recherche → page conseil → fiche service → inscription simulée).
+5. **Mesurer et partager** : indicateurs, exemples d’A/B tests, partage avec l’équipe.
 
 Contenus centralisés dans `src/data/seoPlan.ts` ; parcours dans `src/components/SeoJourney.tsx` ; page dans `src/pages/SeoPlan.tsx`.
 

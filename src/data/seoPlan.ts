@@ -1,7 +1,7 @@
 /**
- * Module « Ma démarche SEO / GEO : de la recherche au service utilisé ».
- * Présentation d'une méthode, à construire avec l'équipe et les données de l'Apec.
- * Aucun diagnostic d'apec.fr, aucune donnée interne de l'Apec.
+ * Module « Ma démarche SEO / GEO ».
+ * Ma façon de travailler, illustrée par quelques pistes à discuter avec l'équipe.
+ * Aucun constat sur apec.fr, aucun plan d'action, aucune donnée interne de l'Apec.
  *
  * Règles :
  * - les recherches et les questions posées aux IA sont des exemples (aucun volume, aucun classement) ;
@@ -22,7 +22,7 @@ export interface SeoSituation {
   services: string[]
   conversion: string
   note?: string
-  /** Le parcours démonstrateur (bloc 3) part de cette situation. */
+  /** Le parcours démonstrateur (bloc 4) part de cette situation. */
   hasJourney?: boolean
 }
 
@@ -111,7 +111,7 @@ export const SEO_SITUATIONS: SeoSituation[] = [
   },
 ]
 
-/* ------------------------------ Bloc 3 : démonstration ------------------------------ */
+/* ------------------------------ Bloc 4 : démonstration ------------------------------ */
 
 export type JourneyServiceKey = 'simulateur' | 'atelier' | 'consultant'
 
@@ -148,54 +148,34 @@ export const LINK_LOGIC = [
   { from: 'Fiches service', section: 'Préparation', to: 'Checklist (page conseil)', anchor: 'utiliser la checklist de préparation' },
 ]
 
-/* ------------------------------ Bloc 4 : mes 90 premiers jours ------------------------------ */
-
-export const ROADMAP = [
-  {
-    period: 'Jours 1–30',
-    title: 'Écouter et comprendre',
-    actions: [
-      'Écouter l’équipe : priorités, chantiers en cours et ce qui a déjà été testé.',
-      'Prendre en main les outils et les données SEO / GEO.',
-      'Comprendre la roadmap produit et le rôle de chacun.',
-    ],
-    deliverables: ['Synthèse partagée des priorités', 'Repères SEO / GEO de départ'],
-  },
-  {
-    period: 'Jours 31–60',
-    title: 'Proposer et tester',
-    actions: [
-      'Proposer de premières actions, priorisées avec l’équipe.',
-      'Lancer un premier test mesuré, sur un périmètre restreint.',
-    ],
-    deliverables: ['Actions priorisées', 'Premier test et son plan de mesure'],
-  },
-  {
-    period: 'Jours 61–90',
-    title: 'Installer la routine',
-    actions: [
-      'Installer un suivi régulier SEO / GEO.',
-      'Mettre en place une routine d’animation partagée.',
-    ],
-    deliverables: ['Suivi SEO / GEO partagé', 'Routine d’animation'],
-  },
-]
-
 /* ------------------------------ Hero ------------------------------ */
 
+/** Ce que je vise dans mes projets SEO / GEO. */
 export const OBJECTIVES = [
-  { title: 'Visibilité hors marque', text: 'Être trouvé sur les moteurs et cité par les IA, par les cadres et les recruteurs qui ne cherchent pas encore « Apec ».' },
+  { title: 'Visibilité hors marque', text: 'Être trouvé sur les moteurs et cité par les IA par les personnes qui ne cherchent pas encore la marque.' },
   { title: 'Trafic qualifié vers les services', text: 'Conduire chaque visite vers l’offre, l’outil ou l’accompagnement qui répond à sa situation.' },
-  { title: 'Conversion mesurée', text: 'Suivre ce que le SEO / GEO produit vraiment : comptes, candidatures, rendez-vous et offres déposées.' },
+  { title: 'Conversion mesurée', text: 'Suivre ce que le SEO / GEO produit vraiment : comptes, inscriptions, rendez-vous, candidatures.' },
 ]
 
-/* ------------------------------ Par où je commencerais ------------------------------ */
+/* ------------------------------ Ma façon de travailler ------------------------------ */
 
-export const START = [
-  { title: 'Écouter', text: 'comprendre les priorités de l’équipe, les chantiers en cours et ce qui a déjà été testé.' },
-  { title: 'Analyser les données', text: 'Search Console, analytics, pages d’entrée, requêtes et conversions par gabarit.' },
-  { title: 'Mesurer la visibilité dans les IA', text: 'sur quelles questions l’Apec est citée, avec quels contenus, et où elle ne l’est pas encore.' },
-  { title: 'Prioriser ensemble', text: 'impact, effort, et cohérence avec la roadmap produit.' },
+export const WAYS = [
+  {
+    title: 'Comprendre les données et les usages',
+    text: 'Search Console, analytics, pages d’entrée, questions posées aux IA, retours des équipes et des utilisateurs, et ce qui a déjà été testé.',
+  },
+  {
+    title: 'Prioriser avec l’équipe, selon la roadmap',
+    text: 'Croiser impact, effort et chantiers en cours, pour proposer des pistes qui s’inscrivent dans les priorités communes.',
+  },
+  {
+    title: 'Déployer dans le CMS avec les équipes',
+    text: 'Gabarits, contenus et maillage, mis en ligne avec les contributeurs, le produit et la DSI.',
+  },
+  {
+    title: 'Mesurer et partager',
+    text: 'Suivre les effets sur la visibilité et les conversions, les partager régulièrement et ajuster ensemble.',
+  },
 ]
 
 /* ------------------------------ Quatre piliers SEO / GEO ------------------------------ */
@@ -244,25 +224,25 @@ export const PILLARS: {
       'Des liens placés là où ils répondent à un besoin, avec des ancres descriptives.',
     ],
     geo: [
-      'Chaque réponse renvoie vers le service de l’Apec qui la prolonge, pour que la page citée mène à un usage.',
+      'Chaque réponse renvoie vers le service qui la prolonge, pour que la page citée mène à un usage.',
     ],
     cocon: ['Fiche métier', 'Offres du métier', 'Salaires', 'Conseils', 'Services'],
   },
   {
     id: 'autorite',
     title: 'Autorité et citabilité',
-    summary: 'Les études, les données et l’expertise de l’Apec comme sources de référence.',
+    summary: 'Faire des études, des données et de l’expertise des sources de référence.',
     seo: [
       'Valoriser les études et les données pour obtenir des liens et des mentions (presse, partenaires).',
     ],
     geo: [
       'Des données datées et sourcées, faciles à citer par les IA.',
-      'Suivi des citations de l’Apec dans les réponses des IA, et des liens qu’elles renvoient.',
+      'Suivi des citations de la marque dans les réponses des IA, et des liens qu’elles renvoient.',
     ],
   },
 ]
 
-/* ------------------------------ Pilotage ------------------------------ */
+/* ------------------------------ Mesurer et partager ------------------------------ */
 
 export const KPI_SEO = [
   'Impressions et clics hors marque',
@@ -271,7 +251,7 @@ export const KPI_SEO = [
   'Pages indexées',
 ]
 export const KPI_GEO = [
-  'Présence et citations de l’Apec dans les réponses des IA, sur un panel de questions',
+  'Présence et citations de la marque dans les réponses des IA, sur un panel de questions',
   'Trafic venant des assistants IA',
 ]
 export const KPI_CONVERSION = ['Comptes créés', 'Inscriptions', 'Rendez-vous', 'Candidatures']
@@ -283,9 +263,9 @@ export const AB_TESTS = [
 ]
 
 export const RITUALS = [
-  { who: 'Webanalyste', what: 'Point régulier sur le suivi SEO / GEO et lecture des A/B tests.' },
-  { who: 'DSI et produit', what: 'Backlog technique partagé : gabarits, données structurées, performance.' },
-  { who: 'Contributeurs et experts métiers', what: 'Comité éditorial : briefs, mises à jour et validation des contenus.' },
+  { who: 'Avec le webanalyste', what: 'Lire ensemble le suivi SEO / GEO et les résultats des A/B tests.' },
+  { who: 'Avec le produit et la DSI', what: 'Inscrire les sujets techniques (gabarits, données structurées, performance) dans le backlog existant.' },
+  { who: 'Avec les contributeurs et les experts métiers', what: 'Préparer les briefs, les mises à jour et la validation des contenus.' },
 ]
 
 /**

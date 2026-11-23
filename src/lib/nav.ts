@@ -13,7 +13,7 @@ const ORIGINS: Record<string, BackTarget> = {
   remuneration: { to: '/conseil/remuneration', label: 'Aborder la rémunération en entretien' },
   etapes: { to: '/cas-03-inscription/prochaines-etapes', label: 'Mes prochaines étapes' },
   espace: { to: '/espace', label: 'Mon espace' },
-  'plan-seo': { to: '/plan-seo', label: 'Ma démarche SEO / GEO', anchor: 'methode' },
+  'plan-seo': { to: '/plan-seo', label: 'Ma démarche SEO / GEO', anchor: 'parcours' },
 }
 
 export function backFor(from: string | null): BackTarget {
