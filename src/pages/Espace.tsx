@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { Case2Coulisses, CASE2_EVENTS } from '../components/Case2Coulisses'
-import { ArrowRight, Chat, Doc, Grid, Handshake, Lightbulb, Search, User } from '../components/Icons'
+import { ArrowRight, Doc, DuoArrowCircle, DuoLaptop, DuoSearch, DuoSpiral, DuoTarget, DuoUser, Eye, Lightbulb, Pencil, Pin, Plus } from '../components/Icons'
 import { toBook } from '../components/ProgramAction'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { getService } from '../data/services'
@@ -14,17 +14,17 @@ import { Link, navigate } from '../lib/router'
  */
 
 /** Ligne de carte : titre en gras, texte, flèche. Sans destination dans le prototype : affichée, non cliquable. */
-function Row({ title, text, to, onClick, badge }: { title: ReactNode; text?: ReactNode; to?: string; onClick?: () => void; badge?: string }) {
+function Row({ title, count, text, to, onClick, badge }: { title: ReactNode; count?: number; text?: ReactNode; to?: string; onClick?: () => void; badge?: string }) {
   const body = (
     <>
       <span className="esp-row__main">
         <span className="esp-row__title">
-          {title}
+          <span>{title}{count !== undefined && <span className="esp-row__count">{' '}({count})</span>}</span>
           {badge && <span className="esp-badge">{badge}</span>}
         </span>
         {text && <span className="esp-row__text">{text}</span>}
       </span>
-      <ArrowRight size={20} className="esp-row__arrow" />
+      <ArrowRight size={22} className="esp-row__arrow" />
     </>
   )
   if (to) return <li><Link to={to} className="esp-row">{body}</Link></li>
@@ -32,10 +32,13 @@ function Row({ title, text, to, onClick, badge }: { title: ReactNode; text?: Rea
   return <li><span className="esp-row esp-row--static">{body}</span></li>
 }
 
+/** Icône « + » blanche dans un rond navy, devant les liens de création. */
+const PlusDot = () => <span className="esp-dot" aria-hidden="true"><Plus size={14} /></span>
+
 const OFFERS = [
-  { title: 'Responsable grands comptes F/H', match: '92 %', city: 'Lyon (69)' },
-  { title: 'Key Account Manager F/H', match: '87 %', city: 'Nanterre (92)' },
-  { title: 'Directeur commercial régional F/H', match: '81 %', city: 'Bordeaux (33)' },
+  { title: 'Responsable grands comptes F/H', match: '64 %', city: 'Lyon (69)' },
+  { title: 'Key Account Manager F/H', match: '61 %', city: 'Nanterre (92)' },
+  { title: 'Directeur commercial régional F/H', match: '59 %', city: 'Bordeaux (33)' },
 ]
 
 export function Espace({ path }: { path: string }) {
@@ -56,15 +59,18 @@ export function Espace({ path }: { path: string }) {
     >
       <div className="band esp-band">
         <div className="container">
-          <p className="esp-band__kicker"><User size={26} className="esp-band__icon" /> Mon espace <strong>candidat</strong></p>
-          <h1 className="esp-band__title" tabIndex={-1}>Bonjour <span className="esp-band__name">Alex</span></h1>
+          <div className="esp-band__head">
+            <DuoUser size={64} className="esp-band__icon" />
+            <p className="esp-band__kicker"><span>Mon espace</span> <strong>candidat</strong></p>
+          </div>
+          <h1 className="esp-band__title" tabIndex={-1}>Bonjour Alex <span className="esp-band__name">DURAND</span></h1>
         </div>
       </div>
 
       <div className="container overlap esp">
         <div className="esp-duo">
           <section className="esp-card" aria-labelledby="esp-relation">
-            <h2 id="esp-relation" className="esp-card__title"><Handshake size={28} className="esp-card__icon" /> Ma relation avec l’Apec</h2>
+            <h2 id="esp-relation" className="esp-card__title"><DuoArrowCircle size={32} className="esp-card__icon" /> Ma relation avec l’Apec</h2>
             <ul className="esp-rows">
               {program.length === 0 ? (
                 <Row
@@ -93,10 +99,10 @@ export function Espace({ path }: { path: string }) {
           </section>
 
           <section className="esp-card" aria-labelledby="esp-offres">
-            <h2 id="esp-offres" className="esp-card__title"><Search size={28} className="esp-card__icon" /> Mes offres</h2>
+            <h2 id="esp-offres" className="esp-card__title"><DuoTarget size={32} className="esp-card__icon" /> Mes offres</h2>
             <ul className="esp-rows">
-              <Row title="Mes offres sauvegardées (5)" />
-              <Row title="Mes candidatures (1)" />
+              <Row title="Mes offres sauvegardées" count={5} />
+              <Row title="Mes candidatures" count={1} />
               <Row title="Rechercher une offre" />
             </ul>
           </section>
@@ -106,26 +112,26 @@ export function Espace({ path }: { path: string }) {
           <h2 id="esp-profil" className="visually-hidden">Mon profil</h2>
           <div className="esp-profile__side">
             <span className="esp-avatar" aria-hidden="true">A</span>
-            <p className="esp-profile__views"><strong>3</strong> consultations de votre profil</p>
+            <p className="esp-profile__views"><strong>3</strong> <span>consultations de votre profil</span></p>
           </div>
           <div className="esp-profile__main">
-            <p className="esp-profile__name">ALEX</p>
-            <p className="esp-profile__job">Responsable commercial grands comptes</p>
-            <ul className="esp-pills" aria-label="État du profil">
-              <li>Profil complété à 60{' '}%</li>
-              <li>Profil visible des recruteurs</li>
-              <li>En recherche active</li>
-            </ul>
-            <p className="esp-profile__hint">Débloquez des opportunités{' '}professionnelles</p>
-            <div className="esp-profile__actions">
-              <span className="esp-link esp-link--static">Modifier les informations personnelles de mon compte</span>
+            <div className="esp-profile__head">
+              <p className="esp-profile__name">ALEX DURAND</p>
               <span className="btn btn--primary esp-static">Voir mon profil</span>
             </div>
+            <p className="esp-profile__job">Responsable commercial grands comptes</p>
+            <ul className="esp-pills" aria-label="État du profil">
+              <li className="esp-pill esp-pill--sky"><span className="esp-pill__dot" aria-hidden="true" /> Profil complété à 60 %</li>
+              <li className="esp-pill esp-pill--sky"><Eye size={16} /> Profil visible des recruteurs</li>
+              <li className="esp-pill">En recherche active</li>
+            </ul>
+            <p className="esp-profile__hint">Débloquez des opportunités professionnelles</p>
+            <span className="esp-link esp-link--static"><span className="esp-dot" aria-hidden="true"><Pencil size={14} /></span> Modifier les informations personnelles de mon compte</span>
           </div>
         </section>
 
-        <section className="esp-card" aria-labelledby="esp-matching">
-          <h2 id="esp-matching" className="esp-card__title">Matching</h2>
+        <section className="esp-matching" aria-labelledby="esp-matching">
+          <h2 id="esp-matching" className="esp-card__title"><DuoSpiral size={32} className="esp-card__icon" /> Matching</h2>
           <p className="esp-card__lead">Les offres d’emploi les plus pertinentes pour votre Profil.</p>
           <label className="esp-check">
             <input type="checkbox" checked={partners} onChange={(e) => setPartners(e.target.checked)} />
@@ -134,43 +140,48 @@ export function Espace({ path }: { path: string }) {
           <ul className="esp-offers">
             {OFFERS.map((o) => (
               <li key={o.title} className="esp-offer">
-                <span className="esp-offer__match">{o.match} match</span>
-                <h3 className="esp-offer__title">{o.title}</h3>
-                <p className="esp-offer__meta"><span>CDI</span><span>{o.city}</span></p>
+                <div className="esp-offer__top">
+                  <h3 className="esp-offer__title">{o.title}</h3>
+                  <span className="esp-offer__match">{o.match} match</span>
+                </div>
+                <ul className="esp-offer__meta">
+                  <li><Doc size={18} /> CDI</li>
+                  <li><Pin size={18} /> {o.city}</li>
+                </ul>
               </li>
             ))}
           </ul>
-          <div className="esp-center"><span className="btn btn--primary esp-static">Toutes les offres pertinentes</span></div>
+          <div className="esp-center esp-overlap"><span className="btn btn--primary esp-static">Toutes les offres pertinentes</span></div>
         </section>
 
         <div className="esp-duo">
           <section className="esp-card" aria-labelledby="esp-cv">
-            <h2 id="esp-cv" className="esp-card__title"><Doc size={28} className="esp-card__icon" /> Mes CV et lettres de{' '}motivation</h2>
+            <h2 id="esp-cv" className="esp-card__title"><DuoSpiral size={32} className="esp-card__icon" /> Mes CV et lettres de{' '}motivation</h2>
             <div className="esp-block">
               <p className="esp-block__title">Mes CV</p>
-              <p className="esp-block__meta">Mis à jour le 19/11/2026</p>
-              <Link to="/service/creer-cv?from=espace" className="esp-link">Créer un CV <ArrowRight size={18} /></Link>
+              <p className="esp-block__date">Mis à jour le 19/11/26</p>
+              <Link to="/service/creer-cv?from=espace" className="esp-link"><PlusDot /> Créer un CV</Link>
             </div>
             <div className="esp-block">
               <p className="esp-block__title">Je n’ai pas de lettre de motivation{' '}?</p>
               <p className="esp-block__meta">Faites en quelques minutes une lettre de motivation professionnelle</p>
-              <span className="esp-link esp-link--static">Créer une lettre de motivation <ArrowRight size={18} /></span>
+              <span className="esp-link esp-link--static"><PlusDot /> Créer une lettre de motivation</span>
             </div>
-            <div className="esp-center"><span className="btn btn--outline esp-static esp-btn-ring">Tous mes CV (1) et lettres de motivation (0)</span></div>
+            <div className="esp-cv-all"><span className="esp-static esp-btn-ring">Tous mes CV (1) et lettres de motivation (0)</span></div>
           </section>
 
           <section className="esp-card" aria-labelledby="esp-recherches">
-            <h2 id="esp-recherches" className="esp-card__title"><Chat size={28} className="esp-card__icon" /> Mes recherches</h2>
+            <h2 id="esp-recherches" className="esp-card__title"><DuoSearch size={32} className="esp-card__icon" /> Mes recherches</h2>
             <p className="esp-block__title">Recevez les offres qui vous correspondent{' '}!</p>
             <p className="esp-block__meta">Ne ratez aucune opportunité, recevez les offres qui vous intéressent chaque jour dans votre boîte{' '}mail.</p>
-            <div className="esp-center"><span className="btn btn--primary esp-static">Créer une recherche</span></div>
-            <p className="esp-tip"><Lightbulb size={22} className="esp-tip__icon" /> Vous pourrez recevoir les nouvelles offres par mail pour chacune de vos{' '}recherches.</p>
+            <p className="esp-block"><span className="esp-link esp-link--static"><PlusDot /> Créer une recherche</span></p>
+            <p className="esp-tip"><Lightbulb size={20} className="esp-tip__icon" /> Vous pourrez recevoir les nouvelles offres par mail pour chacune de vos{' '}recherches.</p>
           </section>
         </div>
 
         <section className="esp-card" aria-labelledby="esp-ressources">
-          <h2 id="esp-ressources" className="esp-card__title"><Grid size={28} className="esp-card__icon" /> Mes ressources Apec</h2>
-          <ul className="esp-rows esp-rows--inline">
+          <h2 id="esp-ressources" className="esp-card__title"><DuoLaptop size={32} className="esp-card__icon" /> Mes ressources Apec</h2>
+          <ul className="esp-rows">
             <Row title="Tous les outils Apec en ligne" />
             <Row title="Toutes les tendances du marché" />
             <Row title="Parcourir les services" to="/cas-02-ab-test?situation=tous" />

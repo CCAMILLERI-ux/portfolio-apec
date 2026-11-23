@@ -134,3 +134,39 @@ export const Lightbulb = (p: P) => (
 export const Grid = (p: P) => (
   <Base {...p}><rect x="4" y="4" width="6.5" height="6.5" rx="1" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="1" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="1" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1" /></Base>
 )
+
+/* ---------- Pictogrammes bicolores de « Mon espace » (trait principal en currentColor, accent jaune) ---------- */
+const accent = { stroke: 'var(--brand-yellow)' }
+
+/** Utilisateur : tête en currentColor, épaules en jaune. */
+export const DuoUser = (p: P) => (
+  <Base strokeWidth={1.4} {...p}><circle cx="12" cy="8" r="4" /><path style={accent} d="M4 21c0-4.4 3.6-7.5 8-7.5s8 3.1 8 7.5" /></Base>
+)
+/** Cercle ouvert traversé d'une flèche. */
+export const DuoArrowCircle = (p: P) => (
+  <Base {...p}><path d="M17.5 5.5A8.5 8.5 0 1 0 17.5 18.5" /><path style={accent} d="M8 12h12M16 8l4 4-4 4" /></Base>
+)
+/** Cible. */
+export const DuoTarget = (p: P) => (
+  <Base {...p}><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle style={{ ...accent, fill: 'var(--brand-yellow)' }} cx="12" cy="12" r="1.6" /></Base>
+)
+/** Spirale / cercle ouvert. */
+export const DuoSpiral = (p: P) => (
+  <Base {...p}><path d="M20.5 12A8.5 8.5 0 1 1 12 3.5" /><path style={accent} d="M12 7.5A4.5 4.5 0 1 1 7.5 12" /></Base>
+)
+/** Loupe : cercle en currentColor, manche jaune. */
+export const DuoSearch = (p: P) => (
+  <Base {...p}><circle cx="10.5" cy="10.5" r="6.5" /><path style={{ ...accent, strokeWidth: 2.4 }} d="M15.5 15.5 21 21" /></Base>
+)
+/** Ordinateur portable : écran en currentColor, socle jaune. */
+export const DuoLaptop = (p: P) => (
+  <Base {...p}><rect x="4.5" y="5" width="15" height="10.5" rx="1" /><path style={accent} d="M2 19h20" /></Base>
+)
+/** Œil. */
+export const Eye = (p: P) => (
+  <Base {...p}><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" /><circle cx="12" cy="12" r="2.8" /></Base>
+)
+/** Crayon. */
+export const Pencil = (p: P) => (
+  <Base {...p}><path d="M4 20l1-4.5L15.5 5a2.1 2.1 0 0 1 3 3L8 18.5z" /><path d="M13.5 7l3 3" /></Base>
+)
