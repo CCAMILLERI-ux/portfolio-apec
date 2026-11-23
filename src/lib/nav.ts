@@ -13,7 +13,7 @@ const ORIGINS: Record<string, BackTarget> = {
   remuneration: { to: '/conseil/remuneration', label: 'Aborder la rémunération en entretien' },
   etapes: { to: '/cas-03-inscription/prochaines-etapes', label: 'Mes prochaines étapes' },
   espace: { to: '/espace', label: 'Mon espace' },
-  'plan-seo': { to: '/plan-seo', label: 'Plan SEO', anchor: 'methode' },
+  'plan-seo': { to: '/plan-seo', label: 'Ma démarche SEO / GEO', anchor: 'methode' },
 }
 
 export function backFor(from: string | null): BackTarget {
@@ -24,7 +24,7 @@ export function backFor(from: string | null): BackTarget {
 export function caseLabelFor(from: string): string {
   if (from.startsWith('cas-3') || from === 'cas-1-seo' || from === 'remuneration') return 'Cas 01 · De la recherche Google aux services'
   if (from === 'etapes' || from === 'espace') return 'Cas 03 · Inscription accompagnée'
-  if (from === 'plan-seo') return 'Plan SEO pour apec.fr'
+  if (from === 'plan-seo') return 'Ma démarche SEO / GEO'
   return 'Cas 02 · Clarifier l’offre'
 }
 

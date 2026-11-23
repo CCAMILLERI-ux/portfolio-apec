@@ -22,7 +22,7 @@ const TITLES: Record<string, string> = {
   '/cas-01-seo': 'Cas 01 — Préparer un entretien de recrutement',
   '/conseil/remuneration': 'Cas 01 — Aborder la rémunération',
   '/design-system': 'Design system & prototypage',
-  '/plan-seo': 'Un plan SEO pour apec.fr',
+  '/plan-seo': 'Ma démarche SEO / GEO',
 }
 
 const LEGACY: Record<string, string> = {

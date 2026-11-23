@@ -1201,7 +1201,7 @@ legend { padding: 0; }
   .bar-switch__opt { min-height: 30px; }
 }
 
-/* Plan SEO : hero, diagnostic, piliers, plan 90 jours, pilotage */
+/* Ma démarche SEO / GEO : hero, démarrage, piliers, 90 premiers jours, pilotage */
 .seo-block p, .seo-block li, .seo-block dd, .seo-hero p { text-wrap: pretty; }
 .pf .seo-hero__title { max-width: 24ch; }
 .seo-goals { list-style: none; padding: 0; margin: var(--s3) 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
@@ -1213,19 +1213,31 @@ legend { padding: 0; }
 .seo-goal__text { color: var(--pf-muted); font-size: 0.9375rem; }
 .seo-hero .seo-mention { margin-top: var(--s2); }
 
-.seo-diag { list-style: none; padding: 0; margin: var(--s2) 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
-@media (max-width: 760px) { .seo-diag { grid-template-columns: 1fr; } }
-.seo-diag__item { background: var(--pf-card); border: 1px solid var(--pf-line); border-radius: 4px; padding: var(--s3); }
-.pf .seo-diag__title { font-size: 1.0625rem; margin: 0 0 var(--s1); }
-.seo-diag__item p { margin: 0 0 var(--s1); }
-.seo-diag__lever { color: var(--pf-ink); border-top: 1px solid var(--pf-line); padding-top: var(--s1); margin-bottom: 0 !important; }
-
+.seo-start { list-style: none; padding: 0; margin: var(--s2) 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
+@media (max-width: 760px) { .seo-start { grid-template-columns: 1fr; } }
+.seo-start__item { display: flex; gap: var(--s2); align-items: flex-start; background: var(--pf-card); border: 1px solid var(--pf-line); border-radius: 4px; padding: var(--s3); }
+.seo-start__item p { margin: 0; text-wrap: pretty; }
+.seo-start__n { flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 4px; background: var(--pf-ink); color: var(--pf-bg); font-size: 0.875rem; font-weight: 700; }
+.seo-start__end { margin: var(--s3) 0 0; font-weight: 700; color: var(--pf-ink); }
 .seo-pillars { list-style: none; padding: 0; margin: var(--s2) 0 var(--s4); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
 @media (max-width: 760px) { .seo-pillars { grid-template-columns: 1fr; } }
 .seo-pillar { background: var(--pf-card); border: 1px solid var(--pf-line); border-left: 5px solid var(--pf-ink); border-radius: 4px; padding: var(--s3); display: flex; flex-direction: column; gap: var(--s1); }
 .seo-pillar__n { margin: 0; font-family: var(--font-pf-display); font-weight: 700; font-size: 1.5rem; line-height: 1; color: var(--pf-accent); }
 .pf .seo-pillar__title { font-size: 1.25rem; margin: 0; }
 .seo-pillar__points { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; }
+.seo-pillar__summary { margin: 0; font-weight: 600; color: var(--pf-ink); text-wrap: pretty; }
+.seo-dims { margin: 0; display: grid; gap: 12px; }
+.seo-dims > div { border-top: 1px solid var(--pf-line); padding-top: 10px; }
+.seo-dims dt { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.04em; color: var(--pf-accent); margin-bottom: 4px; }
+.seo-dims dd { margin: 0; }
+.seo-kpi2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); margin-bottom: var(--s3); }
+.seo-kpi2__col { background: var(--pf-card); border: 1px solid var(--pf-line); border-top: 4px solid var(--pf-accent); border-radius: 4px; padding: var(--s3); }
+.seo-kpi2__col--wide { grid-column: 1 / -1; border-top-color: var(--pf-ink); }
+.pf .seo-kpi2__title { margin: 0 0 var(--s1); font-size: 1.125rem; }
+.seo-kpi2__col ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; }
+.seo-kpi2 .seo-kpi2__inline { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
+.seo-kpi2__inline li { padding: 4px 12px; border: 1px solid var(--pf-line); border-radius: 4px; font-weight: 600; }
+@media (max-width: 760px) { .seo-kpi2 { grid-template-columns: 1fr; } }
 .seo-pillar .pf-link { margin-top: auto; }
 .seo-cocon { list-style: none; padding: 0; margin: var(--s1) 0 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .seo-cocon li { background: var(--pf-bg); border: 1px solid var(--pf-line); border-radius: 4px; padding: 4px 10px; font-size: 0.875rem; font-weight: 600; }

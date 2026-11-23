@@ -4,13 +4,15 @@ import { PortfolioLayout } from '../components/PortfolioLayout'
 import { SeoJourney } from '../components/SeoJourney'
 import {
   AB_TESTS,
-  DIAGNOSTIC,
-  KPIS,
+  KPI_CONVERSION,
+  KPI_GEO,
+  KPI_SEO,
   OBJECTIVES,
   PILLARS,
   RITUALS,
   ROADMAP,
   SEO_SITUATIONS,
+  START,
   nb,
 } from '../data/seoPlan'
 import { Link, type Route } from '../lib/router'
@@ -24,13 +26,12 @@ export function SeoPlan({ route }: { route: Route }) {
       {/* ---------------- 0. Hero ---------------- */}
       <section className="pf-hero pf-hero--compact seo-hero">
         <div className="pf-container">
-          <p className="pf-kicker">Plan SEO · apec.fr</p>
+          <p className="pf-kicker">Ma démarche SEO / GEO</p>
           <h1 className="pf-hero__title seo-hero__title" tabIndex={-1}>
-            Un plan SEO pour apec.fr : de la recherche au service utilisé
+            Ma démarche SEO / GEO{' '}: de la recherche au service{' '}utilisé
           </h1>
           <p className="pf-hero__lead">
-            Faire d’apec.fr la réponse de référence aux questions des cadres et des recruteurs, puis conduire chaque
-            visite vers l’offre, l’outil ou l’accompagnement qui lui correspond.
+            {nb('Être trouvé sur les moteurs de recherche et cité par les IA, puis guider chaque visiteur vers le service qui lui correspond. Une méthode fondée sur les données, à construire avec l’équipe.')}
           </p>
           <ul className="seo-goals" aria-label="Objectifs">
             {OBJECTIVES.map((o, i) => (
@@ -42,42 +43,49 @@ export function SeoPlan({ route }: { route: Route }) {
             ))}
           </ul>
           <div className="seo-levels">
-            <Link to="/plan-seo" anchor="diagnostic" className="pf-btn pf-btn--primary">
-              Découvrir le plan <ArrowRight size={18} />
+            <Link to="/plan-seo" anchor="demarrage" className="pf-btn pf-btn--primary">
+              Découvrir la démarche <ArrowRight size={18} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ---------------- 1. Diagnostic ---------------- */}
-      <section className="pf-container seo-block" aria-labelledby="diagnostic">
+      {/* ---------------- 1. Par où je commencerais ---------------- */}
+      <section className="pf-container seo-block" aria-labelledby="demarrage">
         <p className="seo-block__num">1</p>
-        <h2 id="diagnostic" tabIndex={-1}>Diagnostic</h2>
-        <p className="seo-block__lead">Quatre observations faites sur les pages publiques d’apec.fr, et le levier associé.</p>
-        <ul className="seo-diag">
-          {DIAGNOSTIC.map((d) => (
-            <li key={d.title} className="seo-diag__item">
-              <h3 className="seo-diag__title">{d.title}</h3>
-              <p>{nb(d.finding)}</p>
-              <p className="seo-diag__lever"><strong>Levier :</strong> {nb(d.lever)}</p>
+        <h2 id="demarrage" tabIndex={-1}>Par où je commencerais</h2>
+        <ol className="seo-start">
+          {START.map((s, i) => (
+            <li key={s.title} className="seo-start__item">
+              <span className="seo-start__n" aria-hidden="true">{i + 1}</span>
+              <p><strong>{s.title}</strong>{' '}: {nb(s.text)}</p>
             </li>
           ))}
-        </ul>
+        </ol>
+        <p className="seo-start__end">Pas de conclusion avant d’avoir les{' '}données.</p>
       </section>
 
-      {/* ---------------- 2. Stratégie ---------------- */}
+      {/* ---------------- 2. Quatre piliers ---------------- */}
       <section className="pf-container seo-block" aria-labelledby="strategie">
         <p className="seo-block__num">2</p>
-        <h2 id="strategie" tabIndex={-1}>Stratégie en quatre piliers</h2>
-        <p className="seo-block__lead">Tout le SEO d’apec.fr : offres, fiches métiers, outils, études, conseils et services.</p>
+        <h2 id="strategie" tabIndex={-1}>Quatre piliers SEO / GEO</h2>
+        <p className="seo-block__lead">{nb('Chaque pilier travaille les deux dimensions : être bien classé par les moteurs (SEO) et être compris, repris et cité par les IA (GEO).')}</p>
         <ol className="seo-pillars">
           {PILLARS.map((p, i) => (
             <li key={p.id} className="seo-pillar">
               <p className="seo-pillar__n">{String.fromCharCode(97 + i)}</p>
               <h3 className="seo-pillar__title">{p.title}</h3>
-              <ul className="seo-pillar__points">
-                {p.points.map((pt) => <li key={pt}>{nb(pt)}</li>)}
-              </ul>
+              <p className="seo-pillar__summary">{nb(p.summary)}</p>
+              <dl className="seo-dims">
+                <div>
+                  <dt>SEO</dt>
+                  <dd><ul className="seo-pillar__points">{p.seo.map((pt) => <li key={pt}>{nb(pt)}</li>)}</ul></dd>
+                </div>
+                <div>
+                  <dt>GEO</dt>
+                  <dd><ul className="seo-pillar__points">{p.geo.map((pt) => <li key={pt}>{nb(pt)}</li>)}</ul></dd>
+                </div>
+              </dl>
               {p.cocon && (
                 <ol className="seo-cocon" aria-label="Cocon sémantique autour d’un métier">
                   {p.cocon.map((c) => <li key={c}>{c}</li>)}
@@ -92,9 +100,9 @@ export function SeoPlan({ route }: { route: Route }) {
           ))}
         </ol>
 
-        <h3 id="matrice" tabIndex={-1} className="seo-sub">Contenus et intentions : six situations</h3>
-        <p className="seo-block__lead">Choisissez une situation pour voir le besoin, les recherches, le contenu et les services qui y répondent.</p>
-        <p className="seo-caveat">Exemples de requêtes : volumes et priorités à confirmer dans Search Console.</p>
+        <h3 id="matrice" tabIndex={-1} className="seo-sub">Contenus et intentions{' '}: six situations</h3>
+        <p className="seo-block__lead">{nb('Choisissez une situation pour voir le besoin, les recherches, les questions posées aux IA, le contenu et les services qui y répondent.')}</p>
+        <p className="seo-caveat">{nb('Exemples de recherches et de questions : volumes et priorités à confirmer avec les données.')}</p>
 
         <fieldset className="seo-tabs">
           <legend className="visually-hidden">Situation utilisateur</legend>
@@ -113,24 +121,17 @@ export function SeoPlan({ route }: { route: Route }) {
             <div><dt>Besoin</dt><dd>{nb(sit.need)}</dd></div>
             <div>
               <dt>Exemples de recherches</dt>
-              <dd><ul className="seo-queries">{sit.queries.map((q) => <li key={q}>« {q} »</li>)}</ul></dd>
+              <dd><ul className="seo-queries">{sit.queries.map((q) => <li key={q}>{nb(`« ${q} »`)}</li>)}</ul></dd>
+            </div>
+            <div>
+              <dt>Questions posées aux IA</dt>
+              <dd><ul className="seo-queries">{sit.aiQuestions.map((q) => <li key={q}>{nb(`« ${q} »`)}</li>)}</ul></dd>
             </div>
             <div><dt>Intention</dt><dd>{nb(sit.intent)}</dd></div>
-            <div><dt>Contenu à optimiser ou à envisager</dt><dd>{nb(sit.content)}</dd></div>
+            <div><dt>Contenu à enrichir ou à envisager</dt><dd>{nb(sit.content)}</dd></div>
             <div>
               <dt>Services pertinents</dt>
-              <dd>
-                <ul className="seo-services">
-                  {sit.services.map((sv) => (
-                    <li key={sv.label}>
-                      {sv.label}{' '}
-                      <span className={`badge ${sv.observed ? 'badge--ok' : 'badge--warn'}`}>
-                        {sv.observed ? 'Service existant' : 'Intitulé provisoire'}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </dd>
+              <dd><ul className="seo-services">{sit.services.map((sv) => <li key={sv}>{nb(sv)}</li>)}</ul></dd>
             </div>
             <div><dt>Conversion finale recherchée</dt><dd>{nb(sit.conversion)}</dd></div>
           </dl>
@@ -146,10 +147,9 @@ export function SeoPlan({ route }: { route: Route }) {
       {/* ---------------- 3. Démonstration ---------------- */}
       <section className="pf-container seo-block" aria-labelledby="parcours">
         <p className="seo-block__num">3</p>
-        <h2 id="parcours" tabIndex={-1}>Démonstration : « Préparer mon entretien de recrutement »</h2>
+        <h2 id="parcours" tabIndex={-1}>Démonstration{' '}: «{' '}Préparer mon entretien de recrutement{' '}»</h2>
         <p className="seo-block__lead">
-          La méthode appliquée à un besoin fréquent : une recherche Google, une page conseil utile, une fiche service et
-          une inscription. Le contenu reste utile même sans inscription.
+          {nb('Une illustration de la méthode, sur une intention de recherche fréquente. Une recherche Google, une page conseil utile, une fiche service et une inscription : le contenu reste utile même sans inscription.')}
         </p>
         <SeoJourney route={route} />
 
@@ -157,21 +157,22 @@ export function SeoPlan({ route }: { route: Route }) {
           <summary><span>Comprendre mes choix sur ce parcours</span></summary>
           <div className="seo-acc__body">
             <dl className="seo-why">
-              <div><dt>Besoin utilisateur</dt><dd>Se préparer à un entretien, avec ou sans entretien déjà fixé.</dd></div>
-              <div><dt>Hypothèse</dt><dd>Une réponse utile, accompagnée de propositions contextualisées, facilite la découverte et l’utilisation des services.</dd></div>
-              <div><dt>Réponse proposée</dt><dd>Une page conseil qui répond d’abord (méthode, checklist), puis trois aides selon la situation : seul, en groupe, avec un consultant.</dd></div>
-              <div><dt>Maillage</dt><dd>Liens placés dans la section où ils répondent à un besoin (entraînement → simulateur, accompagnement → atelier et consultant, rémunération → ressource) ; retour des fiches vers la checklist.</dd></div>
-              <div><dt>Conversion recherchée</dt><dd>Inscription finalisée, rendez-vous confirmé ou entraînement terminé, puis participation effective.</dd></div>
-              <div><dt>Mesure</dt><dd>Entrées SEO sur la page, clics vers chaque aide, conversions rapportées aux sessions d’entrée, comparées à l’état initial.</dd></div>
+              <div><dt>Besoin utilisateur</dt><dd>{nb('Se préparer à un entretien, avec ou sans entretien déjà fixé.')}</dd></div>
+              <div><dt>Hypothèse</dt><dd>{nb('Une réponse utile, accompagnée de propositions contextualisées, facilite la découverte et l’utilisation des services.')}</dd></div>
+              <div><dt>Réponse proposée</dt><dd>{nb('Une page conseil qui répond d’abord (méthode, checklist), puis trois aides selon la situation : seul, en groupe, avec un consultant.')}</dd></div>
+              <div><dt>Maillage</dt><dd>{nb('Liens placés dans la section où ils répondent à un besoin (entraînement → simulateur, accompagnement → atelier et consultant, rémunération → ressource) ; retour des fiches vers la checklist.')}</dd></div>
+              <div><dt>GEO</dt><dd>{nb('Une réponse structurée (méthode, checklist, questions-réponses) peut être reprise par les IA, avec un lien vers les services de l’Apec.')}</dd></div>
+              <div><dt>Conversion recherchée</dt><dd>{nb('Inscription finalisée, rendez-vous confirmé ou entraînement terminé, puis participation effective.')}</dd></div>
+              <div><dt>Mesure</dt><dd>{nb('Entrées SEO / GEO sur la page, clics vers chaque aide, conversions rapportées aux sessions d’entrée, comparées à l’état initial.')}</dd></div>
             </dl>
           </div>
         </details>
       </section>
 
-      {/* ---------------- 4. Plan 90 jours ---------------- */}
+      {/* ---------------- 4. Mes 90 premiers jours ---------------- */}
       <section className="pf-container seo-block" aria-labelledby="methode">
         <p className="seo-block__num">4</p>
-        <h2 id="methode" tabIndex={-1}>Plan 90 jours</h2>
+        <h2 id="methode" tabIndex={-1}>Mes 90 premiers jours</h2>
         <ol className="seo-roadmap">
           {ROADMAP.map((r) => (
             <li key={r.period} className="seo-phase">
@@ -179,7 +180,7 @@ export function SeoPlan({ route }: { route: Route }) {
               <h3 className="seo-phase__title">{r.title}</h3>
               <ul className="seo-phase__actions">{r.actions.map((a) => <li key={a}>{nb(a)}</li>)}</ul>
               <p className="seo-phase__label">Livrables</p>
-              <ul className="seo-phase__deliv">{r.deliverables.map((d) => <li key={d}>{d}</li>)}</ul>
+              <ul className="seo-phase__deliv">{r.deliverables.map((d) => <li key={d}>{nb(d)}</li>)}</ul>
             </li>
           ))}
         </ol>
@@ -189,22 +190,28 @@ export function SeoPlan({ route }: { route: Route }) {
       <section className="pf-container seo-block" aria-labelledby="pilotage">
         <p className="seo-block__num">5</p>
         <h2 id="pilotage" tabIndex={-1}>Pilotage</h2>
-        <div className="seo-pilot">
-          <section className="seo-pilot__col" aria-labelledby="kpi">
-            <h3 id="kpi" className="seo-sub">Indicateurs clés</h3>
-            <dl className="seo-kpis">
-              {KPIS.map((k) => (
-                <div key={k.family}>
-                  <dt>{k.family}</dt>
-                  <dd><ul>{k.items.map((i) => <li key={i}>{nb(i)}</li>)}</ul></dd>
-                </div>
-              ))}
-            </dl>
+        <h3 id="kpi" className="seo-sub">Indicateurs clés</h3>
+        <div className="seo-kpi2">
+          <section className="seo-kpi2__col" aria-labelledby="kpi-seo">
+            <h4 id="kpi-seo" className="seo-kpi2__title">SEO</h4>
+            <ul>{KPI_SEO.map((k) => <li key={k}>{nb(k)}</li>)}</ul>
           </section>
+          <section className="seo-kpi2__col" aria-labelledby="kpi-geo">
+            <h4 id="kpi-geo" className="seo-kpi2__title">GEO</h4>
+            <ul>{KPI_GEO.map((k) => <li key={k}>{nb(k)}</li>)}</ul>
+          </section>
+          <section className="seo-kpi2__col seo-kpi2__col--wide" aria-labelledby="kpi-conv">
+            <h4 id="kpi-conv" className="seo-kpi2__title">Conversion</h4>
+            <ul className="seo-kpi2__inline">{KPI_CONVERSION.map((k) => <li key={k}>{k}</li>)}</ul>
+          </section>
+        </div>
+        <div className="seo-pilot">
           <section className="seo-pilot__col" aria-labelledby="abtests">
-            <h3 id="abtests" className="seo-sub">A/B tests</h3>
+            <h3 id="abtests" className="seo-sub">A/B tests</h3>
             <ul className="pf-list">{AB_TESTS.map((t) => <li key={t}>{nb(t)}</li>)}</ul>
-            <h3 className="seo-sub">Rituels</h3>
+          </section>
+          <section className="seo-pilot__col" aria-labelledby="rituels">
+            <h3 id="rituels" className="seo-sub">Rituels</h3>
             <dl className="seo-rituals">
               {RITUALS.map((r) => (
                 <div key={r.who}><dt>{r.who}</dt><dd>{nb(r.what)}</dd></div>
