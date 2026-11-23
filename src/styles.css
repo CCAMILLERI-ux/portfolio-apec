@@ -1641,7 +1641,6 @@ legend { padding: 0; }
 .pf .pf-rcard__title { margin: 0 0 6px; font-size: 1.0625rem; font-weight: 700; line-height: 1.25; color: inherit; text-wrap: balance; }
 .pf-rcard__text { margin: 0 0 12px; font-size: 0.875rem; line-height: 1.45; flex: 1 0 auto; text-wrap: pretty; }
 .pf-rcard__foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-.pf-rcard__duration { display: inline-flex; align-items: center; gap: 4px; font-size: 0.8125rem; }
 .pf .pf-rcard__btn { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 14px; border-radius: 4px; font-size: 0.875rem; font-weight: 700; text-decoration: none; }
 .pf .pf-rcard__btn:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* 01 : navy, texte blanc, numéro et étiquette jaunes (8,9:1), bouton jaune texte navy */

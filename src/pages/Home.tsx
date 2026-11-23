@@ -1,4 +1,4 @@
-import { ArrowRight, Clock } from '../components/Icons'
+import { ArrowRight } from '../components/Icons'
 import { Illustration, type Tone } from '../components/Illustration'
 import { PortfolioLayout } from '../components/PortfolioLayout'
 import { Link } from '../lib/router'
@@ -14,7 +14,6 @@ const WORKS: {
   mission: string
   title: string
   text: string
-  duration: string
   cta: string
   color: 'navy' | 'yellow' | 'blue' | 'tint'
   scene: Scene
@@ -26,7 +25,6 @@ const WORKS: {
     mission: 'Acquisition',
     title: 'De la recherche Google aux services',
     text: 'Un article SEO / GEO qui oriente vers les outils et accompagnements adaptés.',
-    duration: '1 min 30',
     cta: 'Explorer la démo',
     color: 'navy',
     scene: 'conseil',
@@ -38,7 +36,6 @@ const WORKS: {
     mission: 'Performance &\u00a0conversion',
     title: 'Présenter l’offre par situation',
     text: 'Un A/B test UX/UI pour présenter les services selon la situation de chacun.',
-    duration: '1 min 30',
     cta: 'Explorer la démo',
     color: 'yellow',
     scene: 'boussole',
@@ -50,7 +47,6 @@ const WORKS: {
     mission: 'Performance &\u00a0conversion · Animation',
     title: 'Inscription accompagnée',
     text: 'Un tunnel guidé, de la création de compte au premier service utilisé.',
-    duration: '2 min',
     cta: 'Explorer la démo',
     color: 'blue',
     scene: 'echange',
@@ -62,7 +58,6 @@ const WORKS: {
     mission: 'Acquisition',
     title: 'Ma démarche SEO / GEO',
     text: 'Méthode, piliers SEO et GEO, démonstration et premiers 90 jours.',
-    duration: '2 min',
     cta: 'Découvrir la démarche',
     color: 'tint',
     scene: 'document',
@@ -107,7 +102,6 @@ export function Home() {
               <h3 className="pf-rcard__title">{w.title}</h3>
               <p className="pf-rcard__text">{w.text}</p>
               <div className="pf-rcard__foot">
-                <span className="pf-rcard__duration"><Clock size={14} /> {w.duration}<span className="visually-hidden"> (durée indicative)</span></span>
                 <Link to={w.to} className="pf-rcard__btn">
                   {w.cta}<span className="visually-hidden"> — réalisation {w.n}{' '}: {w.title}</span> <ArrowRight size={16} />
                 </Link>
