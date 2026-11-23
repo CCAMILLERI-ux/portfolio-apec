@@ -12,12 +12,12 @@ Portfolio de candidature au poste de Chef de projet animation web. Un seul site 
 | 03 (`#/cas-03-inscription`) | **Accompagner l’utilisateur à chaque étape de son inscription** — anciennement « Guider un nouvel inscrit » : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes prochaines étapes » | Parcours, activation, recommandation déterministe |
 | 01 (`#/cas-01-seo`) | **De la recherche Google à l’utilisation des services** — anciennement « Relier une recherche à un accompagnement » : page conseil « Comment préparer un entretien de recrutement ? », maillage interne, compléments SEO, GEO et coordination multicanale | SEO éditorial, maillage, acquisition |
 
-## Ma démarche SEO / GEO
+## SEO / GEO : quelques pistes
 
-Route `#/plan-seo` (route historique conservée), accessible depuis l’accueil. « Ma démarche SEO / GEO » présente une façon de travailler et quelques pistes pour l’illustrer, à discuter avec l’équipe — sans constat sur apec.fr ni plan d’action :
+Route `#/plan-seo` (route historique conservée), accessible depuis l’accueil. « SEO / GEO : quelques pistes » présente mes habitudes de travail et quelques pistes pour l’illustrer, à discuter avec l’équipe — sans constat sur apec.fr ni plan d’action :
 
 0. **Introduction** : ce que je vise dans mes projets (visibilité hors marque, trafic qualifié vers les services, conversion mesurée).
-1. **Ma façon de travailler** : comprendre les données et les usages, prioriser avec l’équipe selon la roadmap, déployer dans le CMS avec les équipes, mesurer et partager.
+1. **Comment j’ai l’habitude de travailler** : comprendre les données et les usages, prioriser avec l’équipe selon la roadmap, déployer dans le CMS avec les équipes, mesurer et partager.
 2. **Quatre piliers SEO / GEO** : mes repères de travail (technique et indexation, contenus et intentions, maillage et parcours, autorité et citabilité).
 3. **Contenus et intentions : six situations** : besoin, exemples de recherches, questions posées aux IA, piste de contenu, services (intitulés de « Nos services »).
 4. **Une piste illustrée : préparer un entretien de recrutement** : parcours (recherche → page conseil → fiche service → inscription simulée).

@@ -25,10 +25,10 @@ export function SeoPlan({ route }: { route: Route }) {
         <div className="pf-container">
           <p className="pf-kicker">Acquisition · SEO / GEO</p>
           <h1 className="pf-hero__title seo-hero__title" tabIndex={-1}>
-            Ma démarche SEO{' '}/{'\u00a0'}GEO
+            SEO / GEO{'\u00a0'}: quelques{'\u00a0'}pistes
           </h1>
           <p className="pf-hero__lead">
-            {nb('Ma façon de travailler, de la recherche au service utilisé, et quelques pistes pour l’illustrer, à discuter avec l’équipe.')}
+            {nb('Comment j’ai l’habitude de travailler, de la recherche au service utilisé, et quelques pistes pour l’illustrer, à discuter avec l’équipe.')}
           </p>
           <ul className="seo-goals" aria-label="Ce que je vise dans mes projets SEO / GEO">
             {OBJECTIVES.map((o, i) => (
@@ -41,17 +41,17 @@ export function SeoPlan({ route }: { route: Route }) {
           </ul>
           <div className="seo-levels">
             <Link to="/plan-seo" anchor="facon" className="pf-btn pf-btn--primary">
-              Découvrir la démarche <ArrowRight size={18} />
+              Découvrir les pistes <ArrowRight size={18} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ---------------- 1. Ma façon de travailler ---------------- */}
+      {/* ---------------- 1. Comment j’ai l’habitude de travailler ---------------- */}
       <section className="pf-container seo-block" aria-labelledby="facon">
         <p className="seo-block__num">1</p>
-        <h2 id="facon" tabIndex={-1}>Ma façon de travailler</h2>
-        <p className="seo-block__lead">{nb('Quatre étapes que je suis sur mes projets, en complément de l’existant et avec les équipes concernées.')}</p>
+        <h2 id="facon" tabIndex={-1}>Comment j’ai l’habitude de{'\u00a0'}travailler</h2>
+        <p className="seo-block__lead">{nb('Quatre étapes que j’essaie de suivre sur mes projets, en complément de l’existant et avec les équipes concernées.')}</p>
         <ol className="seo-start">
           {WAYS.map((w, i) => (
             <li key={w.title} className="seo-start__item">

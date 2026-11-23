@@ -270,18 +270,12 @@ main:focus-visible { outline: none; }
   background: none; border: 0; color: #fff; font: inherit; font-size: 0.875rem; cursor: pointer;
   min-height: 44px; padding: 0 4px;
 }
-.proto .proto-wordmark {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: #fff; text-decoration: none; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.01em;
-}
-.proto .proto-wordmark { white-space: nowrap; }
 @media (max-width: 640px) {
   .proto-header__inner { gap: 12px; }
   .proto-header__right { gap: 4px; }
   .proto .proto-account { min-width: 40px; gap: 0; justify-content: center; }
   .proto-menu-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .proto-menu-btn { min-width: 44px; justify-content: center; }
-  .proto .proto-wordmark { font-size: 1rem; }
   .proto-account span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   /* Icônes seules : le libellé apparaît au focus clavier, sous l'icône. */
   .proto .proto-account { position: relative; }
@@ -290,11 +284,10 @@ main:focus-visible { outline: none; }
     top: calc(100% + 4px); right: 0; padding: 4px 8px; background: var(--brand-yellow); color: var(--brand-navy); font-size: 0.8125rem;
   }
 }
-.proto-wordmark__dot { width: 12px; height: 12px; background: var(--brand-yellow); border-radius: 50%; }
 .proto-header__right { margin-left: auto; display: flex; gap: var(--s3); }
 .proto .proto-account { display: inline-flex; align-items: center; gap: 8px; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.875rem; min-height: 44px; }
 .proto-account svg { color: var(--brand-yellow); }
-.proto .proto-account:hover, .proto .proto-wordmark:hover { color: #fff; text-decoration: underline; }
+.proto .proto-account:hover { color: #fff; text-decoration: underline; }
 .proto .proto-account[aria-current='page'] { box-shadow: inset 0 -3px 0 var(--brand-yellow); }
 .proto-menu { display: none; background: var(--brand-navy); border-top: 1px solid rgba(255, 255, 255, 0.2); }
 .proto-menu.is-open { display: block; }
@@ -565,6 +558,7 @@ legend { padding: 0; }
 .removed ul { padding-left: 1.25rem; }
 .empty { padding: var(--s3); background: var(--surface-muted); margin-bottom: var(--s3); }
 .step__actions--wrap { flex-wrap: wrap; }
+.step__actions--back { margin-top: var(--s4); padding-top: var(--s3); border-top: 1px solid var(--border-neutral); }
 
 /* Cas 3 : article */
 .article-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s4); align-items: start; }
@@ -1196,7 +1190,7 @@ legend { padding: 0; }
   .bar-switch__opt { min-height: 30px; }
 }
 
-/* Ma démarche SEO / GEO : hero, démarrage, piliers, 90 premiers jours, pilotage */
+/* SEO / GEO : quelques pistes */
 .seo-block p, .seo-block li, .seo-block dd, .seo-hero p { text-wrap: pretty; }
 .pf .seo-hero__title { max-width: 24ch; }
 .seo-goals { list-style: none; padding: 0; margin: var(--s3) 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }

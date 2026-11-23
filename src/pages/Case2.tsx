@@ -478,6 +478,9 @@ export function Case2({ path }: { path: string }) {
             </Link>
             <button type="button" className="btn btn--link" onClick={() => go('program')}><ArrowLeft size={18} /> Revenir à mon programme</button>
           </div>
+          <div className="step__actions step__actions--back">
+            <Link to="/espace" className="btn btn--outline"><ArrowLeft size={18} /> Retour à mon espace</Link>
+          </div>
         </div>
       )
       break

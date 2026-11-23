@@ -56,9 +56,9 @@ const WORKS: {
     n: '04',
     to: '/plan-seo',
     mission: 'Acquisition',
-    title: 'Ma démarche SEO / GEO',
-    text: 'Ma méthode et une piste illustrée, à discuter avec l’équipe.',
-    cta: 'Découvrir la démarche',
+    title: 'SEO / GEO\u00a0: quelques pistes',
+    text: 'Mes habitudes de travail et une piste illustrée, à discuter avec l’équipe.',
+    cta: 'Découvrir les pistes',
     color: 'tint',
     scene: 'document',
     tone: 'blue',
@@ -126,7 +126,7 @@ export function Home() {
 
       <section className="pf-proof2" aria-labelledby="resultats">
         <div className="pf-container">
-          <h2 id="resultats" className="pf-proof2__title">Des résultats concrets sur les projets que je{' '}pilote</h2>
+          <h2 id="resultats" className="pf-proof2__title">Quelques résultats obtenus en{' '}équipe</h2>
           <ul className="pf-proof2__list">
             {RESULTS.map((r) => (
               <li key={r.figure}>

@@ -1,6 +1,6 @@
 /**
- * Module « Ma démarche SEO / GEO ».
- * Ma façon de travailler, illustrée par quelques pistes à discuter avec l'équipe.
+ * Module « SEO / GEO : quelques pistes ».
+ * Mes habitudes de travail, illustrée par quelques pistes à discuter avec l'équipe.
  * Aucun constat sur apec.fr, aucun plan d'action, aucune donnée interne de l'Apec.
  *
  * Règles :
@@ -157,7 +157,7 @@ export const OBJECTIVES = [
   { title: 'Conversion mesurée', text: 'Suivre ce que le SEO / GEO produit vraiment : comptes, inscriptions, rendez-vous, candidatures.' },
 ]
 
-/* ------------------------------ Ma façon de travailler ------------------------------ */
+/* ------------------------------ Comment j'ai l'habitude de travailler ------------------------------ */
 
 export const WAYS = [
   {

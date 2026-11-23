@@ -12,7 +12,7 @@ const labelOf = (id: RdvNeedId) => SITUATIONS.find((s) => s.id === id)!.label
 const START_LABEL = 'Je ne sais pas par où commencer'
 
 /** Lien vers les ateliers : vue « Tous » du cas 02 filtrée sur le format Atelier. */
-const WORKSHOPS = '/cas-02-ab-test?situation=tous&vue=piste&format=atelier'
+const WORKSHOPS = '/cas-02-ab-test?situation=tous&vue=piste3&format=atelier'
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
 

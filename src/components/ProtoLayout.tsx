@@ -155,10 +155,6 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
             >
               {open ? <Close /> : <Menu />} <span>Menu</span>
             </button>
-            <Link to="/cas-02-ab-test" className="proto-wordmark">
-              <span className="proto-wordmark__dot" aria-hidden="true" />
-              espace cadres
-            </Link>
             <span className="proto-header__right">
               <Link
                 to={servicesHref}

@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Case2Coulisses, CASE2_EVENTS } from '../components/Case2Coulisses'
 import { ProgramAction } from '../components/ProgramAction'
-import { ArrowRight } from '../components/Icons'
+import { ArrowLeft, ArrowRight } from '../components/Icons'
 import { PageBand } from '../components/PageBand'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { KindTag, KIND_TONE } from '../components/ServiceCard'
@@ -117,6 +117,9 @@ export function NextSteps({ path }: { path: string }) {
               </button>
             )}
             <Link to="/cas-02-ab-test" className="link-arrow">Voir tous nos services <ArrowRight size={18} /></Link>
+          </div>
+          <div className="step__actions step__actions--back">
+            <Link to="/espace" className="btn btn--outline"><ArrowLeft size={18} /> Retour à mon espace</Link>
           </div>
         </div>
       </div>
