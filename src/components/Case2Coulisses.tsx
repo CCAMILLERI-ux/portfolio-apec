@@ -40,23 +40,22 @@ export function Case2Coulisses() {
       <CrBlock title="Direction graphique">
         <p>
           De grandes icônes pour décider vite, des photos pour les services, où une personne accompagne, des
-          illustrations pour l’accueil et le suivi. Hypothèse à tester : des recommandations plus humaines augmentent
-          le taux d’inscriptions finalisées.
+          illustrations pour l’accueil et le suivi. Hypothèse à explorer avec l’équipe : des recommandations plus humaines
+          pourraient augmenter le taux d’inscriptions{'\u00a0'}finalisées.
         </p>
       </CrBlock>
       <CroGrid
         rubrics={{
           constat: (
             <p>
-              Après la création d’un compte, une personne qui connaît peu l’offre doit identifier seule les ateliers,
-              outils et accompagnements utiles. Le risque : un compte créé sans première action utile. C’est un point
-              de vigilance, pas un constat chiffré.
+              Après la création d’un compte, une personne qui découvre l’offre de l’Apec cherche par où commencer. Un
+              guidage court peut l’aider à trouver une première action utile, en complément des accès{'\u00a0'}existants.
             </p>
           ),
           hypothese: (
             <p>
               Si l’on propose, sans l’imposer, un guidage court qui aboutit à une première action concrète, alors
-              davantage de nouveaux inscrits pourraient utiliser un service. Hypothèse à tester.
+              davantage de nouveaux inscrits pourraient utiliser un service. Hypothèse à explorer avec{'\u00a0'}l’équipe.
             </p>
           ),
           modification: (

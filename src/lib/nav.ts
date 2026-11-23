@@ -25,7 +25,7 @@ export function caseLabelFor(from: string): string {
   if (from.startsWith('cas-3') || from === 'cas-1-seo' || from === 'remuneration') return 'Cas 01 · De la recherche Google aux services'
   if (from === 'etapes' || from === 'espace') return 'Cas 03 · Inscription accompagnée'
   if (from === 'plan-seo') return 'Ma démarche SEO / GEO'
-  return 'Cas 02 · Clarifier l’offre'
+  return 'Cas 02 · Présenter l’offre par situation'
 }
 
 export function safeFrom(from: string | null): string {

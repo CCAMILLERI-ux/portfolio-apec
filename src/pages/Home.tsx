@@ -1,4 +1,4 @@
-import { ArrowRight, Clock } from '../components/Icons'
+import { ArrowRight } from '../components/Icons'
 import { Illustration, type Tone } from '../components/Illustration'
 import { PortfolioLayout } from '../components/PortfolioLayout'
 import { Link } from '../lib/router'
@@ -14,7 +14,6 @@ const WORKS: {
   mission: string
   title: string
   text: string
-  duration: string
   cta: string
   color: 'navy' | 'yellow' | 'blue' | 'tint'
   scene: Scene
@@ -25,8 +24,7 @@ const WORKS: {
     to: '/cas-01-seo',
     mission: 'Acquisition',
     title: 'De la recherche Google aux services',
-    text: 'Un article SEO qui oriente vers les outils et accompagnements adaptés.',
-    duration: '1 min 30',
+    text: 'Un article SEO / GEO qui oriente vers les outils et accompagnements adaptés.',
     cta: 'Explorer la démo',
     color: 'navy',
     scene: 'conseil',
@@ -36,9 +34,8 @@ const WORKS: {
     n: '02',
     to: '/cas-02-ab-test',
     mission: 'Performance &\u00a0conversion',
-    title: 'Clarifier l’offre pour faciliter le choix',
-    text: 'Un A/B test UX/UI pour rendre l’offre de services plus lisible.',
-    duration: '1 min 30',
+    title: 'Présenter l’offre par situation',
+    text: 'Un A/B test UX/UI pour présenter les services selon la situation de chacun.',
     cta: 'Explorer la démo',
     color: 'yellow',
     scene: 'boussole',
@@ -50,7 +47,6 @@ const WORKS: {
     mission: 'Performance &\u00a0conversion · Animation',
     title: 'Inscription accompagnée',
     text: 'Un tunnel guidé, de la création de compte au premier service utilisé.',
-    duration: '2 min',
     cta: 'Explorer la démo',
     color: 'blue',
     scene: 'echange',
@@ -62,7 +58,6 @@ const WORKS: {
     mission: 'Acquisition',
     title: 'Ma démarche SEO / GEO',
     text: 'Méthode, piliers SEO et GEO, démonstration et premiers 90 jours.',
-    duration: '2 min',
     cta: 'Découvrir la démarche',
     color: 'tint',
     scene: 'document',
@@ -74,7 +69,7 @@ const WORKS: {
 const RESULTS = [
   { figure: '83 %', text: 'conformité SEO technique des sites dont je pilote la stratégie SEO' },
   { figure: '× 2', text: 'conversion du tunnel de création de compte d’un espace client B2B, grâce à l’UX et aux A/B tests' },
-  { figure: '70 %', text: 'des comptes clients de cet espace créés en ligne' },
+  { figure: '70 %', text: 'des comptes clients créés en ligne via cet espace\u00a0client' },
   { figure: '3,6 M€', text: 'de chiffre d’affaires digital généré par cet espace client' },
   { figure: '17 000', text: 'contacts par an générés par la refonte d’un moteur de recherche B2B, devenu un levier de génération de leads' },
   { figure: '7 sites', text: 'et plus de 25 services digitaux pilotés avec la DSI et 6 agences' },
@@ -89,8 +84,8 @@ export function Home() {
           Rendre apec.fr toujours plus fluide, utile et{' '}performant
         </h1>
         <p className="pf-hero2__text">
-          Quatre réalisations autour des missions du poste{' '}: acquisition SEO, performance et conversion,
-          animation du{' '}site.
+          Quatre réalisations autour des missions du poste{'\u00a0'}: acquisition SEO / GEO, performance et conversion,
+          animation du{'\u00a0'}site.
         </p>
       </section>
 
@@ -107,7 +102,6 @@ export function Home() {
               <h3 className="pf-rcard__title">{w.title}</h3>
               <p className="pf-rcard__text">{w.text}</p>
               <div className="pf-rcard__foot">
-                <span className="pf-rcard__duration"><Clock size={14} /> {w.duration}<span className="visually-hidden"> (durée indicative)</span></span>
                 <Link to={w.to} className="pf-rcard__btn">
                   {w.cta}<span className="visually-hidden"> — réalisation {w.n}{' '}: {w.title}</span> <ArrowRight size={16} />
                 </Link>
@@ -121,8 +115,9 @@ export function Home() {
         <h2 id="a-propos" className="pf-about__title" tabIndex={-1}>À propos de moi</h2>
         <p className="pf-about__text">
           Cheffe de projet digital et Product Owner, je pilote des sites et services web de bout en bout{' '}: roadmap
-          d’animation, SEO, parcours utilisateurs, A/B tests et déploiement dans le CMS. Je coordonne les métiers, la DSI
-          et les agences, avec un fil rouge{' '}: améliorer l’expérience utilisateur, mesures à{' '}l’appui.
+          d’animation, SEO / GEO, parcours utilisateurs, A/B tests et déploiement dans le CMS. Je coordonne les métiers, la DSI
+          et les agences, avec un fil rouge{'\u00a0'}: améliorer l’expérience utilisateur, mesures à l’appui. J’aime travailler en
+          équipe, proposer des pistes et les tester{'\u00a0'}ensemble.
         </p>
         <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="pf-about__btn">
           Voir mon profil LinkedIn<span className="visually-hidden"> (nouvel onglet)</span> <ArrowRight size={16} />

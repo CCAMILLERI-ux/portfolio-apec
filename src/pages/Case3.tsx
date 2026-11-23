@@ -229,13 +229,13 @@ export function Case3Coulisses() {
         <p>
           Page conseil originale, rédigée pour ce portfolio, sans statistique citée. Les services mentionnés renvoient aux
           fiches du prototype, rédigées à partir des pages d’apec.fr. La page « rémunération » est un contenu
-          connexe court, pas une page de remplissage.
+          connexe court, utile au{'\u00a0'}lecteur.
         </p>
       </CrBlock>
-      <CrBlock title="Solutions recommandées : ordre et provenance">
+      <CrBlock title="Services proposés : ordre et provenance">
         <p>
-          Les services sont regroupés par besoin (s’entraîner, parler salaire, préparer ses questions) pour éviter
-          la surcharge de choix{'\u00a0'}; les services selon le profil et en amont de l’entretien sont proposés en
+          Les services sont regroupés par besoin (s’entraîner, parler salaire, préparer ses questions) pour garder
+          un choix simple{'\u00a0'}; les services selon le profil et en amont de l’entretien sont proposés en
           liens internes.
         </p>
         <p>
@@ -259,29 +259,29 @@ export function Case3Coulisses() {
         constat: (
           <p>
             Une personne qui tape « comment préparer un entretien » cherche d’abord une réponse, pas un
-            service. Sur apec.fr, les contenus et les services existent mais sont reliés surtout par
-            des blocs latéraux génériques.
+            service. Les contenus et les services de l’Apec peuvent ensuite prolonger cette réponse, au moment
+            où elle en a{'\u00a0'}besoin.
           </p>
         ),
         hypothese: (
           <p>
             Si la page répond directement au besoin puis propose, au bon endroit du texte, l’accompagnement
             qui correspond à la situation (seul, en groupe, entretien fixé), alors davantage de lecteurs
-            pourraient utiliser un service. Hypothèse à tester.
+            pourraient utiliser un service. Hypothèse à explorer avec{'\u00a0'}l’équipe.
           </p>
         ),
         modification: (
           <ul>
             <li>Introduction qui répond en quelques lignes, puis sommaire.</li>
             <li>Liens intégrés au texte, avec ancres descriptives et différenciées selon la situation.</li>
-            <li>Bloc final en trois besoins, puis deux lignes de liens internes, sans liste de liens artificielle.</li>
-            <li>Contenu connexe court (rémunération) plutôt que des pages de remplissage.</li>
+            <li>Bloc final en trois besoins, puis deux lignes de liens internes.</li>
+            <li>Contenu connexe court (rémunération), utile au lecteur.</li>
           </ul>
         ),
         kpi: (
           <>
-            <p><strong>KPI principal :</strong> conversions issues des entrées SEO (inscription à un atelier, rendez-vous réservé, usage d’un outil), pas seulement les visites.</p>
-            <p><strong>Diagnostics :</strong> impressions, clics et CTR (Search Console), clics sur les liens contextuels.</p>
+            <p><strong>KPI principal :</strong> conversions issues des entrées SEO / GEO (inscription à un atelier, rendez-vous réservé, usage d’un outil), pas seulement les visites.</p>
+            <p><strong>Indicateurs de suivi :</strong> impressions, clics et CTR (Search Console), clics sur les liens contextuels.</p>
             <p><strong>Qualité :</strong> présence effective, satisfaction. <strong>Garde-fous :</strong> accessibilité, temps de chargement.</p>
           </>
         ),
@@ -289,7 +289,7 @@ export function Case3Coulisses() {
           <ul>
             <li>Rédaction / experts métier : exactitude des conseils, date de mise à jour.</li>
             <li>Équipes produit : maillage interne et gabarits dans le CMS.</li>
-            <li>SEO / webanalyste : suivi Search Console et attribution des conversions.</li>
+            <li>SEO / GEO et webanalyste : suivi Search Console et attribution des conversions.</li>
             <li>Juridique / conformité : mentions sur les services et leurs conditions.</li>
           </ul>
         ),
@@ -308,7 +308,7 @@ export function Case3Coulisses() {
           <li>questions entretien d’embauche</li>
           <li>s’entraîner entretien d’embauche</li>
         </ul>
-        <p className="muted small">Aucun volume de recherche ni classement : à évaluer avec les outils SEO de l’équipe.</p>
+        <p className="muted small">Aucun volume de recherche ni classement : à évaluer avec les outils SEO / GEO de{'\u00a0'}l’équipe.</p>
       </section>
 
       <section className="cr-block cr-block--wide">
@@ -362,7 +362,7 @@ export function Case3Coulisses() {
       </section>
 
       <section className="cr-block cr-block--wide">
-        <h3>Complément : anticiper la recherche avec IA</h3>
+        <h3>Complément : visibilité dans les IA (GEO)</h3>
         <ul className="plus-list">
           <li><Plus size={16} className="plus" /> Réponse claire dès l’introduction, reformulable telle quelle.</li>
           <li><Plus size={16} className="plus" /> Expertise identifiable : auteur ou équipe, date de mise à jour.</li>
@@ -384,7 +384,7 @@ export function Case3Coulisses() {
               <tr><th scope="col">Canal</th><th scope="col">Message</th><th scope="col">Destination</th><th scope="col">Contributeur à mobiliser</th><th scope="col">Marquage</th></tr>
             </thead>
             <tbody>
-              <tr><td>SEO</td><td>La méthode en 5 étapes</td><td>Page conseil</td><td>Rédaction, SEO</td><td>— (organique)</td></tr>
+              <tr><td>SEO / GEO</td><td>La méthode en 5 étapes</td><td>Page conseil</td><td>Rédaction, SEO / GEO</td><td>— (organique)</td></tr>
               <tr><td>SEA</td><td>S’entraîner avant un entretien</td><td>Page conseil, ancre accompagnement</td><td>Équipe acquisition</td><td><code>utm_source</code>, <code>utm_campaign</code></td></tr>
               <tr><td>CRM</td><td>Un entretien prévu ? Préparez-le</td><td>Fiche simulation individuelle</td><td>Marketing relationnel</td><td><code>utm_medium=email</code></td></tr>
               <tr><td>Réseaux sociaux</td><td>3 questions à préparer</td><td>Page conseil, section questions</td><td>Communication</td><td><code>utm_medium=social</code></td></tr>
