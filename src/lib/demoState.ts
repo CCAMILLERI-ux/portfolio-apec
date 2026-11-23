@@ -14,7 +14,7 @@ export interface OnboardingState {
   recs: string[]
   /** Services ajoutés par le candidat à son programme, dans l'ordre d'ajout. */
   program: string[]
-  /** Services retirés du programme depuis « Mes prochaines étapes » (rétablissables). */
+  /** Services retirés du programme depuis « Mes services sélectionnés » (rétablissables). */
   removed: string[]
 }
 

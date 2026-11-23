@@ -17,7 +17,7 @@ const TITLES: Record<string, string> = {
   '/': 'Accueil',
   '/cas-02-ab-test': 'Cas 02 — Présenter l’offre par situation',
   '/cas-03-inscription': 'Cas 03 — Inscription accompagnée',
-  '/cas-03-inscription/prochaines-etapes': 'Cas 03 — Mes prochaines étapes',
+  '/cas-03-inscription/services-selectionnes': 'Cas 03 — Mes services sélectionnés',
   '/espace': 'Cas 03 — Mon espace',
   '/cas-01-seo': 'Cas 01 — Préparer un entretien de recrutement',
   '/conseil/remuneration': 'Cas 01 — Aborder la rémunération',
@@ -28,7 +28,8 @@ const TITLES: Record<string, string> = {
 const LEGACY: Record<string, string> = {
   '/cas-1': '/cas-02-ab-test',
   '/cas-2': '/cas-03-inscription',
-  '/cas-2/prochaines-etapes': '/cas-03-inscription/prochaines-etapes',
+  '/cas-2/prochaines-etapes': '/cas-03-inscription/services-selectionnes',
+  '/cas-03-inscription/prochaines-etapes': '/cas-03-inscription/services-selectionnes',
   '/cas-3': '/cas-01-seo',
   '/sources': '/design-system',
 }
@@ -88,7 +89,7 @@ export default function App() {
   else if (path === '/cas-02-ab-test') page = <Case1 route={route} />
   else if (path === '/espace') page = <Espace path={path} />
   else if (path === '/cas-03-inscription') page = <Case2 path={path} />
-  else if (path === '/cas-03-inscription/prochaines-etapes') page = <NextSteps path={path} />
+  else if (path === '/cas-03-inscription/services-selectionnes') page = <NextSteps path={path} />
   else if (path === '/cas-01-seo') page = <Case3 path={path} />
   else if (path === '/conseil/remuneration') page = <Remuneration path={path} />
   else if (path === '/design-system') page = <DesignSystem />

@@ -13,7 +13,7 @@ import { nb } from '../lib/text'
 import { ALEX_PRESET, NEED_OPTIONS, SITUATION_OPTIONS, recommend, TOP_COUNT, type Need } from '../data/onboarding'
 import { Picto } from '../components/Picto'
 import { WorkshopSignup } from '../components/WorkshopSignup'
-import { isBookable, ProgramAction, toBook } from '../components/ProgramAction'
+import { isBookable, ProgramAction, SELECTION_PATH, selectionCounts, selectionSummary } from '../components/ProgramAction'
 import type { Service } from '../data/services'
 import { getService } from '../data/services'
 import { INITIAL_ONBOARDING, useBookings, useOnboarding, type OnboardingStep } from '../lib/demoState'
@@ -387,7 +387,7 @@ export function Case2({ path }: { path: string }) {
           </p>
           <div className="step__actions">
             <button type="button" className="btn btn--link" onClick={() => go('needs')}><ArrowLeft size={18} /> Modifier mes réponses</button>
-            <Link to="/cas-03-inscription/prochaines-etapes" className="btn btn--outline">Mon espace</Link>
+            <Link to="/espace" className="btn btn--outline">Mon espace</Link>
           </div>
         </div>
       )
@@ -446,12 +446,12 @@ export function Case2({ path }: { path: string }) {
       break
 
     case 'confirm': {
-      const remaining = toBook(program, bookings, getService)
+      const counts = selectionCounts(program, bookings, getService)
       body = chosen ? bookingView('Revenir à la confirmation') : (
         <div className="step confirm">
           <span className="confirm__check" aria-hidden="true"><Check size={44} /></span>
           {heading(<>C’est noté, Alex{'\u00a0'}!</>, 'step__title confirm__title')}
-          <p>Votre programme compte {countLabel(program.length).replace(' dans mon programme', '')}{'\u00a0'}:</p>
+          <h3 className="h3-like confirm__sub">Mes services sélectionnés ({program.length})</h3>
           <ul className="program-recap">
             {program.map((id) => {
               const s = getService(id)!
@@ -467,14 +467,10 @@ export function Case2({ path }: { path: string }) {
             })}
           </ul>
           <p className="visually-hidden" role="status" aria-live="polite">{status}</p>
-          <p>
-            {remaining.length > 0
-              ? <>Vous pouvez réserver maintenant ou plus tard depuis «{'\u00a0'}Mes prochaines{'\u00a0'}étapes{'\u00a0'}».</>
-              : <>Tout est réservé. Retrouvez votre programme dans «{'\u00a0'}Mes prochaines{'\u00a0'}étapes{'\u00a0'}».</>}
-          </p>
+          <p className="confirm__summary" aria-live="polite">{selectionSummary(counts)}</p>
           <div className="step__actions">
-            <Link to="/cas-03-inscription/prochaines-etapes" className="btn btn--primary" onClick={() => track('onboarding_step_complete', 'confirm')}>
-              Mes prochaines étapes <ArrowRight size={18} />
+            <Link to={SELECTION_PATH} className="btn btn--primary" onClick={() => track('onboarding_step_complete', 'confirm')}>
+              Voir mes services sélectionnés <ArrowRight size={18} />
             </Link>
             <button type="button" className="btn btn--link" onClick={() => go('program')}><ArrowLeft size={18} /> Revenir à mon programme</button>
           </div>

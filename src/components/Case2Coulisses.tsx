@@ -21,7 +21,7 @@ export function Case2Coulisses() {
           </li>
           <li>La situation et les besoins sont pré-remplis d’après ce scénario ; tout est modifiable.</li>
           <li>L’âge n’est ni demandé ni utilisé : les recommandations reposent uniquement sur les réponses.</li>
-          <li>« Mes prochaines étapes » utilise une sauvegarde locale de démonstration, effacée par « Réinitialiser la démo » (barre du haut). « Mon espace » est la page d’accueil de l’espace de démonstration.</li>
+          <li>« Mes services sélectionnés » utilise une sauvegarde locale de démonstration, effacée par « Réinitialiser la démo » (barre du haut). « Mon espace » est la page d’accueil de l’espace de démonstration.</li>
         </ul>
       </CrBlock>
       <CrBlock title="Mon espace">
@@ -64,7 +64,7 @@ export function Case2Coulisses() {
               <li>Trois questions, puis des recommandations, chacune justifiée.</li>
               <li>Règles déterministes lisibles (pas d’IA).</li>
               <li>Le candidat compose son programme{'\u00a0'}: trois suggestions mises en avant, les autres services pertinents accessibles, plusieurs choix possibles.</li>
-              <li>Aide humaine en alternative (Rendez-vous conseil), page « Mes prochaines étapes ».</li>
+              <li>Aide humaine en alternative (Rendez-vous conseil), page « Mes services sélectionnés » (à réserver, réservés, outils à utiliser).</li>
             </ul>
           ),
           kpi: (

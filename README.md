@@ -9,7 +9,7 @@ Portfolio de candidature au poste de Chef de projet animation web. Un seul site 
 | Cas | Démo | Compétences illustrées |
 | --- | --- | --- |
 | 02 (`#/cas-02-ab-test`) | **Présenter l’offre par situation** — anciennement « Clarifier l’offre pour faciliter le choix » : entrée par situation, cartes de services, bascule « Version actuelle / Piste exploratoire » | UX/UI, animation du site, hypothèse CRO |
-| 03 (`#/cas-03-inscription`) | **Accompagner l’utilisateur à chaque étape de son inscription** — anciennement « Guider un nouvel inscrit » : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes prochaines étapes » | Parcours, activation, recommandation déterministe |
+| 03 (`#/cas-03-inscription`) | **Accompagner l’utilisateur à chaque étape de son inscription** — anciennement « Guider un nouvel inscrit » : accueil guidé d’« Alex » (personnage fictif), recommandations explicables, réservation simulée, « Mes services sélectionnés » | Parcours, activation, recommandation déterministe |
 | 01 (`#/cas-01-seo`) | **De la recherche Google à l’utilisation des services** — anciennement « Relier une recherche à un accompagnement » : page conseil « Comment préparer un entretien de recrutement ? », maillage interne, compléments SEO, GEO et coordination multicanale | SEO éditorial, maillage, acquisition |
 
 ## SEO / GEO : quelques pistes
@@ -35,7 +35,7 @@ La colonne latérale et le bas de l’article présentent la même liste, dans l
 - **Prototypes** : univers inspiré d’apec.fr (bleu nuit, jaune, bleu ; Montserrat), **sans aucune explication dans les écrans utilisateur**.
 - **Coulisses du prototype** : masquées par défaut, affichées uniquement au clic sur « Comprendre ce cas », sous le pied de page, dans l’univers portfolio. Elles regroupent la mention d’indépendance, le retour au portfolio, la réinitialisation, la méthode (constat, hypothèse, modification, KPI et garde-fous, équipes), la provenance des informations et le journal local.
 - **Barre de démo** (univers portfolio), en haut de page et hors maquette : « Retour au portfolio », nom du cas, choix de variante (cas 1 : Version actuelle / Piste 1 / Piste 2 / Piste 3), « Comprendre ce cas » (affiche ou masque les coulisses) et « Réinitialiser la démo ». Pendant et après une réservation, elle affiche « Réservation simulée… » puis « Simulation terminée — aucun rendez-vous réel n’a été réservé ».
-- **Mon espace** : page d’accueil de l’espace fictif d’Alex (guidage, prochaines étapes, rendez-vous, services, conseils).
+- **Mon espace** : page d’accueil de l’espace fictif d’Alex (guidage, services sélectionnés, rendez-vous, services, conseils).
 
 ## Installation et lancement
 
@@ -72,7 +72,7 @@ Le `noindex` est porté par la balise meta de chaque page. Le `robots.txt` du do
 ## Parcours de démo en cinq minutes
 
 1. **Accueil** : trois cartes, un clic par cas.
-2. **Cas 03 (≈ 2 min)** : « Me guider » → la situation est présélectionnée (modifiable) → cocher « Préparer un entretien », puis « Oui, dans les prochains jours » → les recommandations changent et s’expliquent (« Pourquoi ce service ? ») → « Commencer par ce service » → choisir un créneau fictif → récapitulatif → valider → « Simulation terminée — aucun rendez-vous réel n’a été réservé » → « Mes prochaines étapes » (retirer, modifier ses besoins, reprendre, remettre à zéro).
+2. **Cas 03 (≈ 2 min)** : « Me guider » → la situation est présélectionnée (modifiable) → cocher « Préparer un entretien », puis « Oui, dans les prochains jours » → les recommandations changent et s’expliquent (« Pourquoi ce service ? ») → « Commencer par ce service » → choisir un créneau fictif → récapitulatif → valider → « Simulation terminée — aucun rendez-vous réel n’a été réservé » → « Mes services sélectionnés » (retirer, modifier ses besoins, reprendre, remettre à zéro).
 3. **Cas 02 (≈ 1 min 30)** : changer de situation (« Je recrute et j’ai besoin d’aide ») puis comparer « Version actuelle », « Piste 1 » (visuels illustrés), « Piste 2 » (aide au choix) et « Piste 3 » (photos, ateliers mis en avant) depuis la barre du haut.
 4. **Cas 01 (≈ 1 min 30)** : lire l’introduction, suivre « simulation individuelle d’1 h » puis revenir avec la flèche du bandeau ; bouton « Comprendre ce cas » de la barre du haut pour le maillage, l’aperçu du titre, le GEO et la coordination.
 
