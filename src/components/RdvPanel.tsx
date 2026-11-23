@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { getService } from '../data/services'
-import { RDV_COUNT, RDV_NEEDS, RDV_START, RDV_START_ID, type RdvMotif, type RdvNeedId } from '../data/rendezVous'
+import { RDV_NEEDS, RDV_START, RDV_START_ID, type RdvMotif, type RdvNeedId } from '../data/rendezVous'
 import { SITUATION_ICON, SITUATIONS } from '../data/situations'
 import { navigate, useRoute } from '../lib/router'
 import { track } from '../lib/storage'
@@ -29,6 +29,14 @@ export function RdvPanel({ onClose }: { onClose: (restoreFocus?: boolean) => voi
   const initial = RDV_NEEDS.find((n) => n.id === fromServices)?.id ?? RDV_NEEDS[0].id
   const [need, setNeed] = useState<RdvNeedId>(initial)
   const [showAll, setShowAll] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+  const toggled = useRef(false)
+  // Ouverture : focus sur le premier séparateur ; fermeture : focus rendu au bouton.
+  useEffect(() => {
+    if (!toggled.current) { toggled.current = true; return }
+    if (showAll) document.getElementById(`rdv-g-${RDV_NEEDS[0].id}`)?.focus()
+    else toggleRef.current?.focus()
+  }, [showAll])
   const panelRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
   const current = RDV_NEEDS.find((n) => n.id === need)!
@@ -77,6 +85,9 @@ export function RdvPanel({ onClose }: { onClose: (restoreFocus?: boolean) => voi
         <div className="rdv__body">
           <p className="rdv__lead">Un échange en tête-à-tête avec un consultant Apec, sur le sujet de votre{' '}choix.</p>
 
+          {/* Vue par défaut (situations, porte d'entrée, motifs filtrés) et vue complète s'excluent : aucun motif en double. */}
+          {!showAll && (
+            <>
           <fieldset className="rdv-needs">
             <legend className="rdv__step">1. Quel est votre besoin{' '}?</legend>
             <div className="rdv-needs__grid">
@@ -109,22 +120,25 @@ export function RdvPanel({ onClose }: { onClose: (restoreFocus?: boolean) => voi
             <MotifList motifs={current.motifs} onChoose={choose} />
           </section>
 
+            </>
+          )}
+
           <div className="rdv-more">
-            <button type="button" className="rdv-more__toggle" aria-expanded={showAll} aria-controls="rdv-tous" onClick={() => setShowAll((v) => !v)}>
-              {showAll ? 'Masquer' : 'Voir'} les {RDV_COUNT} motifs de rendez-vous
+            <button ref={toggleRef} type="button" className="rdv-more__toggle" aria-expanded={showAll} aria-controls="rdv-tous" onClick={() => setShowAll((v) => !v)}>
+              {showAll ? 'Masquer les motifs de rendez-vous' : 'Voir tous les motifs de rendez-vous'}
               <ArrowRight size={18} className={`rdv-more__chev${showAll ? ' is-open' : ''}`} />
             </button>
             <div id="rdv-tous" hidden={!showAll}>
-              {RDV_NEEDS.map((n) => (
+              {showAll && RDV_NEEDS.map((n) => (
                 <section key={n.id} className="rdv-group" aria-labelledby={`rdv-g-${n.id}`}>
-                  <h4 id={`rdv-g-${n.id}`} className="rdv-group__title">{labelOf(n.id)}</h4>
-                  <MotifList motifs={n.motifs} onChoose={choose} level={5} />
+                  <h3 id={`rdv-g-${n.id}`} className="rdv-group__title" tabIndex={-1}>{labelOf(n.id)}</h3>
+                  <MotifList motifs={n.motifs} onChoose={choose} level={4} />
                 </section>
               ))}
-              <section className="rdv-group" aria-labelledby="rdv-g-debut">
-                <h4 id="rdv-g-debut" className="rdv-group__title">{START_LABEL}</h4>
-                <MotifList motifs={[RDV_START]} onChoose={choose} level={5} />
-              </section>
+              {showAll && <section className="rdv-group" aria-labelledby="rdv-g-debut">
+                <h3 id="rdv-g-debut" className="rdv-group__title">{START_LABEL}</h3>
+                <MotifList motifs={[RDV_START]} onChoose={choose} level={4} />
+              </section>}
             </div>
           </div>
 

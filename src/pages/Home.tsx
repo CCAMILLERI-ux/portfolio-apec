@@ -116,6 +116,18 @@ export function Home() {
         </ol>
       </section>
 
+      <section className="pf-container pf-about" aria-labelledby="a-propos">
+        <h2 id="a-propos" className="pf-about__title" tabIndex={-1}>À propos de moi</h2>
+        <p className="pf-about__text">
+          Cheffe de projet digital et Product Owner, je pilote des sites et services web de bout en bout{' '}: roadmap
+          d’animation, SEO, parcours utilisateurs, A/B tests et déploiement dans le CMS. Je coordonne les métiers, la DSI
+          et les agences, avec un fil rouge{' '}: améliorer l’expérience utilisateur, mesures à{' '}l’appui.
+        </p>
+        <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="pf-about__btn">
+          Voir mon profil LinkedIn<span className="visually-hidden"> (nouvel onglet)</span> <ArrowRight size={16} />
+        </a>
+      </section>
+
       <section className="pf-proof2" aria-labelledby="resultats">
         <div className="pf-container">
           <h2 id="resultats" className="pf-proof2__title">Des résultats concrets sur les projets que je{' '}pilote</h2>
@@ -128,18 +140,6 @@ export function Home() {
             ))}
           </ul>
         </div>
-      </section>
-
-      <section className="pf-container pf-about" aria-labelledby="a-propos">
-        <h2 id="a-propos" className="pf-about__title" tabIndex={-1}>À propos de moi</h2>
-        <p className="pf-about__text">
-          Cheffe de projet digital et Product Owner, je pilote des sites et services web de bout en bout{' '}: roadmap
-          d’animation, SEO, parcours utilisateurs, A/B tests et déploiement dans le CMS. Je coordonne les métiers, la DSI
-          et les agences, avec un fil rouge{' '}: améliorer l’expérience utilisateur, mesures à{' '}l’appui.
-        </p>
-        <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="pf-about__btn">
-          Voir mon profil LinkedIn<span className="visually-hidden"> (nouvel onglet)</span> <ArrowRight size={16} />
-        </a>
       </section>
     </PortfolioLayout>
   )
