@@ -25,7 +25,7 @@ const WORKS: {
     to: '/cas-01-seo',
     mission: 'Acquisition',
     title: 'De la recherche Google aux services',
-    text: 'Un article SEO qui oriente vers les outils et accompagnements adaptés.',
+    text: 'Un article SEO / GEO qui oriente vers les outils et accompagnements adaptés.',
     duration: '1 min 30',
     cta: 'Explorer la démo',
     color: 'navy',
@@ -36,8 +36,8 @@ const WORKS: {
     n: '02',
     to: '/cas-02-ab-test',
     mission: 'Performance &\u00a0conversion',
-    title: 'Clarifier l’offre pour faciliter le choix',
-    text: 'Un A/B test UX/UI pour rendre l’offre de services plus lisible.',
+    title: 'Présenter l’offre par situation',
+    text: 'Un A/B test UX/UI pour présenter les services selon la situation de chacun.',
     duration: '1 min 30',
     cta: 'Explorer la démo',
     color: 'yellow',
@@ -89,8 +89,8 @@ export function Home() {
           Rendre apec.fr toujours plus fluide, utile et{' '}performant
         </h1>
         <p className="pf-hero2__text">
-          Quatre réalisations autour des missions du poste{' '}: acquisition SEO, performance et conversion,
-          animation du{' '}site.
+          Quatre réalisations autour des missions du poste{'\u00a0'}: acquisition SEO / GEO, performance et conversion,
+          animation du{'\u00a0'}site.
         </p>
       </section>
 
@@ -121,8 +121,9 @@ export function Home() {
         <h2 id="a-propos" className="pf-about__title" tabIndex={-1}>À propos de moi</h2>
         <p className="pf-about__text">
           Cheffe de projet digital et Product Owner, je pilote des sites et services web de bout en bout{' '}: roadmap
-          d’animation, SEO, parcours utilisateurs, A/B tests et déploiement dans le CMS. Je coordonne les métiers, la DSI
-          et les agences, avec un fil rouge{' '}: améliorer l’expérience utilisateur, mesures à{' '}l’appui.
+          d’animation, SEO / GEO, parcours utilisateurs, A/B tests et déploiement dans le CMS. Je coordonne les métiers, la DSI
+          et les agences, avec un fil rouge{'\u00a0'}: améliorer l’expérience utilisateur, mesures à l’appui. J’aime travailler en
+          équipe, proposer des pistes et les tester{'\u00a0'}ensemble.
         </p>
         <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="pf-about__btn">
           Voir mon profil LinkedIn<span className="visually-hidden"> (nouvel onglet)</span> <ArrowRight size={16} />

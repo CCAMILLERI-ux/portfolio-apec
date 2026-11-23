@@ -8,6 +8,9 @@ export function Coulisses({ events, hidden, children }: { events: string[]; hidd
     <section id="coulisses" className="coulisses" tabIndex={-1} aria-labelledby="coulisses-titre" hidden={hidden}>
       <div className="pf-container">
         <h2 id="coulisses-titre" className="coulisses__title">Coulisses du prototype</h2>
+        <p className="coulisses__lead">
+          Une proposition exploratoire, conçue comme une piste à discuter avec l’équipe, en complément de{'\u00a0'}l’existant.
+        </p>
         <p className="coulisses__hint">
           Retour au portfolio, réinitialisation et fermeture de ces explications : barre en haut de page.{' '}
           <Link to="/design-system" className="pf-link">Design system et sources</Link>
@@ -39,11 +42,11 @@ export interface CroRubrics {
 }
 
 const LABELS: [keyof CroRubrics, string][] = [
-  ['constat', '1. Besoin utilisateur et constat observable'],
-  ['hypothese', '2. Hypothèse (à tester, sans gain affirmé)'],
-  ['modification', '3. Modification proposée'],
+  ['constat', '1. Besoin utilisateur'],
+  ['hypothese', '2. Hypothèse à explorer avec l’équipe'],
+  ['modification', '3. Piste proposée'],
   ['kpi', '4. KPI et garde-fous'],
-  ['equipes', '5. Équipes et vérifications nécessaires'],
+  ['equipes', '5. Équipes à associer'],
 ]
 
 export function CroGrid({ rubrics }: { rubrics: CroRubrics }) {

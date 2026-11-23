@@ -158,7 +158,7 @@ export function SeoPlan({ route }: { route: Route }) {
           <div className="seo-acc__body">
             <dl className="seo-why">
               <div><dt>Besoin utilisateur</dt><dd>{nb('Se préparer à un entretien, avec ou sans entretien déjà fixé.')}</dd></div>
-              <div><dt>Hypothèse</dt><dd>{nb('Une réponse utile, accompagnée de propositions contextualisées, facilite la découverte et l’utilisation des services.')}</dd></div>
+              <div><dt>Hypothèse à explorer avec l’équipe</dt><dd>{nb('Une réponse utile, accompagnée de propositions contextualisées, facilite la découverte et l’utilisation des services.')}</dd></div>
               <div><dt>Réponse proposée</dt><dd>{nb('Une page conseil qui répond d’abord (méthode, checklist), puis trois aides selon la situation : seul, en groupe, avec un consultant.')}</dd></div>
               <div><dt>Maillage</dt><dd>{nb('Liens placés dans la section où ils répondent à un besoin (entraînement → simulateur, accompagnement → atelier et consultant, rémunération → ressource) ; retour des fiches vers la checklist.')}</dd></div>
               <div><dt>GEO</dt><dd>{nb('Une réponse structurée (méthode, checklist, questions-réponses) peut être reprise par les IA, avec un lien vers les services de l’Apec.')}</dd></div>

@@ -228,7 +228,7 @@ export const PILLARS: {
     summary: 'Répondre aux recherches comme aux questions posées aux IA.',
     seo: [
       'Partir des situations des cadres et des recruteurs, pas seulement des mots-clés.',
-      'Enrichir l’existant avant de créer de nouvelles pages.',
+      'Valoriser les contenus existants, en complément de nouvelles pages.',
     ],
     geo: [
       'Des réponses claires et structurées : questions-réponses, points clés en tête de page, données sourcées.',
@@ -277,7 +277,7 @@ export const KPI_GEO = [
 export const KPI_CONVERSION = ['Comptes créés', 'Inscriptions', 'Rendez-vous', 'Candidatures']
 
 export const AB_TESTS = [
-  'Titles et méta-descriptions d’un gabarit, pour améliorer le CTR.',
+  'Titles et méta-descriptions d’un gabarit, pour mesurer l’effet sur le CTR.',
   'Place et libellé des appels à l’action vers les services.',
   'Modules de maillage entre fiches métiers, offres et conseils.',
 ]

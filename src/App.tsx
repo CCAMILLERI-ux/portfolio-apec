@@ -15,7 +15,7 @@ import { DesignSystem } from './pages/DesignSystem'
 
 const TITLES: Record<string, string> = {
   '/': 'Accueil',
-  '/cas-02-ab-test': 'Cas 02 — Clarifier l’offre pour faciliter le choix',
+  '/cas-02-ab-test': 'Cas 02 — Présenter l’offre par situation',
   '/cas-03-inscription': 'Cas 03 — Inscription accompagnée',
   '/cas-03-inscription/prochaines-etapes': 'Cas 03 — Mes prochaines étapes',
   '/espace': 'Cas 03 — Mon espace',

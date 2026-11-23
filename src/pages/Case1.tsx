@@ -15,7 +15,7 @@ import { nb } from '../lib/text'
 
 type View = 'existant' | 'piste' | 'piste2' | 'piste3'
 const VIEWS: [View, string][] = [
-  ['existant', 'Existant observé'],
+  ['existant', 'Version actuelle'],
   ['piste', 'Piste 1'],
   ['piste2', 'Piste 2'],
   ['piste3', 'Piste 3'],
@@ -86,8 +86,8 @@ export function Case1({ route }: { route: Route }) {
       <div className="bar-switch">
       {VIEWS.map(([v, label]) => (
         <label key={v} className={`bar-switch__opt${view === v ? ' is-selected' : ''}`}>
-          <input type="radio" name="vue" value={v} checked={view === v} onChange={() => update({ vue: v })} />
-          {v === 'existant' ? <>Existant<span className="demo-bar__hide-sm"> observé</span></> : label}
+          <input type="radio" name="vue" value={v} checked={view === v} onChange={() => update({ vue: v })} aria-label={label} />
+          {v === 'existant' ? <><span className="demo-bar__hide-sm" aria-hidden="true">Version actuelle</span><span className="demo-bar__only-sm" aria-hidden="true">Actuelle</span></> : label}
         </label>
       ))}
       </div>
@@ -97,7 +97,7 @@ export function Case1({ route }: { route: Route }) {
   return (
     <ProtoLayout
       path={route.path}
-      caseLabel="Cas 02 · Clarifier l’offre"
+      caseLabel="Cas 02 · Présenter l’offre par situation"
       barControl={variantSwitch}
       events={['service_view', 'service_cta_click', 'booking_start', 'booking_complete_demo']}
       onReset={() => navigate('/cas-02-ab-test', { replace: true })}
@@ -350,40 +350,39 @@ function Case1Coulisses() {
   const tbc = SERVICES.filter((s) => s.titleProvenance === 'a-verifier')
   return (
     <>
-      <h3 className="coulisses__case">Cas 02 — Clarifier l’offre pour faciliter le choix</h3>
+      <h3 className="coulisses__case">Cas 02 — Présenter l’offre par situation</h3>
       <CrBlock title="Objectif du test">
         <p className="cr-kicker">Simulation d’A/B test UX/UI</p>
         <p>
-          <strong>Optimiser l’expérience utilisateur et la conversion.</strong> Comparer deux présentations des services
-          pour faciliter le choix. Test envisageable avec AB{'\u00a0'}Tasty.
+          <strong>Contribuer à l’expérience utilisateur et à la conversion.</strong> Comparer plusieurs présentations des
+          services, en complément de la version actuelle. Test envisageable avec AB{'\u00a0'}Tasty.
         </p>
       </CrBlock>
       <CrBlock title="Comment lire cette démo">
         <p>
-          La barre du haut bascule entre quatre variantes sur les mêmes services : <strong>Existant observé</strong>,
+          La barre du haut bascule entre quatre variantes sur les mêmes services : <strong>Version actuelle</strong>,
           <strong> Piste 1</strong>, <strong>Piste 2</strong> et <strong>Piste 3</strong>. C’est une simulation : aucun test A/B n’a été mené.
         </p>
         <p>
-          La vue « existant » reprend la présentation actuelle des services sur apec.fr (rubrique « Entretiens de
-          recrutement », novembre 2026). Le regroupement par situation n’existe pas aujourd’hui : c’est lui-même une
-          piste.
+          La vue « Version actuelle » reprend la présentation des services sur apec.fr (rubrique « Entretiens de
+          recrutement », novembre 2026). Le regroupement par situation est lui-même une piste à{'\u00a0'}explorer.
         </p>
       </CrBlock>
-      <CrBlock title="Hypothèses des trois pistes">
+      <CrBlock title="Hypothèses à explorer avec l’équipe">
         <ul>
           <li><strong>Piste 1 :</strong> des tuiles visuelles avec icônes facilitent le{'\u00a0'}repérage.</li>
           <li><strong>Piste 2 :</strong> une liste de décision (« Idéal si ») aide à choisir entre des services{'\u00a0'}proches.</li>
           <li><strong>Piste 3 :</strong> des photos rendent l’offre plus humaine et{'\u00a0'}rassurante.</li>
         </ul>
         <p>
-          Chaque piste teste une seule hypothèse face à l’existant{'\u00a0'}; l’indicateur principal est le taux de clic
+          Chaque piste explore une hypothèse, comparée à la version actuelle{'\u00a0'}; l’indicateur principal est le taux de clic
           vers un service, puis le taux d’inscription ou de rendez-vous{'\u00a0'}finalisé.
         </p>
       </CrBlock>
       <CrBlock title="Sélection des services">
         <p>
           Pour chaque situation, un rendez-vous individuel, un atelier et un outil, proposés ensemble sur une même
-          page : on ne sépare plus les outils des services, on part de la situation de l’utilisateur. Sélection
+          page : outils et services sont réunis, à partir de la situation de l’utilisateur. Sélection
           volontairement courte pour la{'\u00a0'}démonstration.
         </p>
         <p>
@@ -398,8 +397,8 @@ function Case1Coulisses() {
       </CrBlock>
       <CrBlock title="Vue « Tous nos services »">
         <p>
-          Variante testée : un classement par situation de l’utilisateur, avec le format en second niveau, plutôt qu’un
-          classement par nature d’outil. Chaque service apparaît une seule fois, dans sa situation.
+          Variante proposée : un classement par situation de l’utilisateur, avec le format en second niveau, en complément
+          du classement par nature d’outil. Chaque service apparaît une seule fois, dans sa situation.
           Indicateurs : clics vers un service depuis la vue Tous, puis inscriptions ou rendez-vous finalisés, comparés
           à la version{'\u00a0'}actuelle.
         </p>
@@ -408,7 +407,7 @@ function Case1Coulisses() {
         <div className="table-scroll">
           <table className="data-table">
             <caption className="visually-hidden">Comparaison des pistes</caption>
-            <thead><tr><th scope="col">Élément</th><th scope="col">Existant observé</th><th scope="col">Piste 1 — valoriser</th><th scope="col">Piste 2 — aider à choisir</th><th scope="col">Piste 3 — montrer l’humain</th></tr></thead>
+            <thead><tr><th scope="col">Élément</th><th scope="col">Version actuelle</th><th scope="col">Piste 1 — valoriser</th><th scope="col">Piste 2 — aider à choisir</th><th scope="col">Piste 3 — montrer l’humain</th></tr></thead>
             <tbody>
               <tr><td>Entrée</td><td>Par thème</td><td>Par situation</td><td>Par situation</td><td>Par situation</td></tr>
               <tr><td>Carte</td><td>Pictogramme, intitulé, phrase</td><td>Visuel coloré, accroche bénéfice, intitulé conservé</td><td><strong>Liste de décision</strong> : une ligne par service, pictogramme, accroche, <strong>« Idéal si… »</strong>, format</td><td><strong>Photo</strong> + étiquette du type d’aide</td></tr>
@@ -426,17 +425,16 @@ function Case1Coulisses() {
           photo (piste 3).
         </p>
         <p>
-          <strong>Ce que la piste 2 cherche à améliorer :</strong> la piste 1 montre mieux chaque service, mais laisse le
-          visiteur comparer seul. La piste 2 formule le critère de choix (« Idéal si… »), présente les services comme des
+          <strong>Ce que la piste 2 explore :</strong> la piste 1 met en avant chaque service{'\u00a0'}; la piste 2 y ajoute
+          une aide à la comparaison. Elle formule le critère de choix (« Idéal si… »), présente les services comme des
           options comparables, traite l’aide humaine comme une option à part entière et relie le choix à des contenus
-          utiles (maillage vers le cas 01). Hypothèse à tester : moins d’hésitation, pas forcément plus de clics.
+          utiles (maillage vers le cas 01). Hypothèse à explorer avec l’équipe : moins d’hésitation, pas forcément plus de{'\u00a0'}clics.
         </p>
         <p>
-          <strong>Ce que la piste 3 explore :</strong> les ateliers sont aujourd’hui présentés comme les autres services,
-          dans un encadré texte. La piste 3 les rend plus repérables et plus attrayants : carte vedette, grande photo de
+          <strong>Ce que la piste 3 explore :</strong> une mise en avant des ateliers collectifs{'\u00a0'}: carte vedette, grande photo de
           groupe, étiquette « Atelier collectif » et prochaines sessions visibles sans clic. Les photographies, déjà
           présentes dans les contenus et réseaux sociaux de l’Apec, montrent la dimension humaine des accompagnements.
-          Hypothèse à tester : davantage d’inscriptions aux ateliers, à surveiller avec la présence effective.
+          Hypothèse à explorer avec l’équipe : davantage d’inscriptions aux ateliers, à suivre avec la présence{'\u00a0'}effective.
         </p>
       </CrBlock>
       <CrBlock title="Photographies de la piste 3">
@@ -450,21 +448,22 @@ function Case1Coulisses() {
         rubrics={{
           constat: (
             <p>
-              Sur apec.fr, les services sont présentés par thème, avec un intitulé, une phrase et deux
-              boutons. Les modalités (format, durée, gratuité, public) n’apparaissent qu’une fois la fiche ouverte.
-              Ce constat ne prouve pas une baisse de conversion.
+              Un visiteur qui arrive avec une situation précise (préparer un entretien, évoluer, se reconvertir)
+              cherche le service qui lui correspond et aime connaître le format, la durée et le public avant de
+              s’engager.
             </p>
           ),
           hypothese: (
             <p>
               Si un visiteur entre par sa situation et voit, dès la liste, le bénéfice, le type d’aide, les modalités
-              et le cas où chaque service est utile, alors il pourrait choisir plus facilement. Aucun gain n’est affirmé.
+              et le cas où chaque service est utile, alors il pourrait choisir plus facilement. Une piste à vérifier par le
+              test, sans gain{'\u00a0'}affirmé.
             </p>
           ),
           modification: (
             <ul>
               <li>Cinq entrées par situation, modifiables, et une vue « tous nos services ».</li>
-              <li>Accroche orientée bénéfice, distincte de l’intitulé existant, conservé.</li>
+              <li>Accroche orientée bénéfice, en complément de l’intitulé officiel, conservé.</li>
               <li>Visuels en aplats et étiquette carrée, reprenant le langage graphique d’apec.fr.</li>
               <li>Piste 2 : critère « Idéal si… », aide humaine en option, conseils reliés.</li>
             </ul>
@@ -474,7 +473,7 @@ function Case1Coulisses() {
               <p><strong>KPI principal :</strong> inscriptions finalisées / visiteurs exposés au module.</p>
               <p><strong>Qualité :</strong> présence effective, satisfaction, adéquation du service.</p>
               <p><strong>Garde-fous :</strong> abandon, accessibilité, performance ; ne pas dégrader la recherche d’offres.</p>
-              <p>Chaque piste change plusieurs éléments : un test global n’isolerait pas l’effet de chacun. Tester ensuite des éléments isolés (ex. « Idéal si… »).</p>
+              <p>Chaque piste change plusieurs éléments : un test global n’isolerait pas l’effet de chacun. Piste pour la suite : tester des éléments isolés (ex. « Idéal si… »).</p>
             </>
           ),
           equipes: (
