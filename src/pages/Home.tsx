@@ -69,7 +69,7 @@ const WORKS: {
 const RESULTS = [
   { figure: '83 %', text: 'conformité SEO technique des sites dont je pilote la stratégie SEO' },
   { figure: '× 2', text: 'conversion du tunnel de création de compte d’un espace client B2B, grâce à l’UX et aux A/B tests' },
-  { figure: '70 %', text: 'des comptes clients de cet espace créés en ligne' },
+  { figure: '70 %', text: 'des comptes clients créés en ligne via cet espace\u00a0client' },
   { figure: '3,6 M€', text: 'de chiffre d’affaires digital généré par cet espace client' },
   { figure: '17 000', text: 'contacts par an générés par la refonte d’un moteur de recherche B2B, devenu un levier de génération de leads' },
   { figure: '7 sites', text: 'et plus de 25 services digitaux pilotés avec la DSI et 6 agences' },
