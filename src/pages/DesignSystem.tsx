@@ -92,7 +92,8 @@ export function DesignSystem() {
           <h2 id="kit">Le design system de ces prototypes</h2>
           <p className="ds-lead">
             Pour ce portfolio, j’ai prototypé directement à partir de ce mini design system, construit en relevant les
-            styles d’apec.fr. Démonstration des fondations et des{N}composants.
+            styles d’apec.fr, avec l’aide de l’IA{N}: le code des prototypes a été produit avec Claude{N}Code, à partir de
+            mes choix de conception, de mes contenus et de mes relectures. Démonstration des fondations et des{N}composants.
           </p>
         </section>
       </div>
