@@ -62,9 +62,20 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
   const vue = route.query.get('vue')
   const servicesHref = `/cas-02-ab-test?${new URLSearchParams({ situation: 'tous', ...(vue ? { vue } : {}) })}`
   const rdvBtn = useRef<HTMLButtonElement>(null)
+  /** Élément qui a ouvert le panneau (bouton de l'en-tête ou lien d'une page) : le focus y revient. */
+  const rdvTrigger = useRef<HTMLElement | null>(null)
   const closeRdv = useCallback((restoreFocus = true) => {
     setRdvOpen(false)
-    if (restoreFocus) window.setTimeout(() => rdvBtn.current?.focus(), 0)
+    if (restoreFocus) window.setTimeout(() => (rdvTrigger.current ?? rdvBtn.current)?.focus(), 0)
+  }, [])
+  // Une page peut ouvrir le panneau (ex. « Mon espace ») : window.dispatchEvent(new Event('open-rdv-panel')).
+  useEffect(() => {
+    const open = () => {
+      rdvTrigger.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+      setRdvOpen(true)
+    }
+    window.addEventListener('open-rdv-panel', open)
+    return () => window.removeEventListener('open-rdv-panel', open)
   }, [])
   const toggleExplain = () => {
     if (explain) {
@@ -163,7 +174,7 @@ export function ProtoLayout({ path, caseLabel, children, coulisses, events, barC
                 className="proto-account proto-account--btn"
                 aria-haspopup="dialog"
                 aria-expanded={rdvOpen}
-                onClick={() => setRdvOpen(true)}
+                onClick={() => { rdvTrigger.current = rdvBtn.current; setRdvOpen(true) }}
                 aria-label="Prendre rendez-vous"
               >
                 <Calendar size={22} /> <span>Prendre rendez-vous</span>

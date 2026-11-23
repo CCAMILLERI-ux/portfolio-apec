@@ -24,6 +24,12 @@ export function Case2Coulisses() {
           <li>« Mes prochaines étapes » utilise une sauvegarde locale de démonstration, effacée par « Réinitialiser la démo » (barre du haut). « Mon espace » est la page d’accueil de l’espace de démonstration.</li>
         </ul>
       </CrBlock>
+      <CrBlock title="Mon espace">
+        <p>
+          L’espace candidat est reproduit tel qu’il existe. Seul ajout{'\u00a0'}: une porte d’entrée vers le parcours guidé,
+          intégrée dans la carte « Ma relation avec l’Apec », au format des lignes{'\u00a0'}existantes.
+        </p>
+      </CrBlock>
       <CrBlock title="Prise de rendez-vous">
         <p>
           Prise de rendez-vous{'\u00a0'}: 17 motifs officiels de rendez-vous individuels regroupés selon les 4 situations de « Nos services », avec une
