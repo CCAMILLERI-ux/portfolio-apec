@@ -2,7 +2,8 @@ import { nb } from '../lib/text'
 import { useEffect, useRef, useState } from 'react'
 import { Booking, type BookingResult } from '../components/Booking'
 import { CrBlock } from '../components/Coulisses'
-import { ArrowRight, Check } from '../components/Icons'
+import { ArrowLeft, ArrowRight, Check } from '../components/Icons'
+import { WorkshopSignup } from '../components/WorkshopSignup'
 import { PageBand } from '../components/PageBand'
 import { ProtoLayout } from '../components/ProtoLayout'
 import { getService } from '../data/services'
@@ -44,6 +45,30 @@ export function BookingPage({ id, route }: { id: string; route: Route }) {
         </>
       }
     >
+      {service.kind === 'atelier' && !done ? (
+        <>
+          {/* Inscription à un atelier : bandeau retour + intitulé, puis carte « Inscrivez-vous ». */}
+          <div className="band band--signup">
+            <div className="container band__signup">
+              <Link to={serviceBack.to} className="band__back">
+                <ArrowLeft size={26} />
+                <span className="visually-hidden">Retour à la fiche du service</span>
+              </Link>
+              <h1 className="band__title" tabIndex={-1}>{nb(service.officialTitle)}</h1>
+            </div>
+          </div>
+          <div className="container overlap">
+            <WorkshopSignup
+              service={service}
+              onComplete={(r) => {
+                setBookings((b) => ({ ...b, [r.serviceId]: r.slot }))
+                setDone(r)
+              }}
+            />
+          </div>
+        </>
+      ) : (
+      <>
       <PageBand back={serviceBack} title={done ? 'Votre réservation' : 'Planifiez votre rendez-vous'} />
       <div className="container overlap">
         <div className="sheet sheet--narrow">
@@ -78,6 +103,8 @@ export function BookingPage({ id, route }: { id: string; route: Route }) {
           )}
         </div>
       </div>
+      </>
+      )}
     </ProtoLayout>
   )
 }

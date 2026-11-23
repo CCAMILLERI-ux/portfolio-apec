@@ -1764,3 +1764,58 @@ legend { padding: 0; }
 }
 /* Libellé raccourci à l'écran, nom accessible complet conservé (« Réinitialiser la démo »). */
 @media (max-width: 1400px) { .demo-bar__hide-md { display: inline; position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
+
+/* ---------- Inscription à un atelier (structure de la page d'inscription d'apec.fr) ---------- */
+.band--signup { padding-bottom: 96px; }
+.band__signup { display: flex; align-items: center; gap: var(--s2); padding-top: var(--s3); }
+.band__signup .band__back { flex: none; color: var(--brand-yellow); }
+.band__signup .band__title { margin: 0; }
+.signup { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s3); align-items: start; }
+.signup__card { background: #fff; box-shadow: var(--shadow); padding: var(--s4) var(--s4) var(--s3); }
+.proto .signup__title { margin: 0 0 6px; text-align: center; font-size: 1.75rem; font-weight: 600; }
+.signup__intro { margin: 0 0 var(--s3); text-align: center; color: var(--text-secondary-a11y); }
+.signup__mode { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: var(--s4); font-weight: 600; }
+.signup__mode-label { cursor: pointer; color: var(--text-secondary-a11y); }
+.signup__mode-label.is-on { color: var(--brand-navy); }
+.signup__switch { position: relative; width: 52px; height: 28px; flex: none; border-radius: 999px; border: 2px solid var(--brand-navy); background: #fff; cursor: pointer; padding: 0; }
+.signup__switch[aria-checked='true'] { background: var(--brand-blue); border-color: var(--brand-blue); }
+.signup__switch-knob { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--brand-navy); transition: transform 0.15s; }
+.signup__switch[aria-checked='true'] .signup__switch-knob { transform: translateX(24px); background: #fff; }
+.signup__switch:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.proto .signup__h3 { margin: 0 0 4px; font-size: 1.25rem; }
+.signup__help { margin: 0 0 var(--s2); color: var(--text-secondary-a11y); }
+.signup__field { margin-bottom: var(--s2); }
+.signup__label { display: block; margin: 0 0 6px; padding: 0; font-weight: 600; }
+.signup__select { width: 100%; max-width: 360px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--border-neutral); border-radius: 2px; font: inherit; background: #fff; }
+.signup__select:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.signup__sessions { margin: 0 0 var(--s2); padding: 0; border: 0; min-width: 0; display: grid; gap: 6px; }
+.signup__session { display: grid; grid-template-columns: 12rem 4.5rem 9rem minmax(0, 1fr); gap: 4px 12px; align-items: center; padding: 12px 14px; border: 1px solid var(--border-neutral); cursor: pointer; font-size: 0.9375rem; }
+.signup__session:hover { border-color: var(--brand-blue); }
+.signup__session.is-selected { background: var(--brand-blue); border-color: var(--brand-blue); color: #fff; }
+.signup__session:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+.signup__cell--date { font-weight: 600; }
+.signup__submit { display: flex; justify-content: center; margin-top: var(--s3); }
+.signup__req { margin: var(--s1) 0 var(--s3); text-align: center; font-size: 0.8125rem; color: var(--text-secondary-a11y); }
+.signup__free { display: flex; gap: 12px; align-items: flex-start; padding: var(--s2); background: var(--brand-blue-tint); }
+.signup__free p { margin: 0; }
+.signup__free-icon { flex: none; color: var(--brand-blue); }
+.signup__free-title { font-weight: 700; color: var(--brand-navy); }
+.signup__back { margin-top: var(--s2); }
+.signup__aside { background: #fff; box-shadow: var(--shadow); }
+.signup__aside-head { position: relative; background: var(--brand-yellow); padding: 12px var(--s2); display: flex; align-items: center; gap: 12px; }
+.signup__illu { width: 72px; height: 48px; flex: none; }
+.proto .signup__aside-title { margin: 0; font-size: 1.125rem; }
+.signup__aside-body { padding: var(--s2); }
+.signup__aside-body p { margin: 0 0 12px; }
+.signup__aside-name { font-weight: 700; color: var(--brand-navy); }
+.signup__aside-line { display: flex; gap: 10px; align-items: flex-start; }
+.signup__aside-line svg { flex: none; color: var(--brand-blue); margin-top: 2px; }
+.signup__aside-note { font-size: 0.8125rem; color: var(--text-secondary-a11y); }
+.signup__aside-empty { color: var(--text-secondary-a11y); }
+.sheet--signup { max-width: 1160px; }
+@media (max-width: 900px) {
+  .signup { grid-template-columns: 1fr; }
+  .signup__card { padding: var(--s3) var(--s2); }
+  .signup__session { grid-template-columns: 1fr auto; }
+  .signup__cell--place { grid-column: 1 / -1; }
+}

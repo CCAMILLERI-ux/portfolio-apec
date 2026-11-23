@@ -12,6 +12,7 @@ import { FORMAT_LABEL } from '../data/situations'
 import { nb } from '../lib/text'
 import { ALEX_PRESET, NEED_OPTIONS, SITUATION_OPTIONS, recommend, TOP_COUNT, type Need } from '../data/onboarding'
 import { Picto } from '../components/Picto'
+import { WorkshopSignup } from '../components/WorkshopSignup'
 import { isBookable, ProgramAction, toBook } from '../components/ProgramAction'
 import type { Service } from '../data/services'
 import { getService } from '../data/services'
@@ -125,6 +126,29 @@ export function Case2({ path }: { path: string }) {
   /** Réservation d'un service du programme, depuis « Mon programme » ou l'écran Confirmation. */
   const bookingView = (cancelLabel: string) => {
     const c = chosen!
+    const back = () => {
+      focusRow.current = c.id
+      setState((st) => ({ ...st, chosenId: null }))
+    }
+    // Atelier : écran d'inscription (sessions par région, présentiel ou à distance).
+    if (c.kind === 'atelier') {
+      return (
+        <div className="step">
+          {heading(<>{nb(c.officialTitle)}</>)}
+          <WorkshopSignup
+            key={c.id}
+            service={c}
+            onComplete={({ serviceId, slot }) => {
+              setBookings((b) => ({ ...b, [serviceId]: slot }))
+              setStatus(`${c.officialTitle}\u00a0: inscription le ${slot.date} à ${slot.time}.`)
+              focusRow.current = serviceId
+              setState((st) => ({ ...st, chosenId: null }))
+            }}
+            footer={<button type="button" className="btn btn--link signup__back" onClick={back}><ArrowLeft size={18} /> {cancelLabel}</button>}
+          />
+        </div>
+      )
+    }
     return (
         <div className="step">
           <div className="action-head">
@@ -474,7 +498,7 @@ export function Case2({ path }: { path: string }) {
     >
       <PageBand back={{ to: '/espace', label: 'Mon espace' }} title="Bien démarrer" titleIsHeading={false} />
       <div className="container overlap">
-        <div className={`sheet${step === 'welcome' ? ' sheet--flush' : ' sheet--narrow'}`}>
+        <div className={`sheet${step === 'welcome' ? ' sheet--flush' : chosen?.kind === 'atelier' ? ' sheet--signup' : ' sheet--narrow'}`}>
           <h1 className="visually-hidden" tabIndex={-1}>Bien démarrer — accueil après inscription</h1>
           <Progress step={step} />
           {body}
